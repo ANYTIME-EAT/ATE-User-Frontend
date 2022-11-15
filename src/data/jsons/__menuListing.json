@@ -1,0 +1,106 @@
+[
+  {
+    "id": "id1",
+    "authorId": 10,
+    "date": "May 20, 2021",
+    "href": "#",
+    "listingCategoryId": 1,
+    "title": "2 Clasic Chiken Crispers",
+    "featuredImage": "src/images/menu1.png",
+    "galleryImgs": [
+      "src/images/menu1.png"
+    ],
+    "commentCount": 70,
+    "viewCount": 602,
+    "like": false,
+    "address": "2 delicious chiken value burgers",
+    "reviewStart": 4.8,
+    "reviewCount": 28,
+    "price": "$26",
+    "maxGuests": 6,
+    "bedrooms": 10,
+    "bathrooms": 3,
+    "saleOff": "-50% today",
+    "isAds": null,
+    "map": { "lat": 55.2094559, "lng": 61.5594641 }
+  },
+  {
+    "id": "id_2",
+    "authorId": 1,
+    "date": "May 20, 2021",
+    "href": "#",
+    "listingCategoryId": 9,
+    "title": "Zam zam fast food",
+    "featuredImage": "src/images/menu1.png",
+    "galleryImgs": ["src/images/menu1.png"
+     
+    ],
+    "commentCount": 16,
+    "viewCount": 196,
+    "like": false,
+    "address": "2 delicious chiken value burgers",
+    "reviewStart": 4.4,
+    "reviewCount": 198,
+    "price": "$250",
+    "maxGuests": 10,
+    "bedrooms": 6,
+    "bathrooms": 7,
+    "saleOff": null,
+    "isAds": null,
+    "map": { "lat": 55.1972153, "lng": 61.4407266 }
+  },
+  {
+    "id": "id_3",
+    "authorId": 6,
+    "date": "May 20, 2021",
+    "href": "#",
+    "listingCategoryId": 11,
+    "title": "sacoury Sea Shell",
+    "featuredImage": "src/images/kfc1.jpg",
+    "galleryImgs": [
+      "src/images/kfc1.jpg"
+      
+    ],
+    "commentCount": 47,
+    "viewCount": 843,
+    "like": true,
+    "address": "2 delicious chiken value burgers",
+    "reviewStart": 3.6,
+    "reviewCount": 16,
+    "price": "$278",
+    "maxGuests": 9,
+    "bedrooms": 9,
+    "bathrooms": 8,
+    "saleOff": null,
+    "isAds": null,
+    "map": { "lat": 55.247483, "lng": 61.5229791 }
+  },
+  {
+    "id": "id_4",
+    "authorId": 8,
+    "date": "May 20, 2021",
+    "href": "#",
+    "listingCategoryId": 6,
+    "title": "Natural Ice Creams",
+    "featuredImage": "src/images/menu1.png",
+    "galleryImgs": [
+      "https://images.pexels.com/photos/2290738/pexels-photo-2290738.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "https://images.pexels.com/photos/751268/pexels-photo-751268.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "https://images.pexels.com/photos/3201922/pexels-photo-3201922.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "https://images.pexels.com/photos/2404422/pexels-photo-2404422.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    ],
+    "commentCount": 6,
+    "viewCount": 91,
+    "like": false,
+    "address": "2 delicious chiken value burgers",
+    "reviewStart": 4.8,
+    "reviewCount": 34,
+    "price": "$40",
+    "maxGuests": 6,
+    "bedrooms": 7,
+    "bathrooms": 5,
+    "saleOff":null,
+    "isAds": null,
+    "map": { "lat": 55.2342034, "lng": 61.5409607 }
+  }
+]

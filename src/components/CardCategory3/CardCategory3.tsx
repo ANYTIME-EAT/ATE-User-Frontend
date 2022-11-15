@@ -21,7 +21,7 @@ const CardCategory3: FC<CardCategory3Props> = ({
       data-nc-id="CardCategory3"
     >
       <div
-        className={`flex-shrink-0 relative w-full aspect-w-5 aspect-h-4 sm:aspect-h-7 h-0 rounded-2xl overflow-hidden group`}
+        className={`flex-shrink-0 relative w-full lg:aspect-w-9 lg:aspect-h-8 md:aspect-w-8 md:aspect-h-7 sm:aspect-w-8 sm:aspect-h-7 h-100 rounded-2xl overflow-hidden group`}
       >
         <NcImage
           src={thumbnail}
@@ -38,7 +38,7 @@ const CardCategory3: FC<CardCategory3Props> = ({
         <span
           className={`block mt-2 text-sm text-neutral-6000 dark:text-neutral-400`}
         >
-          {convertNumbThousand(count || 0)} properties
+          {convertNumbThousand(count || 0)} Views
         </span>
       </div>
     </Link>
