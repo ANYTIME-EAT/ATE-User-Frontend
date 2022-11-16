@@ -11,47 +11,41 @@ export interface WidgetFooterMenu {
 
 const widgetMenus: WidgetFooterMenu[] = [
   {
-    id: "5",
-    title: "Getting started",
-    menus: [
-      { href: "#", label: "Installation" },
-      { href: "#", label: "Release Notes" },
-      { href: "#", label: "Upgrade Guide" },
-      { href: "#", label: "Browser Support" },
-      { href: "#", label: "Editor Support" },
-    ],
-  },
-  {
     id: "1",
-    title: "Explore",
+    title: "COMPANY",
     menus: [
-      { href: "#", label: "Design features" },
-      { href: "#", label: "Prototyping" },
-      { href: "#", label: "Design systems" },
-      { href: "#", label: "Pricing" },
-      { href: "#", label: "Security" },
+      { href: "#", label: "Who We Are"},
+      { href: "#", label: "Blog" },
+      { href: "#", label: "Careers" },
+      { href: "#", label: "Report Fraud" },
+      { href: "#", label: "Contact" },
     ],
   },
   {
     id: "2",
-    title: "Resources",
+    title: "FOR FOODIES",
     menus: [
-      { href: "#", label: "Best practices" },
-      { href: "#", label: "Support" },
-      { href: "#", label: "Developers" },
-      { href: "#", label: "Learn design" },
-      { href: "#", label: "Releases" },
+      { href: "#", label: "Code of Conduct" },
+      { href: "#", label: "Community" },
+      { href: "#", label: "Blogger Help" },
+      { href: "#", label: "Mobile Apps" },
+    ],
+  },
+  {
+    id: "3",
+    title: "FOR RESTAURANTS",
+    menus: [
+      { href: "#", label: "Add restaurant" },
     ],
   },
   {
     id: "4",
-    title: "Community",
+    title: "FOR YOU",
     menus: [
-      { href: "#", label: "Discussion Forums" },
-      { href: "#", label: "Code of Conduct" },
-      { href: "#", label: "Community Resources" },
-      { href: "#", label: "Contributing" },
-      { href: "#", label: "Concurrent Mode" },
+      { href: "#", label: "Privacy" },
+      { href: "#", label: "Terms" },
+      { href: "#", label: "Security" },
+      { href: "#", label: "Sitemap" },
     ],
   },
 ];
@@ -82,9 +76,13 @@ const Footer: React.FC = () => {
 
   return (
     <div className="nc-Footer relative py-24 lg:py-28 border-t border-neutral-200 dark:border-neutral-700">
+      
+      <p className="text-center">jhjgfdshfdf</p>
       <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 ">
-        <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
+       
+       <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
           <div className="col-span-2 md:col-span-1">
+
             <Logo />
           </div>
           <div className="col-span-2 flex items-center md:col-span-3">
