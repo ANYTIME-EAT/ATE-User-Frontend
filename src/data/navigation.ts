@@ -20,5 +20,4 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     href: "/contactUs",
     name: "Contact Us",
   },
-
 ];
