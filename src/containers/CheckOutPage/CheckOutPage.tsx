@@ -104,7 +104,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
               </Tab.Panels>
             </Tab.Group>
             <div className="pt-8">
-              <ButtonPrimary href={"/pay-done"}>Confirm and pay</ButtonPrimary>
+              <ButtonPrimary href={"/pay-done"}>Confirm</ButtonPrimary>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
         <h3 className="text-2xl font-semibold">View Cart</h3>
-        <h6 className="text-2xl font-semibold">For Self Pickup, No delivery charge</h6>
+        <div className="">For Self Pickup, No delivery charge</div>
         <Tab.Group>
         <Tab.List className="flex my-5">
                 <Tab as={Fragment}>
@@ -141,7 +141,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                           : " text-neutral-6000 dark:text-neutral-400"
                       }`}
                     >
-                      <span className="mr-2.5"> Delivery</span>
+                      <span className="mr-2.5">Delivery</span>
                 
                     </button>
                   )}
@@ -149,8 +149,8 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         </Tab.List>
         </Tab.Group>
 
-        <h3 className="text-2xl font-semibold">Deliver to</h3>
-        <h6 className="text-2xl font-semibold">Michael 123 Avenue Street</h6>
+        <div className="font-semibold">Deliver to</div>
+        <div>Michael 123 Avenue Street</div>
 
         <div className="flex flex-col sm:flex-row sm:items-center">
           <div className="flex-shrink-0 w-full sm:w-40">
@@ -213,39 +213,40 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           <h3 className="text-2xl font-semibold">Choose Payment Method</h3>
 
           <div className="mt-6">
-            <Tab.Group>
+          <Tab.Group>
               <Tab.List className="flex my-5">
+
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
-                          : "text-neutral-6000 dark:text-neutral-400"
-                      }`}
+                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${selected ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
+                        : " text-neutral-6000 dark:text-neutral-400"
+                        }`}
                     >
-                      Credit card
+                      <span className="mr-2.5">Card</span>
+                      <img className="w-8" src={visaPng} alt="" />
+                      /
+                      <img className="w-8" src={mastercardPng} alt="" />
                     </button>
+
                   )}
                 </Tab>
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
-                          : " text-neutral-6000 dark:text-neutral-400"
-                      }`}
+                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${selected
+                        ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
+                        : "text-neutral-6000 dark:text-neutral-400"
+                        }`}
                     >
-                      <span className="mr-2.5">Debit card</span>
-                      {/* <img className="w-8" src={visaPng} alt="" />
-                      <img className="w-8" src={mastercardPng} alt="" /> */}
+                      Cash On Delivery
                     </button>
                   )}
                 </Tab>
               </Tab.List>
 
               <Tab.Panels>
+
                 <Tab.Panel className="space-y-5">
                   <div className="space-y-1">
                     <Label>Card number </Label>
@@ -265,43 +266,45 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                       <Input />
                     </div>
                   </div>
-                 
+                  <ButtonPrimary href={"/pay-done"}>Confirm and pay</ButtonPrimary>
                 </Tab.Panel>
                 <Tab.Panel className="space-y-5">
-                  <div className="space-y-1">
-                    <Label>Email </Label>
-                    <Input type="email" defaultValue="example@gmail.com" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Password </Label>
-                    <Input type="password" defaultValue="***" />
-                  </div>
-                 
+                  <ButtonPrimary href={"/pay-done"}>Confirm</ButtonPrimary>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
-            <div className="pt-8">
-              <ButtonPrimary href={"/pay-done"}>Confirm and pay</ButtonPrimary>
-            </div>
+      
           </div>
         </div>
       </div>
     );
   };
 
+  // return (
+  //   <div className={`nc-CheckOutPage ${className}`} data-nc-id="CheckOutPage">
+  //     <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
+  //       {/* <div className="hidden lg:block flex-grow w-6/12">{renderContactDetails()}</div>
+  //       <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10 w-6/12">{renderMain()}</div>
+  //       <div className="hidden lg:block flex-grow w-6/12">{renderSidebar()}</div> */}
+        
+  //       <div className="grid grid-cols-2 gap-4 w-screen ">
+          
+  //       <div className="w-3/5 lg:w-9/12 xl:w-9/12 lg:pr-10">{renderContactDetails()}</div>
+  //       <div className="w-2/5 lg:w-9/12 xl:w-9/12 lg:pr-10">{renderSidebar()}</div>
+  //       <div className="w-1/2 lg:w-9/12 xl:w-9/12 lg:pr-10">{renderMain()}</div>
+  //       </div>
+  //     </main>
+  //   </div>
+  // );
   return (
     <div className={`nc-CheckOutPage ${className}`} data-nc-id="CheckOutPage">
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
-        {/* <div className="hidden lg:block flex-grow w-6/12">{renderContactDetails()}</div>
-        <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10 w-6/12">{renderMain()}</div>
-        <div className="hidden lg:block flex-grow w-6/12">{renderSidebar()}</div> */}
         
-        <div className="grid grid-cols-2 gap-4 ">
-          
-        <div className="lg:w-9/12 xl:w-9/12 lg:pr-10">{renderContactDetails()}</div>
-        <div className="lg:w-9/12 xl:w-9/12 lg:pr-10">{renderSidebar()}</div>
-        <div className="lg:w-9/12 xl:w-9/12 lg:pr-10">{renderMain()}</div>
-        </div>
+        <div className="w-full lg:w-w-4/6 xl:w-w-4/6 lg:pr-10">{renderContactDetails()}</div>
+        <div className="hidden lg:block flex-grow">{renderSidebar()}</div>
+      </main>
+      <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
+      <div className="lg:w-w-4/6 xl:w-w-4/6 lg:pr-10">{renderMain()}</div>
       </main>
     </div>
   );
