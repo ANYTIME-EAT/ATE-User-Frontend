@@ -38,7 +38,6 @@ const NAV: NavItem[] = [
     icon: MenuBar,
   },
 ];
-
 const FooterNav = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   //
