@@ -49,6 +49,7 @@ import ListingFlightsPage from "containers/ListingFlightsPage/ListingFlightsPage
 import FooterNav from "components/FooterNav";
 import useWindowSize from "hooks/useWindowResize";
 import PageHome3 from "containers/PageHome/PageHome3";
+import CustomProfileManageAddress from "containers/CustomProfileManageAddress/CustomProfileManageAddress";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
@@ -84,6 +85,7 @@ export const pages: Page[] = [
   { path: "/listing-flights", component: ListingFlightsPage },
   //
   { path: "/checkout", component: CheckOutPage },
+  { path: "/profile", component: CustomProfileManageAddress},
   { path: "/pay-done", component: PayPage },
   //
   { path: "/author", component: AuthorPage },
