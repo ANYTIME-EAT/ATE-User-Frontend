@@ -90,13 +90,13 @@ const ListingRealEstatePage: FC<ListingRealEstatePageProps> = ({
 
       <div className="container relative">
         {/* SECTION HERO */}
-        <SectionHero2ArchivePage className="" />
+        {/* <SectionHero2ArchivePage className="" /> */}
 
         {/* SECTION */}
         <SectionGridFilterCard className="py-24 lg:py-28" />
 
         {/* SECTION 1 */}
-        <div className="relative py-16">
+        {/* <div className="relative py-16">
           <BackgroundSection />
           <SectionSliderNewCategories
             heading="Explore top destination ✈"
@@ -107,10 +107,10 @@ const ListingRealEstatePage: FC<ListingRealEstatePageProps> = ({
             sliderStyle="style2"
             uniqueClassName="nc-ListingRealEstatePage"
           />
-        </div>
+        </div> */}
 
         {/* SECTION */}
-        <SectionSubscribe2 className="py-24 lg:py-28" />
+        {/* <SectionSubscribe2 className="py-24 lg:py-28" /> */}
       </div>
     </div>
   );

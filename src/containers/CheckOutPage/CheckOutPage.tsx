@@ -16,6 +16,7 @@ import { DateRage } from "components/HeroSearchForm/StaySearchForm";
 import converSelectedDateToString from "utils/converSelectedDateToString";
 import ModalSelectGuests from "components/ModalSelectGuests";
 import { GuestsObject } from "components/HeroSearchForm2Mobile/GuestsInput";
+import Checkbox from "shared/Checkbox/Checkbox";
 
 export interface CheckOutPageProps {
   className?: string;
@@ -85,69 +86,66 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           Confirm and payment
         </h2>
         <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-        <div>
+        <div className="relative">
           <div>
-            <h3 className="text-2xl font-semibold">Your trip</h3>
-            <NcModal
-              renderTrigger={(openModal) => (
-                <span
-                  onClick={() => openModal()}
-                  className="block lg:hidden underline  mt-1 cursor-pointer"
-                >
-                  View booking details
-                </span>
-              )}
-              renderContent={renderSidebar}
-              modalTitle="Booking details"
-            />
-          </div>
-          <div className="mt-6 border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700">
-            <ModalSelectDate
-              defaultValue={rangeDates}
-              onSelectDate={setRangeDates}
-              renderChildren={({ openModal }) => (
-                <button
-                  onClick={openModal}
-                  className="text-left flex-1 p-5 flex justify-between space-x-5 "
-                  type="button"
-                >
-                  <div className="flex flex-col">
-                    <span className="text-sm text-neutral-400">Date</span>
-                    <span className="mt-1.5 text-lg font-semibold">
-                      {converSelectedDateToString(rangeDates)}
-                    </span>
-                  </div>
-                  <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
-                </button>
-              )}
-            />
+            <h3 className="text-2xl font-semibold">Contact Information</h3>
 
-            <ModalSelectGuests
-              defaultValue={guests}
-              onChangeGuests={setGuests}
-              renderChildren={({ openModal }) => (
-                <button
-                  type="button"
-                  onClick={openModal}
-                  className="text-left flex-1 p-5 flex justify-between space-x-5"
-                >
-                  <div className="flex flex-col">
-                    <span className="text-sm text-neutral-400">Guests</span>
-                    <span className="mt-1.5 text-lg font-semibold">
-                      <span className="line-clamp-1">
-                        {`${
-                          (guests.guestAdults || 0) +
-                          (guests.guestChildren || 0)
-                        } Guests, ${guests.guestInfants || 0} Infants`}
-                      </span>
-                    </span>
-                  </div>
-                  <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
-                </button>
-              )}
-            />
           </div>
+          <div className="mt-6  flex flex-col sm:flex-row ">
+            <div className="space-y-1 px-1">
+
+              <Label>Name</Label>
+              <Input
+                sizeClass="w-80"
+              />
+            </div>
+            <div className="space-y-1 pl-12">
+              <Label>Contact number </Label>
+              <Input
+                sizeClass="w-80"
+                defaultValue="111 112 222 999" />
+            </div>
+          </div>
+          <div className="mt-6   sm:flex-row ">
+            <div className="space-y-1 px-1">
+              <Label>Address</Label>
+              <Input defaultValue="" />
+            </div>
+          </div>
+          <div className="mt-6   sm:flex-row ">
+            <div className="space-y-1 px-1">
+              <Label>Landmark</Label>
+              <Input defaultValue="" />
+            </div>
+          </div>
+
+          {/* address label  */}
+          <div>
+            <p className="text-2xl mt-6">Contact Information</p>
+          </div>
+          <div className="mt-6  flex flex-row ">
+
+            <div className="space-y-1 px-9">
+
+              <Label>Home</Label>
+              <Checkbox
+                name="Home"
+              />
+            </div>
+
+            <div className="space-y-1 px-9">
+
+              <Label>Home</Label>
+              <Checkbox
+                name="Home"
+              />
+            </div>
+
+
+          </div>
+          <ButtonPrimary className="fixed top-0 left-0 right-0 mt-6" href={"/pay-done"}>Confirm</ButtonPrimary>
         </div>
+
 
         <div>
           <h3 className="text-2xl font-semibold">Pay with</h3>
@@ -156,37 +154,38 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           <div className="mt-6">
             <Tab.Group>
               <Tab.List className="flex my-5">
+
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
-                          : "text-neutral-6000 dark:text-neutral-400"
-                      }`}
+                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${selected ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
+                        : " text-neutral-6000 dark:text-neutral-400"
+                        }`}
                     >
-                      Paypal
+                      <span className="mr-2.5">Card</span>
+                      <img className="w-8" src={visaPng} alt="" />
+                      /
+                      <img className="w-8" src={mastercardPng} alt="" />
                     </button>
+
                   )}
                 </Tab>
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
-                          : " text-neutral-6000 dark:text-neutral-400"
-                      }`}
+                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${selected
+                        ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
+                        : "text-neutral-6000 dark:text-neutral-400"
+                        }`}
                     >
-                      <span className="mr-2.5">Credit card</span>
-                      <img className="w-8" src={visaPng} alt="" />
-                      <img className="w-8" src={mastercardPng} alt="" />
+                      Cash On Delivery
                     </button>
                   )}
                 </Tab>
               </Tab.List>
 
               <Tab.Panels>
+
                 <Tab.Panel className="space-y-5">
                   <div className="space-y-1">
                     <Label>Card number </Label>
@@ -206,35 +205,15 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                       <Input />
                     </div>
                   </div>
-                  <div className="space-y-1">
-                    <Label>Messager for author </Label>
-                    <Textarea placeholder="..." />
-                    <span className="text-sm text-neutral-500 block">
-                      Write a few sentences about yourself.
-                    </span>
-                  </div>
+                  <ButtonPrimary href={"/pay-done"}>Confirm and pay</ButtonPrimary>
                 </Tab.Panel>
                 <Tab.Panel className="space-y-5">
-                  <div className="space-y-1">
-                    <Label>Email </Label>
-                    <Input type="email" defaultValue="example@gmail.com" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Password </Label>
-                    <Input type="password" defaultValue="***" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Messager for author </Label>
-                    <Textarea placeholder="..." />
-                    <span className="text-sm text-neutral-500 block">
-                      Write a few sentences about yourself.
-                    </span>
-                  </div>
+                  <ButtonPrimary href={"/pay-done"}>Confirm</ButtonPrimary>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
             <div className="pt-8">
-              <ButtonPrimary href={"/pay-done"}>Confirm and pay</ButtonPrimary>
+
             </div>
           </div>
         </div>
@@ -246,7 +225,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     <div className={`nc-CheckOutPage ${className}`} data-nc-id="CheckOutPage">
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
         <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10 ">{renderMain()}</div>
-        <div className="hidden lg:block flex-grow">{renderSidebar()}</div>
+        <div className=" lg:block flex-grow">{renderSidebar()}</div>
       </main>
     </div>
   );

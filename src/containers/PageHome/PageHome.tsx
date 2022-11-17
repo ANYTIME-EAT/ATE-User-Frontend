@@ -1,6 +1,6 @@
 import SectionHero from "components/SectionHero/SectionHero";
 import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
 import SectionOurFeatures from "components/SectionOurFeatures/SectionOurFeatures";
 import SectionGridFeaturePlaces from "./SectionGridFeaturePlaces";
@@ -17,6 +17,8 @@ import pizza from 'images/pizza.png'
 import bbq from 'images/bbq.png'
 import offer1 from 'images/offer1.png'
 import offer2 from 'images/offer2.png'
+import {getRestaurantList,getOffersList} from '../../services/apiServices'
+
 
 
 
@@ -117,7 +119,46 @@ const DEMO_CATS_2: TaxonomyType[] = [
   },
 ];
 
-function PageHome() {
+const PageHome = () => {
+
+  const [restrauntData,setRestraurantData] = useState<any>([])
+  const [offerData,setOfferData] = useState<any>([])
+
+  const getRestrauntData =async () => {
+    const response = await getRestaurantList()
+
+    if(response.data){
+      let tempData : any  = [];
+      if(response.data.response === "success"){
+        response.data.restaurant.map((item: any, key: number) => {
+          tempData[key] = {
+            id: item.id,
+            href: "#",
+            name: item.name,
+            taxonomy: "category",
+            count: 188288,
+            thumbnail:kfc,
+        }      
+        })
+        setRestraurantData(tempData)
+      }
+      
+    }
+  }
+  const getOfferData=async () => {
+    const response = await getOffersList()
+    console.log(response.data)
+
+    // if(response.data?.response === "success"){
+    //   response.data.
+    // }
+  }
+  useEffect(() => {
+    getRestrauntData()
+    getOfferData()
+  },[])
+  
+
   return (
     <div className="nc-PageHome relative overflow-hidden">
       {/* GLASSMOPHIN */}
@@ -130,15 +171,17 @@ function PageHome() {
         
 
         {/* SECTION 1 */}
+
+        {restrauntData.length > 0 &&
         <SectionSliderNewCategories
           heading="Our Top Brands"
           subHeading=""
           categoryCardType="card5"
           itemPerRow={4}
           sliderStyle="style2"
-          categories={DEMO_CATS}
+          categories={restrauntData}
           uniqueClassName="PageHome_s1"
-        />
+        />}
         
 
          {/* SECTION  */}

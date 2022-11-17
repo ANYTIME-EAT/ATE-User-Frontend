@@ -32,7 +32,12 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "/contact",
-    name: "Contact"
+    href: "/author",
+    name: "rest demo"
+  },
+  {
+    id: ncNanoId(),
+    href: "/listing-real-estate",
+    name: "card"
   },
 ];
