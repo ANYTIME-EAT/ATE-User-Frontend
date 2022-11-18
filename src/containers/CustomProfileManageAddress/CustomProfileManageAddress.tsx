@@ -4,7 +4,7 @@ import React, { Component } from "react";
 class CustomProfileManageAddress extends Component {
   render() {
     return (
-      <div className="flex min-h-full w-full flex-col bg-slate-100 grow">
+      <div className="flex min-h-full w-full flex-col bg-neutral-300 grow">
         {/* title */}
     <div className="max-w-sm h-auto mx-20px my-20 rounded-md overflow-hidden grid gap-4 grid-cols-2">
       <div>
