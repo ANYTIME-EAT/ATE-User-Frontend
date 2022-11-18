@@ -26,6 +26,7 @@ export interface LocationStates {
   "/listing-car-detail"?: {};
   //
   "/checkout"?: {};
+  "/profile"?: {};
   "/pay-done"?: {};
   //
   "/account"?: {};
