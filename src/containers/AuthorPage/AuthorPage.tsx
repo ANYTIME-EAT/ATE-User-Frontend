@@ -146,7 +146,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   return (
     
     <div className={`nc-AuthorPage ${className}`} data-nc-id="AuthorPage">
-      {/* <SectionHero2 /> */}
+      <SectionHero2 />
       <Helmet>
         <title>Restraunt || ATE</title>
       </Helmet>

@@ -20,7 +20,7 @@ const Demo = () => {
       <div
         className={` ${ 
           open ? "w-72" : "w-20 "
-        }  h-screen p-5  pt-8 relative duration-300`}
+        }  h-20 p-5  pt-8 relative duration-300`}
       >
         <img
           src={img}
