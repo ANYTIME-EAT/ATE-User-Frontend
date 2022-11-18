@@ -35,7 +35,7 @@ const SectionStatistic: FC<SectionStatisticProps> = ({ className = "" }) => {
   return (
     <div className={`nc-SectionStatistic relative ${className}`}>
       
-      <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8">
+      <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-2 xl:gap-8">
         {FOUNDER_DEMO.map((item) => (
           <div
             key={item.id}

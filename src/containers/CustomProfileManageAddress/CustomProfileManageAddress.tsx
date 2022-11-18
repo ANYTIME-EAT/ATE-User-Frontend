@@ -6,7 +6,28 @@ class CustomProfileManageAddress extends Component {
     return (
       <div className="flex min-h-full w-full flex-col bg-slate-400 grow">
         {/* title */}
-        <div className="flex h-32 w-screen bg-red-600"></div>
+    <div className="max-w-sm h-auto mx-20px my-20 rounded-md overflow-hidden grid gap-4 grid-cols-2">
+      <div>
+      <img className="object-cover rounded-full h-36 w-36 mx-auto m-1 p-1 border-4 border-pink-600" src="https://images.pexels.com/photos/2709388/pexels-photo-2709388.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Human Picture by Ike louie Natividad" />
+    </div>
+      <div className="">
+        <h6>User1</h6>
+        <p>+1 404 555-4099</p>
+        <p>user1username@gmail.com</p>
+      </div>
+
+        {/* <div className="flex flex-col">
+          <div className="font-bold text-xl text-center text-gray-800 hover:text-pink-500 hover:cursor-pointer">Helena Wang</div>
+          <p className="text-gray-600 text-sm text-center">Product Designer</p>
+        </div> */}
+
+        {/* <div className="flex flex-row justify-center font-semibold mx-auto my-4">
+          <div className="my-auto text-white bg-pink-500 hover:bg-pink-600 hover:cursor-pointer rounded-3xl py-2 px-4 mx-2">Follow</div>
+          <div className="my-auto text-gray-800 py-1 px-4 border-2 border-pink-500 hover:bg-pink-500 hover:cursor-pointer hover:text-white rounded-3xl mx-2">Message</div>
+        </div> */}
+
+      {/* </div> */}
+      </div>
 
         <div className="flex h-auto w-screen flex-row grow">
           <aside className="w-64" aria-label="Sidebar">
