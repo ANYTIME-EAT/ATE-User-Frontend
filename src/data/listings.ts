@@ -1,4 +1,4 @@
-import __stayListing from "./jsons/__stayListing.json";
+import __stayListing from "./jsons/__menuListing.json";
 import __carsListing from "./jsons/__carsListing.json";
 import __experiencesListing from "./jsons/__experiencesListing.json";
 import {
@@ -51,7 +51,7 @@ const DEMO_STAY_LISTINGS = __stayListing.map((post, index): StayDataType => {
   return {
     ...post,
     id: `stayListing_${index}_`,
-    saleOff: !index ? "-20% today" : post.saleOff,
+    saleOff: !index ? "5" : post.saleOff,
     isAds: !index ? true : post.isAds,
     author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
     listingCategory: category,

@@ -8,114 +8,112 @@ import SectionHowItWork from "components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "components/BackgroundSection/BackgroundSection";
 import BgGlassmorphism from "components/BgGlassmorphism/BgGlassmorphism";
 import { TaxonomyType } from "data/types";
-import SectionGridAuthorBox from "components/SectionGridAuthorBox/SectionGridAuthorBox";
-import SectionGridCategoryBox from "components/SectionGridCategoryBox/SectionGridCategoryBox";
-import SectionBecomeAnAuthor from "components/SectionBecomeAnAuthor/SectionBecomeAnAuthor";
-import SectionVideos from "./SectionVideos";
+import SectionDowloadApp from "./SectionDowloadApp";
 import SectionClientSay from "components/SectionClientSay/SectionClientSay";
+import SectionGridAllMenu from "./SectionGridAllMenu";
+import kfc from 'images/kfc.png'
+import domino from 'images/domino.png'
+import pizza from 'images/pizza.png'
+import bbq from 'images/bbq.png'
+import offer1 from 'images/offer1.png'
+import offer2 from 'images/offer2.png'
+
+
+
 
 const DEMO_CATS: TaxonomyType[] = [
   {
     id: "1",
-    href: "/listing-stay",
-    name: "New Yourk",
+    href: "#",
+    name: "KFC",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/64271/queen-of-liberty-statue-of-liberty-new-york-liberty-statue-64271.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+    thumbnail:kfc,
   },
   {
     id: "2",
-    href: "/listing-stay",
-    name: "Singapore",
+    href: "#",
+    name: "Domino's",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/7740160/pexels-photo-7740160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    thumbnail:domino,
   },
   {
     id: "2",
-    href: "/listing-stay",
-    name: "Paris",
+    href: "#",
+    name: "Pizza Hut",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/739407/pexels-photo-739407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    thumbnail:pizza,
   },
   {
     id: "2",
-    href: "/listing-stay",
-    name: "London",
+    href: "#",
+    name: "BBQ Nation",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+    thumbnail:bbq,
   },
-  {
-    id: "2",
-    href: "/listing-stay",
-    name: "Tokyo",
-    taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/4151484/pexels-photo-4151484.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
-  },
-  {
-    id: "2",
-    href: "/listing-stay",
-    name: "Maldives",
-    taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/3250613/pexels-photo-3250613.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  },
+  // {
+  //   id: "2",
+  //   href: "#",
+  //   name: "Tokyo",
+  //   taxonomy: "category",
+  //   count: 188288,
+  //   thumbnail:
+  //     "https://images.pexels.com/photos/4151484/pexels-photo-4151484.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+  // },
+  // {
+  //   id: "2",
+  //   href: "#",
+  //   name: "Maldives",
+  //   taxonomy: "category",
+  //   count: 188288,
+  //   thumbnail:
+  //     "https://images.pexels.com/photos/3250613/pexels-photo-3250613.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  // },
 ];
 
 const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "1",
-    href: "/listing-stay",
-    name: "Enjoy the great cold",
+    href: "#",
+    name: "Lorem ipsum",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/5764100/pexels-photo-5764100.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+    thumbnail:offer1,
   },
   {
     id: "222",
-    href: "/listing-stay",
-    name: "Sleep in a floating way",
+    href: "#",
+    name: "Lorem ipsum",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/2869499/pexels-photo-2869499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    thumbnail:offer2,
   },
   {
     id: "3",
-    href: "/listing-stay",
-    name: "In the billionaire's house",
+    href: "#",
+    name: "Lorem ipsum",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/7031413/pexels-photo-7031413.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    thumbnail:offer1,
   },
   {
     id: "4",
-    href: "/listing-stay",
-    name: "Cool in the deep forest",
+    href: "#",
+    name: "Lorem ipsum",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/247532/pexels-photo-247532.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    thumbnail:offer2,
   },
   {
     id: "5",
-    href: "/listing-stay",
-    name: "In the billionaire's house",
+    href: "#",
+    name: "Lorem ipsum",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/7031413/pexels-photo-7031413.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    thumbnail:offer1,
   },
 ];
 
@@ -129,67 +127,84 @@ function PageHome() {
         {/* SECTION HERO */}
         <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
 
+        
+
         {/* SECTION 1 */}
         <SectionSliderNewCategories
+          heading="Our Top Brands"
+          subHeading=""
+          categoryCardType="card5"
+          itemPerRow={4}
+          sliderStyle="style2"
           categories={DEMO_CATS}
           uniqueClassName="PageHome_s1"
         />
+        
+
+         {/* SECTION  */}
+         <div className="relative py-16">
+          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
+          <SectionSliderNewCategories
+            categories={DEMO_CATS_2}
+            categoryCardType="card3"
+            itemPerRow={4}
+            heading="Our Top Offers"
+            subHeading="Good Food Is Always Cooking! Order Yummy Items From Menu"
+            sliderStyle="style2"
+            uniqueClassName="PageHome_s2"
+            className="object-right-bottom"
+          />
+        </div>
 
         {/* SECTION2 */}
-        <SectionOurFeatures />
+        {/* <SectionOurFeatures /> */}
+
+        <SectionDowloadApp />
+
+       
+
+        
 
         {/* SECTION */}
         <div className="relative py-16">
           <BackgroundSection />
-          <SectionGridFeaturePlaces />
+          <SectionGridAllMenu />
         </div>
 
         {/* SECTION */}
         <SectionHowItWork />
 
-        {/* SECTION 1 */}
-        <div className="relative py-16">
-          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
-          <SectionSliderNewCategories
-            categories={DEMO_CATS_2}
-            categoryCardType="card4"
-            itemPerRow={4}
-            heading="Suggestions for discovery"
-            subHeading="Popular places to stay that Chisfis recommends for you"
-            sliderStyle="style2"
-            uniqueClassName="PageHome_s2"
-          />
-        </div>
+       
 
         {/* SECTION */}
         <SectionSubscribe2 />
 
         {/* SECTION */}
-        <div className="relative py-16">
+        {/* <div className="relative py-16">
           <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
           <SectionGridAuthorBox />
-        </div>
+        </div> */}
 
         {/* SECTION */}
-        <SectionGridCategoryBox />
+        {/* <SectionGridCategoryBox /> */}
 
         {/* SECTION */}
-        <div className="relative py-16">
+        {/* <div className="relative py-16">
           <BackgroundSection />
           <SectionBecomeAnAuthor />
-        </div>
+        </div> */}
 
         {/* SECTION 1 */}
-        <SectionSliderNewCategories
+        {/* <SectionSliderNewCategories
           heading="Explore by types of stays"
           subHeading="Explore houses based on 10 types of stays"
           categoryCardType="card5"
           itemPerRow={5}
           uniqueClassName="PageHome_s3"
-        />
+        /> */}
 
         {/* SECTION */}
-        <SectionVideos />
+        {/* <SectionVideos /> */}
 
         {/* SECTION */}
         <div className="relative py-16">

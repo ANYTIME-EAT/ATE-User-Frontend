@@ -15,7 +15,7 @@ const BtnLikeIcon: FC<BtnLikeIconProps> = ({
 
   return (
     <div
-      className={`nc-BtnLikeIcon w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ${
+      className={`nc-BtnLikeIcon w-8 h-8 flex items-center justify-center rounded-full cursor-pointer  ${
         likedState ? "nc-BtnLikeIcon--liked" : ""
       }  ${colorClass} ${className}`}
       data-nc-id="BtnLikeIcon"
@@ -24,10 +24,11 @@ const BtnLikeIcon: FC<BtnLikeIconProps> = ({
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5"
+        className="h-5 w-5 "
         fill={likedState ? "currentColor" : "none"}
         viewBox="0 0 24 24"
         stroke="currentColor"
+        
       >
         <path
           strokeLinecap="round"
