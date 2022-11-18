@@ -16,6 +16,7 @@ import { DateRage } from "components/HeroSearchForm/StaySearchForm";
 import converSelectedDateToString from "utils/converSelectedDateToString";
 import ModalSelectGuests from "components/ModalSelectGuests";
 import { GuestsObject } from "components/HeroSearchForm2Mobile/GuestsInput";
+import Checkbox from "shared/Checkbox/Checkbox";
 
 export interface CheckOutPageProps {
   className?: string;
@@ -209,8 +210,79 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   const renderMain = () => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
+<<<<<<< HEAD
       <div>
           <h3 className="text-2xl font-semibold">Choose Payment Method</h3>
+=======
+        <h2 className="text-3xl lg:text-4xl font-semibold">
+          Confirm and payment
+        </h2>
+        <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+        <div className="relative">
+          <div>
+            <h3 className="text-2xl font-semibold">Contact Information</h3>
+
+          </div>
+          <div className="mt-6  flex flex-col sm:flex-row ">
+            <div className="space-y-1 px-1">
+
+              <Label>Name</Label>
+              <Input
+                sizeClass="w-80"
+              />
+            </div>
+            <div className="space-y-1 pl-12">
+              <Label>Contact number </Label>
+              <Input
+                sizeClass="w-80"
+                defaultValue="111 112 222 999" />
+            </div>
+          </div>
+          <div className="mt-6   sm:flex-row ">
+            <div className="space-y-1 px-1">
+              <Label>Address</Label>
+              <Input defaultValue="" />
+            </div>
+          </div>
+          <div className="mt-6   sm:flex-row ">
+            <div className="space-y-1 px-1">
+              <Label>Landmark</Label>
+              <Input defaultValue="" />
+            </div>
+          </div>
+
+          {/* address label  */}
+          <div>
+            <p className="text-2xl mt-6">Contact Information</p>
+          </div>
+          <div className="mt-6  flex flex-row ">
+
+            <div className="space-y-1 px-9">
+
+              <Label>Home</Label>
+              <Checkbox
+                name="Home"
+              />
+            </div>
+
+            <div className="space-y-1 px-9">
+
+              <Label>Home</Label>
+              <Checkbox
+                name="Home"
+              />
+            </div>
+
+
+          </div>
+          <ButtonPrimary className="fixed top-0 left-0 right-0 mt-6" href={"/pay-done"}>Confirm</ButtonPrimary>
+        </div>
+
+
+        <div>
+          <h3 className="text-2xl font-semibold">Pay with</h3>
+          <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
+>>>>>>> dd64e54f580c50e77d709b715e9b28d49f1f849e
 
           <div className="mt-6">
           <Tab.Group>
@@ -273,7 +345,13 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
+<<<<<<< HEAD
       
+=======
+            <div className="pt-8">
+
+            </div>
+>>>>>>> dd64e54f580c50e77d709b715e9b28d49f1f849e
           </div>
         </div>
       </div>
@@ -299,9 +377,14 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   return (
     <div className={`nc-CheckOutPage ${className}`} data-nc-id="CheckOutPage">
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
+<<<<<<< HEAD
         
         <div className="w-full lg:w-w-4/6 xl:w-w-4/6 lg:pr-10">{renderContactDetails()}</div>
         <div className="hidden lg:block flex-grow">{renderSidebar()}</div>
+=======
+        <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10 ">{renderMain()}</div>
+        <div className=" lg:block flex-grow">{renderSidebar()}</div>
+>>>>>>> dd64e54f580c50e77d709b715e9b28d49f1f849e
       </main>
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
       <div className="lg:w-w-4/6 xl:w-w-4/6 lg:pr-10">{renderMain()}</div>

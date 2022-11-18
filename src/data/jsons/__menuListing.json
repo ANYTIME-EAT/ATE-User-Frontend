@@ -18,9 +18,9 @@
     "reviewCount": 28,
     "price": "$26",
     "maxGuests": 6,
-    "bedrooms": 10,
+    "bedrooms": 1,
     "bathrooms": 3,
-    "saleOff": "-50% today",
+    "saleOff": "null",
     "isAds": null,
     "map": { "lat": 55.2094559, "lng": 61.5594641 }
   },
@@ -45,7 +45,7 @@
     "maxGuests": 10,
     "bedrooms": 6,
     "bathrooms": 7,
-    "saleOff": null,
+    "saleOff": "34% today",
     "isAds": null,
     "map": { "lat": 55.1972153, "lng": 61.4407266 }
   },
@@ -71,7 +71,7 @@
     "maxGuests": 9,
     "bedrooms": 9,
     "bathrooms": 8,
-    "saleOff": null,
+    "saleOff": "34% today",
     "isAds": null,
     "map": { "lat": 55.247483, "lng": 61.5229791 }
   },
