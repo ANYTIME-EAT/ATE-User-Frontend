@@ -7,6 +7,8 @@ import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
 import SaleOffBadge from "components/SaleOffBadge/SaleOffBadge";
 import Badge from "shared/Badge/Badge";
 import { StayDataType } from "data/types";
+import Button from "shared/Button/Button";
+import ButtonCircle from "shared/Button/ButtonCircle";
 
 export interface PropertyCardHProps {
   className?: string;
@@ -43,8 +45,9 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
           href={href}
         />
 
+
         {saleOff && (
-          <SaleOffBadge className="absolute left-5 top-5 !bg-orange-500" />
+          <SaleOffBadge className="absolute left-5 top-5 !bg-orange-500" saleOff={saleOff} />
         )}
       </div>
     );
@@ -90,26 +93,10 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
       <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
         <div className="space-y-4 w-full">
           <div className="inline-flex space-x-3">
-            <Badge
-              name={
-                <div className="flex items-center">
-                  <i className="text-sm las la-share-alt"></i>
-                  <span className="ml-1">4 Network</span>
-                </div>
-              }
-            />
-            <Badge
-              name={
-                <div className="flex items-center">
-                  <i className="text-sm las la-user-friends"></i>
-                  <span className="ml-1">Family</span>
-                </div>
-              }
-              color="yellow"
-            />
+            <StartRating reviewCount={reviewCount} point={reviewStart} />
           </div>
           <div className="flex items-center space-x-2">
-            {isAds && <Badge name="ADS" color="green" />}
+            
             <h2 className="text-lg font-medium capitalize">
               <span className="line-clamp-2">{title}</span>
             </h2>
@@ -117,10 +104,12 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
           {renderTienIch()}
           <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 "></div>
           <div className="flex w-full justify-between items-end">
-            <StartRating reviewCount={reviewCount} point={reviewStart} />
-            <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-medium text-secondary-500">
-              {`${price},000`}
+          <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-sm text-secondary-500">
+              {`${price}`}
             </span>
+            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 "><i className="las la-shopping-cart"/>add</Button>           
+            
+
           </div>
         </div>
       </div>
@@ -129,7 +118,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
 
   return (
     <div
-      className={`nc-PropertyCardH group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden hover:shadow-xl transition-shadow ${className}`}
+      className={`nc-PropertyCardH group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden  ${className}`}
       data-nc-id="PropertyCardH"
     >
       <Link to={href} className="absolute inset-0"></Link>
@@ -137,6 +126,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
         {renderSliderGallery()}
         {renderContent()}
       </div>
+
       <BtnLikeIcon
         colorClass={` bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 hover:bg-opacity-70 text-neutral-6000 dark:text-neutral-400`}
         isLiked={like}
