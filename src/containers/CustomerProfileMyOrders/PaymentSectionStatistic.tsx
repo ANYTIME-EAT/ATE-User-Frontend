@@ -25,7 +25,7 @@ export interface SectionStatisticProps {
   className?: string;
 }
 
-const PaymentSectionStatistic: FC<SectionStatisticProps> = ({ className = "" }) => {
+const SectionStatistic: FC<SectionStatisticProps> = ({ className = "" }) => {
   return (
     <div className={`nc-SectionStatistic relative ${className}`}>
       
@@ -64,4 +64,4 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({ className = "" }) 
   );
 };
 
-export default PaymentSectionStatistic;
+export default SectionStatistic;
