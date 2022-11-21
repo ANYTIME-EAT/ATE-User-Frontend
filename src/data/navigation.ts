@@ -17,10 +17,6 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-<<<<<<< HEAD
-    href: "/contactUs",
-    name: "Contact Us",
-=======
     href: "/services",
     name: "Services",
   },
@@ -43,6 +39,5 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     id: ncNanoId(),
     href: "/listing-real-estate",
     name: "card"
->>>>>>> dd64e54f580c50e77d709b715e9b28d49f1f849e
   },
 ];
