@@ -1,37 +1,43 @@
+import BackgroundSection from "components/BackgroundSection/BackgroundSection";
 import SectionStatistic from "containers/PageAbout/SectionStatistic";
 import React, { Component } from "react";
+import SectionGridAllProfileMenu from "./SectionGridAllProfileMenu";
 
-class CustomProfileManageAddress extends Component {
+class ProfileFavourites extends Component {
   render() {
     return (
-      <div className="flex min-h-full w-full flex-col bg-neutral-300 grow">
+      <div className="flex min-h-full w-full flex-col bg-slate-400 grow">
         {/* title */}
-    <div className="max-w-sm h-auto mx-20px my-20 rounded-md overflow-hidden grid gap-4 grid-cols-2">
-      <div>
-      <img className="object-cover rounded-full h-36 w-36 mx-auto m-1 p-1 border-4 border-pink-600" src="https://images.pexels.com/photos/2709388/pexels-photo-2709388.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Human Picture by Ike louie Natividad" />
-    </div>
-      <div className="">
-        <h6>User1</h6>
-        <p>+1 404 555-4099</p>
-        <p>user1username@gmail.com</p>
-      </div>
+        <div className="max-w-sm h-auto mx-20px my-20 rounded-md overflow-hidden grid gap-4 grid-cols-2">
+          <div>
+            <img
+              className="object-cover rounded-full h-36 w-36 mx-auto m-1 p-1 border-4 border-pink-600"
+              src="https://images.pexels.com/photos/2709388/pexels-photo-2709388.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              alt="Human Picture by Ike louie Natividad"
+            />
+          </div>
+          <div className="">
+            <h6>User1</h6>
+            <p>+1 404 555-4099</p>
+            <p>user1username@gmail.com</p>
+          </div>
 
-        {/* <div className="flex flex-col">
+          {/* <div className="flex flex-col">
           <div className="font-bold text-xl text-center text-gray-800 hover:text-pink-500 hover:cursor-pointer">Helena Wang</div>
           <p className="text-gray-600 text-sm text-center">Product Designer</p>
         </div> */}
 
-        {/* <div className="flex flex-row justify-center font-semibold mx-auto my-4">
+          {/* <div className="flex flex-row justify-center font-semibold mx-auto my-4">
           <div className="my-auto text-white bg-pink-500 hover:bg-pink-600 hover:cursor-pointer rounded-3xl py-2 px-4 mx-2">Follow</div>
           <div className="my-auto text-gray-800 py-1 px-4 border-2 border-pink-500 hover:bg-pink-500 hover:cursor-pointer hover:text-white rounded-3xl mx-2">Message</div>
         </div> */}
 
-      {/* </div> */}
-      </div>
+          {/* </div> */}
+        </div>
 
         <div className="flex h-auto w-screen flex-row grow">
-          <aside className="w-64 bg-slate-100"  aria-label="Sidebar ">
-            <div className="px-3 py-4 overflow-y-auto rounded">
+          <aside className="w-64" aria-label="Sidebar">
+            <div className="px-3 py-4 overflow-y-auto rounded bg-neutral-200">
               <ul className="space-y-2">
                 <li>
                   <a
@@ -65,9 +71,8 @@ class CustomProfileManageAddress extends Component {
                       <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                     </svg>
                     <span className="flex-1 ml-3 whitespace-nowrap">
-                    Payment
+                      Payment
                     </span>
-                  
                   </a>
                 </li>
                 <li>
@@ -85,7 +90,9 @@ class CustomProfileManageAddress extends Component {
                       <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
                       <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
                     </svg>
-                    <span className="flex-1 ml-3 whitespace-nowrap">My Order</span>
+                    <span className="flex-1 ml-3 whitespace-nowrap">
+                      My Order
+                    </span>
                   </a>
                 </li>
                 <li>
@@ -105,7 +112,9 @@ class CustomProfileManageAddress extends Component {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <span className="flex-1 ml-3 whitespace-nowrap">Refund History</span>
+                    <span className="flex-1 ml-3 whitespace-nowrap">
+                      Refund History
+                    </span>
                   </a>
                 </li>
                 <li>
@@ -148,7 +157,7 @@ class CustomProfileManageAddress extends Component {
                       ></path>
                     </svg>
                     <span className="flex-1 ml-3 whitespace-nowrap">
-                    Promotional
+                      Promotional
                     </span>
                   </a>
                 </li>
@@ -170,7 +179,7 @@ class CustomProfileManageAddress extends Component {
                       ></path>
                     </svg>
                     <span className="flex-1 ml-3 whitespace-nowrap">
-                    Referral
+                      Referral
                     </span>
                   </a>
                 </li>
@@ -192,7 +201,7 @@ class CustomProfileManageAddress extends Component {
                       ></path>
                     </svg>
                     <span className="flex-1 ml-3 whitespace-nowrap">
-                    Change Language
+                      Change Language
                     </span>
                   </a>
                 </li>
@@ -200,14 +209,14 @@ class CustomProfileManageAddress extends Component {
             </div>
           </aside>
 
-          <div className="flex w-full bg-stone-50">
-          <SectionStatistic />
-          </div>
+            <div className="flex w-full bg-stone-50 px-20">
+              <SectionGridAllProfileMenu />
+            </div>
+          
         </div>
-        {/* <div className="flex h-32 w-screen bg-green-400">Footer</div> */}
-      </div>
+        </div>
     );
   }
 }
 
-export default CustomProfileManageAddress;
+export default ProfileFavourites;

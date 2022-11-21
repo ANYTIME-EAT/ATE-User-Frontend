@@ -1,7 +1,8 @@
-import SectionStatistic from "containers/PageAbout/SectionStatistic";
-import React, { Component } from "react";
 
-class CustomProfileManageAddress extends Component {
+import React, { Component } from "react";
+import SectionGridFilterCardMyOrders from "./SectionGridFilterCardMyOrders";
+
+class CustomerProfileMyOrders extends Component {
   render() {
     return (
       <div className="flex min-h-full w-full flex-col bg-neutral-300 grow">
@@ -200,14 +201,16 @@ class CustomProfileManageAddress extends Component {
             </div>
           </aside>
 
-          <div className="flex w-full bg-stone-50">
-          <SectionStatistic />
+          <div className="flex w-full bg-stone-50 grid">
+          <div className="bg-neutral-50 px-10 py-10">
+            <h1 className="font-semibold text-2xl">My Order</h1>
+          </div>
+            <SectionGridFilterCardMyOrders/>
           </div>
         </div>
-        {/* <div className="flex h-32 w-screen bg-green-400">Footer</div> */}
       </div>
     );
   }
 }
 
-export default CustomProfileManageAddress;
+export default CustomerProfileMyOrders;

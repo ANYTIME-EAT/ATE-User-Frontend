@@ -213,7 +213,7 @@ const SiteHeader = () => {
   return (
     <>
       <Helmet>
-        <title>EUROPE TOURS & TRAVELS</title>
+        <title>AnytimeEat</title>
       </Helmet>
       {renderControlSelections()}
       {renderHeader()}
