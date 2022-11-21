@@ -53,6 +53,7 @@ import CustomProfileManageAddress from "containers/CustomProfileManageAddress/Cu
 import ProfileFavourites from "containers/ProfileFavourites/ProfileFavourites";
 import CustomerProfilePayment from "containers/CustomerProfilePayment/CustomerProfilePayment";
 import CustomerProfileMyOrders from "containers/CustomerProfileMyOrders/CustomerProfileMyOrders";
+import ProfileAccount from "containers/ProfileAccount/ProfileAccount";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
@@ -96,7 +97,7 @@ export const pages: Page[] = [
   { path: "/pay-done", component: PayPage },
   //
   { path: "/author", component: AuthorPage },
-  { path: "/account", component: AccountPage },
+  { path: "/profile/account", component: ProfileAccount },
   { path: "/account-password", component: AccountPass },
   { path: "/account-savelists", component: AccountSavelists },
   { path: "/account-billing", component: AccountBilling },
