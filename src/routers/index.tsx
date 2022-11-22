@@ -54,6 +54,7 @@ import ProfileFavourites from "containers/ProfileFavourites/ProfileFavourites";
 import CustomerProfilePayment from "containers/CustomerProfilePayment/CustomerProfilePayment";
 import CustomerProfileMyOrders from "containers/CustomerProfileMyOrders/CustomerProfileMyOrders";
 import ProfileAccount from "containers/ProfileAccount/ProfileAccount";
+import ProfilePromotional from "containers/ProfilePromotional/ProfilePromotional";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
@@ -93,6 +94,7 @@ export const pages: Page[] = [
   { path: "/profile/favourites", component: ProfileFavourites},
   { path: "/profile/payment", component: CustomerProfilePayment},
   { path: "/profile/myOrders", component: CustomerProfileMyOrders},
+  { path: "/profile/promotional", component: ProfilePromotional},
   
   { path: "/pay-done", component: PayPage },
   //

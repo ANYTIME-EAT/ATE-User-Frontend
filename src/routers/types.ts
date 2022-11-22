@@ -31,6 +31,8 @@ export interface LocationStates {
   "/profile/payment"?: {};
   "/profile/myOrders"?: {};
   "/profile/account"?: {};
+  "/profile/promotional"?: {};
+
 
   
   "/pay-done"?: {};
