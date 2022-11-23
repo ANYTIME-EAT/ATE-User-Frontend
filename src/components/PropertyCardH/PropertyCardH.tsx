@@ -47,7 +47,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
 
 
         {saleOff && (
-          <SaleOffBadge className="absolute left-5 top-5 !bg-orange-500" saleOff={saleOff} />
+          <SaleOffBadge className="absolute left-5 top-5 !bg-orange-500" desc={saleOff} />
         )}
       </div>
     );
@@ -76,14 +76,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
         </div>
 
         {/* ---- */}
-        <div className="flex items-center space-x-2">
-          <span className="hidden sm:inline-block">
-            <i className="las la-expand-arrows-alt text-lg"></i>
-          </span>
-          <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            1200 Sq. Fit
-          </span>
-        </div>
+        
       </div>
     );
   };

@@ -152,7 +152,7 @@ const PageHome = () => {
   }
   const getOfferData=async () => {
     const response = await getOffersList()
-    console.log(response.data)
+    // console.log(response.data)
 
     // if(response.data?.response === "success"){
     //   response.data.

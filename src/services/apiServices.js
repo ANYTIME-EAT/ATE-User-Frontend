@@ -1,4 +1,5 @@
 import axios from "axios";
+import { reject } from "lodash";
 import config from "../config/config.json"
 
 export const getRestaurantList = () => {
