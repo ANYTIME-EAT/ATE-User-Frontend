@@ -50,6 +50,11 @@ import FooterNav from "components/FooterNav";
 import useWindowSize from "hooks/useWindowResize";
 import PageHome3 from "containers/PageHome/PageHome3";
 import CustomProfileManageAddress from "containers/CustomProfileManageAddress/CustomProfileManageAddress";
+import ProfileFavourites from "containers/ProfileFavourites/ProfileFavourites";
+import CustomerProfilePayment from "containers/CustomerProfilePayment/CustomerProfilePayment";
+import CustomerProfileMyOrders from "containers/CustomerProfileMyOrders/CustomerProfileMyOrders";
+import ProfileAccount from "containers/ProfileAccount/ProfileAccount";
+import ProfilePromotional from "containers/ProfilePromotional/ProfilePromotional";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
@@ -86,10 +91,15 @@ export const pages: Page[] = [
   //
   { path: "/checkout", component: CheckOutPage },
   { path: "/profile", component: CustomProfileManageAddress},
+  { path: "/profile/favourites", component: ProfileFavourites},
+  { path: "/profile/payment", component: CustomerProfilePayment},
+  { path: "/profile/myOrders", component: CustomerProfileMyOrders},
+  { path: "/profile/promotional", component: ProfilePromotional},
+  
   { path: "/pay-done", component: PayPage },
   //
   { path: "/author", component: AuthorPage },
-  { path: "/account", component: AccountPage },
+  { path: "/profile/account", component: ProfileAccount },
   { path: "/account-password", component: AccountPass },
   { path: "/account-savelists", component: AccountSavelists },
   { path: "/account-billing", component: AccountBilling },

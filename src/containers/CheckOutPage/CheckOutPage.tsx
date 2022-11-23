@@ -16,8 +16,11 @@ import { DateRage } from "components/HeroSearchForm/StaySearchForm";
 import converSelectedDateToString from "utils/converSelectedDateToString";
 import ModalSelectGuests from "components/ModalSelectGuests";
 import { GuestsObject } from "components/HeroSearchForm2Mobile/GuestsInput";
+<<<<<<< HEAD
 import Checkbox from "shared/Checkbox/Checkbox";
 import NcInputNumber from "components/NcInputNumber/NcInputNumber";
+=======
+>>>>>>> c87cabee1507ba1d2c9d3a695edc711b30241ae0
 
 export interface CheckOutPageProps {
   className?: string;
@@ -40,7 +43,9 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     
         <div>
           <h3 className="text-2xl font-semibold">Contact details</h3>
-         <div className="mt-6">
+          {/* <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div> */}
+
+          <div className="mt-6">
             <Tab.Group>
         
               <Tab.Panels>
@@ -58,11 +63,11 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                   </div>
                   <div className="space-y-1">
                     <Label>Address </Label>
-                    <Input type="text" defaultValue="" />
+                    <Input type="text" defaultValue="123 Avenue Street" />
                   </div>
                   <div className="space-y-1">
                     <Label>Landmark </Label>
-                    <Input type="text" defaultValue="" />
+                    <Input type="text" defaultValue="***" />
                   </div>
 
                   <div className="block">
@@ -125,7 +130,9 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                       className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
                         selected
                           ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
-                          : "text-neutral-6000 dark:text-neutral-400"}`}>
+                          : "text-neutral-6000 dark:text-neutral-400"
+                      }`}
+                    >
                       Pickup
                     </button>
                   )}
@@ -137,8 +144,10 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                         selected
                           ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
                           : " text-neutral-6000 dark:text-neutral-400"
-                      }`}>
+                      }`}
+                    >
                       <span className="mr-2.5">Delivery</span>
+                
                     </button>
                   )}
                 </Tab>
@@ -174,8 +183,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         </div>
         <div className="flex flex-col space-y-4">
           {/* <h3 className="text-2xl font-semibold">Price detail</h3> */}
-          <p className="text-2xl font-semibold">6 Pc Nuggets+McChicken+Coke(M)</p>
-          <NcInputNumber defaultValue={1}/>
+          <h6 className="text-2xl font-semibold">6 Pc Nuggets+McChicken+Coke(M)</h6>
           <div>Do you want to add instructions</div>
 
           <h3 className="text-2xl font-semibold">Apply Coupon</h3>
@@ -206,6 +214,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   const renderMain = () => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
+<<<<<<< HEAD
         <h2 className="text-3xl lg:text-4xl font-semibold">
           Confirm and payment
         </h2>
@@ -274,6 +283,10 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         <div>
           <h3 className="text-2xl font-semibold">Pay with</h3>
           <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
+=======
+      <div>
+          <h3 className="text-2xl font-semibold">Choose Payment Method</h3>
+>>>>>>> c87cabee1507ba1d2c9d3a695edc711b30241ae0
 
           <div className="mt-6">
           <Tab.Group>
@@ -336,9 +349,13 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
+<<<<<<< HEAD
             <div className="pt-8">
 
             </div>
+=======
+      
+>>>>>>> c87cabee1507ba1d2c9d3a695edc711b30241ae0
           </div>
         </div>
       </div>
@@ -364,8 +381,14 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   return (
     <div className={`nc-CheckOutPage ${className}`} data-nc-id="CheckOutPage">
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
+<<<<<<< HEAD
         <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10 ">{renderMain()}</div>
         <div className=" lg:block flex-grow">{renderSidebar()}</div>
+=======
+        
+        <div className="w-full lg:w-w-4/6 xl:w-w-4/6 lg:pr-10">{renderContactDetails()}</div>
+        <div className="hidden lg:block flex-grow">{renderSidebar()}</div>
+>>>>>>> c87cabee1507ba1d2c9d3a695edc711b30241ae0
       </main>
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
       <div className="lg:w-w-4/6 xl:w-w-4/6 lg:pr-10">{renderMain()}</div>

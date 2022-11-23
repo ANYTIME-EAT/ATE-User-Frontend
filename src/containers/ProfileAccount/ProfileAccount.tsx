@@ -1,7 +1,8 @@
-import SectionStatistic from "containers/PageAbout/SectionStatistic";
+import AccountPage from "containers/AccountPage/AccountPage";
+import PaymentSectionStatistic from "containers/CustomerProfilePayment/PaymentSectionStatistic";
 import React, { Component } from "react";
 
-class CustomProfileManageAddress extends Component {
+class ProfileAccount extends Component {
   render() {
     return (
       <div className="flex min-h-full w-full flex-col bg-neutral-300 grow">
@@ -200,14 +201,13 @@ class CustomProfileManageAddress extends Component {
             </div>
           </aside>
 
-          <div className="flex w-full bg-stone-50">
-          <SectionStatistic />
+          <div className="flex w-full bg-stone-50 grid">
+           <AccountPage/>
           </div>
         </div>
-        {/* <div className="flex h-32 w-screen bg-green-400">Footer</div> */}
       </div>
     );
   }
 }
 
-export default CustomProfileManageAddress;
+export default ProfileAccount;

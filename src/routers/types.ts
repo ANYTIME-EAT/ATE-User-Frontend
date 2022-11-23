@@ -27,6 +27,14 @@ export interface LocationStates {
   //
   "/checkout"?: {};
   "/profile"?: {};
+  "/profile/favourites"?: {};
+  "/profile/payment"?: {};
+  "/profile/myOrders"?: {};
+  "/profile/account"?: {};
+  "/profile/promotional"?: {};
+
+
+  
   "/pay-done"?: {};
   //
   "/account"?: {};
