@@ -27,7 +27,7 @@ const SectionGridAllMenu: FC<SectionGridAllMenuProps> = ({
   tabs = [],
 }) => {
   const renderCard = (stay: StayDataType) => {
-    console.log(stay)
+    
     return <StayCard key={stay.id} data={stay} />;
   };
 

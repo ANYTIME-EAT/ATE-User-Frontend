@@ -17,9 +17,14 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
+<<<<<<< HEAD
     href: "/contactUs",
     name: "Contact Us",
 
+=======
+    href: "/services",
+    name: "Services",
+>>>>>>> e24f4beabd6b2f922a2843915f0147ca7051e95f
   },
   {
     id: ncNanoId(),
@@ -40,10 +45,13 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     id: ncNanoId(),
     href: "/listing-real-estate",
     name: "card"
+<<<<<<< HEAD
   },
   {
     id: ncNanoId(),
     href: "/services",
     name: "Services",
+=======
+>>>>>>> e24f4beabd6b2f922a2843915f0147ca7051e95f
   },
 ];
