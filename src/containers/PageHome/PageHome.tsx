@@ -17,11 +17,7 @@ import pizza from 'images/pizza.png'
 import bbq from 'images/bbq.png'
 import offer1 from 'images/offer1.png'
 import offer2 from 'images/offer2.png'
-import {getRestaurantList,getOffersList} from '../../services/apiServices'
-
-
-
-
+import {getRestaurantList,getOffersList,getAllComboMenuList} from '../../services/apiServices'
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -56,24 +52,7 @@ const DEMO_CATS: TaxonomyType[] = [
     count: 188288,
     thumbnail:bbq,
   },
-  // {
-  //   id: "2",
-  //   href: "#",
-  //   name: "Tokyo",
-  //   taxonomy: "category",
-  //   count: 188288,
-  //   thumbnail:
-  //     "https://images.pexels.com/photos/4151484/pexels-photo-4151484.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
-  // },
-  // {
-  //   id: "2",
-  //   href: "#",
-  //   name: "Maldives",
-  //   taxonomy: "category",
-  //   count: 188288,
-  //   thumbnail:
-  //     "https://images.pexels.com/photos/3250613/pexels-photo-3250613.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-  // },
+
 ];
 
 const DEMO_CATS_2: TaxonomyType[] = [
@@ -123,6 +102,7 @@ const PageHome = () => {
 
   const [restrauntData,setRestraurantData] = useState<any>([])
   const [offerData,setOfferData] = useState<any>([])
+  const [comboMenuData,setcomboMenuData] = useState<any>([])
 
   const getRestrauntData =async () => {
     const response = await getRestaurantList()
@@ -145,6 +125,31 @@ const PageHome = () => {
       
     }
   }
+
+  const getComboMenuData =async () => {
+    const response = await getAllComboMenuList()
+
+    if(response.data){
+      let tempData : any  = [];
+      if(response.data.response === "success"){
+        response.data.comboMenu.map((item: any, key: number) => {
+          tempData[key] = {
+            id: item.id,
+            name:item.name,
+            description:item.description,
+            discount:item.discount,
+            max_quantity: item.max_quantity,
+            is_availability:item.is_availability,
+            menu_avatar:item.menu_avatar,
+            is_deleted:item.is_deleted
+
+        }      
+        })
+        setcomboMenuData(tempData)
+      }
+      
+    }
+  }
   const getOfferData=async () => {
     const response = await getOffersList()
     console.log(response.data)
@@ -156,6 +161,7 @@ const PageHome = () => {
   useEffect(() => {
     getRestrauntData()
     getOfferData()
+    getComboMenuData()
   },[])
   
 
@@ -211,7 +217,7 @@ const PageHome = () => {
         {/* SECTION */}
         <div className="relative py-16">
           <BackgroundSection />
-          <SectionGridAllMenu />
+          <SectionGridAllMenu combo_MenuData={comboMenuData} />
         </div>
 
         {/* SECTION */}
