@@ -16,11 +16,8 @@ import { DateRage } from "components/HeroSearchForm/StaySearchForm";
 import converSelectedDateToString from "utils/converSelectedDateToString";
 import ModalSelectGuests from "components/ModalSelectGuests";
 import { GuestsObject } from "components/HeroSearchForm2Mobile/GuestsInput";
-<<<<<<< HEAD
 import Checkbox from "shared/Checkbox/Checkbox";
-=======
 import NcInputNumber from "components/NcInputNumber/NcInputNumber";
->>>>>>> 5ad0c5dda8b674c3446abe5648c0a2f1e8f040ee
 
 export interface CheckOutPageProps {
   className?: string;
@@ -209,10 +206,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   const renderMain = () => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
-<<<<<<< HEAD
-      <div>
-          <h3 className="text-2xl font-semibold">Choose Payment Method</h3>
-=======
         <h2 className="text-3xl lg:text-4xl font-semibold">
           Confirm and payment
         </h2>
@@ -281,7 +274,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         <div>
           <h3 className="text-2xl font-semibold">Pay with</h3>
           <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
->>>>>>> dd64e54f580c50e77d709b715e9b28d49f1f849e
 
           <div className="mt-6">
           <Tab.Group>
@@ -344,13 +336,9 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
-<<<<<<< HEAD
-      
-=======
             <div className="pt-8">
 
             </div>
->>>>>>> dd64e54f580c50e77d709b715e9b28d49f1f849e
           </div>
         </div>
       </div>
@@ -376,14 +364,8 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   return (
     <div className={`nc-CheckOutPage ${className}`} data-nc-id="CheckOutPage">
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
-<<<<<<< HEAD
-        
-        <div className="w-full lg:w-w-4/6 xl:w-w-4/6 lg:pr-10">{renderContactDetails()}</div>
-        <div className="hidden lg:block flex-grow">{renderSidebar()}</div>
-=======
         <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10 ">{renderMain()}</div>
         <div className=" lg:block flex-grow">{renderSidebar()}</div>
->>>>>>> dd64e54f580c50e77d709b715e9b28d49f1f849e
       </main>
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
       <div className="lg:w-w-4/6 xl:w-w-4/6 lg:pr-10">{renderMain()}</div>

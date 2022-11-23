@@ -1,6 +1,6 @@
 
 
-import React, { FC, Fragment, useState } from "react";
+import React, { FC, Fragment, useState,useEffect } from "react";
 
 import { Helmet } from "react-helmet";
 
@@ -8,6 +8,8 @@ import RestraurantPage from "containers/RestraurantPage/RestraurantPage"
 
 import SectionGridFilterCard from "containers/ListingRealEstatePage/SectionGridFilterCard";
 import SectionHero2 from "components/SectionHero2/SectionHero2";
+import { getRestaurantCategory } from "services/apiServices";
+
 export interface AuthorPageProps {
   className?: string;
 }
@@ -16,77 +18,90 @@ export interface AuthorPageProps {
 const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
 
+  const[restraurantCategory,setrestraurantCategory] = useState<any>([])
+
+  const getrestraurantCat = async () => {
+    const response = await getRestaurantCategory()
+    if(response.data?.response === "success"){
+      let menuArr: any = [];
+      response.data.category.map((item: any, key: number) => {
+        menuArr[key] = {
+          title: item.name
+        }
+      })
+      setrestraurantCategory(menuArr)
+    }
+
+
+  }
+  useEffect(() => {  
+    getrestraurantCat()
+  },[])
+
   const renderSidebar = () => {
-    return (
+    if(restraurantCategory.length > 0){
+      return (
+        // <div className="flex items-start ">
+        //   <ul className="nav nav-tabs flex flex-col flex-wrap list-none border-b-0 pl-0 mr-4" id="tabs-tabVertical"
+        //     role="tablist">
+        //     <li className="nav-item flex-grow text-center" role="presentation">
+        //       <a href="#tabs-homeVertical" className="
+        //     nav-link
+        //     block
+        //     font-medium
+        //     text-xs
+        //     leading-tight
+        //     uppercase
+        //     border-x-0 border-t-0 border-b-2 border-transparent
+        //     px-6
+        //     py-3
+        //     my-2
+        //     hover:bg-gray-100
+        //     focus:border-transparent
+        //     active
+        //   " id="tabs-home-tabVertical" data-bs-toggle="pill" data-bs-target="#tabs-homeVertical" role="tab"
+        //         aria-controls="tabs-homeVertical" aria-selected="true">Home</a>
+        //     </li>
+        //     <li className="nav-item flex-grow text-center" role="presentation">
+        //       <a href="#tabs-profileVertical" className="
+        //     nav-link
+        //     block
+        //     font-medium
+        //     text-xs
+        //     leading-tight
+        //     uppercase
+        //     border-x-0 border-t-0 border-b-2 border-transparent
+        //     px-6
+        //     py-3
+        //     my-2
+        //     hover:border-transparent hover:bg-gray-100
+        //     focus:border-transparent
+        //   " id="tabs-profile-tabVertical" data-bs-toggle="pill" data-bs-target="#tabs-profileVertical" role="tab"
+        //         aria-controls="tabs-profileVertical" aria-selected="false">Profile</a>
+        //     </li>
+        //     <li className="nav-item flex-grow text-center" role="presentation">
+        //       <a href="#tabs-messagesVertical" className="
+        //     nav-link
+        //     block
+        //     font-medium
+        //     text-xs
+        //     leading-tight
+        //     uppercase
+        //     border-x-0 border-t-0 border-b-2 border-transparent
+        //     px-6
+        //     py-3
+        //     my-2
+        //     hover:border-transparent hover:bg-gray-100
+        //     focus:border-transparent
+        //   " id="tabs-messages-tabVertical" data-bs-toggle="pill" data-bs-target="#tabs-messagesVertical" role="tab"
+        //         aria-controls="tabs-messagesVertical" aria-selected="false">Messages</a>
+        //     </li>
+        //   </ul>
 
-
-      // <div className="flex items-start ">
-      //   <ul className="nav nav-tabs flex flex-col flex-wrap list-none border-b-0 pl-0 mr-4" id="tabs-tabVertical"
-      //     role="tablist">
-      //     <li className="nav-item flex-grow text-center" role="presentation">
-      //       <a href="#tabs-homeVertical" className="
-      //     nav-link
-      //     block
-      //     font-medium
-      //     text-xs
-      //     leading-tight
-      //     uppercase
-      //     border-x-0 border-t-0 border-b-2 border-transparent
-      //     px-6
-      //     py-3
-      //     my-2
-      //     hover:bg-gray-100
-      //     focus:border-transparent
-      //     active
-      //   " id="tabs-home-tabVertical" data-bs-toggle="pill" data-bs-target="#tabs-homeVertical" role="tab"
-      //         aria-controls="tabs-homeVertical" aria-selected="true">Home</a>
-      //     </li>
-      //     <li className="nav-item flex-grow text-center" role="presentation">
-      //       <a href="#tabs-profileVertical" className="
-      //     nav-link
-      //     block
-      //     font-medium
-      //     text-xs
-      //     leading-tight
-      //     uppercase
-      //     border-x-0 border-t-0 border-b-2 border-transparent
-      //     px-6
-      //     py-3
-      //     my-2
-      //     hover:border-transparent hover:bg-gray-100
-      //     focus:border-transparent
-      //   " id="tabs-profile-tabVertical" data-bs-toggle="pill" data-bs-target="#tabs-profileVertical" role="tab"
-      //         aria-controls="tabs-profileVertical" aria-selected="false">Profile</a>
-      //     </li>
-      //     <li className="nav-item flex-grow text-center" role="presentation">
-      //       <a href="#tabs-messagesVertical" className="
-      //     nav-link
-      //     block
-      //     font-medium
-      //     text-xs
-      //     leading-tight
-      //     uppercase
-      //     border-x-0 border-t-0 border-b-2 border-transparent
-      //     px-6
-      //     py-3
-      //     my-2
-      //     hover:border-transparent hover:bg-gray-100
-      //     focus:border-transparent
-      //   " id="tabs-messages-tabVertical" data-bs-toggle="pill" data-bs-target="#tabs-messagesVertical" role="tab"
-      //         aria-controls="tabs-messagesVertical" aria-selected="false">Messages</a>
-      //     </li>
-      //   </ul>
-
-      // </div>
-      
-      
-        <RestraurantPage />
-      
-
-
-
-
-    );
+        // </div>
+          <RestraurantPage data={restraurantCategory}/>
+      );
+    }
   };
 
   const renderSection1 = () => {

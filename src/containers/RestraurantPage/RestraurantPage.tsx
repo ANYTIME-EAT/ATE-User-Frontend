@@ -1,7 +1,12 @@
-import { useState } from "react";
+import React, { FC, useState } from "react";
 import Heading from "shared/Heading/Heading";
 import img from '../RestraurantPage/control.png'
-const Demo = () => {
+
+export interface RestraurantPageProps {
+  data?: any;
+}
+
+const RestraurantPage: FC<RestraurantPageProps> = ({data}) => {
   const [open, setOpen] = useState(true);
   const Menus = [
     { title: "Recomended",  },
@@ -42,7 +47,7 @@ const Demo = () => {
             desc="">Choose Here</Heading>
         </div>
         <ul className="pt-6">
-          {Menus.map((Menu, index) => (
+          {data.map((Menu: any, index: number) => (
             <li
               key={index}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-blue-100 hover:font-bold dark:hover:bg-slate-400 text-red text-sm items-center gap-x-4 
@@ -62,4 +67,4 @@ const Demo = () => {
     </div>
   );
 };
-export default Demo;
+export default RestraurantPage;
