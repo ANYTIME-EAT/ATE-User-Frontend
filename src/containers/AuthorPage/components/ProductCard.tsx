@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import GallerySlider from "components/GallerySlider/GallerySlider";
+import GallerySlider from "./GallerySlider";
 import { DEMO_STAY_LISTINGS } from "data/listings";
 import StartRating from "components/StartRating/StartRating";
 import { Link } from "react-router-dom";
@@ -44,6 +44,7 @@ const ProductCard: FC<ProductCardProps> = ({
           className="w-full h-full rounded-2xl overflow-hidden will-change-transform"
           uniqueID={`ProductCard_${id}`}
           href={href}
+          
         />
 
 

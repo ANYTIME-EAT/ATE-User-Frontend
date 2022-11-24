@@ -41,7 +41,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   //retauraunt Name
   const getRestaurantName =async () => {
     const response = await getRestaurant(1)
-    // console.log(response.data)
+    console.log(response.data)
     if(response.data?.response ==="success") {
       setresturant(response.data.restaurant[0])
     }
@@ -50,7 +50,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   // Products 
   const getProductItems =async () => {
     const response = await getProduct(1)
-    console.log(response.data)
+    // console.log(response.data)
     if(response.data?.response ==="success"){
       setProduct(response.data.product)
       // let productArr:any = [];
