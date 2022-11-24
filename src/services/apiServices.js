@@ -11,9 +11,9 @@ export const getRestaurantList = () => {
     })
 }
 
-export const getRestaurantCategory = () => {
+export const getRestaurantCategory = (id) => {
     return new Promise((resolve,reject)=>{
-        axios.get(`${config.SERVER_URL}/category/restautant`).then((res) =>{
+        axios.get(`${config.SERVER_URL}/category/restaurant/${id}`).then((res) =>{
             resolve(res)
         }).catch((res) => {
             reject(res)

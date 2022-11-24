@@ -26,7 +26,8 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
   //Resturant Food Category
   const getrestraurantCat = async () => {
-    const response = await getRestaurantCategory()
+    const response = await getRestaurantCategory(1)
+    console.log(response.data)
     if (response.data?.response === "success") {
       let menuArr: any = [];
       response.data.category.map((item: any, key: number) => {
