@@ -10,7 +10,9 @@ import ButtonPrimary from "shared/Button/ButtonPrimary";
 import { useNavigate } from 'react-router-dom';
 import { loginApi } from "services/authServices";
 import { toSafeInteger } from "lodash";
-import {ToastContainer, toast} from 'react-toastify'
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 export interface PageLoginProps {
