@@ -117,7 +117,7 @@ const PageHome = () => {
             name: item.name,
             taxonomy: "category",
             count: 188288,
-            thumbnail:kfc,
+            // thumbnail:kfc,
         }      
         })
         setRestraurantData(tempData)

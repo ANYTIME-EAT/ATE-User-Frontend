@@ -10,14 +10,14 @@ import { StayDataType } from "data/types";
 import Button from "shared/Button/Button";
 import ButtonCircle from "shared/Button/ButtonCircle";
 
-export interface PropertyCardHProps {
+export interface ProductCardProps {
   className?: string;
-  data?: StayDataType;
+  data?: any;
 }
 
 const DEMO_DATA = DEMO_STAY_LISTINGS[0];
 
-const PropertyCardH: FC<PropertyCardHProps> = ({
+const ProductCard: FC<ProductCardProps> = ({
   className = "",
   data = DEMO_DATA,
 }) => {
@@ -27,7 +27,6 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
     href,
     like,
     saleOff,
-    isAds,
     price,
     reviewStart,
     reviewCount,
@@ -41,7 +40,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
           ratioClass="aspect-w-1 aspect-h-1"
           galleryImgs={galleryImgs}
           className="w-full h-full rounded-2xl overflow-hidden will-change-transform"
-          uniqueID={`PropertyCardH_${id}`}
+          uniqueID={`ProductCard_${id}`}
           href={href}
         />
 
@@ -118,8 +117,8 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
 
   return (
     <div
-      className={`nc-PropertyCardH group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden  ${className}`}
-      data-nc-id="PropertyCardH"
+      className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden  ${className}`}
+      data-nc-id="ProductCard"
     >
       <Link to={href} className="absolute inset-0"></Link>
       <div className="h-full w-full flex flex-col sm:flex-row sm:items-center">
@@ -136,4 +135,4 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
   );
 };
 
-export default PropertyCardH;
+export default ProductCard;

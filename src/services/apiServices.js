@@ -1,5 +1,4 @@
 import axios from "axios";
-import { reject } from "lodash";
 import config from "../config/config.json"
 
 export const getRestaurantList = () => {
@@ -25,6 +24,26 @@ export const getOffersList = () => {
 export const getAllComboMenuList = () => {
     return new Promise((resolve,reject)=>{
         axios.get(`${config.SERVER_URL}/combomenu/list`).then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getRestaurant = (id) => {
+    return new Promise((resolve,reject) => {
+        axios.get(`${config.SERVER_URL}/restaurant/${id}`).then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getProduct = (id) => {
+    return new Promise((resolve,reject) => {
+        axios.get(`${config.SERVER_URL}/product/product/${id}`).then((res) => {
             resolve(res)
         }).catch((res) => {
             reject(res)
