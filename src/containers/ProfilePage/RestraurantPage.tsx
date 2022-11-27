@@ -4,6 +4,7 @@ import img from '../RestraurantPage/control.png'
 
 export interface RestraurantPageProps {
   data?: any;
+  handleActivePage(id: number, title: string) : void;
 }
 
 const sidebarData=[
@@ -12,11 +13,19 @@ const sidebarData=[
         
     },
     {
+      title:"Favourites"
+      
+  },
+    {
         title:"Payment"
         
     },
     {
         title:"My Order"
+        
+    },
+    {
+        title:"Referral"
         
     },
     {
@@ -28,16 +37,16 @@ const sidebarData=[
         
     },
     {
-        title:"Referral"
-        
+        title:"Change Language"       
     },
-    {
-        title:"Change Language"
-        
-    }
+ {
+  title:"Edit Profile"       
+}
+
+    
 ]
 
-const RestraurantPage: FC<RestraurantPageProps> = ({ data }) => {
+const RestraurantPage: FC<RestraurantPageProps> = ({ data, handleActivePage }) => {
   const [open, setOpen] = useState(true);
 
   return (
@@ -60,9 +69,6 @@ const RestraurantPage: FC<RestraurantPageProps> = ({ data }) => {
               }`}
           >
           </h1>
-          {/* <Heading className={`text-black origin-left  dark:text-gray-100 font-medium text-xl duration-200 ${!open && "scale-0"
-            }`}
-            desc="">Choose Here</Heading> */}
         </div>
         <ul className="pt-6">
           {sidebarData.map((Menu: any, index: number) => (
@@ -71,8 +77,7 @@ const RestraurantPage: FC<RestraurantPageProps> = ({ data }) => {
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-blue-100 hover:font-bold dark:hover:bg-slate-400 dark:hover:text-black  text-lg items-center gap-x-4 
                ${index === 0 && "bg-light-white"
                 } `}
-            >
-
+              onClick={() => handleActivePage(index, Menu.title)}>
               <span className={`${!open && "hidden bg-blue-100 "} origin-left duration-200 py-3`}>
                 {Menu.title}
               </span>

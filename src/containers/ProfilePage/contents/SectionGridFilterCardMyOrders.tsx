@@ -25,7 +25,9 @@ const SectionGridFilterCardMyOrders: FC<SectionGridFilterCardProps> = ({
         heading="MyOrders"
        
       /> */}
-      <div className="grid grid-cols-1 gap-3 md:gap-8 xl:grid-cols-1 px-10 ">
+      <h1 className="font-semibold text-xl pb-10">My Orders</h1>
+      <div className="grid grid-cols-1 gap-3 md:gap-8 xl:grid-cols-1">
+      
         {data.map((stay) => (
           <PropertyCardMyOrder key={stay.id} data={stay} />
         ))}
