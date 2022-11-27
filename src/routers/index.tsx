@@ -55,6 +55,7 @@ import CustomerProfilePayment from "containers/CustomerProfilePayment/CustomerPr
 import CustomerProfileMyOrders from "containers/CustomerProfileMyOrders/CustomerProfileMyOrders";
 import ProfileAccount from "containers/ProfileAccount/ProfileAccount";
 import ProfilePromotional from "containers/ProfilePromotional/ProfilePromotional";
+import ProfilePage from "containers/ProfilePage/ProfilePage";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
@@ -95,6 +96,7 @@ export const pages: Page[] = [
   { path: "/profile/payment", component: CustomerProfilePayment},
   { path: "/profile/myOrders", component: CustomerProfileMyOrders},
   { path: "/profile/promotional", component: ProfilePromotional},
+  { path: "/profile/route", component: ProfilePage},
   
   { path: "/pay-done", component: PayPage },
   //
