@@ -18,6 +18,9 @@ import ModalSelectGuests from "components/ModalSelectGuests";
 import { GuestsObject } from "components/HeroSearchForm2Mobile/GuestsInput";
 import Checkbox from "shared/Checkbox/Checkbox";
 import NcInputNumber from "components/NcInputNumber/NcInputNumber";
+import { useNavigate } from 'react-router-dom';
+import { checkoutApi } from "services/apiServices";
+import { ToastContainer,toast } from "react-toastify";
 
 export interface CheckOutPageProps {
   className?: string;
@@ -33,86 +36,111 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     guestChildren: 1,
     guestInfants: 1,
   });
+const [name, setName]=useState("");
+const [email, setEmail]=useState("");
+const [phone, setPhone]=useState("");
+const [landmark, setLandmark]=useState("");
+const navigate = useNavigate();
 
-  const renderContactDetails = () => {
-    return (
-      <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
-    
-        <div>
-          <h3 className="text-2xl font-semibold">Contact details</h3>
-          {/* <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div> */}
 
-          <div className="mt-6">
-            <Tab.Group>
+//handle contact details
+  const handleSubmit = async () => {
+    var data ={
+      "name": name,
+      "email":email,
+      "phone": phone,
+      "landmark":landmark
+    };
+    const response=await checkoutApi(data);
+    if(response.data){
+      console.log(response.data);
+        navigate('/');
+      }else{
+        toast.error(response.data.message,{
+          position:toast.POSITION.TOP_CENTER
+        });
+      }
+    }
+
+  // const renderContactDetails = () => {
+  //   return (
+  //     <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
+  //   <ToastContainer/>
+  //       <div>
+  //         <h3 className="text-2xl font-semibold">Contact details</h3>
+  //         {/* <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div> */}
+
+  //         <div className="mt-6">
+  //           <Tab.Group>
         
-              <Tab.Panels>
+  //             <Tab.Panels>
                 
-                <Tab.Panel className="space-y-5">
-                <div className="flex space-x-5  ">
-                    <div className="flex-1 space-y-1">
-                      <Label>Name </Label>
-                      <Input type="text" defaultValue="name" />
-                    </div>
-                    <div className="flex-1 space-y-1">
-                      <Label>Phone number</Label>
-                      <Input />
-                    </div>
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Address </Label>
-                    <Input type="text" defaultValue="123 Avenue Street" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Landmark </Label>
-                    <Input type="text" defaultValue="***" />
-                  </div>
+  //               <Tab.Panel className="space-y-5">
+  //               <div className="flex space-x-5  ">
+  //                   <div className="flex-1 space-y-1">
+  //                     <Label>Name </Label>
+  //                     <Input type="text" defaultValue="name" />
+  //                   </div>
+  //                   <div className="flex-1 space-y-1">
+  //                     <Label>Phone number</Label>
+  //                     <Input />
+  //                   </div>
+  //                 </div>
+  //                 <div className="space-y-1">
+  //                   <Label>Address </Label>
+  //                   <Input type="text" defaultValue="123 Avenue Street" />
+  //                 </div>
+  //                 <div className="space-y-1">
+  //                   <Label>Landmark </Label>
+  //                   <Input type="text" defaultValue="***" />
+  //                 </div>
 
-                  <div className="block">
-                    <span className="text-gray-700">Address Label (Optional)</span>
-                    <div className="mt-2">
-                      <div>
-                        <label className="inline-flex items-center">
-                        <input type="checkbox" className="form-checkbox" />
-                          <span className="ml-2">Home</span>
-                        </label>
-                      </div>
-                      <div>
-                        <label className="inline-flex items-center">
-                          <input type="checkbox" className="form-checkbox"/>
-                          <span className="ml-2">Work</span>
-                        </label>
-                      </div>
-                  </div>
-                </div>
-                <div className="block">
-                    <span className="text-gray-700">Deliver to</span>
-                    <div className="mt-2">
-                      <div>
-                        <label className="inline-flex items-center">
-                        <input type="checkbox" className="form-checkbox" />
-                          <span className="ml-2">Deliver to door</span>
-                        </label>
-                      </div>
-                      <div>
-                        <label className="inline-flex items-center">
-                          <input type="checkbox" className="form-checkbox"/>
-                          <span className="ml-2">Pickup outside</span>
-                        </label>
-                      </div>   
-                  </div>
-                </div>
+  //                 <div className="block">
+  //                   <span className="text-gray-700">Address Label (Optional)</span>
+  //                   <div className="mt-2">
+  //                     <div>
+  //                       <label className="inline-flex items-center">
+  //                       <input type="checkbox" className="form-checkbox" />
+  //                         <span className="ml-2">Home</span>
+  //                       </label>
+  //                     </div>
+  //                     <div>
+  //                       <label className="inline-flex items-center">
+  //                         <input type="checkbox" className="form-checkbox"/>
+  //                         <span className="ml-2">Work</span>
+  //                       </label>
+  //                     </div>
+  //                 </div>
+  //               </div>
+  //               <div className="block">
+  //                   <span className="text-gray-700">Deliver to</span>
+  //                   <div className="mt-2">
+  //                     <div>
+  //                       <label className="inline-flex items-center">
+  //                       <input type="checkbox" className="form-checkbox" />
+  //                         <span className="ml-2">Deliver to door</span>
+  //                       </label>
+  //                     </div>
+  //                     <div>
+  //                       <label className="inline-flex items-center">
+  //                         <input type="checkbox" className="form-checkbox"/>
+  //                         <span className="ml-2">Pickup outside</span>
+  //                       </label>
+  //                     </div>   
+  //                 </div>
+  //               </div>
 
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
-            <div className="pt-8">
-              <ButtonPrimary href={"/pay-done"}>Confirm</ButtonPrimary>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  //               </Tab.Panel>
+  //             </Tab.Panels>
+  //           </Tab.Group>
+  //           <div className="pt-8">
+  //             <ButtonPrimary href={"/pay-done"}>Confirm</ButtonPrimary>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   const renderSidebar = () => {
     return (
@@ -212,7 +240,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
         <h2 className="text-3xl lg:text-4xl font-semibold">
-          Confirm and payment
+         payment Details
         </h2>
         <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
         <div className="relative">
@@ -250,7 +278,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
 
           {/* address label  */}
           <div>
-            <p className="text-2xl mt-6">Contact Information</p>
+            <p className="text-2xl mt-6">Address Label (Optional)</p>
           </div>
           <div className="mt-6  flex flex-row ">
 
@@ -264,21 +292,21 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
 
             <div className="space-y-1 px-9">
 
-              <Label>Home</Label>
+              <Label>Work</Label>
               <Checkbox
-                name="Home"
+                name="Work"
               />
             </div>
 
 
           </div>
-          <ButtonPrimary className="fixed top-0 left-0 right-0 mt-6" href={"/pay-done"}>Confirm</ButtonPrimary>
+          {/* <ButtonPrimary className="fixed top-0 left-0 right-0 mt-6" href={"/pay-done"}>Confirm</ButtonPrimary> */}
         </div>
 
 
         <div>
           <h3 className="text-2xl font-semibold">Pay with</h3>
-          <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
+          <div className="border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
 
           <div className="mt-6">
           <Tab.Group>
@@ -371,9 +399,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
         <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10 ">{renderMain()}</div>
         <div className=" lg:block flex-grow">{renderSidebar()}</div>
-      </main>
-      <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
-      <div className="lg:w-w-4/6 xl:w-w-4/6 lg:pr-10">{renderMain()}</div>
       </main>
     </div>
   );
