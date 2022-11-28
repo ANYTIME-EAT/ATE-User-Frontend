@@ -13,6 +13,7 @@ export interface SectionGridFilterCardProps {
   className?: string;
   data?: StayDataType[];
   productData?: any;
+  crrAuthor?:any;
 }
 
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
@@ -20,7 +21,8 @@ const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
 const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
   className = "",
   data = DEMO_DATA,
-  productData
+  productData,
+  crrAuthor
 }) => {
   return (
     <div
@@ -28,7 +30,7 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
       data-nc-id="SectionGridFilterCard"
     >
       <Heading2
-        heading="Recomended"
+        heading={crrAuthor.title}
       />
 
       

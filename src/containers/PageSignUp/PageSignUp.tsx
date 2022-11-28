@@ -89,7 +89,7 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
   return (
     <div className={`nc-PageSignUp  ${className}`} data-nc-id="PageSignUp">
       <Helmet>
-        <title>Sign up || EUROPE TOURS & TRAVELS</title>
+        <title>Sign up || Anytime Eat</title>
       </Helmet>
       
 

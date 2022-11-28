@@ -11,22 +11,6 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "/restaurant",
-    name: "Restaurant",
-    isNew: true,
-  },
-  {
-    id: ncNanoId(),
-    href: "/services",
-    name: "Services",
-  },
-  {
-    id: ncNanoId(),
-    href: "/packages",
-    name: "Packages",
-  },
-  {
-    id: ncNanoId(),
     href: "/offers",
     name: "Promotions",
   },

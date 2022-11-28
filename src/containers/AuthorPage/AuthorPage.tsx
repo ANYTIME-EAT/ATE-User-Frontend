@@ -24,12 +24,23 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const [restaurant, setresturant] = useState<any>([])
   const [product, setProduct] = useState<any>([])
 
+  const [currentAuthor, setCurrentAuthor] = useState<any>({index:-1, title: ""})
+
+  const changeAuthor = (index: number, title: string) => {
+    setCurrentAuthor({index:index, title: title})
+  }
+
+  useEffect(() => {
+    // console.log(currentAuthor)
+  },[currentAuthor])
+
   //Resturant Food Category
   const getrestraurantCat = async () => {
     const response = await getRestaurantCategory(1)
     console.log(response.data)
     if (response.data?.response === "success") {
-      let menuArr: any = [];
+      setCurrentAuthor({index:0, title: response.data.category[0].name})
+      let menuArr: any = [];    
       response.data.category.map((item: any, key: number) => {
         menuArr[key] = {
           title: item.name
@@ -75,7 +86,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   const renderSidebar = () => {
     if (restraurantCategory.length > 0) {
       return (
-        <RestraurantPage data={restraurantCategory} />
+        <RestraurantPage data={restraurantCategory} crrAuthor={currentAuthor} changeAuthor={changeAuthor}/>
       );
     }
   };
@@ -94,7 +105,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
      
       <div className=" flex-1 p-7">
         {product.length > 0 &&
-        <SectionGridFilterCard productData={product}  className="py-14 lg:py-10" />
+        <SectionGridFilterCard productData={product} crrAuthor={currentAuthor} className="py-14 lg:py-10" />
          } 
       </div>
       
