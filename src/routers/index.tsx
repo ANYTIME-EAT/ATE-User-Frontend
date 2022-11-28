@@ -51,6 +51,7 @@ import useWindowSize from "hooks/useWindowResize";
 import PageHome3 from "containers/PageHome/PageHome3";
 import ProfilePromotional from "containers/ProfilePromotional/ProfilePromotional";
 import ProfilePage from "containers/ProfilePage/ProfilePage";
+import SectionHero from "containers/ProfilePage/SectionHero/SectionHero";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
@@ -123,6 +124,8 @@ export const pages: Page[] = [
   { path: "/signup", component: PageSignUp },
   { path: "/login", component: PageLogin },
   { path: "/subscription", component: PageSubcription },
+  { path: "/address/edit", component: SectionHero },
+  
   //
 ];
 

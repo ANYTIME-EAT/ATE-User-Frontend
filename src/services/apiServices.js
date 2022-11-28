@@ -1,6 +1,15 @@
 import axios from "axios";
 import config from "../config/config.json"
 
+const header=()=>{
+    const token=localStorage.getItem("access-token");
+    return {
+        headers:{
+            'Authorization':`Bearer ${token}`
+        }
+    }
+    
+}
 
 export const getAvatar = (avatar) => {
     return new Promise((resole, reject) => {
@@ -88,9 +97,11 @@ export const checkoutApi = (data) => {
     })
 }
 
-export const getAllUserAddress = (id) => {
+
+export const getAllUserAddress = (userId) => {
     return new Promise((resolve,reject)=>{
-        axios.get(`${config.SERVER_URL}/user/address/${id}`).then((res) =>{
+        localStorage.getItem("access-token");
+        axios.get(`${config.SERVER_URL}/user/get_address/${userId}`,header()).then((res) =>{
             resolve(res)
         }).catch((res) => {
             reject(res)

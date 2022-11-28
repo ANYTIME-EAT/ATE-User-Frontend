@@ -9,6 +9,7 @@ import PaymentSectionStatistic from "./contents/PaymentSectionStatistic";
 import SectionGridAllprofileMenu from "./contents/SectionGridAllProfileMenu";
 import SectionGridFilterCardMyOrders from "./contents/SectionGridFilterCardMyOrders";
 import AccountPage from "./AccountPage/AccountPage";
+// import EditAddressPage from "./EditAddress/EditAddressPage";
 
 
 export interface AuthorPageProps {
@@ -89,6 +90,14 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
         </div>
       );
     }
+    // else if(activePage.title === "Edit Address"){
+    //   return (
+    //     <div className=" flex-1 p-7">
+    //       <EditAddressPage/>
+    //     </div>
+    //   );
+    // }
+    
   };
 
   // user profile page
