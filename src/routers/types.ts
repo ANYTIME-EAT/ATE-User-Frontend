@@ -32,6 +32,7 @@ export interface LocationStates {
   "/profile/myOrders"?: {};
   "/profile/account"?: {};
   "/profile/promotional"?: {};
+  "/profile/route"?: {};
 
 
   

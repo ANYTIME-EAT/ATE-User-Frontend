@@ -1,5 +1,4 @@
 import AccountPage from "containers/AccountPage/AccountPage";
-import PaymentSectionStatistic from "containers/CustomerProfilePayment/PaymentSectionStatistic";
 import React, { Component } from "react";
 
 class ProfileAccount extends Component {

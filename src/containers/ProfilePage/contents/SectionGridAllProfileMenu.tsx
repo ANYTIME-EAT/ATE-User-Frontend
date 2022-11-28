@@ -33,16 +33,18 @@ const SectionGridAllprofileMenu: FC<SectionGridAllMenuProps> = ({
 
   return (
     <div className="nc-SectionGridAllMenu relative">
-      <HeaderFilter
+      {/* <HeaderFilter
         tabActive={""}
         subHeading={subHeading}
         tabs={tabs}
         heading={heading}
         onClickTab={() => {}}
-      />
+      /> */}
+      <h1 className="font-semibold text-xl pb-10">Favourites</h1>
       <div
         className={`grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${gridClass}`}
       >
+        
         {DEMO_DATA.map((stay) => renderCard(stay))}
       </div>
       
