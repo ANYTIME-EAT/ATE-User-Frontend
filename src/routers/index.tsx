@@ -51,6 +51,7 @@ import useWindowSize from "hooks/useWindowResize";
 import PageHome3 from "containers/PageHome/PageHome3";
 import ProfilePromotional from "containers/ProfilePromotional/ProfilePromotional";
 import ProfilePage from "containers/ProfilePage/ProfilePage";
+import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
@@ -133,6 +134,7 @@ const MyRoutes = () => {
       basename={process.env.NODE_ENV === "production" ? "chisfis" : ""}
     >
       <ScrollToTop />
+      {/* <ShoppingCart /> */}
       <SiteHeader />
 
       <Routes>

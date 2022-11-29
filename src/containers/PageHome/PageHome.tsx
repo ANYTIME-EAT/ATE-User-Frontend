@@ -18,6 +18,7 @@ import bbq from 'images/bbq.png'
 import offer1 from 'images/offer1.png'
 import offer2 from 'images/offer2.png'
 import {getRestaurantList,getOffersList,getAllComboMenuList} from '../../services/apiServices'
+import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -169,10 +170,13 @@ const PageHome = () => {
     <div className="nc-PageHome relative overflow-hidden">
       {/* GLASSMOPHIN */}
       <BgGlassmorphism />
+      
 
       <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
         {/* SECTION HERO */}
         <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
+        <ShoppingCart />
+       
 
         
 
