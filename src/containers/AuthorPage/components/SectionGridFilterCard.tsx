@@ -14,6 +14,7 @@ export interface SectionGridFilterCardProps {
   data?: StayDataType[];
   productData?: any;
   crrAuthor?:any;
+  addAuthorItems(id:number, name:string, price:string, quantity:number, image:any): void;
 }
 
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
@@ -22,7 +23,8 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
   className = "",
   data = DEMO_DATA,
   productData,
-  crrAuthor
+  crrAuthor,
+  addAuthorItems
 }) => {
   return (
     <div
@@ -35,8 +37,8 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
 
       
       <div className="grid grid-cols-1 gap-6 md:gap-8 xl:grid-cols-2 ">
-        {productData.map((item:any, key:number) => (
-          <ProductCard key={key} productData={item} />
+        {productData.map((item:any, key:number) => (        
+          <ProductCard key={key} productData={item} addAuthorItems={addAuthorItems}/>
         ))}
       </div>
       <div className="flex mt-16 justify-center items-center">

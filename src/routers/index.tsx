@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Page } from "./types";
 import ScrollToTop from "./ScrollToTop";
@@ -52,6 +52,7 @@ import PageHome3 from "containers/PageHome/PageHome3";
 import ProfilePromotional from "containers/ProfilePromotional/ProfilePromotional";
 import ProfilePage from "containers/ProfilePage/ProfilePage";
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
+
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
@@ -129,12 +130,12 @@ export const pages: Page[] = [
 
 const MyRoutes = () => {
   const WIN_WIDTH = useWindowSize().width || window.innerWidth;
+
   return (
     <BrowserRouter
       basename={process.env.NODE_ENV === "production" ? "chisfis" : ""}
     >
       <ScrollToTop />
-      {/* <ShoppingCart /> */}
       <SiteHeader />
 
       <Routes>

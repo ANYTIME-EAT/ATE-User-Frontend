@@ -10,6 +10,7 @@ import RestraurantPage from "containers/RestraurantPage/RestraurantPage"
 import SectionGridFilterCard from "./components/SectionGridFilterCard";
 import SectionHero2 from "./components/SectionHero2";
 import { getRestaurantCategory,getRestaurant,getProduct } from "services/apiServices";
+import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 
 
 export interface AuthorPageProps {
@@ -30,9 +31,21 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     setCurrentAuthor({index:index, title: title})
   }
 
-  useEffect(() => {
-    // console.log(currentAuthor)
-  },[currentAuthor])
+  //Add to cart
+  const [authorItems, setAuthorItems] = useState<any>([])
+  const addAuthorItems = (id:number, name:string, price:string, quantity:number, image:any) => {
+    setAuthorItems((s:any) => {
+      return[
+        ...s, {
+          id:id,
+          name:name,
+          price:price,
+          quantity:quantity,
+          image: image     
+        }   
+      ]
+    }) 
+  }
 
   //Resturant Food Category
   const getrestraurantCat = async () => {
@@ -77,6 +90,8 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     }
   }
 
+
+
   useEffect(() => {
     getrestraurantCat()
     getRestaurantName()
@@ -105,7 +120,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
      
       <div className=" flex-1 p-7">
         {product.length > 0 &&
-        <SectionGridFilterCard productData={product} crrAuthor={currentAuthor} className="py-14 lg:py-10" />
+        <SectionGridFilterCard productData={product} crrAuthor={currentAuthor} addAuthorItems={addAuthorItems} className="py-14 lg:py-10" />
          } 
       </div>
       
@@ -118,8 +133,6 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       );
   }
 
-
-
   return (
 
     <div className={`nc-AuthorPage ${className}`} data-nc-id="AuthorPage">
@@ -128,11 +141,15 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       
       <Helmet>
         <title>Restraunt || ATE</title>
+        
       </Helmet>
+      
+
       <main className="flex flex-row ">
-
+        <ShoppingCart className="top-1/3" authorItems={authorItems} addAuthorItems={addAuthorItems}/>
+      
         <div className="">{renderSidebar()}</div>
-
+        
         <div className="w-full  space-y-4 lg:space-y-10 lg:pl-1 flex-shrink  ">
           {renderSection1()}
         </div>

@@ -14,6 +14,7 @@ export interface ProductCardProps {
   className?: string;
   data?: any;
   productData?: any;
+  addAuthorItems(id:number, name:string, price:string, quantity:number, image:any): void;
 }
 
 const DEMO_DATA = DEMO_STAY_LISTINGS[0];
@@ -21,7 +22,8 @@ const DEMO_DATA = DEMO_STAY_LISTINGS[0];
 const ProductCard: FC<ProductCardProps> = ({
   className = "",
   data = DEMO_DATA,
-  productData
+  productData,
+  addAuthorItems
 }) => {
   const {
     galleryImgs,
@@ -91,6 +93,7 @@ const ProductCard: FC<ProductCardProps> = ({
     );
   };
 
+
   const renderContent = () => {
     return (
       <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
@@ -116,8 +119,8 @@ const ProductCard: FC<ProductCardProps> = ({
           <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-sm text-secondary-500">
               {`${productData.price}`}$
             </span>
-            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 "><i className="las la-shopping-cart"/>add</Button>           
-            
+            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 " 
+            onClick={() => addAuthorItems(productData.id,productData.name,productData.price,1,productData.product_avatar)}><i className="las la-shopping-cart"/>add</Button>           
 
           </div>
         </div>
