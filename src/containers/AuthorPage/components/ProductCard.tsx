@@ -10,20 +10,36 @@ import { StayDataType } from "data/types";
 import Button from "shared/Button/Button";
 import ButtonCircle from "shared/Button/ButtonCircle";
 
+import { addToCart, getCartList, addProduct } from "services/cartStorage"
+import { ToastContainer, toast } from 'react-toastify'
+
 export interface ProductCardProps {
   className?: string;
   data?: any;
   productData?: any;
-  addAuthorItems(id:number, name:string, price:string, quantity:number, image:any): void;
+  setNewProduct(val:boolean): void;
 }
 
 const DEMO_DATA = DEMO_STAY_LISTINGS[0];
+
+const addAuthorItems = (id:number, name:string, price:string, quantity:number, image:any, type:string) => { 
+  const response = addProduct(id,name,price,quantity,image,type);
+  if(response){
+    toast.success(`Product added to shopping cart.`,{
+      position: toast.POSITION.BOTTOM_RIGHT 
+    })
+  }else{
+    toast.warning(`This item has already been added to your shopping cart.`,{
+      position: toast.POSITION.BOTTOM_RIGHT 
+    })
+  }
+}
 
 const ProductCard: FC<ProductCardProps> = ({
   className = "",
   data = DEMO_DATA,
   productData,
-  addAuthorItems
+  setNewProduct
 }) => {
   const {
     galleryImgs,
@@ -98,6 +114,7 @@ const ProductCard: FC<ProductCardProps> = ({
   const renderContent = () => {
     return (
       <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
+        <ToastContainer />
         <div className="space-y-4 w-full">
           <div className="inline-flex space-x-3">
             <StartRating reviewCount={reviewCount} point={reviewStart} />
@@ -121,7 +138,7 @@ const ProductCard: FC<ProductCardProps> = ({
               {`${productData.price}`}$
             </span>
             <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 " 
-            onClick={() => addAuthorItems(productData.id,productData.name,productData.price,1,productData.product_avatar)}><i className="las la-shopping-cart"/>add</Button>           
+            onClick={() => {addAuthorItems(productData.id,productData.name,productData.price,1,productData.product_avatar,"author"); ; setNewProduct(true)}}><i className="las la-shopping-cart"/>add</Button>           
 
           </div>
         </div>

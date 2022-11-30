@@ -7,26 +7,38 @@ import NcInputNumber from "components/NcInputNumber/NcInputNumber";
 import CustomInupt from "./components/CustomInupt";
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import Heading1 from "components/Heading/Heading1";
+import  { getProduct, getAllProductsAPI } from "services/apiServices"
+import { getCartList, editQuantity, removeCart } from 'services/cartStorage'
+import { values } from "lodash";
+
+
 export interface ShoppingCartProps {
     className?: string;
-    cartItems?: any;
-    addtoCart?(id: number, name: string, price: string, quantity: number): void;
-    authorItems?: any;
-    addAuthorItems?(id: number, name: string, price: string, quantity: number, image: any): void;
+    newProduct: boolean;
+    setNewProduct(val: boolean): void;
 }
 
 
-const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", cartItems, addtoCart, authorItems, addAuthorItems }) => {
+const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", newProduct, setNewProduct }) => {
     const [showSidebar, setShowSidebar] = useState(false);
-
+    const [allProducts, setAllProducts] = useState([]);
     const [items, setItems] = useState<any>([]);
 
     useEffect(() => {
-        if (authorItems) {
-            setItems(authorItems)
-        }
+        getItems()
+    },[])
 
-    }, [authorItems])
+    const getItems = async() => {
+        setItems(JSON.parse(getCartList() || "[]"))
+        setNewProduct(false)
+    }
+
+    useEffect(() => {
+        if(newProduct)
+            getItems()
+    },[newProduct])
+
+    
 
     return (
         <>
@@ -92,7 +104,7 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", cartItems, addtoC
                         <div className="flex flex-col max-w-2xl p-1 space-y-2 sm:p-1 dark:bg-inherit dark:text-gray-100 ">
 
                             <ul className="flex flex-col divide-y divide-gray-700  overflow-auto h-64">
-                                {items.map((item: any, key: number) => {
+                                {items && items.map((item: any, key: number) => {
                                     return [
                                         // <p>{item.name} : {item.price}</p>
                                         <li className="flex flex-col py-6 sm:flex-row sm:justify-between">
@@ -106,16 +118,16 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", cartItems, addtoC
                                                             <p className="text-sm dark:text-gray-400">{items.quantity}</p>
                                                         </div>
                                                         <div className="text-center">
-                                                            <p className="text-lg font-semibold">{item.price}$</p>
+                                                            <p className="text-lg font-semibold">{item.price * item.quantity}$</p>
                                                             {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
                                                         </div>
                                                     </div>
                                                     <div className="flex text-sm ">
 
                                                         <div className="flex items-right px-2 py-1 pl-0 space-x-1">
-                                                            <CustomInupt className="mr-2" />
+                                                            <CustomInupt className="mr-2" defaultValue={item.quantity} onChange={(e) => {editQuantity(item.id, item.type, e); setNewProduct(true);}}/>
                                                         </div>
-                                                        <button type="button" className="flex items-center px-1 py-1 pl-0 space-x-1 fill-red-600">
+                                                        <button type="button" className="flex items-center px-1 py-1 pl-0 space-x-1 fill-red-600" onClick={() => {removeCart(item.id, item.type); setNewProduct(true);}}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-3 h-3 ">
                                                                 <path d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"></path>
                                                                 <rect width="32" height="200" x="168" y="216"></rect>

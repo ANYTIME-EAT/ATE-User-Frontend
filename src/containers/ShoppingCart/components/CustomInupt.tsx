@@ -13,8 +13,8 @@ export interface CustomInuptProps {
 
 const CustomInupt: FC<CustomInuptProps> = ({
   className = "w-full",
-  defaultValue = 0,
-  min = 0,
+  defaultValue = 1,
+  min = 1,
   max,
   onChange,
   label,
