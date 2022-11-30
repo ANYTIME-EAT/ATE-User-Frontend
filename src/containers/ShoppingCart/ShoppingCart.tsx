@@ -158,8 +158,8 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", newProduct, setNe
                     <div className="bg-gray-50 dark:bg-white/5 p-5">
                         <a
                             className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-primary-6000 text-white hover:bg-primary-700"
-                            href='#'
-                            target="_blank"
+                            href='/checkout'
+                            // target="_blank"
                             rel="noopener noreferrer"
                         >
                             {/* <ShoppingCartIcon className="w-4 h-4" /> */}

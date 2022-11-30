@@ -79,7 +79,7 @@ const [exp_year,setExp_year]=useState("");
 const [admin_id, setAdmin_id]=useState("");
 const [amount, setAmount]=useState("");
 const [currency, setCurrency]=useState("");
-const [type, setType]=useState("");
+const [type, setType]=useState("card");
 const [card_no, setCard_no]=useState("");
 const [cvc, setCvc]=useState("");
 const [tracking_number, setTracking_number]=useState("");
@@ -87,15 +87,17 @@ const [country_code, setCountry_code]=useState("");
 const [postal_code, set]=useState("");
 const navigate = useNavigate();
 
+var _ = require('lodash');
 
 useEffect(() => {
+  setCard_id(_.uniqueId(`cc-${Date.now()}-`))
   console.log(cardExpiryFormat("34","month"))
 },[])
 
-var _ = require('lodash');
 
-console.log(_.uniqueId('id_'));
-console.log(_.uniqueId());
+
+// console.log(_.uniqueId('id_'));
+// console.log(_.uniqueId());
 
 //handle contact details
   const handleSubmit1 = async () => {
@@ -111,9 +113,10 @@ console.log(_.uniqueId());
     "cardId":card_id,
     "last4Number":last4Number,
     "cardType": type,
-    "primary_card": "false"
+    "primary_card": false
 
     };
+    console.log(data)
     const response=await checkoutApi1(data);
     if(response.data){
       console.log(response.data);
