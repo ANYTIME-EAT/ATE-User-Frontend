@@ -18,19 +18,30 @@ export interface ShoppingCartProps {
     setNewProduct(val: boolean): void;
 }
 
+const getTotal = (array:any) => {
+    let total = 0;
+    array && array.map((item:any) => {
+        total += item.price * item.quantity
+    })
+    return total
+}
+
 
 const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", newProduct, setNewProduct }) => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [allProducts, setAllProducts] = useState([]);
     const [items, setItems] = useState<any>([]);
+    const [total, setTotal] = useState<any>(0);
 
     useEffect(() => {
         getItems()
     },[])
 
     const getItems = async() => {
-        setItems(JSON.parse(getCartList() || "[]"))
+        let cartList = JSON.parse(getCartList() || "[]")
+        setItems(cartList)
         setNewProduct(false)
+        setTotal(getTotal(cartList))
     }
 
     useEffect(() => {
@@ -118,7 +129,7 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", newProduct, setNe
                                                             <p className="text-sm dark:text-gray-400">{items.quantity}</p>
                                                         </div>
                                                         <div className="text-center">
-                                                            <p className="text-lg font-semibold">{item.price * item.quantity}$</p>
+                                                            <p className="text-lg font-semibold">{item.price * item.quantity} €</p>
                                                             {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
                                                         </div>
                                                     </div>
@@ -147,8 +158,8 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", newProduct, setNe
                                 {/* {items[0].name} */}         
                             </ul>
                             <div className="space-y-1 text-right">
-                                <p>Total amount:
-                                    <span className="font-semibold">357 €</span>
+                                <p>Total amount :
+                                    <span className="font-semibold"> {total} €</span>
                                 </p>
                                 <p className="text-sm dark:text-gray-400">Not including taxes and shipping costs</p>
                             </div>
