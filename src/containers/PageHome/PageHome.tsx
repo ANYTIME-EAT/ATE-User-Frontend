@@ -1,6 +1,6 @@
 import SectionHero from "components/SectionHero/SectionHero";
 import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, FC } from "react";
 import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
 import SectionOurFeatures from "components/SectionOurFeatures/SectionOurFeatures";
 import SectionGridFeaturePlaces from "./SectionGridFeaturePlaces";
@@ -18,6 +18,8 @@ import bbq from 'images/bbq.png'
 import offer1 from 'images/offer1.png'
 import offer2 from 'images/offer2.png'
 import {getRestaurantList,getOffersList,getAllComboMenuList} from '../../services/apiServices'
+import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
+import EmptyCart from "containers/ShoppingCart/EmptyCart";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -98,11 +100,17 @@ const DEMO_CATS_2: TaxonomyType[] = [
   },
 ];
 
+// export interface PageHomeProps {
+//   addtoCart(id:number, name:string, price:string, quantity:number): void;
+// }
+
 const PageHome = () => {
 
   const [restrauntData,setRestraurantData] = useState<any>([])
   const [offerData,setOfferData] = useState<any>([])
   const [comboMenuData,setcomboMenuData] = useState<any>([])
+  const [newProduct, setNewProduct] = useState<boolean>(false)
+
 
   const getRestrauntData =async () => {
     const response = await getRestaurantList()
@@ -158,6 +166,9 @@ const PageHome = () => {
     //   response.data.
     // }
   }
+
+ 
+
   useEffect(() => {
     getRestrauntData()
     getOfferData()
@@ -169,10 +180,13 @@ const PageHome = () => {
     <div className="nc-PageHome relative overflow-hidden">
       {/* GLASSMOPHIN */}
       <BgGlassmorphism />
+      
 
       <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
         {/* SECTION HERO */}
         <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
+        <ShoppingCart newProduct={newProduct} setNewProduct={setNewProduct}/>
+        {/* <EmptyCart /> */}
 
         
 
@@ -217,7 +231,7 @@ const PageHome = () => {
         {/* SECTION */}
         <div className="relative py-16">
           <BackgroundSection />
-          <SectionGridAllMenu combo_MenuData={comboMenuData} />
+          <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct}/>
         </div>
 
         {/* SECTION */}

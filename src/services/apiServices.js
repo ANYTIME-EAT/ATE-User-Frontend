@@ -108,6 +108,15 @@ export const checkoutApi2= (data) => {
     })
 }
 
+export const getAllProductsAPI = () => {
+    return new Promise((resolve,reject) => {
+        axios.get(`${config.SERVER_URL}/product/list`).then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
 
 export const getAllUserAddress = (userId) => {
     return new Promise((resolve,reject)=>{

@@ -17,6 +17,7 @@ export interface SectionGridAllMenuProps {
   subHeading?: ReactNode;
   headingIsCenter?: boolean;
   tabs?: string[];
+  setNewProduct(val:boolean): void;
 }
 
 const SectionGridAllMenu: FC<SectionGridAllMenuProps> = ({
@@ -27,10 +28,11 @@ const SectionGridAllMenu: FC<SectionGridAllMenuProps> = ({
   subHeading = "Good Food Is Always Cooking! Order Some Yummy Items From The Menu",
   headingIsCenter,
   tabs = [],
+  setNewProduct
 }) => {
   const renderCard = (data:any) => {
     console.log(data)
-    return <StayCard key={data.id} comboMenuData={data}/>;
+    return <StayCard key={data.id} comboMenuData={data} setNewProduct={setNewProduct}/>;
   };
 
   return (
