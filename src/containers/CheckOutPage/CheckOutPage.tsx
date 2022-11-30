@@ -73,7 +73,6 @@ const [state, setState]=useState("");
 const [address_lable, setAddress_lable]=useState("");
 const [card_id, setCard_id]=useState("");
 const [name, setName]=useState("");
-const [last4Number, setLast4Number]=useState("");
 const [exp_month,setExp_month]=useState("");
 const [exp_year,setExp_year]=useState("");
 const [admin_id, setAdmin_id]=useState("");
@@ -96,22 +95,18 @@ useEffect(() => {
 
 
 
-// console.log(_.uniqueId('id_'));
-// console.log(_.uniqueId());
-
 //handle contact details
-  const handleSubmit1 = async () => {
+  const handleSubmit = async () => {
     var data ={
-    "customer_name":JSON.parse(localStorage.getItem("user-info")|| "{}").username,
+    "customer_name":customer_name,
     "name": name, 
     "email":JSON.parse(localStorage.getItem("user-info")|| "{}").email,
     "type": type,
     "card_no": card_no,
-    "exp_month": exp_month,
-    "exp_year": exp_year,
+    "exp_month": exp_month.split("-")[1],
+    "exp_year": exp_month.split("-")[0],
     "cvc": cvc,
     "cardId":card_id,
-    "last4Number":last4Number,
     "cardType": type,
     "primary_card": false
 
@@ -120,32 +115,15 @@ useEffect(() => {
     const response=await checkoutApi1(data);
     if(response.data){
       console.log(response.data);
-        // navigate('/');
       }else{
         toast.error(response.data.message,{
           position:toast.POSITION.TOP_CENTER
         });
       }
   }
-    const handleSubmit3= async () => {
-      var data1 ={
-      "customer_name":JSON.parse(localStorage.getItem("user-info")|| "{}").username,
-      "name": name, 
-      "email":JSON.parse(localStorage.getItem("user-info")|| "{}").email,
-      "type": type,
-      "card_no": card_no,
-      "exp_month": exp_month,
-      "exp_year": exp_year,
-      "cvc": cvc,
-      "cardId":card_id,
-      "last4Number":last4Number,
-      "cardType": type,
-      "primary_card": "false"
-  
-      };
      
       const handleSubmit2 = async () => {
-        var data2 ={
+        var data1={
         "admin_id":admin_id,
         "amount": amount, 
         "card_id":card_id,
@@ -169,97 +147,6 @@ useEffect(() => {
            });
          }
     }
-
-    const response=await checkoutApi2(data1);
-    if(response.data){
-      console.log(response.data);
-        // navigate('/');
-      }else{
-        toast.error(response.data.message,{
-          position:toast.POSITION.TOP_CENTER
-        });
-      }
-    }
-
-  // const renderContactDetails = () => {
-  //   return (
-  //     <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
-  //   <ToastContainer/>
-  //       <div>
-  //         <h3 className="text-2xl font-semibold">Contact details</h3>
-  //         {/* <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div> */}
-
-  //         <div className="mt-6">
-  //           <Tab.Group>
-        
-  //             <Tab.Panels>
-                
-  //               <Tab.Panel className="space-y-5">
-  //               <div className="flex space-x-5  ">
-  //                   <div className="flex-1 space-y-1">
-  //                     <Label>Name </Label>
-  //                     <Input type="text" defaultValue="name" />
-  //                   </div>
-  //                   <div className="flex-1 space-y-1">
-  //                     <Label>Phone number</Label>
-  //                     <Input />
-  //                   </div>
-  //                 </div>
-  //                 <div className="space-y-1">
-  //                   <Label>Address </Label>
-  //                   <Input type="text" defaultValue="123 Avenue Street" />
-  //                 </div>
-  //                 <div className="space-y-1">
-  //                   <Label>Landmark </Label>
-  //                   <Input type="text" defaultValue="***" />
-  //                 </div>
-
-  //                 <div className="block">
-  //                   <span className="text-gray-700">Address Label (Optional)</span>
-  //                   <div className="mt-2">
-  //                     <div>
-  //                       <label className="inline-flex items-center">
-  //                       <input type="checkbox" className="form-checkbox" />
-  //                         <span className="ml-2">Home</span>
-  //                       </label>
-  //                     </div>
-  //                     <div>
-  //                       <label className="inline-flex items-center">
-  //                         <input type="checkbox" className="form-checkbox"/>
-  //                         <span className="ml-2">Work</span>
-  //                       </label>
-  //                     </div>
-  //                 </div>
-  //               </div>
-  //               <div className="block">
-  //                   <span className="text-gray-700">Deliver to</span>
-  //                   <div className="mt-2">
-  //                     <div>
-  //                       <label className="inline-flex items-center">
-  //                       <input type="checkbox" className="form-checkbox" />
-  //                         <span className="ml-2">Deliver to door</span>
-  //                       </label>
-  //                     </div>
-  //                     <div>
-  //                       <label className="inline-flex items-center">
-  //                         <input type="checkbox" className="form-checkbox"/>
-  //                         <span className="ml-2">Pickup outside</span>
-  //                       </label>
-  //                     </div>   
-  //                 </div>
-  //               </div>
-
-  //               </Tab.Panel>
-  //             </Tab.Panels>
-  //           </Tab.Group>
-  //           <div className="pt-8">
-  //             <ButtonPrimary href={"/pay-done"}>Confirm</ButtonPrimary>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
 
   const renderSidebar = () => {
     return (
@@ -412,50 +299,11 @@ useEffect(() => {
                       onChange={(e) => setState(e.target.value)}/>
                     </div>
                   </div>
-        {/* <div className="mt-6 sm:flex-row ">
-          <Label>Address</Label>
-            <div className="space-y-1 px-1 grid gap-4 grid-cols-3">
-              <Input
-                type="text"
-                placeholder="country"
-                className="mt-1"
-                onChange={(e) => setCountry(e.target.value)} />
-              <Input type="text"
-                placeholder="city"
-                className="mt-1"
-                onChange={(e) => setCity(e.target.value)} />
-              <Input type="text"
-                placeholder="state"
-                className="mt-1"
-                onChange={(e) => setState(e.target.value)}/>
-            </div>
-            </div> */}
-            {/* <div className="space-y-1 px-1 col-span-3">
-              <Label>Country</Label>
-              <Input defaultValue="" />
-            </div> */}
-          
-          {/* <div className="mt-6   sm:flex-row ">
-            <div className="space-y-1 px-1">
-              <Label>Landmark</Label>
-              <Input defaultValue="" />
-            </div>
-          </div> */}
-
-          {/* address label  */}
+       
           <div>
             <p className="text-base mt-6">Address Label (Optional)</p>
           </div>
-          {/* <div className="mt-6  flex flex-row ">
-            <div className="space-y-1">
-            <Label>Home</Label>
-            <Checkbox name="Home"/> 
-          </div>
-            <div className="space-y-1 px-9">
-              <Label>Work</Label>
-              <Checkbox name="Work"/>
-            </div>
-          </div> */}
+          
 
       <div className="flex items-center mb-4">
           <input id="default-radio-1" type="radio" value="" name="address_lable" 
@@ -548,10 +396,10 @@ useEffect(() => {
                       onChange={(e) => setCvc(e.target.value)}/>
                     </div>
                   </div>
-                  <ButtonPrimary href={"/pay-done"} onClick={handleSubmit1}>Confirm and pay</ButtonPrimary>
+                  <ButtonPrimary href={"/pay-done"} onClick={handleSubmit}>Confirm and pay</ButtonPrimary>
                 </Tab.Panel>
                 <Tab.Panel className="space-y-5">
-                  <ButtonPrimary href={"/pay-done"} onClick={handleSubmit3}>Confirm</ButtonPrimary>
+                  <ButtonPrimary href={"/pay-done"} onClick={handleSubmit}>Confirm</ButtonPrimary>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
