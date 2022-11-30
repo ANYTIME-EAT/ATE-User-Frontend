@@ -86,9 +86,20 @@ export const getProduct = (id) => {
     })
 }
 
-export const checkoutApi = (data) => {
+export const checkoutApi1 = (data) => {
     return new Promise((resolve,reject)=>{
-        axios.post(`${config.SERVER_URL}/payment_card/add_card/:admin_id`,data)
+        axios.post(`${config.SERVER_URL}/payment_card/add_card/5`,data)
+        .then((res) =>{           
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const checkoutApi2= (data) => {
+    return new Promise((resolve,reject)=>{
+        axios.post(`http://localhost:5005/payment/direct_payment`,data)
         .then((res) =>{           
             resolve(res)
         }).catch((res) => {
@@ -108,3 +119,14 @@ export const getAllUserAddress = (userId) => {
         })
     })
 }
+
+// export const viewCart= (userId) => {
+//     return new Promise((resolve,reject)=>{
+//         // localStorage.getItem("access-token");
+//         axios.get(`${config.SERVER_URL}/user/get_address/${userId}`,header()).then((res) =>{
+//             resolve(res)
+//         }).catch((res) => {
+//             reject(res)
+//         })
+//     })
+// }
