@@ -42,6 +42,7 @@ const ProductCard: FC<ProductCardProps> = ({
       <div className="flex-shrink-0 p-3 w-full sm:w-64 ">
         <GallerySlider
           ratioClass="aspect-w-1 aspect-h-1"
+          // galleryImgs={productData.menu_avatar} not working
           galleryImgs={galleryImgs}
           className="w-full h-full rounded-2xl overflow-hidden will-change-transform"
           uniqueID={`ProductCard_${id}`}

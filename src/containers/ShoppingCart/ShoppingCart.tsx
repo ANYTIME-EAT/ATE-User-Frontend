@@ -73,7 +73,7 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", cartItems, addtoC
                             top: "1.6rem",
                             transform: "translate(25%, 25%)",
                         }}>
-                        3
+                        {items.length}
                     </div>
 
                 </button>
@@ -83,7 +83,7 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", cartItems, addtoC
                 className={`top-0 right-0 lg:w-1/5 sm:w-5/6 md:w-2/3 bg-gray-500 p-28  fixed h-screen z-40  ease-in-out duration-300 ${showSidebar ? "translate-x-0 " : "translate-x-full"
                     }`}
             > */}
-            <div className={`top-0 right-0 p-3 z-40 w-screen  max-w-lg fixed ease-in-out duration-300 ${showSidebar ? "translate-x-0 " : "translate-x-full"
+            <div className={`top-6 right-0 p-3 z-40 w-screen  max-w-lg fixed ease-in-out duration-300 ${showSidebar ? "translate-x-0 " : "translate-x-full"
                 }`}>
                 <div className={`rounded-2xl  bg-white dark:bg-neutral-800  nc-custom-shadow-1 `}>
                     <div className="relative p-6 ">
@@ -103,7 +103,7 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", cartItems, addtoC
                                                     <div className="flex justify-between w-full pb-2 space-x-2">
                                                         <div className="space-y-1">
                                                             <h3 className="text-lg font-semibold leading-snug sm:pr-8">{item.name}</h3>
-                                                            <p className="text-sm dark:text-gray-400">Text</p>
+                                                            <p className="text-sm dark:text-gray-400">{items.quantity}</p>
                                                         </div>
                                                         <div className="text-center">
                                                             <p className="text-lg font-semibold">{item.price}$</p>
