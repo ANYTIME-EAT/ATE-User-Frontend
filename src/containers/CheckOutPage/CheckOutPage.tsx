@@ -65,6 +65,8 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     guestInfants: 1,
   });
   
+const currentTime = Date.now();
+
 const [customer_name, setCustomer_name]=useState("");
 const [phone, setPhone]=useState("");
 const [city, setCity]=useState("");
@@ -73,13 +75,13 @@ const [state, setState]=useState("");
 const [address_lable, setAddress_lable]=useState("");
 const [card_id, setCard_id]=useState("");
 const [name, setName]=useState("");
-const [last4Number, setLast4Number]=useState("");
+// const [last4Number, setLast4Number]=useState("");
 const [exp_month,setExp_month]=useState("");
 const [exp_year,setExp_year]=useState("");
 const [admin_id, setAdmin_id]=useState("");
 const [amount, setAmount]=useState("");
 const [currency, setCurrency]=useState("");
-const [type, setType]=useState("");
+const [type, setType]=useState("card");
 const [card_no, setCard_no]=useState("");
 const [cvc, setCvc]=useState("");
 const [tracking_number, setTracking_number]=useState("");
@@ -89,32 +91,28 @@ const navigate = useNavigate();
 
 
 useEffect(() => {
-  console.log(cardExpiryFormat("34","month"))
+  setCard_id(_.uniqueId(`cc_${currentTime}`))
 },[])
 
-var _ = require('lodash');
-
-console.log(_.uniqueId('id_'));
-console.log(_.uniqueId());
 
 //handle contact details
   const handleSubmit1 = async () => {
     var data ={
-    "customer_name":JSON.parse(localStorage.getItem("user-info")|| "{}").username,
+    "customer_name":customer_name,
     "name": name, 
     "email":JSON.parse(localStorage.getItem("user-info")|| "{}").email,
     "type": type,
     "card_no": card_no,
-    "exp_month": exp_month,
-    "exp_year": exp_year,
+    "exp_month": cardExpiryFormat(exp_month.split("-")[1],"month"),
+    "exp_year": cardExpiryFormat(exp_month.split("-")[0],"year"),
     "cvc": cvc,
     "cardId":card_id,
-    "last4Number":last4Number,
     "cardType": type,
     "primary_card": "false"
 
     };
-    const response=await checkoutApi1(data);
+    const response = await checkoutApi1(data);
+    console.log(data);
     if(response.data){
       console.log(response.data);
         // navigate('/');
@@ -126,19 +124,17 @@ console.log(_.uniqueId());
   }
     const handleSubmit3= async () => {
       var data1 ={
-      "customer_name":JSON.parse(localStorage.getItem("user-info")|| "{}").username,
-      "name": name, 
-      "email":JSON.parse(localStorage.getItem("user-info")|| "{}").email,
-      "type": type,
-      "card_no": card_no,
-      "exp_month": exp_month,
-      "exp_year": exp_year,
-      "cvc": cvc,
-      "cardId":card_id,
-      "last4Number":last4Number,
-      "cardType": type,
-      "primary_card": "false"
-  
+        "customer_name":JSON.parse(localStorage.getItem("user-info")|| "{}").username,
+        "name": name, 
+        "email":JSON.parse(localStorage.getItem("user-info")|| "{}").email,
+        "type": type,
+        "card_no": card_no,
+        "exp_month": exp_month,
+        "exp_year": exp_year,
+        "cvc": cvc,
+        "cardId":card_id,
+        "cardType": type,
+        "primary_card": false
       };
      
       const handleSubmit2 = async () => {
@@ -157,6 +153,7 @@ console.log(_.uniqueId());
         "postal_code":postal_code
        };
        const response=await checkoutApi2(data1);
+       console.log(data1);
        if(response.data1){
          console.log(response.data1);
            // navigate('/');
