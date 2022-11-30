@@ -147,7 +147,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
       <main className="flex flex-row ">
         <ShoppingCart className="top-1/3" authorItems={authorItems} addAuthorItems={addAuthorItems}/>
-      
+       
         <div className="">{renderSidebar()}</div>
         
         <div className="w-full  space-y-4 lg:space-y-10 lg:pl-1 flex-shrink  ">
