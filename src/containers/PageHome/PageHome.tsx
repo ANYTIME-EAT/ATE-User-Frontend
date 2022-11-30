@@ -186,7 +186,7 @@ const PageHome = () => {
         {/* SECTION HERO */}
         <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
         <ShoppingCart newProduct={newProduct} setNewProduct={setNewProduct}/>
-        <EmptyCart />
+        {/* <EmptyCart /> */}
 
         
 
