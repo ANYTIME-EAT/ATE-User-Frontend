@@ -19,6 +19,7 @@ import offer1 from 'images/offer1.png'
 import offer2 from 'images/offer2.png'
 import {getRestaurantList,getOffersList,getAllComboMenuList} from '../../services/apiServices'
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
+import EmptyCart from "containers/ShoppingCart/EmptyCart";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -199,7 +200,7 @@ const PageHome = () => {
         {/* SECTION HERO */}
         <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
         <ShoppingCart cartItems={cartItems} addtoCart={addtoCart}/>
-       
+        {/* <EmptyCart /> */}
 
         
 
