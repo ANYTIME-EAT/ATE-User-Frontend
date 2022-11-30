@@ -86,6 +86,7 @@ export const getProduct = (id) => {
     })
 }
 
+
 export const checkoutApi1 = (data) => {
     return new Promise((resolve,reject)=>{
         axios.post(`${config.SERVER_URL}/payment_card/add_card/5`,data)
