@@ -77,6 +77,16 @@ export const getProduct = (id) => {
     })
 }
 
+export const getAllProductsAPI = () => {
+    return new Promise((resolve,reject) => {
+        axios.get(`${config.SERVER_URL}/product/list`).then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
 export const checkoutApi = (data) => {
     return new Promise((resolve,reject)=>{
         axios.post(`${config.SERVER_URL}/payment_card/add_card/:admin_id`,data)

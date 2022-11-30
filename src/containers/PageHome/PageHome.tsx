@@ -108,22 +108,8 @@ const PageHome = () => {
   const [restrauntData,setRestraurantData] = useState<any>([])
   const [offerData,setOfferData] = useState<any>([])
   const [comboMenuData,setcomboMenuData] = useState<any>([])
+  const [newProduct, setNewProduct] = useState<boolean>(false)
 
-  //Add to cart
-  const [cartItems, setcartItems] = useState<any>([])
-
-  const addtoCart = (id:number, name:string, price:string, quantity:number) => {
-    setcartItems((s:any) => {
-      return[
-        ...s, {
-          id:id,
-          name:name,
-          price:price,
-          quantity:quantity     
-        }   
-      ]
-    }) 
-  }
 
   const getRestrauntData =async () => {
     const response = await getRestaurantList()
@@ -198,7 +184,7 @@ const PageHome = () => {
       <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
         {/* SECTION HERO */}
         <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
-        <ShoppingCart cartItems={cartItems} addtoCart={addtoCart}/>
+        <ShoppingCart newProduct={newProduct} setNewProduct={setNewProduct}/>
        
 
         
@@ -244,7 +230,7 @@ const PageHome = () => {
         {/* SECTION */}
         <div className="relative py-16">
           <BackgroundSection />
-          <SectionGridAllMenu combo_MenuData={comboMenuData} />
+          <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct}/>
         </div>
 
         {/* SECTION */}
