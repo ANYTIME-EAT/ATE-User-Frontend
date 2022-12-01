@@ -63,6 +63,7 @@ const ProductCard: FC<ProductCardProps> = ({
   }
 
   useEffect(() => {
+    console.log(productData.product_avatar)
     getProfile(productData.product_avatar)
   },[])
 
