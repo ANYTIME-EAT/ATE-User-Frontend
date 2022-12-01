@@ -110,8 +110,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       <div>{heroSection()}</div>
       
       <Helmet>
-        <title>Restraunt || ATE</title>
-        
+        <title>Restaurant | ATE</title>       
       </Helmet>
       
 

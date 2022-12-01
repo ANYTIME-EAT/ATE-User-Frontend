@@ -151,7 +151,7 @@ const ProductCard: FC<ProductCardProps> = ({
               {`${productData.price}`}$
             </span>
             <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 " 
-            onClick={() => {addAuthorItems(productData.id,productData.name,productData.price,1,image,"author"); ; setNewProduct(true)}}><i className="las la-shopping-cart"/>add</Button>           
+            onClick={() => {addAuthorItems(productData.id,productData.name,productData.price,1,productData.product_avatar,"author"); ; setNewProduct(true)}}><i className="las la-shopping-cart"/>add</Button>           
 
           </div>
         </div>
