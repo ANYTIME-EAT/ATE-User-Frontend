@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
 import Heading from "components/Heading/Heading";
 import { getAllUserAddress } from "services/apiServices";
-import {BiHome} from "react-icons/bi";
-import {FaBusinessTime} from "react-icons/fa";
+// import {BiHome} from "react-icons/bi";
+// import {FaBusinessTime} from "react-icons/fa";
 
 export interface Statistic {
   id: string;
@@ -49,7 +49,7 @@ export interface ManageAddressProps {
               className="p-6 bg-slate-100  dark:bg-neutral-800 rounded-2xl dark:border-neutral-800"
             >
               <div className="columns-8 ">
-              {item.addressType=="Home"?<BiHome/>:item.addressType=="Business"?<FaBusinessTime/>:""}
+              {/* {item.addressType=="Home"?<BiHome/>:item.addressType=="Business"?<FaBusinessTime/>:""} */}
               <h3 className="font-semibold leading-none text-neutral-900 md:text-lg dark:text-neutral-200">
               {item.addressType}
               </h3>
