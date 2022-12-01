@@ -1,5 +1,6 @@
 import StartRating from "components/StartRating/StartRating";
 import React, { FC } from "react";
+import { useLocation } from "react-router-dom";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import NcImage from "shared/NcImage/NcImage";
 
@@ -8,6 +9,9 @@ export interface PayPageProps {
 }
 
 const PayPage: FC<PayPageProps> = ({ className = "" }) => {
+  const { state } = useLocation();
+  console.log(state);
+  
   const renderContent = () => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">

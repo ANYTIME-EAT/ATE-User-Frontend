@@ -17,41 +17,169 @@ import converSelectedDateToString from "utils/converSelectedDateToString";
 import ModalSelectGuests from "components/ModalSelectGuests";
 import { GuestsObject } from "components/HeroSearchForm2Mobile/GuestsInput";
 import { COUNTRIES } from "data/countryCodeList"
+import _ from "lodash";
+import { getAvatar, attachCardApi, paymentApi } from 'services/apiServices'
+import { getCartList } from 'services/cartStorage'
+import { useNavigate } from "react-router-dom";
 
 export interface CheckOutPageProps {
   className?: string;
 }
 
+const SERVICE_CHARGE = 20
+
+const generateRandomID = (size:number) => {
+  let length = size,
+    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    retVal = "";
+  for (let i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
+}
+
 const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
-  const [rangeDates, setRangeDates] = useState<DateRage>({
-    startDate: moment().add(1, "day"),
-    endDate: moment().add(5, "days"),
-  });
-  const [guests, setGuests] = useState<GuestsObject>({
-    guestAdults: 2,
-    guestChildren: 1,
-    guestInfants: 1,
-  });
 
-  const [items, setItems] = useState<any>([])
+    const navigate = useNavigate();
+    const [items, setItems] = useState<any>([])
 
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [line1, setLine1] = useState<string>("");
-  const [line2, setLine2] = useState<string>("");
-  const [city, setCity] = useState<string>("");
-  const [postal_code, setPostalCode] = useState<string>("");
-  const [countryCode, setCountryCode] = useState<string>("AF");
+    const [id, setId] = useState<number>(-1)
+
+    const [name, setName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [phone, setPhone] = useState<string>("");
+    const [line1, setLine1] = useState<string>("");
+    const [line2, setLine2] = useState<string>("");
+    const [city, setCity] = useState<string>("");
+    const [state, setState] = useState<string>("");
+    const [postal_code, setPostalCode] = useState<string>("");
+    const [countryCode, setCountryCode] = useState<string>("IT");
+
+    const [total_amount, setTotal] = useState<number>(0)
+
+    //Card dets
+    const [cardNo, setCardNo] = useState<string>("4242424242424242")
+    const [card_id, setCard_id] = useState(_.uniqueId(`cc-${Date.now()}-${generateRandomID(6)}`));
+    const [expDate, setExpDate] = useState<string>("2022-12")
+    const [cardholderName, setCardholderName] = useState<string>("Mr X")
+    const [cvv, setCvv] = useState<string>("123")
+
+    const [images, setImages] = useState<any>([]);
+
+    const getProfile = (list:any) => {
+      list.map(async(item:any,key:number) => {
+          let file = await getAvatar(item.image)
+          setImages((s:any) => {
+              return[
+                  ...s, {
+                      id: item.id,
+                      author: item.author,
+                      image: URL.createObjectURL(file)
+                  }
+              ]
+          })
+      })     
+  }
+  const getProductImg = (id:number,author:string) =>{
+    let product_image = "";
+    images && images.map((item:any) => {
+        if(item.id == id && item.author == author){
+            product_image = item.image;
+        }
+    })
+    return product_image;
+  }
+
+
+
+    const getItems = async() => {
+        let cartList = JSON.parse(getCartList() || "[]");
+        let total = 0;
+        cartList.map((item:any) => {
+          total += item.price * item.quantity
+    
+        })
+        setTotal(total)
+        
+        setItems(cartList)
+        getProfile(cartList)
+    }
 
   useEffect(() => {
-    console.log(countryCode)
-  }, [countryCode])
+    getItems()
+    if(localStorage.getItem("user-info")){
+      let userid = JSON.parse(localStorage.getItem("user-info")|| "{}").id;
+      console.log(userid)
+      setId(userid)
+    }
+  },[])
+
+  const handleConfirm = async(creditCardId: string = "") => {
+    const shipping_dets= {
+      name: name,
+      phone: phone,
+      tracking_number: "TR-123456",
+      address: {
+        city: city,
+        country_code: countryCode,
+        line1: line1,
+        line2: line2,
+        postal_code:postal_code,
+        state: state
+      }
+    }
+    const data = {
+      admin_id: id,
+      amount: total_amount + SERVICE_CHARGE,
+      card_id: creditCardId,
+      currency: "eur",
+      receipt_email: email,
+      shipping_dets: shipping_dets
+    }
+
+    if(creditCardId != ""){
+      const response = await paymentApi(data);
+      if(response.data){
+
+        if(response.data.response === "success"){
+          navigate("/pay-done", {state: {data: items}});
+        }
+      }
+    }else{
+      console.log(data)
+      console.log("Payment successfull.")
+    }
+  }
+  
+
+  const handlePayByCard = async() => {  
+    const data = {
+      customer_name: cardholderName,
+      name: name,
+      email: email,
+      type: "card",
+      card_no: cardNo,
+      exp_month: expDate.split("-")[1],
+      exp_year: expDate.split("-")[0],
+      cvc: cvv,
+      cardId: card_id,
+      primary_card: false
+    }
+    const response = await attachCardApi(id,data)
+    if(response.data){
+      if(response.data.response === "success" || response.data.message === "This card is already exists."){
+        console.log(card_id)
+        handleConfirm(card_id)
+      }else{
+        console.log("Invalid card details")
+      }
+    }
+  }
 
   const renderSidebar = () => {
     return (
       <div className="flex flex-col max-w-2xl p-1 dark:bg-inherit dark:text-gray-100  sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
-        <h3 className="text-2xl font-semibold">Summary</h3>
+        <h3 className="text-2xl font-semibold">View Cart</h3>
         <div className="flex flex-col  ">
           {/* <div className="flex-shrink-0 w-full sm:w-40">
             <div className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent  rounded-2xl overflow-hidden">
@@ -70,41 +198,27 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
            
           </div>
           </div> */}
-          <div className="flex w-full space-x-2 sm:space-x-4">
-            <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Polaroid camera"
-            />
-            <div className="flex flex-col justify-between w-full pb-4">
-              <div className="flex justify-between w-full pb-2 space-x-2">
-                <div className="space-y-1">
-                  <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
-                  <p className="text-sm dark:text-gray-400">04</p>
+          {items && items.map ((item:any , key:number) => {
+            return[
+              <div className="flex w-full space-x-2 sm:space-x-4 mb-3">
+              <img className="flex-shrink-0 object-cover  w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500" src={getProductImg(item.id, item.author)} alt={item.name} loading="lazy"/> 
+              <div className="flex flex-col justify-between w-full pb-4">
+                <div className="flex justify-between w-full pb-2 space-x-2">
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-semibold leading-snug sm:pr-8">{item.name}</h3>
+                    <p className="text-sm dark:text-gray-400">Quantity : {item.quantity}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-lg font-semibold">{item.price * item.quantity} €</p>
+                    {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
+                  </div>
                 </div>
-                <div className="text-center">
-                  <p className="text-lg font-semibold">2.33$</p>
-                  {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
-                </div>
-              </div>
-              <div className="flex text-sm mt-3">
-
-                <div className="flex items-right px-2 py-1 pl-0 space-x-1">
-                  <CustomInupt className="mr-2"  />
-                  {/* defaultValue={item.quantity} onChange={(e) => { editQuantity(item.id, item.type, e); setNewProduct(true); }} */}
-                </div>
-                <button type="button" className="flex items-center px-1 py-1 pl-0 space-x-1 fill-red-600" >
-                {/* onClick={() => { removeCart(item.id, item.type); setNewProduct(true); }} */}
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-3 h-3 ">
-                    <path d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"></path>
-                    <rect width="32" height="200" x="168" y="216"></rect>
-                    <rect width="32" height="200" x="240" y="216"></rect>
-                    <rect width="32" height="200" x="312" y="216"></rect>
-                    <path d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z"></path>
-                  </svg>
-                  <span className="text-red-700">Remove</span>
-                </button>
+              
               </div>
             </div>
-          </div>
-          <div className="flex w-full space-x-2 sm:space-x-4 mt-5">
+            ]
+          })}
+          {/* <div className="flex w-full space-x-2 sm:space-x-4 mt-5">
             <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Polaroid camera"
             />
             <div className="flex flex-col justify-between w-full pb-4">
@@ -123,24 +237,24 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                
               </div>
             </div>
-          </div>
+          </div> */}
 
         </div>
         <div className="flex flex-col space-y-4">
           {/* <h3 className="text-2xl font-semibold">Price detail</h3> */}
           <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-            <span>$19 x 3 day</span>
-            <span>$57</span>
+            <span>Sub Total :</span>
+            <span>{total_amount} €</span>
           </div>
           <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-            <span>Service charge</span>
-            <span>$0</span>
+            <span>Shipping charge :</span>
+            <span>{SERVICE_CHARGE} €</span>
           </div>
 
           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
           <div className="flex justify-between font-semibold">
             <span>Total</span>
-            <span>$57</span>
+            <span>{total_amount + SERVICE_CHARGE} €</span>
           </div>
         </div>
       </div>
@@ -164,35 +278,38 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           <div>
             <div className="space-y-1 mb-4">
               <Label>Recipient Name </Label>
-              <Input type="text" placeholder="Name" />
+              <Input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)}/>
             </div>
             <div className="space-y-1 mb-4">
               <Label>Recipient Email </Label>
-              <Input type="email" placeholder="Email" />
+              <Input type="email" placeholder="Email"  onChange={(e) => setEmail(e.target.value)}/>
             </div>
             <div className="space-y-1 mb-4">
               <Label>Phone No </Label>
-              <Input type="number" placeholder="Phone" />
+              <Input type="number" placeholder="Phone"  onChange={(e) => setPhone(e.target.value)}/>
             </div>
             <div className="space-y-1 mb-4">
               <h4 className="text-1x1 font-semibold">Address</h4>
               <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
               <div className="space-y-1 mb-4">
-                <input type="text" placeholder="Address Line 1" />
+                <input type="text" placeholder="Address Line 1"  onChange={(e) => setLine1(e.target.value)}/>
               </div>
               <div className="space-y-1 mb-4">
-                <input type="text" placeholder="Address Line 2" />
+                <input type="text" placeholder="Address Line 2"  onChange={(e) => setLine2(e.target.value)}/>
               </div>
               <div className="space-y-1 mb-4">
-                <input type="text" placeholder="City" />
+                <input type="text" placeholder="City"  onChange={(e) => setCity(e.target.value)}/>
               </div>
               <div className="space-y-1 mb-4">
-                <input type="number" placeholder="Postal Code" />
+                <input type="text" placeholder="State/Province"  onChange={(e) => setState(e.target.value)}/>
               </div>
               <div className="space-y-1 mb-4">
-                <select onChange={(e) => setCountryCode(e.target.value)}>
-                  {COUNTRIES.map((item: any, key: number) => {
-                    return [
+                <input type="number" placeholder="Postal Code"  onChange={(e) => setPostalCode(e.target.value)}/>
+              </div>
+              <div className="space-y-1 mb-4">
+                <select value={countryCode} onChange={(e) => setCountryCode(e.target.value)}>
+                  {COUNTRIES.map((item:any,key:number)=>{
+                    return[
                       <option value={item.code}>{item.name}</option>
                     ]
                   })}
@@ -246,26 +363,30 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                 <Tab.Panel className="space-y-5">
                   <div className="space-y-1">
                     <Label>Card number </Label>
-                    <Input defaultValue="111 112 222 999" />
+                    <Input type="number" value={cardNo} onChange={(e) => {e.target.value.length <= 16 && setCardNo(e.target.value)}} />
                   </div>
                   <div className="space-y-1">
                     <Label>Card holder </Label>
-                    <Input defaultValue="JOHN DOE" />
+                    <Input onChange={(e) => setCardholderName(e.target.value)} />
                   </div>
                   <div className="flex space-x-5  ">
                     <div className="flex-1 space-y-1">
                       <Label>Expiration date </Label>
-                      <Input type="month" defaultValue="2022-12" />
+                      <Input type="month" defaultValue="2022-12" onChange={(e) => setExpDate(e.target.value)} />
                     </div>
                     <div className="flex-1 space-y-1">
-                      <Label>CVC </Label>
-                      <Input />
+                      <Label>CVV </Label>
+                      <Input type="number" value={cvv} onChange={(e) => {e.target.value.length <= 4 && setCvv(e.target.value)}}/>
                     </div>
                   </div>
-                  <ButtonPrimary href={"/pay-done"}>Confirm and pay</ButtonPrimary>
+                  <ButtonPrimary onClick={handlePayByCard}>
+                    Confirm and pay
+                  </ButtonPrimary>
+                  {/* href={"/pay-done"} */}
                 </Tab.Panel>
                 <Tab.Panel className="space-y-5">
-                  <ButtonPrimary href={"/pay-done"}>Confirm</ButtonPrimary>
+                  <ButtonPrimary  onClick={handleConfirm}>Confirm</ButtonPrimary>
+                  {/* href={"/pay-done"} */}
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
