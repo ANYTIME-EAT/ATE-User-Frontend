@@ -20,7 +20,6 @@ import ListingCarDetailPage from "containers/ListingDetailPage/ListingCarDetailP
 import CheckOutPage from "containers/CheckOutPage/CheckOutPage";
 import PayPage from "containers/PayPage/PayPage";
 import AuthorPage from "containers/AuthorPage/AuthorPage";
-import AccountPage from "containers/AccountPage/AccountPage";
 import AccountPass from "containers/AccountPage/AccountPass";
 import AccountSavelists from "containers/AccountPage/AccountSavelists";
 import AccountBilling from "containers/AccountPage/AccountBilling";
@@ -52,6 +51,7 @@ import PageHome3 from "containers/PageHome/PageHome3";
 import ProfilePromotional from "containers/ProfilePromotional/ProfilePromotional";
 import ProfilePage from "containers/ProfilePage/ProfilePage";
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
+import AccountPage from "containers/ProfilePage/AccountPage/AccountPage";
 
 
 export const pages: Page[] = [
@@ -89,6 +89,8 @@ export const pages: Page[] = [
   //
   { path: "/checkout", component: CheckOutPage },
   { path: "/profile", component: ProfilePage},
+  { path: "/profile/user/edit", component: AccountPage},
+  
   // { path: "/profile/favourites", component: ProfilePage},
   // { path: "/profile/payment", component: ProfilePage},
   // { path: "/profile/myOrders", component: ProfilePage},

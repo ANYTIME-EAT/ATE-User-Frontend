@@ -84,9 +84,12 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
       );
     }
     else if(activePage.title === "Edit Profile"){
+      {console.log(userInfo)}
       return (
+        
         <div className=" flex-1 p-7">
-          <AccountPage/>
+          <AccountPage userInfo={userInfo}/>
+          
         </div>
       );
     }

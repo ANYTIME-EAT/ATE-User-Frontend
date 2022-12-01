@@ -98,10 +98,21 @@ export const checkoutApi1 = (data) => {
     })
 }
 
-export const checkoutApi2= (data) => {
-    return new Promise((resolve,reject)=>{
-        axios.post(`http://localhost:5005/payment/direct_payment`,data)
-        .then((res) =>{           
+// export const checkoutApi2= (data) => {
+//     return new Promise((resolve,reject)=>{
+//         axios.post(`${config.SERVER_URL}/payment/direct_payment`,data)
+//         .then((res) =>{           
+//             resolve(res)
+//         }).catch((res) => {
+//             reject(res)
+//         })
+//     })
+// }
+
+export const getAllCartCheckout = (data) => {
+    return new Promise((resolve,reject) => {
+        axios.post(`${config.SERVER_URL}/payment/direct_payment`,data)
+        .then((res) => {
             resolve(res)
         }).catch((res) => {
             reject(res)
@@ -130,13 +141,14 @@ export const getAllUserAddress = (userId) => {
     })
 }
 
-// export const viewCart= (userId) => {
-//     return new Promise((resolve,reject)=>{
-//         // localStorage.getItem("access-token");
-//         axios.get(`${config.SERVER_URL}/user/get_address/${userId}`,header()).then((res) =>{
-//             resolve(res)
-//         }).catch((res) => {
-//             reject(res)
-//         })
-//     })
-// }
+export const updateProfile = (data) => {
+    return new Promise((resolve,reject) => {
+        localStorage.getItem("access-token");
+        axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
+        .then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}

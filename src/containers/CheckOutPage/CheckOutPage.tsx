@@ -19,7 +19,7 @@ import { GuestsObject } from "components/HeroSearchForm2Mobile/GuestsInput";
 import Checkbox from "shared/Checkbox/Checkbox";
 import NcInputNumber from "components/NcInputNumber/NcInputNumber";
 import { useNavigate } from 'react-router-dom';
-import { checkoutApi1,checkoutApi2 } from "services/apiServices";
+import { checkoutApi1,getAllCartCheckout } from "services/apiServices";
 import { ToastContainer,toast } from "react-toastify";
 import { userInfo } from "os";
 import _ from 'lodash';
@@ -84,7 +84,11 @@ const [cvc, setCvc]=useState("");
 const [tracking_number, setTracking_number]=useState("");
 const [country_code, setCountry_code]=useState("");
 const [postal_code, set]=useState("");
+const [viewCartData, setViewCartData]=useState("");
+
+const [id,setId]=useState("");
 const navigate = useNavigate();
+
 
 var _ = require('lodash');
 
@@ -92,7 +96,6 @@ useEffect(() => {
   setCard_id(_.uniqueId(`cc-${Date.now()}-`))
   console.log(cardExpiryFormat("34","month"))
 },[])
-
 
 
 //handle contact details
@@ -121,36 +124,81 @@ useEffect(() => {
         });
       }
   }
-     
-      const handleSubmit2 = async () => {
-        var data1={
-        "admin_id":admin_id,
-        "amount": amount, 
-        "card_id":card_id,
-        "currency": currency,
-        "receipt_email":JSON.parse(localStorage.getItem("user-info")|| "{}").email,
-        "name": name,
-        "phone": phone,
-        "tracking_number": tracking_number,
-        "city":city,
-        "country_code":country_code,
-        "state": state,
-        "postal_code":postal_code
-       };
-       const response=await checkoutApi2(data1);
-       if(response.data1){
-         console.log(response.data1);
-           // navigate('/');
-         }else{
-           toast.error(response.data.message,{
-             position:toast.POSITION.TOP_CENTER
-           });
-         }
-    }
+
+  const handleSubmitCart = async () => {
+    var dataCart ={
+    "admin_id":JSON.parse(localStorage.getItem("user-info")|| "{}").id,
+    "amount": "20" ,
+    // "email":JSON.parse(localStorage.getItem("cart-items")|| "{}").email,
+    "card_id": "cc-2826453728",
+    "currency": "eur",
+    "name": "dsfdsg",
+    "phone":phone,
+    // "tracking_number": tracking_number,
+    "city":city,
+    "country_code": "IT",
+    "postal_code": postal_code,
+    "state":state
+    };
+    // var dataCart ={
+    //   "admin_id":"5",
+    //   "amount":20,
+    //   "receipt_email":"vjvfc2k16@gmail.com",
+    //   "card_id": "cc-1669816162263-4",
+    //   "currency": "eur",
+    //   "name": "Alex",
+    //   "phone":"0123456789",
+    //   "tracking_number": "TR-123456",
+    //   "city":"Milan",
+    //   "country_code": "IT",
+    //   "line1":"Test street",
+    //   "line2":"",
+    //   "postal_code": "20019",
+    //   "state":"Milano"
+    //   };
+    console.log(dataCart);
+    const response=await getAllCartCheckout(dataCart);
+    if(response.data.length>0){
+      setViewCartData(response.data);
+      // response.data.map(async(item, key)=>{        
+        
+      // })
+      console.log(response.data);
+      }else{
+        toast.error(response.data.message,{
+          position:toast.POSITION.TOP_CENTER
+        });
+      }
+  }
+  // const getAllCartData =async () => {
+  //   const response = await getAllCartCheckout()
+
+  //   if(response.data){
+  //     let tempData : any  = [];
+  //     if(response.data.response === "success"){
+  //       console.log(response.data);
+  //       response.data.restaurant.map((item: any, key: number) => {
+  //         tempData[key] = {
+  //           id: item.id,
+  //           href: "#",
+  //           name: item.name,
+  //           taxonomy: "category",
+  //           count: 188288,
+  //           // thumbnail:kfc,
+  //       }      
+  //       })
+  //       setViewCartData(tempData)
+  //     }
+      
+  //   }
+  // }
 
   const renderSidebar = () => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
+        {/* {viewCartData.map((item,key)=>{
+
+        })} */}
         <h3 className="text-xl font-semibold">View Cart</h3>
         <div className="align-middle">For Self Pickup, No delivery charge</div>
         <Tab.Group>
@@ -186,7 +234,7 @@ useEffect(() => {
         </Tab.Group>
 
         <div className="font-semibold">Deliver to</div>
-        <div>Michael 123 Avenue Street</div>
+        <div></div>
 
         <div className="flex flex-col sm:flex-row sm:items-center">
           <div className="flex-shrink-0 w-full sm:w-40">
@@ -198,9 +246,6 @@ useEffect(() => {
           <div className="py-5 sm:px-5 space-y-3">
             
             <div>
-              {/* <span className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1">
-                Hotel room in Tokyo, Jappan
-              </span> */}
               <span className="text-base font-medium mt-1 block">
                 McDonald's
               </span>
