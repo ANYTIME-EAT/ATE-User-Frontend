@@ -142,11 +142,16 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
       if(response.data){
 
         if(response.data.response === "success"){
-          navigate("/pay-done", {state: {data: items}});
+          localStorage.removeItem('cart-items')
+          navigate("/pay-done", {state: {data: items, total_amount: total_amount}});
+        }else{
+          console.log("Payment failure")
         }
       }
     }else{
       console.log(data)
+      navigate("/pay-done", {state: {data: items, total_amount: total_amount}});
+      localStorage.removeItem('cart-items')
       console.log("Payment successfull.")
     }
   }

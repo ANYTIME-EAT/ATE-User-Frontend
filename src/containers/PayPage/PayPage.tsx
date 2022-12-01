@@ -1,8 +1,10 @@
 import StartRating from "components/StartRating/StartRating";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import NcImage from "shared/NcImage/NcImage";
+import { getAvatar } from "services/apiServices";
+import { stat } from "fs";
 
 export interface PayPageProps {
   className?: string;
@@ -10,10 +12,24 @@ export interface PayPageProps {
 
 const PayPage: FC<PayPageProps> = ({ className = "" }) => {
   const { state } = useLocation();
-  console.log(state);
 
   const [images, setImages] = useState<any>([]);
   const [total_amount, setTotal] = useState<number>(0)
+
+  const getProfile = (list:any) => {
+    list.map(async(item:any,key:number) => {
+        let file = await getAvatar(item.image)
+        setImages((s:any) => {
+            return[
+                ...s, {
+                    id: item.id,
+                    author: item.author,
+                    image: URL.createObjectURL(file)
+                }
+            ]
+        })
+    })     
+  }
 
   const getProductImg = (id: number, author: string) => {
     let product_image = "";
@@ -24,6 +40,12 @@ const PayPage: FC<PayPageProps> = ({ className = "" }) => {
     })
     return product_image;
   }
+
+  useEffect(() => {
+    if(state?.data){
+      getProfile(state.data)
+    }   
+  },[])
 
   const renderContent = () => {
     return (
@@ -39,10 +61,10 @@ const PayPage: FC<PayPageProps> = ({ className = "" }) => {
         <div className="flex flex-col max-w-2xl p-1 dark:bg-inherit dark:text-gray-100  sm:rounded-2xl  space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
           <h3 className="text-2xl font-semibold">View Cart</h3>
           <div className="flex flex-col ">
-            {state.data && state.data.map((item: any, key: number) => {
+            {state?.data && state.data.map((item: any, key: number) => {
               return [
                 <div className="flex w-full space-x-2 sm:space-x-4 mb-3">
-                  <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent  rounded-2xl overflow-hidden" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" />
+                  <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent  rounded-2xl overflow-hidden" src={getProductImg(item.id, item.author)} loading="lazy" />
                   <div className="flex lex-row justify-between w-full pb-4 ml-11">
                     <div className="flex justify-between w-full pb-2 space-x-2">
                       <div className="space-y-1">
@@ -54,6 +76,9 @@ const PayPage: FC<PayPageProps> = ({ className = "" }) => {
                           </div>
                           <span className="block  text-sm text-neutral-500 dark:text-neutral-400">
                             Quantity : {item.quantity}
+                          </span>
+                          <span className="block  text-sm text-neutral-500 dark:text-neutral-400">
+                            Price : {item.price}
                           </span>
                           {/* <div className="text-center f">
                             <p className="text-center">{item.price * item.quantity} €</p>
@@ -86,13 +111,13 @@ const PayPage: FC<PayPageProps> = ({ className = "" }) => {
             <div className="flex text-neutral-6000 dark:text-neutral-300">
               <span className="flex-1">Date</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
-                12 Aug, 2021
+                {new Date().toLocaleString()}
               </span>
             </div>
             <div className="flex text-neutral-6000 dark:text-neutral-300">
               <span className="flex-1">Total</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
-                $199
+                {state?.total_amount} €
               </span>
             </div>
             <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">

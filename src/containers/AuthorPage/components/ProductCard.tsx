@@ -61,6 +61,7 @@ const ProductCard: FC<ProductCardProps> = ({
     const file = await getAvatar(img)
     setImage(URL.createObjectURL(file))
   }
+  
 
   useEffect(() => {
     console.log(productData.product_avatar)
