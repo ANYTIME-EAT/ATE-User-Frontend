@@ -87,9 +87,9 @@ export const getProduct = (id) => {
 }
 
 
-export const checkoutApi1 = (data) => {
+export const attachCardApi = (id,data) => {
     return new Promise((resolve,reject)=>{
-        axios.post(`${config.SERVER_URL}/payment_card/add_card/5`,data)
+        axios.post(`${config.SERVER_URL}/payment_card/add_card/${id}`,data)
         .then((res) =>{           
             resolve(res)
         }).catch((res) => {
@@ -98,21 +98,10 @@ export const checkoutApi1 = (data) => {
     })
 }
 
-// export const checkoutApi2= (data) => {
-//     return new Promise((resolve,reject)=>{
-//         axios.post(`${config.SERVER_URL}/payment/direct_payment`,data)
-//         .then((res) =>{           
-//             resolve(res)
-//         }).catch((res) => {
-//             reject(res)
-//         })
-//     })
-// }
-
-export const getAllCartCheckout = (data) => {
-    return new Promise((resolve,reject) => {
+export const paymentApi = (data) => {
+    return new Promise((resolve,reject)=>{
         axios.post(`${config.SERVER_URL}/payment/direct_payment`,data)
-        .then((res) => {
+        .then((res) =>{           
             resolve(res)
         }).catch((res) => {
             reject(res)

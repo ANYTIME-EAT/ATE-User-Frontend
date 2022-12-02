@@ -28,9 +28,9 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
       data-nc-id="SectionGridFilterCard"
     >
       <Heading2
-        heading={crrAuthor?.title}
+        heading={"Items"}
+        //crrAuthor?.title
       />
-
       
       <div className="grid grid-cols-1 gap-6 md:gap-8 xl:grid-cols-2 ">
         {productData.map((item:any, key:number) => (        

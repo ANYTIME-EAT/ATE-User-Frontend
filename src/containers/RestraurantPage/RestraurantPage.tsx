@@ -34,7 +34,7 @@ const RestraurantPage: FC<RestraurantPageProps> = ({ data, changeAuthor,crrAutho
           </h1>
           <Heading className={`text-black origin-left dark:text-gray-100 font-medium text-xl duration-200 ${!open && "scale-0"
             }`}
-            desc="">Choose Here</Heading>
+            desc="">Menu</Heading>
         </div>
         <ul className="pt-6">
           {data.map((Menu: any, index: number) => (

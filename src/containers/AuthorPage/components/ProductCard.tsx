@@ -1,7 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import GallerySlider from "./GallerySlider";
 import { DEMO_STAY_LISTINGS } from "data/listings";
 import StartRating from "components/StartRating/StartRating";
+import NcImage from "shared/NcImage/NcImage";
 import { Link } from "react-router-dom";
 import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
 import SaleOffBadge from "components/SaleOffBadge/SaleOffBadge";
@@ -9,6 +10,7 @@ import Badge from "shared/Badge/Badge";
 import { StayDataType } from "data/types";
 import Button from "shared/Button/Button";
 import ButtonCircle from "shared/Button/ButtonCircle";
+import { getAvatar } from 'services/apiServices'
 
 import { addToCart, getCartList, addProduct } from "services/cartStorage"
 import { ToastContainer, toast } from 'react-toastify'
@@ -53,13 +55,26 @@ const ProductCard: FC<ProductCardProps> = ({
     id,
   } = data;
 
+  const [image, setImage] = useState<any>("")
+
+  const getProfile = async(img:string) => {
+    const file = await getAvatar(img)
+    setImage(URL.createObjectURL(file))
+  }
+  
+
+  useEffect(() => {
+    console.log(productData.product_avatar)
+    getProfile(productData.product_avatar)
+  },[])
+
   const renderSliderGallery = () => {
     return (
       <div className="flex-shrink-0 p-3 w-full sm:w-64 ">
         <GallerySlider
           ratioClass="aspect-w-1 aspect-h-1"
           // galleryImgs={productData.menu_avatar} not working
-          galleryImgs={galleryImgs}
+          galleryImgs={[image && image]}
           className="w-full h-full rounded-2xl overflow-hidden will-change-transform"
           uniqueID={`ProductCard_${id}`}
           href={href}

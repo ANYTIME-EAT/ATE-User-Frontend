@@ -10,376 +10,327 @@ import ButtonPrimary from "shared/Button/ButtonPrimary";
 import NcImage from "shared/NcImage/NcImage";
 import StartRating from "components/StartRating/StartRating";
 import NcModal from "shared/NcModal/NcModal";
-import ModalSelectDate from "components/ModalSelectDate";
+import CustomInupt from "containers/ShoppingCart/components/CustomInupt";
 import moment from "moment";
 import { DateRage } from "components/HeroSearchForm/StaySearchForm";
 import converSelectedDateToString from "utils/converSelectedDateToString";
 import ModalSelectGuests from "components/ModalSelectGuests";
 import { GuestsObject } from "components/HeroSearchForm2Mobile/GuestsInput";
-import Checkbox from "shared/Checkbox/Checkbox";
-import NcInputNumber from "components/NcInputNumber/NcInputNumber";
-import { useNavigate } from 'react-router-dom';
-import { checkoutApi1,getAllCartCheckout } from "services/apiServices";
-import { ToastContainer,toast } from "react-toastify";
-import { userInfo } from "os";
-import _ from 'lodash';
+import { COUNTRIES } from "data/countryCodeList"
+import _ from "lodash";
+import { getAvatar, attachCardApi, paymentApi } from 'services/apiServices'
+import { getCartList } from 'services/cartStorage'
+import { useNavigate } from "react-router-dom";
 
 export interface CheckOutPageProps {
   className?: string;
 }
 
-const limit = (val:any, max:any) => {
-	if (val.length === 1 && val[0] > max[0]) {
-		val = '0' + val
-	}
+const SERVICE_CHARGE = 20
 
-	if (val.length === 2) {
-		if (Number(val) === 0) {
-			val = '01'
-		} else if (val > max) {
-			val = max
-		}
-	}
-
-	return val
-}
-
-const cardExpiryFormat = (val:any, type: string = "year") => {
-  if(type === "month"){
-    let month = limit(val.substring(0, 2), '12')
-    return month
-  }else{
-    let year = limit(val.substring(2, 4), '99')
-    return year
+const generateRandomID = (size:number) => {
+  let length = size,
+    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    retVal = "";
+  for (let i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
   }
+  return retVal;
 }
 
 const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
-  const [rangeDates, setRangeDates] = useState<DateRage>({
-    startDate: moment().add(1, "day"),
-    endDate: moment().add(5, "days"),
-  });
-  const [guests, setGuests] = useState<GuestsObject>({
-    guestAdults: 2,
-    guestChildren: 1,
-    guestInfants: 1,
-  });
-  
-const [customer_name, setCustomer_name]=useState("");
-const [phone, setPhone]=useState("");
-const [city, setCity]=useState("");
-const [country, setCountry]=useState("");
-const [state, setState]=useState("");
-const [address_lable, setAddress_lable]=useState("");
-const [card_id, setCard_id]=useState("");
-const [name, setName]=useState("");
-const [exp_month,setExp_month]=useState("");
-const [exp_year,setExp_year]=useState("");
-const [admin_id, setAdmin_id]=useState("");
-const [amount, setAmount]=useState("");
-const [currency, setCurrency]=useState("");
-const [type, setType]=useState("card");
-const [card_no, setCard_no]=useState("");
-const [cvc, setCvc]=useState("");
-const [tracking_number, setTracking_number]=useState("");
-const [country_code, setCountry_code]=useState("");
-const [postal_code, set]=useState("");
-const [viewCartData, setViewCartData]=useState("");
 
-const [id,setId]=useState("");
-const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [items, setItems] = useState<any>([])
 
+    const [id, setId] = useState<number>(-1)
 
-var _ = require('lodash');
+    const [name, setName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [phone, setPhone] = useState<string>("");
+    const [line1, setLine1] = useState<string>("");
+    const [line2, setLine2] = useState<string>("");
+    const [city, setCity] = useState<string>("");
+    const [state, setState] = useState<string>("");
+    const [postal_code, setPostalCode] = useState<string>("");
+    const [countryCode, setCountryCode] = useState<string>("IT");
 
-useEffect(() => {
-  setCard_id(_.uniqueId(`cc-${Date.now()}-`))
-  console.log(cardExpiryFormat("34","month"))
-},[])
+    const [total_amount, setTotal] = useState<number>(0)
 
+    //Card dets
+    const [cardNo, setCardNo] = useState<string>("4242424242424242")
+    const [card_id, setCard_id] = useState(_.uniqueId(`cc-${Date.now()}-${generateRandomID(6)}`));
+    const [expDate, setExpDate] = useState<string>("2022-12")
+    const [cardholderName, setCardholderName] = useState<string>("Mr X")
+    const [cvv, setCvv] = useState<string>("123")
 
-//handle contact details
-  const handleSubmit = async () => {
-    var data ={
-    "customer_name":customer_name,
-    "name": name, 
-    "email":JSON.parse(localStorage.getItem("user-info")|| "{}").email,
-    "type": type,
-    "card_no": card_no,
-    "exp_month": exp_month.split("-")[1],
-    "exp_year": exp_month.split("-")[0],
-    "cvc": cvc,
-    "cardId":card_id,
-    "cardType": type,
-    "primary_card": false
+    const [images, setImages] = useState<any>([]);
 
-    };
-    console.log(data)
-    const response=await checkoutApi1(data);
-    if(response.data){
-      console.log(response.data);
-      }else{
-        toast.error(response.data.message,{
-          position:toast.POSITION.TOP_CENTER
-        });
-      }
+    const getProfile = (list:any) => {
+      list.map(async(item:any,key:number) => {
+          let file = await getAvatar(item.image)
+          setImages((s:any) => {
+              return[
+                  ...s, {
+                      id: item.id,
+                      author: item.author,
+                      image: URL.createObjectURL(file)
+                  }
+              ]
+          })
+      })     
+  }
+  const getProductImg = (id:number,author:string) =>{
+    let product_image = "";
+    images && images.map((item:any) => {
+        if(item.id == id && item.author == author){
+            product_image = item.image;
+        }
+    })
+    return product_image;
   }
 
-  const handleSubmitCart = async () => {
-    var dataCart ={
-    "admin_id":JSON.parse(localStorage.getItem("user-info")|| "{}").id,
-    "amount": "20" ,
-    // "email":JSON.parse(localStorage.getItem("cart-items")|| "{}").email,
-    "card_id": "cc-2826453728",
-    "currency": "eur",
-    "name": "dsfdsg",
-    "phone":phone,
-    // "tracking_number": tracking_number,
-    "city":city,
-    "country_code": "IT",
-    "postal_code": postal_code,
-    "state":state
-    };
-    // var dataCart ={
-    //   "admin_id":"5",
-    //   "amount":20,
-    //   "receipt_email":"vjvfc2k16@gmail.com",
-    //   "card_id": "cc-1669816162263-4",
-    //   "currency": "eur",
-    //   "name": "Alex",
-    //   "phone":"0123456789",
-    //   "tracking_number": "TR-123456",
-    //   "city":"Milan",
-    //   "country_code": "IT",
-    //   "line1":"Test street",
-    //   "line2":"",
-    //   "postal_code": "20019",
-    //   "state":"Milano"
-    //   };
-    console.log(dataCart);
-    const response=await getAllCartCheckout(dataCart);
-    if(response.data.length>0){
-      setViewCartData(response.data);
-      // response.data.map(async(item, key)=>{        
+
+
+    const getItems = async() => {
+        let cartList = JSON.parse(getCartList() || "[]");
+        let total = 0;
+        cartList.map((item:any) => {
+          total += item.price * item.quantity
+    
+        })
+        setTotal(total)
         
-      // })
-      console.log(response.data);
-      }else{
-        toast.error(response.data.message,{
-          position:toast.POSITION.TOP_CENTER
-        });
-      }
-  }
-  // const getAllCartData =async () => {
-  //   const response = await getAllCartCheckout()
+        setItems(cartList)
+        getProfile(cartList)
+    }
 
-  //   if(response.data){
-  //     let tempData : any  = [];
-  //     if(response.data.response === "success"){
-  //       console.log(response.data);
-  //       response.data.restaurant.map((item: any, key: number) => {
-  //         tempData[key] = {
-  //           id: item.id,
-  //           href: "#",
-  //           name: item.name,
-  //           taxonomy: "category",
-  //           count: 188288,
-  //           // thumbnail:kfc,
-  //       }      
-  //       })
-  //       setViewCartData(tempData)
-  //     }
-      
-  //   }
-  // }
+  useEffect(() => {
+    getItems()
+    if(localStorage.getItem("user-info")){
+      let userid = JSON.parse(localStorage.getItem("user-info")|| "{}").id;
+      console.log(userid)
+      setId(userid)
+    }
+  },[])
+
+  const handleConfirm = async(creditCardId: string = "") => {
+    const shipping_dets= {
+      name: name,
+      phone: phone,
+      tracking_number: "TR-123456",
+      address: {
+        city: city,
+        country_code: countryCode,
+        line1: line1,
+        line2: line2,
+        postal_code:postal_code,
+        state: state
+      }
+    }
+    const data = {
+      admin_id: id,
+      amount: total_amount + SERVICE_CHARGE,
+      card_id: creditCardId,
+      currency: "eur",
+      receipt_email: email,
+      shipping_dets: shipping_dets
+    }
+
+    if(creditCardId != ""){
+      const response = await paymentApi(data);
+      if(response.data){
+
+        if(response.data.response === "success"){
+          localStorage.removeItem('cart-items')
+          navigate("/pay-done", {state: {data: items, total_amount: total_amount}});
+        }else{
+          console.log("Payment failure")
+        }
+      }
+    }else{
+      console.log(data)
+      navigate("/pay-done", {state: {data: items, total_amount: total_amount}});
+      localStorage.removeItem('cart-items')
+      console.log("Payment successfull.")
+    }
+  }
+  
+
+  const handlePayByCard = async() => {  
+    const data = {
+      customer_name: cardholderName,
+      name: name,
+      email: email,
+      type: "card",
+      card_no: cardNo,
+      exp_month: expDate.split("-")[1],
+      exp_year: expDate.split("-")[0],
+      cvc: cvv,
+      cardId: card_id,
+      primary_card: false
+    }
+    const response = await attachCardApi(id,data)
+    if(response.data){
+      if(response.data.response === "success" || response.data.message === "This card is already exists."){
+        console.log(card_id)
+        handleConfirm(card_id)
+      }else{
+        console.log("Invalid card details")
+      }
+    }
+  }
 
   const renderSidebar = () => {
     return (
-      <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
-        {/* {viewCartData.map((item,key)=>{
-
-        })} */}
-        <h3 className="text-xl font-semibold">View Cart</h3>
-        <div className="align-middle">For Self Pickup, No delivery charge</div>
-        <Tab.Group>
-        <Tab.List className="flex my-5">
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
-                          : "text-neutral-6000 dark:text-neutral-400"
-                      }`}
-                    >
-                      Pickup
-                    </button>
-                  )}
-                </Tab>
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-300 text-white dark:text-neutral-900"
-                          : " text-neutral-6000 dark:text-neutral-400"
-                      }`}
-                    >
-                      <span className="mr-2.5">Delivery</span>
-                
-                    </button>
-                  )}
-                </Tab>
-        </Tab.List>
-        </Tab.Group>
-
-        <div className="font-semibold">Deliver to</div>
-        <div></div>
-
-        <div className="flex flex-col sm:flex-row sm:items-center">
-          <div className="flex-shrink-0 w-full sm:w-40">
-            
-            <div className=" aspect-w-4 aspect-h-3 sm:aspect-h-4 rounded-2xl overflow-hidden">
-              <NcImage src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+      <div className="flex flex-col max-w-2xl p-1 dark:bg-inherit dark:text-gray-100  sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
+        <h3 className="text-2xl font-semibold">View Cart</h3>
+        <div className="flex flex-col  ">
+          {/* <div className="flex-shrink-0 w-full sm:w-40">
+            <div className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent  rounded-2xl overflow-hidden">
+              <NcImage src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />             
             </div>
-          </div>
-          <div className="py-5 sm:px-5 space-y-3">
-            
+            <div className="py-5 sm:px-5 space-y-3">
             <div>
               <span className="text-base font-medium mt-1 block">
-                McDonald's
+                The Lounge & Bar
               </span>
             </div>
             <span className="block  text-sm text-neutral-500 dark:text-neutral-400">
-              American Fast Food
+              2 beds · 2 baths
             </span>
-            {/* <div className="w-10 border-b border-neutral-200  dark:border-neutral-700"></div>
-            <StartRating /> */}
+            <div className="w-10 border-b border-neutral-200  dark:border-neutral-700"></div>
+           
           </div>
+          </div> */}
+          {items && items.map ((item:any , key:number) => {
+            return[
+              <div className="flex w-full space-x-2 sm:space-x-4 mb-3">
+              <img className="flex-shrink-0 object-cover  w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500" src={getProductImg(item.id, item.author)} alt={item.name} loading="lazy"/> 
+              <div className="flex flex-col justify-between w-full pb-4">
+                <div className="flex justify-between w-full pb-2 space-x-2">
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-semibold leading-snug sm:pr-8">{item.name}</h3>
+                    <p className="text-sm dark:text-gray-400">Quantity : {item.quantity}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-lg font-semibold">{item.price * item.quantity} €</p>
+                    {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
+                  </div>
+                </div>
+              
+              </div>
+            </div>
+            ]
+          })}
+          {/* <div className="flex w-full space-x-2 sm:space-x-4 mt-5">
+            <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Polaroid camera"
+            />
+            <div className="flex flex-col justify-between w-full pb-4">
+              <div className="flex justify-between w-full pb-2 space-x-2">
+                <div className="space-y-1">
+                  <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
+                  <p className="text-sm dark:text-gray-400">04</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-lg font-semibold">2.33$</p>
+                
+                </div>
+              </div>
+              <div className="flex text-sm ">
+
+               
+              </div>
+            </div>
+          </div> */}
+
         </div>
         <div className="flex flex-col space-y-4">
           {/* <h3 className="text-2xl font-semibold">Price detail</h3> */}
-          <h6 className="text-2xl font-semibold">6 Pc Nuggets+McChicken+Coke(M)</h6>
-          <div>Do you want to add instructions</div>
-
-          <h3 className="text-2xl font-semibold">Apply Coupon</h3>
-
-          {/* <h3 className="text-2xl font-semibold">Price detail</h3> */}
           <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-            <span>Subtotal(1 item)</span>
-            <span>$250</span>
+            <span>Sub Total :</span>
+            <span>{total_amount} €</span>
           </div>
           <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-            <span>Ship Fee(1.5km)</span>
-            <span>$10</span>
+            <span>Shipping charge :</span>
+            <span>{SERVICE_CHARGE} €</span>
           </div>
 
           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
           <div className="flex justify-between font-semibold">
             <span>Total</span>
-            <span>$260</span>
+            <span>{total_amount + SERVICE_CHARGE} €</span>
           </div>
         </div>
-        <div className="pt-8">
-              <ButtonPrimary href={"/pay-done"}>Make Payment</ButtonPrimary>
-            </div>
       </div>
     );
   };
 
   const renderMain = () => {
+
     return (
       <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
-        <h2 className="text-xl lg:text-4xl font-semibold">
-         payment Details
+        <h2 className="text-3xl lg:text-4xl font-semibold mt-11">
+          Confirm and Payment
         </h2>
         <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-        <div className="relative">
-          <div>
-            <h3 className="text-xl font-semibold">Contact Information</h3>
-
-          </div>
-          <div className="mt-6  flex flex-col sm:flex-row ">
-            <div className="space-y-1 px-1">
-
-              <Label>Name</Label>
-              <Input
-                sizeClass="w-80"
-                type="text"
-                placeholder="name"
-                className="mt-1"
-                onChange={(e) => setCustomer_name(e.target.value)}
-              />
-            </div>
-            <div className="space-y-1 pl-12">
-              <Label>Contact number </Label>
-              <Input
-                sizeClass="w-80"
-                type="text"
-                placeholder="Contact Number"
-                className="mt-1"
-                onChange={(e) => setPhone(e.target.value)}
-                 />
-            </div>
-          </div>
-          <div  className="mt-6">
-          <Label>Address </Label>
-          </div>
-          <div className="flex space-x-5">
-                    <div className="flex-1 space-y-1">
-                      <Input
-                      onChange={(e) => setCountry(e.target.value)}
-                      placeholder="country"/>
-                    </div>
-                    <div className="flex-1 space-y-1">
-                      
-                      <Input
-                      placeholder="city" 
-                      onChange={(e) => setCity(e.target.value)}/>
-                    </div>
-                    <div className="flex-1 space-y-1">
-                  
-                      <Input
-                      placeholder="state"
-                      onChange={(e) => setState(e.target.value)}/>
-                    </div>
-                  </div>
-       
-          <div>
-            <p className="text-base mt-6">Address Label (Optional)</p>
-          </div>
-          
-
-      <div className="flex items-center mb-4">
-          <input id="default-radio-1" type="radio" value="" name="address_lable" 
-          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          checked={address_lable === "Home"}
-          onChange={(e) => setAddress_lable(e.target.value)}
-          />
-          <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Home</label>
-      </div>
-      <div className="flex items-center">
-          <input id="default-radio-2" 
-          checked={address_lable === "Work"}
-          onChange={(e) => setAddress_lable(e.target.value)}
-          type="radio" value="" name="address_lable" 
-          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-          <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Work</label>
-      </div>
-      <div className="flex items-center">
-          <input id="default-radio-2"
-          checked={address_lable === "Other"} 
-          onChange={(e) => setAddress_lable(e.target.value)}
-          type="radio" value="" name="address_lable" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-          <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Other</label>
-      </div>
-  </div>
         <div>
-          <h3 className="text-xl font-semibold">Pay with</h3>
-          <div className="border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
+          <div>
+            <h3 className="text-2xl font-semibold">Shipping Details</h3>
+            <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
+          </div>
+
+          <div>
+            <div className="space-y-1 mb-4">
+              <Label>Recipient Name </Label>
+              <Input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)}/>
+            </div>
+            <div className="space-y-1 mb-4">
+              <Label>Recipient Email </Label>
+              <Input type="email" placeholder="Email"  onChange={(e) => setEmail(e.target.value)}/>
+            </div>
+            <div className="space-y-1 mb-4">
+              <Label>Phone No </Label>
+              <Input type="number" placeholder="Phone"  onChange={(e) => setPhone(e.target.value)}/>
+            </div>
+            <div className="space-y-1 mb-4">
+              <h4 className="text-1x1 font-semibold">Address</h4>
+              <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
+              <div className="space-y-1 mb-4">
+                <input type="text" placeholder="Address Line 1"  onChange={(e) => setLine1(e.target.value)}/>
+              </div>
+              <div className="space-y-1 mb-4">
+                <input type="text" placeholder="Address Line 2"  onChange={(e) => setLine2(e.target.value)}/>
+              </div>
+              <div className="space-y-1 mb-4">
+                <input type="text" placeholder="City"  onChange={(e) => setCity(e.target.value)}/>
+              </div>
+              <div className="space-y-1 mb-4">
+                <input type="text" placeholder="State/Province"  onChange={(e) => setState(e.target.value)}/>
+              </div>
+              <div className="space-y-1 mb-4">
+                <input type="number" placeholder="Postal Code"  onChange={(e) => setPostalCode(e.target.value)}/>
+              </div>
+              <div className="space-y-1 mb-4">
+                <select value={countryCode} onChange={(e) => setCountryCode(e.target.value)}>
+                  {COUNTRIES.map((item:any,key:number)=>{
+                    return[
+                      <option value={item.code}>{item.name}</option>
+                    ]
+                  })}
+                </select>
+                {/* <Input type="select" placeholder="Country" /> */}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-2xl font-semibold">Pay with</h3>
+          <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
 
           <div className="mt-6">
-          <Tab.Group>
+            <Tab.Group>
               <Tab.List className="flex my-5">
 
                 <Tab as={Fragment}>
@@ -409,6 +360,7 @@ useEffect(() => {
                     </button>
                   )}
                 </Tab>
+
               </Tab.List>
 
               <Tab.Panels>
@@ -416,35 +368,30 @@ useEffect(() => {
                 <Tab.Panel className="space-y-5">
                   <div className="space-y-1">
                     <Label>Card number </Label>
-                    <Input defaultValue="111 112 222 999" 
-                    onChange={(e) => setCard_no(e.target.value)}
-                    />
+                    <Input type="number" value={cardNo} onChange={(e) => {e.target.value.length <= 16 && setCardNo(e.target.value)}} />
                   </div>
                   <div className="space-y-1">
                     <Label>Card holder </Label>
-                    <Input defaultValue="JOHN DOE" 
-                    onChange={(e) => setName(e.target.value)}/>
+                    <Input onChange={(e) => setCardholderName(e.target.value)} />
                   </div>
                   <div className="flex space-x-5  ">
                     <div className="flex-1 space-y-1">
                       <Label>Expiration date </Label>
-                      {/* <Input type="month" 
-                      defaultValue="MM/YY" 
-                      onChange={(e) => setExp_month(e.target.value)}/> */}
-                      <input type="month" id="start" name="start" min="2018-03"
-                      onChange={(e) => setExp_month(e.target.value)}/>
+                      <Input type="month" defaultValue="2022-12" onChange={(e) => setExpDate(e.target.value)} />
                     </div>
                     <div className="flex-1 space-y-1">
-                      <Label>CVC </Label>
-                      <Input
-                      defaultValue="1234" 
-                      onChange={(e) => setCvc(e.target.value)}/>
+                      <Label>CVV </Label>
+                      <Input type="number" value={cvv} onChange={(e) => {e.target.value.length <= 4 && setCvv(e.target.value)}}/>
                     </div>
                   </div>
-                  <ButtonPrimary href={"/pay-done"} onClick={handleSubmit}>Confirm and pay</ButtonPrimary>
+                  <ButtonPrimary onClick={handlePayByCard}>
+                    Confirm and pay
+                  </ButtonPrimary>
+                  {/* href={"/pay-done"} */}
                 </Tab.Panel>
                 <Tab.Panel className="space-y-5">
-                  <ButtonPrimary href={"/pay-done"} onClick={handleSubmit}>Confirm</ButtonPrimary>
+                  <ButtonPrimary  onClick={handleConfirm}>Confirm</ButtonPrimary>
+                  {/* href={"/pay-done"} */}
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
@@ -461,9 +408,10 @@ useEffect(() => {
     <div className={`nc-CheckOutPage ${className}`} data-nc-id="CheckOutPage">
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
         <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10 ">{renderMain()}</div>
-        <div className=" lg:block flex-grow">{renderSidebar()}</div>
+        <div className=" flex-grow">{renderSidebar()}</div>
       </main>
     </div>
   );
 };
+
 export default CheckOutPage;

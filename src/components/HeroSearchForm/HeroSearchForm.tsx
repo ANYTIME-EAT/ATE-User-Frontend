@@ -54,9 +54,9 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
       case "Experiences":
         return <ExperiencesSearchForm haveDefaultValue={isArchivePage} />;
       case "Cars":
-        return <RentalCarSearchForm haveDefaultValue={isArchivePage} />;
-      case "Flights":
-        return <FlightSearchForm haveDefaultValue={isArchivePage} />;
+        return <StaySearchForm haveDefaultValue={isArchivePage} />;
+      // case "Flights":
+        // return <FlightSearchForm haveDefaultValue={isArchivePage} />;
 
       default:
         return null;

@@ -5,6 +5,7 @@ import SectionGridFilterCard from "./components/SectionGridFilterCard";
 import SectionHero2 from "./components/SectionHero2";
 import { getRestaurantCategory,getRestaurant,getProduct } from "services/apiServices";
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
+import { getAvatar } from 'services/apiServices'
 
 // import { addToCart, getCartList } from "services/cartStorage"
 
@@ -30,13 +31,15 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
   let items = [];
 
-  //Add to cart
-  // const [authorItems, setAuthorItems] = useState<any>([])
-  
+  const [image, setImage] = useState<any>("")
+
+  const getProfile = async(img:string) => {
+    const file = await getAvatar(img)
+    setImage(URL.createObjectURL(file))
+  }
 
 
-
-  //Resturant Food Category
+  //Restaurant Food Category
   const getrestraurantCat = async () => {
     const response = await getRestaurantCategory(1)
     console.log(response.data)
@@ -57,6 +60,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     const response = await getRestaurant(1)
     if(response.data?.response ==="success") {
       setresturant(response.data.restaurant[0])
+      getProfile(response.data.restaurant[0].restaurant_avatar)
     }
   }
 
@@ -99,7 +103,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
   const heroSection = () => {
       return(
-        <SectionHero2 data={restaurant} />
+        <SectionHero2 data={restaurant} img={image}/>
       );
   }
 
@@ -110,12 +114,13 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       <div>{heroSection()}</div>
       
       <Helmet>
-        <title>Restraunt || ATE</title>
-        
+        <title>Restaurant | ATE</title>       
       </Helmet>
       
 
       <main className="flex flex-row ">
+        {/* <ShoppingCart className="top-1/3" authorItems={authorItems} addAuthorItems={addAuthorItems}/> */}
+       
         <ShoppingCart className="top-1/3" newProduct={newProduct} setNewProduct={setNewProduct}/>
       
         <div className="">{renderSidebar()}</div>
