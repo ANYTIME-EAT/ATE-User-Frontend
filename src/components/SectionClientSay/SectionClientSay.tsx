@@ -19,20 +19,8 @@ export interface SectionClientSayProps {
 }
 
 const DEMO_DATA = [
-  {
-    id: 1,
-    clientName: "Tiana Abie",
-    clientAddress: "Malaysia",
-    content:
-      "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
-  },
-  {
-    id: 2,
-    clientName: "Lennie Swiffan",
-    clientAddress: "London",
-    content:
-      "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
-  },
+  
+  
   {
     id: 3,
     clientName: "Berta Emili",

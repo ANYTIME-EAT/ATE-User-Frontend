@@ -24,7 +24,7 @@ const SectionGridAllMenu: FC<SectionGridAllMenuProps> = ({
   combo_MenuData,
   stayListings = DEMO_DATA,
   gridClass = "",
-  heading = "All Restraunt Menus",
+  heading = "Combo Menu's",
   subHeading = "Good Food Is Always Cooking! Order Some Yummy Items From The Menu",
   headingIsCenter,
   tabs = [],
