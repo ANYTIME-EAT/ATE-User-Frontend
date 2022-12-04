@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import LocationInput from "./LocationInput";
 import GuestsInput, { GuestsInputProps } from "./GuestsInput";
 import ExperiencesDateSingleInput from "./ExperiencesDateSingleInput";
+import SearchInputCustom from "containers/PageHome/Components/SearchInputCustom";
 import moment from "moment";
 
 import { FC } from "react";
@@ -51,16 +52,7 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({
           className="flex-[1.5]"
         />
 
-        {/* <ExperiencesDateSingleInput
-          defaultValue={dateValue}
-          onChange={(date) => setdateValue(date)}
-          defaultFocus={dateFocused}
-          onFocusChange={(focus: boolean) => {
-            setDateFocused(focus);
-          }}
-          className="flex-1"
-        /> */}
-        <LocationInput
+        <SearchInputCustom
           defaultValue={locationInputValue}
           onChange={(e) => setLocationInputValue(e)}
           onInputDone={() => setDateFocused(true)}

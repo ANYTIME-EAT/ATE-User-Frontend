@@ -79,7 +79,7 @@ const ListingCarPage: FC<ListingCarPageProps> = ({ className = "" }) => {
 
       <div className="container relative">
         {/* SECTION HERO */}
-        <SectionHeroArchivePage
+        {/* <SectionHeroArchivePage
           rightImage={heroRightImage}
           currentPage="Cars"
           currentTab="Cars"
@@ -90,7 +90,7 @@ const ListingCarPage: FC<ListingCarPageProps> = ({ className = "" }) => {
             </>
           }
           className="pt-10 pb-24 lg:pb-28 lg:pt-16 "
-        />
+        /> */}
 
         {/* SECTION */}
         <SectionGridFilterCard className="pb-24 lg:pb-28" />
