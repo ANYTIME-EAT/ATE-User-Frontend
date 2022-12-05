@@ -37,9 +37,11 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" ,userInfo}) => {
     console.log(userdata)
     const response=await updateProfile(userData);
     console.log(response);
+    
     if(response.data>0){
       setUserData(response.data);
       console.log(response.data);
+      navigate("/profile");
       }else{
         toast.error(response.data.message,{
           position:toast.POSITION.TOP_CENTER
@@ -49,21 +51,13 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" ,userInfo}) => {
 
 
   useEffect(() => {
-    // if(userInfo)
-    // getProfileData()
     setEmail(JSON.parse(localStorage.getItem("user-info")|| "{}").email)
     setUsername(JSON.parse(localStorage.getItem("user-info")|| "{}").username)
-    // console.log(userInfo);
-
   },[])
+  
   useEffect(()=>{
     console.log(email)
   },[email])
-
-  const routeChange = () =>{ 
-    navigate("/profile");
-  }
-
   
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
@@ -125,8 +119,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" ,userInfo}) => {
         <button type="submit"
         className="w-40 space-x-4 font-semibold border border-slate-500 bg-white hover:bg-gray-200 
         text-black p-2 ml-6 rounded text-sm float-right" 
-        // onClick={getProfileData}
-        onClick={routeChange}
+        onClick={getProfileData}
         >
             Update
         </button>

@@ -132,7 +132,6 @@ export const getAllUserAddress = (userId) => {
 
 export const updateProfile = (data) => {
     return new Promise((resolve,reject) => {
-        localStorage.getItem("access-token");
         axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
         .then((res) => {
             resolve(res)
@@ -144,7 +143,6 @@ export const updateProfile = (data) => {
 
 export const editAddress = (data) => {
     return new Promise((resolve,reject) => {
-        localStorage.getItem("access-token");
         axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
         .then((res) => {
             resolve(res)
