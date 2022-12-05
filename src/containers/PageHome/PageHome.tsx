@@ -196,7 +196,7 @@ const PageHome = () => {
 
         {restrauntData.length > 0 &&
         <SectionSliderNewCategories
-          heading="Our Top Brands"
+          heading="All Restaurants"
           subHeading=""
           categoryCardType="card5"
           itemPerRow={4}
@@ -213,7 +213,7 @@ const PageHome = () => {
             categories={DEMO_CATS_2}
             categoryCardType="card3"
             itemPerRow={4}
-            heading="Our Top Offers"
+            heading="Top Offers"
             subHeading="Good Food Is Always Cooking! Order Yummy Items From Menu"
             sliderStyle="style2"
             uniqueClassName="PageHome_s2"

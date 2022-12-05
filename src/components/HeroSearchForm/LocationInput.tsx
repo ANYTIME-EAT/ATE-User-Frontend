@@ -3,7 +3,7 @@ import { FC } from "react";
 import { useEffect } from "react";
 import ClearDataButton from "./ClearDataButton";
 import { useRef } from "react";
-
+import ButtonSubmit from "components/HeroSearchForm2Mobile/ButtonSubmit";
 export interface LocationInputProps {
   defaultValue: string;
   onChange?: (value: string) => void;
@@ -19,8 +19,8 @@ const LocationInput: FC<LocationInputProps> = ({
   autoFocus = false,
   onChange,
   onInputDone,
-  placeHolder = "Location",
-  desc = "Where are you going?",
+  placeHolder = "Search Location",
+  desc = "",
   className = "nc-flex-1.5",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -217,6 +217,7 @@ const LocationInput: FC<LocationInputProps> = ({
         <div className="absolute left-0 z-40 w-full min-w-[300px] sm:min-w-[500px] bg-white dark:bg-neutral-800 top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto">
           {value ? renderSearchValue() : renderRecentSearches()}
         </div>
+        
       )}
     </div>
   );
