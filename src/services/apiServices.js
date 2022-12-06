@@ -151,3 +151,14 @@ export const editAddress = (data) => {
         })
     })
 }
+
+export const getAllFavouritesAPI = (userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/favourite/get_all_fav/${userId}`,header())
+        .then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}

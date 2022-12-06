@@ -20,6 +20,8 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
   const [restaurant, setresturant] = useState<any>([])
   const [userInfo, setUserInfo] = useState<any>({})
   const [activePage, setActivePage] = useState<any>({id: 0, title: "Manage Address"});
+  const [favouriteData, setFavouriteData] = useState<any>([])
+  
 
   const handleActivePage = (id: number, title: string) => {
     setActivePage({id:id, title:title})
@@ -72,7 +74,7 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
     else if(activePage.title === "Favourites"){
       return (
         <div className=" flex-1 p-7">
-          <SectionGridAllprofileMenu/>
+          <SectionGridAllprofileMenu favourites_Data={favouriteData}/>
         </div>
       );
     }
