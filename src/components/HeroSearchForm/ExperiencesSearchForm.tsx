@@ -44,7 +44,7 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({
 
   const renderForm = () => {
     return (
-      <form className="w-full relative mt-8 flex flex-col md:flex-row  rounded-3xl md:rounded-full shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-700  md:divide-y-0">
+      <form className="w-3/4 relative mt-8 flex flex-col md:flex-row items-center justify-center rounded-3xl md:rounded-full shadow-xl dark:shadow-2xl bg-gray-100 dark:bg-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-700  md:divide-y-0 ml-36">
         <LocationInput
           defaultValue={locationInputValue}
           onChange={(e) => setLocationInputValue(e)}
