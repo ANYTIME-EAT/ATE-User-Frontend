@@ -4,7 +4,7 @@ import { StayDataType } from "data/types";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import StayCard from "components/StayCard/StayCard";
 import HeaderFilter from "containers/PageHome/HeaderFilter";
-import { getAllFavouritesAPI } from "services/apiServices";
+import { getAllFavouritesAPI,getAvatar } from "services/apiServices";
 
 // OTHER DEMO WILL PASS PROPS
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
@@ -34,6 +34,7 @@ const SectionGridAllprofileMenu: FC<SectionGridAllMenuProps> = ({
     return <StayCard key={data.id} favouritesData={data} />;
   };
 
+  
 //get all favourites
 
 const [allFavouritesData,setAllFavouritesData]=useState<any>([]);

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import GallerySlider from "components/GallerySlider/GallerySlider";
 import { DEMO_STAY_LISTINGS } from "data/listings";
 import { StayDataType } from "data/types";
@@ -9,6 +9,7 @@ import SaleOffBadge from "components/SaleOffBadge/SaleOffBadge";
 import Badge from "shared/Badge/Badge";
 import Button from "shared/Button/Button";
 import img1 from "images/domino.png";
+import { getAvatar } from "services/apiServices";
 
 export interface StayCardProps {
   className?: string;
@@ -41,13 +42,25 @@ const StayCard: FC<StayCardProps> = ({
     id,
   } = data;
 
+  const [image, setImage] = useState<any>("")
+
+  const getProfile = async(img:string) => {
+    const file = await getAvatar(img)
+    setImage(URL.createObjectURL(file))
+  }
+
+  useEffect(() => {
+    console.log(favouritesData.product_avatar)
+    getProfile(favouritesData.product_avatar)
+  },[])
+
   const renderSliderGallery = () => {
     return (
       <div className="relative w-full">
         <GallerySlider
           uniqueID={`StayCard_${favouritesData.id}`}
           ratioClass="aspect-w-4 aspect-h-3 "
-          galleryImgs={galleryImgs}
+          galleryImgs={[image && image]}
           href={href}
         />
 
