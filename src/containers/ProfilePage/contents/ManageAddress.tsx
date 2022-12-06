@@ -70,6 +70,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     );
     const response = await updateProfile({ address: newAddressList });
     setUserAddress(newAddressList);
+    
     if (response.data) {
       if (response.data.response === "success") {
         handleModal(false);
@@ -111,6 +112,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     if(response.data){
       if(response.data === "success"){
         setUserAddress(temp)
+        handleModal(false);
       }else{
         console.log("cannot add address")
       }
@@ -184,7 +186,8 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
                 data-modal-toggle="popup-modal"
                 type="button"
                 className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center ml-2"
-                onClick={handleAddressCreate}
+                onClick={handleAddressCreate} 
+                
               >
                 Add
               </button>
