@@ -130,13 +130,35 @@ export const getAllUserAddress = (userId) => {
     })
 }
 
-// export const viewCart= (userId) => {
-//     return new Promise((resolve,reject)=>{
-//         // localStorage.getItem("access-token");
-//         axios.get(`${config.SERVER_URL}/user/get_address/${userId}`,header()).then((res) =>{
-//             resolve(res)
-//         }).catch((res) => {
-//             reject(res)
-//         })
-//     })
-// }
+export const updateProfile = (data) => {
+    return new Promise((resolve,reject) => {
+        axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
+        .then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const editAddress = (data) => {
+    return new Promise((resolve,reject) => {
+        axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
+        .then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getAllFavouritesAPI = (userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/favourite/get_all_fav/${userId}`,header())
+        .then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}

@@ -1,5 +1,5 @@
 import Label from "components/Label/Label";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Avatar from "shared/Avatar/Avatar";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import Input from "shared/Input/Input";
@@ -7,20 +7,64 @@ import Select from "shared/Select/Select";
 import Textarea from "shared/Textarea/Textarea";
 import CommonLayout from "./CommonLayout";
 import { Helmet } from "react-helmet";
+import { updateProfile } from "services/apiServices";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export interface AccountPageProps {
   className?: string;
+  userInfo? :any;
 }
 
-const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
+const AccountPage: FC<AccountPageProps> = ({ className = "" ,userInfo}) => {
+  const [email, setEmail] = useState<any>("")
+  const [username, setUsername] = useState<any>("")
+  const [userData, setUserData] = useState<any>("")
+  let navigate = useNavigate(); 
+  
+  // const getProfileData = async(data:any) => {
+  //   const response = await updateProfile(data);
+
+  //   setUserData(response.data)
+  //   console.log(response.data);
+  // }
+
+  const getProfileData = async () => {
+    var userdata ={
+    "username":username,
+    "email":email
+    };
+    console.log(userdata)
+    const response=await updateProfile(userData);
+    console.log(response);
+    
+    if(response.data>0){
+      setUserData(response.data);
+      console.log(response.data);
+      navigate("/profile");
+      }else{
+        toast.error(response.data.message,{
+          position:toast.POSITION.TOP_CENTER
+        });
+      }
+  }
+
+
+  useEffect(() => {
+    setEmail(JSON.parse(localStorage.getItem("user-info")|| "{}").email)
+    setUsername(JSON.parse(localStorage.getItem("user-info")|| "{}").username)
+  },[])
+  
+  useEffect(()=>{
+    console.log(email)
+  },[email])
+  
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
       <Helmet>
         <title>Account || AntimeEat</title>
       </Helmet>
-      {/* <CommonLayout> */}
         <div className="space-y-6 sm:space-y-8">
-          {/* HEADING */}
           <h2 className="text-3xl font-semibold">Account infomation</h2>
           <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
           <div className="flex flex-col md:flex-row">
@@ -55,49 +99,28 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6">
               <div>
                 <Label>Username</Label>
-                <Input className="mt-1.5" defaultValue="@eden_tuan" />
+                <Input className="mt-1.5"
+                onChange={(e) => setUsername(e.target.value)} 
+                value={username}/>
               </div>
-              {/* ---- */}
+           
               <div>
                 <Label>Email</Label>
-                <Input className="mt-1.5" defaultValue="example@email.com" />
+                <Input className="mt-1.5" onChange={(e) => setEmail(e.target.value)} 
+                value={email}/>
               </div>
-              {/* ---- */}
-              {/* <div className="max-w-lg">
-                <Label>Date of birth</Label>
-                <Input
-                  className="mt-1.5"
-                  type="date"
-                  defaultValue="1990-07-22"
-                />
-              </div> */}
-              {/* ---- */}
+             
               {/* <div>
-                <Label>Addess</Label>
-                <Input className="mt-1.5" defaultValue="New york, USA" />
-              </div> */}
-              {/* ---- */}
-              <div>
                 <Label>Phone number</Label>
                 <Input className="mt-1.5" defaultValue="003 888 232" />
-              </div>
-              {/* ---- */}
-              {/* <div>
-                <Label>About you</Label>
-                <Textarea className="mt-1.5" defaultValue="..." />
               </div> */}
-
-              {/*---------------- button----------- */}
-              {/* <div className="flex flex-row ">
-              <div className="pr-10">
-                  <ButtonPrimary>Cancel</ButtonPrimary>
-                </div>
-                <div className="pr-10">
-                  <ButtonPrimary>Update</ButtonPrimary>
-                </div>
-              </div> */}
+              
               <div className="w-1/2">
-        <button type="submit" className="w-40 space-x-4 font-semibold border border-slate-500 bg-white hover:bg-gray-200 text-black p-2 ml-6 rounded text-sm float-right ">
+        <button type="submit"
+        className="w-40 space-x-4 font-semibold border border-slate-500 bg-white hover:bg-gray-200 
+        text-black p-2 ml-6 rounded text-sm float-right" 
+        onClick={getProfileData}
+        >
             Update
         </button>
         

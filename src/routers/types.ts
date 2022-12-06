@@ -72,6 +72,7 @@ export interface LocationStates {
 
   "/profile/address/edit"?: {};
   "/address/edit"?: {};
+  "/profile/user/edit"?: {};
   
 }
 

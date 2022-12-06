@@ -6,6 +6,8 @@ import StartRating from "components/StartRating/StartRating";
 import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
 import { getAvatar } from 'services/apiServices'
 import Heading from "shared/Heading/Heading";
+import { useNavigate } from "react-router-dom";
+
 
 export interface SectionHero2Props {
   className?: string;
@@ -31,12 +33,19 @@ const SectionHero2: FC<SectionHero2Props> = ({
   }) => {
 
     const [avatar, setAvatar] = useState<any>("")
+    const [userData, setUserData] = useState<any>("")
+    let navigate = useNavigate(); 
 
     const getProfile = async(imgUrl : string) => {
       // cons
       const response = await getAvatar(imgUrl);
       setAvatar(URL.createObjectURL(response))
     }
+
+    const routeChange = () =>{ 
+      navigate("/profile/user/edit");
+    }
+
 
     useEffect(() => {
       if(userInfo.avatar)
@@ -61,7 +70,12 @@ const SectionHero2: FC<SectionHero2Props> = ({
                 className="text-black dark:text-white"
               />
               <p className="text-black dark:text-white pb-2">{address}</p>
-              <button className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">Edit Profile</button>
+              <button 
+              className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow"
+              onClick={routeChange}>
+                
+                Edit Profile
+                </button>
               {/* <StartRating
                 className="mt-4"
               /> */}
