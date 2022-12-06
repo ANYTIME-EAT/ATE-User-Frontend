@@ -8,13 +8,13 @@ import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
 import SaleOffBadge from "components/SaleOffBadge/SaleOffBadge";
 import Badge from "shared/Badge/Badge";
 import Button from "shared/Button/Button";
-import img1 from 'images/domino.png'
-
+import img1 from "images/domino.png";
 
 export interface StayCardProps {
   className?: string;
   data?: StayDataType;
   size?: "default" | "small";
+  favouritesData?: any;
 }
 
 const DEMO_DATA = DEMO_STAY_LISTINGS[0];
@@ -23,6 +23,7 @@ const StayCard: FC<StayCardProps> = ({
   size = "default",
   className = "",
   data = DEMO_DATA,
+  favouritesData,
 }) => {
   const {
     galleryImgs,
@@ -44,12 +45,12 @@ const StayCard: FC<StayCardProps> = ({
     return (
       <div className="relative w-full">
         <GallerySlider
-          uniqueID={`StayCard_${id}`}
+          uniqueID={`StayCard_${favouritesData.id}`}
           ratioClass="aspect-w-4 aspect-h-3 "
           galleryImgs={galleryImgs}
           href={href}
         />
-        
+
         <BtnLikeIcon isLiked={like} className="absolute right-3 top-3 z-[1]" />
         {saleOff && <SaleOffBadge className="absolute left-1 top-3" />}
       </div>
@@ -61,33 +62,29 @@ const StayCard: FC<StayCardProps> = ({
       <div className={size === "default" ? "p-4 space-y-4" : "p-3 space-y-2"}>
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
-
             <h2
-              className={` font-medium capitalize ${size === "default" ? "text-lg" : "text-base"
-                }`}
+              className={` font-medium capitalize ${
+                size === "default" ? "text-lg" : "text-base"
+              }`}
             >
-              <span className="line-clamp-1">{title}</span>
+              <span className="line-clamp-1">{favouritesData.name}</span>
             </h2>
           </div>
           <span className="text-sm text-neutral-500 dark:text-neutral-400">
-            {/* address -> decription  */}
-            {address}  
+            {favouritesData.description}
           </span>
           <div className="flex justify-between items-center">
             <span className="text-base font-semibold">
-              {price}
+              {favouritesData.price}
               {` `}
-             
             </span>
             {!!reviewStart && (
               <StartRating reviewCount={reviewCount} point={reviewStart} />
             )}
           </div>
           <div className="w-20 border-b border-neutral-100 dark:border-neutral-800"></div>
-          <Button className="px-1 py-1 sm:px-3 hover:bg-[#be123c] dark:bg-[#be123c] dark:hover:bg-[#881337] flex  content-center"><i className="las la-shopping-cart"/>Add</Button>
+          <Button className="bg-red-600 text-white px-1 py-1 sm:px-3 hover:bg-[#be123c] dark:bg-[#be123c] dark:hover:bg-[#881337] flex  content-center">Order Now</Button>
         </div>
-
-
       </div>
     );
   };
