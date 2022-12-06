@@ -2,14 +2,14 @@ import React, { FC, ReactNode } from "react";
 import { DEMO_STAY_LISTINGS } from "data/listings";
 import { StayDataType } from "data/types";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
-import HeaderFilter from "./HeaderFilter";
-import StayCard from "./StayCard";
+import HeaderFilter from "../HeaderFilter";
+import StayCard from "../StayCard";
 
 // OTHER DEMO WILL PASS PROPS
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
 
 //
-export interface SectionGridAllMenuProps {
+export interface AllRestMenuProps {
   combo_MenuData?:any;
   stayListings?: StayDataType[];
   gridClass?: string;
@@ -20,11 +20,11 @@ export interface SectionGridAllMenuProps {
   setNewProduct(val:boolean): void;
 }
 
-const SectionGridAllMenu: FC<SectionGridAllMenuProps> = ({
+const AllRestMenu: FC<AllRestMenuProps> = ({
   combo_MenuData,
   stayListings = DEMO_DATA,
   gridClass = "",
-  heading = "Combo Menus",
+  heading = "Combo Menu",
   subHeading = "Good Food Is Always Cooking! Order Some Yummy Items From The Menu",
   headingIsCenter,
   tabs = [],
@@ -32,11 +32,11 @@ const SectionGridAllMenu: FC<SectionGridAllMenuProps> = ({
 }) => {
   const renderCard = (data:any) => {
     // console.log(data)
-    return <StayCard key={data.id} comboMenuData={data} setNewProduct={setNewProduct}/>;
+    return <StayCard key={data.id} setNewProduct={setNewProduct}/>;
   };
 
   return (
-    <div className="nc-SectionGridAllMenu items-center">
+    <div className="nc-AllRestMenu relative">
       <HeaderFilter
         tabActive={""}
         subHeading={subHeading}
@@ -55,4 +55,4 @@ const SectionGridAllMenu: FC<SectionGridAllMenuProps> = ({
   );
 };
 
-export default SectionGridAllMenu;
+export default AllRestMenu;

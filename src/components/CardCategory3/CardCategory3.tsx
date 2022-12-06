@@ -35,11 +35,6 @@ const CardCategory3: FC<CardCategory3Props> = ({
         >
           {name}
         </h2>
-        <span
-          className={`block mt-2 text-sm text-neutral-6000 dark:text-neutral-400`}
-        >
-          {convertNumbThousand(count || 0)} Views
-        </span>
       </div>
     </Link>
   );

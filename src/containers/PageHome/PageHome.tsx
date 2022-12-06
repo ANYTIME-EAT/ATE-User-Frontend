@@ -17,10 +17,11 @@ import pizza from 'images/pizza.png'
 import bbq from 'images/bbq.png'
 import offer1 from 'images/offer1.png'
 import offer2 from 'images/offer2.png'
-import {getRestaurantList,getOffersList,getAllComboMenuList} from '../../services/apiServices'
+import { getRestaurantList, getOffersList, getAllComboMenuList } from '../../services/apiServices'
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 import AteSectionHero from "components/SectionHero/AteSectionHero";
-import EmptyCart from "containers/ShoppingCart/EmptyCart";
+import ComboSlider from "./Components/ComboSlider";
+import AllRestMenu from "./Components/AllRestMenu";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -29,7 +30,7 @@ const DEMO_CATS: TaxonomyType[] = [
     name: "KFC",
     taxonomy: "category",
     count: 188288,
-    thumbnail:kfc,
+    thumbnail: kfc,
   },
   {
     id: "2",
@@ -37,7 +38,7 @@ const DEMO_CATS: TaxonomyType[] = [
     name: "Domino's",
     taxonomy: "category",
     count: 188288,
-    thumbnail:domino,
+    thumbnail: domino,
   },
   {
     id: "2",
@@ -45,7 +46,7 @@ const DEMO_CATS: TaxonomyType[] = [
     name: "Pizza Hut",
     taxonomy: "category",
     count: 188288,
-    thumbnail:pizza,
+    thumbnail: pizza,
   },
   {
     id: "2",
@@ -53,7 +54,7 @@ const DEMO_CATS: TaxonomyType[] = [
     name: "BBQ Nation",
     taxonomy: "category",
     count: 188288,
-    thumbnail:bbq,
+    thumbnail: bbq,
   },
 
 ];
@@ -65,7 +66,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
     name: "Lorem ipsum",
     taxonomy: "category",
     count: 188288,
-    thumbnail:offer1,
+    thumbnail: offer1,
   },
   {
     id: "222",
@@ -73,7 +74,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
     name: "Lorem ipsum",
     taxonomy: "category",
     count: 188288,
-    thumbnail:offer2,
+    thumbnail: offer2,
   },
   {
     id: "3",
@@ -81,7 +82,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
     name: "Lorem ipsum",
     taxonomy: "category",
     count: 188288,
-    thumbnail:offer1,
+    thumbnail: offer1,
   },
   {
     id: "4",
@@ -89,7 +90,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
     name: "Lorem ipsum",
     taxonomy: "category",
     count: 188288,
-    thumbnail:offer2,
+    thumbnail: offer2,
   },
   {
     id: "5",
@@ -97,7 +98,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
     name: "Lorem ipsum",
     taxonomy: "category",
     count: 188288,
-    thumbnail:offer1,
+    thumbnail: offer1,
   },
 ];
 
@@ -107,18 +108,18 @@ const DEMO_CATS_2: TaxonomyType[] = [
 
 const PageHome = () => {
 
-  const [restrauntData,setRestraurantData] = useState<any>([])
-  const [offerData,setOfferData] = useState<any>([])
-  const [comboMenuData,setcomboMenuData] = useState<any>([])
+  const [restrauntData, setRestraurantData] = useState<any>([])
+  const [offerData, setOfferData] = useState<any>([])
+  const [comboMenuData, setcomboMenuData] = useState<any>([])
   const [newProduct, setNewProduct] = useState<boolean>(false)
 
 
-  const getRestrauntData =async () => {
+  const getRestrauntData = async () => {
     const response = await getRestaurantList()
 
-    if(response.data){
-      let tempData : any  = [];
-      if(response.data.response === "success"){
+    if (response.data) {
+      let tempData: any = [];
+      if (response.data.response === "success") {
         response.data.restaurant.map((item: any, key: number) => {
           tempData[key] = {
             id: item.id,
@@ -127,39 +128,39 @@ const PageHome = () => {
             taxonomy: "category",
             count: 188288,
             // thumbnail:kfc,
-        }      
+          }
         })
         setRestraurantData(tempData)
       }
-      
+
     }
   }
 
-  const getComboMenuData =async () => {
+  const getComboMenuData = async () => {
     const response = await getAllComboMenuList()
 
-    if(response.data){
-      let tempData : any  = [];
-      if(response.data.response === "success"){
+    if (response.data) {
+      let tempData: any = [];
+      if (response.data.response === "success") {
         response.data.comboMenu.map((item: any, key: number) => {
           tempData[key] = {
             id: item.id,
-            name:item.name,
-            description:item.description,
-            discount:item.discount,
+            name: item.name,
+            description: item.description,
+            discount: item.discount,
             max_quantity: item.max_quantity,
-            is_availability:item.is_availability,
-            menu_avatar:item.menu_avatar,
-            is_deleted:item.is_deleted
+            is_availability: item.is_availability,
+            menu_avatar: item.menu_avatar,
+            is_deleted: item.is_deleted
 
-        }      
+          }
         })
         setcomboMenuData(tempData)
       }
-      
+
     }
   }
-  const getOfferData=async () => {
+  const getOfferData = async () => {
     const response = await getOffersList()
     // console.log(response.data)
 
@@ -168,47 +169,48 @@ const PageHome = () => {
     // }
   }
 
- 
+
 
   useEffect(() => {
     getRestrauntData()
     getOfferData()
     getComboMenuData()
-  },[])
-  
+  }, [])
+
 
   return (
     <div className="nc-PageHome relative overflow-hidden">
       {/* GLASSMOPHIN */}
-      {/* <BgGlassmorphism /> */}
-      <AteSectionHero  className="pt-64 lg:pt-64 lg:pb-16  "  />
-      
+      <BgGlassmorphism />
+      <AteSectionHero className="pt-64 lg:pt-64 lg:pb-16  " />
+
 
       <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
         {/* SECTION HERO */}
-       
+
         {/* <SectionHero className="pt-10 lg:pt-16 lg:pb-16" /> */}
-        <ShoppingCart newProduct={newProduct} setNewProduct={setNewProduct}/>
+        {/* <ShoppingCart newProduct={newProduct} setNewProduct={setNewProduct}/> */}
         {/* <EmptyCart /> */}
 
-        
+
 
         {/* SECTION 1 */}
 
         {restrauntData.length > 0 &&
-        <SectionSliderNewCategories
-          heading="Our Top Brands"
-          subHeading=""
-          categoryCardType="card5"
-          itemPerRow={4}
-          sliderStyle="style2"
-          categories={restrauntData}
-          uniqueClassName="PageHome_s1"
-        />}
-        
+          <SectionSliderNewCategories
+            heading="Our Top Brands"
+            subHeading=""
+            categoryCardType="card5"
+            itemPerRow={4}
+            sliderStyle="style2"
+            categories={restrauntData}
+            uniqueClassName="PageHome_s1"
+            className="mt-24"
+          />}
 
-         {/* SECTION  */}
-         <div className="relative py-16">
+
+        {/* SECTION  */}
+        <div className="relative py-16">
           <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
           <SectionSliderNewCategories
             categories={DEMO_CATS_2}
@@ -222,28 +224,34 @@ const PageHome = () => {
           />
         </div>
 
-        {/* SECTION2 */}
-        {/* <SectionOurFeatures /> */}
+        {/* All Rest Menu  */}
+        <div className="relative py-16">
+          {/* <BackgroundSection /> */}
+          <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct} />
+        </div>
 
-        <SectionDowloadApp />
+     
 
-       
 
-        
+
+
+
+
 
         {/* SECTION */}
         <div className="relative py-16">
           <BackgroundSection />
-          <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct}/>
+          {/* <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct} /> */}
+          {/* <AllRestMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct}/> */}
         </div>
 
         {/* SECTION */}
-        <SectionHowItWork />
+        {/* <SectionHowItWork /> */}
 
-       
+
 
         {/* SECTION */}
-        <SectionSubscribe2 />
+        {/* <SectionSubscribe2 /> */}
 
         {/* SECTION */}
         {/* <div className="relative py-16">
@@ -268,15 +276,30 @@ const PageHome = () => {
           itemPerRow={5}
           uniqueClassName="PageHome_s3"
         /> */}
+        <SectionDowloadApp />
+
+        {/* Combo  */}
+        {/* <ComboSlider
+          heading="Our Top Brands"
+          subHeading=""
+          itemPerRow={5}
+          sliderStyle="style2"
+          // categories={restrauntData}
+          uniqueClassName="PageHome_s1"
+          categoryCardType="card3"
+        /> */}
+
+        
+
 
         {/* SECTION */}
         {/* <SectionVideos /> */}
 
         {/* SECTION */}
-        <div className="relative py-16">
+        {/* <div className="relative py-16">
           <BackgroundSection />
           <SectionClientSay uniqueClassName="PageHome_" />
-        </div>
+        </div> */}
       </div>
     </div>
   );
