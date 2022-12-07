@@ -22,21 +22,21 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
 
   const renderTab = () => {
     return (
-      <ul className="ml-2 sm:ml-6 md:ml-12 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
+      <ul className="mx-96 items-center flex space-x-12  lg:space-x-32 overflow-x-auto hiddenScrollbar mb-10">
         {tabs.map((tab) => {
           const active = tab === tabActive;
           return (
             <li
               onClick={() => setTabActive(tab)}
-              className={`flex-shrink-0 flex items-center cursor-pointer text-sm lg:text-base font-medium ${
+              className={`flex-shrink-0 flex items-center cursor-pointer  text-3xl font-medium ${
                 active
                   ? ""
-                  : "text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-400"
+                  : "text-neutral-100 hover:text-neutral-200 dark:hover:text-neutral-400"
               } `}
               key={tab}
             >
               {active && (
-                <span className="block w-2.5 h-2.5 rounded-full bg-neutral-800 dark:bg-neutral-100 mr-2" />
+                <span className="block w-3.5 h-3.5 rounded-full  bg-red-800  mr-2" />
               )}
               <span>{tab}</span>
             </li>
@@ -65,11 +65,11 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
 
   return (
     <div
-      className={`nc-HeroSearchForm w-full max-w-6xl py-5 lg:py-0 ${className}`}
+      className={`nc-HeroSearchForm  w-full  py-5 lg:py-0 ${className}`}
       data-nc-id="HeroSearchForm"
     >
       {renderTab()}
-      {renderForm()}
+      <div className="mr-12"> {renderForm()}</div>
     </div>
   );
 };
