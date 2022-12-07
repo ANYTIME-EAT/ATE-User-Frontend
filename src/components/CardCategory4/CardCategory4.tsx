@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import NcImage from "shared/NcImage/NcImage";
 import { TaxonomyType } from "data/types";
 import { Link } from "react-router-dom";
-
+import convertNumbThousand from "utils/convertNumbThousand";
 
 export interface CardCategory4Props {
   className?: string;
@@ -35,6 +35,15 @@ const CardCategory4: FC<CardCategory4Props> = ({
         >
           {name}
         </h2>
+        <span
+          className={`block mt-2 text-sm text-neutral-6000 dark:text-neutral-400`}
+        >
+          {convertNumbThousand(count || 0)}
+          {` `}
+          {(!listingType || listingType === "stay") && "orders"}
+          {listingType === "car" && "cars"}
+          {listingType === "experiences" && "experiences"}
+        </span>
       </div>
     </Link>
   );

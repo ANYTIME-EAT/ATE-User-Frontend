@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import imagePng from "images/hero-right.png";
 import HeroSearchForm from "components/HeroSearchForm/HeroSearchForm";
-import "./hero.css"
 
 export interface AteSectionHeroProps {
   className?: string;
@@ -10,26 +9,27 @@ export interface AteSectionHeroProps {
 
 const AteSectionHero: FC<AteSectionHeroProps> = ({ className = "" }) => {
   return (
-    <div className="bg-hero">
-      <div
-        className={`flex lg:flex-col relative text-white ${className}`}
-      >
-        <div className="flex flex-col lg:flex-row ">
-          <div className="flex flex-col items-center space-y-4 sm:space-y-10 pb-12 lg:pb-64">
-            <h2 className="font-medium text-2xl md:text-3xl xl:text-8xl ml-16 ">
-              Discover the best Food & Drinks
-            </h2>
-
-
-          </div>
-          {/* <div className="flex">
+    <div
+      className={`nc-AteSectionHero flex flex-col-reverse lg:flex-col relative ${className}`}
+      data-nc-id="AteSectionHero"
+    >
+      <div className="flex flex-col lg:flex-row lg:items-center">
+        <div className="flex-shrink-0 lg:w-1/2 flex flex-col items-start space-y-8 sm:space-y-10 pb-14 lg:pb-64 xl:pr-14 lg:mr-10 xl:mr-0">
+          <h2 className="font-medium text-4xl md:text-5xl xl:text-7xl !leading-[114%] ">
+            
+          </h2>
+          <span className="text-base md:text-lg text-neutral-500 dark:text-neutral-400">
+            Discover The Best Food And Drinks
+          </span>
+          <ButtonPrimary>View Resturaunt</ButtonPrimary>
+        </div>
+        <div className="flex-grow">
           <img className="w-full" src={imagePng} alt="hero" />
-        </div> */}
         </div>
+      </div>
 
-        <div className="hidden lg:block z-10 mb-8 lg:mb-0 lg:-mt-40 w-full">
-          <HeroSearchForm className="mx-32" />
-        </div>
+      <div className="hidden lg:block z-10 mb-12 lg:mb-0 lg:-mt-40 w-full">
+        <HeroSearchForm />
       </div>
     </div>
   );

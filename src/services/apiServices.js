@@ -1,6 +1,15 @@
 import axios from "axios";
 import config from "../config/config.json"
 
+const header=()=>{
+    const token=localStorage.getItem("access-token");
+    return {
+        headers:{
+            'Authorization':`Bearer ${token}`
+        }
+    }
+    
+}
 
 export const getAvatar = (avatar) => {
     return new Promise((resole, reject) => {
@@ -77,6 +86,29 @@ export const getProduct = (id) => {
     })
 }
 
+
+export const attachCardApi = (id,data) => {
+    return new Promise((resolve,reject)=>{
+        axios.post(`${config.SERVER_URL}/payment_card/add_card/${id}`,data)
+        .then((res) =>{           
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const paymentApi = (data) => {
+    return new Promise((resolve,reject)=>{
+        axios.post(`${config.SERVER_URL}/payment/direct_payment`,data)
+        .then((res) =>{           
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
 export const getAllProductsAPI = () => {
     return new Promise((resolve,reject) => {
         axios.get(`${config.SERVER_URL}/product/list`).then((res) => {
@@ -87,10 +119,10 @@ export const getAllProductsAPI = () => {
     })
 }
 
-export const checkoutApi = (data) => {
+export const getAllUserAddress = (userId) => {
     return new Promise((resolve,reject)=>{
-        axios.post(`${config.SERVER_URL}/payment_card/add_card/:admin_id`,data)
-        .then((res) =>{           
+        localStorage.getItem("access-token");
+        axios.get(`${config.SERVER_URL}/user/get_address/${userId}`,header()).then((res) =>{
             resolve(res)
         }).catch((res) => {
             reject(res)
@@ -98,12 +130,13 @@ export const checkoutApi = (data) => {
     })
 }
 
-export const getAllUserAddress = (id) => {
-    return new Promise((resolve,reject)=>{
-        axios.get(`${config.SERVER_URL}/user/address/${id}`).then((res) =>{
-            resolve(res)
-        }).catch((res) => {
-            reject(res)
-        })
-    })
-}
+// export const viewCart= (userId) => {
+//     return new Promise((resolve,reject)=>{
+//         // localStorage.getItem("access-token");
+//         axios.get(`${config.SERVER_URL}/user/get_address/${userId}`,header()).then((res) =>{
+//             resolve(res)
+//         }).catch((res) => {
+//             reject(res)
+//         })
+//     })
+// }

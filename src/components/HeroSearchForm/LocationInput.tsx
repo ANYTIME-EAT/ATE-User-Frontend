@@ -190,7 +190,7 @@ const LocationInput: FC<LocationInputProps> = ({
         </div>
         <div className="flex-grow">
           <input
-            className={`block w-full  text-black bg-transparent border-none focus:ring-0 p-0 focus:outline-none focus:placeholder-neutral-300 xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200 truncate`}
+            className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none focus:placeholder-neutral-300 xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200 truncate`}
             placeholder={placeHolder}
             value={value}
             autoFocus={showPopover}

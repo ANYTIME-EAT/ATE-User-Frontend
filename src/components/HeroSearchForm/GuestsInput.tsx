@@ -37,7 +37,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
 
             {/* BUTTON SUBMIT OF FORM */}
             {hasButtonSubmit && (
-              <div className="pr-8 xl:pr-4 ">
+              <div className="pr-8 xl:pr-4">
                 <ButtonSubmit href={buttonSubmitHref} />
               </div>
             )}
