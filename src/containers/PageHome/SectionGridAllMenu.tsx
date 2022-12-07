@@ -23,7 +23,7 @@ export interface SectionGridAllMenuProps {
 const SectionGridAllMenu: FC<SectionGridAllMenuProps> = ({
   combo_MenuData,
   stayListings = DEMO_DATA,
-  gridClass = "",
+  gridClass = "items-center",
   heading = "Combo Menus",
   subHeading = "Good Food Is Always Cooking! Order Some Yummy Items From The Menu",
   headingIsCenter,

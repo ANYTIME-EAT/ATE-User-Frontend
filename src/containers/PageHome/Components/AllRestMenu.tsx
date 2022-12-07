@@ -24,7 +24,7 @@ const AllRestMenu: FC<AllRestMenuProps> = ({
   combo_MenuData,
   stayListings = DEMO_DATA,
   gridClass = "",
-  heading = "Combo Menu",
+  heading = "All Rest Menu",
   subHeading = "Good Food Is Always Cooking! Order Some Yummy Items From The Menu",
   headingIsCenter,
   tabs = [],
@@ -32,7 +32,7 @@ const AllRestMenu: FC<AllRestMenuProps> = ({
 }) => {
   const renderCard = (data:any) => {
     // console.log(data)
-    return <StayCard key={data.id} setNewProduct={setNewProduct}/>;
+    return <StayCard key={data.id} comboMenuData={data} setNewProduct={setNewProduct}/>;
   };
 
   return (

@@ -230,19 +230,12 @@ const PageHome = () => {
           <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct} />
         </div>
 
-     
-
-
-
-
-
-
 
         {/* SECTION */}
         <div className="relative py-16">
           <BackgroundSection />
           {/* <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct} /> */}
-          {/* <AllRestMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct}/> */}
+          <AllRestMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct}/>
         </div>
 
         {/* SECTION */}
