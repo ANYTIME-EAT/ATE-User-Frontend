@@ -1,0 +1,7 @@
+.bg-hero {
+    background: linear-gradient(rgba(9, 30, 62, .66), rgba(9, 30, 62, .66)), url(../../images/hero.png) center center no-repeat;
+    background-size: cover;
+   
+    display: flex;
+    align-items: center;
+}

@@ -130,24 +130,13 @@ export const getAllUserAddress = (userId) => {
     })
 }
 
-export const updateProfile = (data) => {
-    return new Promise((resolve,reject) => {
-        axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
-        .then((res) => {
-            resolve(res)
-        }).catch((res) => {
-            reject(res)
-        })
-    })
-}
-
-export const editAddress = (data) => {
-    return new Promise((resolve,reject) => {
-        axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
-        .then((res) => {
-            resolve(res)
-        }).catch((res) => {
-            reject(res)
-        })
-    })
-}
+// export const viewCart= (userId) => {
+//     return new Promise((resolve,reject)=>{
+//         // localStorage.getItem("access-token");
+//         axios.get(`${config.SERVER_URL}/user/get_address/${userId}`,header()).then((res) =>{
+//             resolve(res)
+//         }).catch((res) => {
+//             reject(res)
+//         })
+//     })
+// }
