@@ -29,7 +29,7 @@ const Heading: React.FC<HeadingProps> = ({
           {children || ``}
         </h2>
         {desc && (
-          <span className="mt-1 md:mt-2 font-normal block text-base sm:text-lg text-neutral-500 dark:text-neutral-400">
+          <span className="mt-1 md:mt-2 font-normal block text-base sm:text-lg text-neutral-500 dark:text-neutral-400 ">
             {desc}
           </span>
         )}

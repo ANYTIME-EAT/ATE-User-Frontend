@@ -227,7 +227,7 @@ const PageHome = () => {
         {/* All Rest Menu  */}
         <div className="relative py-16">
           {/* <BackgroundSection /> */}
-          <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct} />
+          <SectionGridAllMenu headingIsCenter={true} combo_MenuData={comboMenuData} setNewProduct={setNewProduct} />
         </div>
 
 
@@ -235,7 +235,7 @@ const PageHome = () => {
         <div className="relative py-16">
           <BackgroundSection />
           {/* <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct} /> */}
-          <AllRestMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct}/>
+          <AllRestMenu  combo_MenuData={comboMenuData} setNewProduct={setNewProduct}/>
         </div>
 
         {/* SECTION */}
@@ -261,38 +261,24 @@ const PageHome = () => {
           <SectionBecomeAnAuthor />
         </div> */}
 
-        {/* SECTION 1 */}
-        {/* <SectionSliderNewCategories
-          heading="Explore by types of stays"
-          subHeading="Explore houses based on 10 types of stays"
-          categoryCardType="card5"
+        {/* All Resturaunt */}
+        <SectionSliderNewCategories
+          heading="All Resturaunts"
+          subHeading="Good Food Is Always Cooking! Order Yummy Items "
+          categoryCardType="card3"
           itemPerRow={5}
           uniqueClassName="PageHome_s3"
-        /> */}
+          sliderStyle = "style2"
+        />
+
         <SectionDowloadApp />
+        
 
-        {/* Combo  */}
-        {/* <ComboSlider
-          heading="Our Top Brands"
-          subHeading=""
-          itemPerRow={5}
-          sliderStyle="style2"
-          // categories={restrauntData}
-          uniqueClassName="PageHome_s1"
-          categoryCardType="card3"
-        /> */}
-
+      
         
 
 
-        {/* SECTION */}
-        {/* <SectionVideos /> */}
-
-        {/* SECTION */}
-        {/* <div className="relative py-16">
-          <BackgroundSection />
-          <SectionClientSay uniqueClassName="PageHome_" />
-        </div> */}
+     
       </div>
     </div>
   );

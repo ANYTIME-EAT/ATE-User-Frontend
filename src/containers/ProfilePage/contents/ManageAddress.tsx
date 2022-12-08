@@ -2,10 +2,10 @@ import React, { FC, useEffect, useMemo, useState } from "react";
 import Heading from "components/Heading/Heading";
 import { getAllUserAddress } from "services/apiServices";
 import Modal from "../components/Modal";
-import { BiHome, BiLocationPlus } from "react-icons/bi";
-import { FaBusinessTime } from "react-icons/fa";
-import { TbEdit } from "react-icons/tb";
-import { RiDeleteBinLine } from "react-icons/ri";
+// import { BiHome, BiLocationPlus } from "react-icons/bi";
+// import { FaBusinessTime } from "react-icons/fa";
+// import { TbEdit } from "react-icons/tb";
+// import { RiDeleteBinLine } from "react-icons/ri";
 import NavItem from "shared/NavItem/NavItem";
 import { add } from "lodash";
 import { updateProfile } from "services/apiServices";
@@ -275,13 +275,13 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
             className="p-6 bg-slate-100  dark:bg-neutral-800 rounded-2xl dark:border-neutral-800"
           >
             <div className="columns-8 ">
-              {item.type == "Home" ? (
+              {/* {item.type == "Home" ? (
                 <BiHome />
               ) : item.type == "Bussiness" ? (
                 <FaBusinessTime />
               ) : (
                 <BiLocationPlus />
-              )}
+              )} */}
               <h3 className="font-semibold leading-none text-neutral-900 md:text-lg dark:text-neutral-200">
                 {item.type}
               </h3>
@@ -297,7 +297,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
                   setShowModel(true);
                 }}
               >
-                <TbEdit />
+                {/* <TbEdit /> */}
               </button>
               <div className="pl-20 pr-5">
                 <button
@@ -306,7 +306,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
                     setShowModel2(true);
                   }}
                 >
-                  <RiDeleteBinLine />
+                  {/* <RiDeleteBinLine /> */}
                 </button>
               </div>
             </div>

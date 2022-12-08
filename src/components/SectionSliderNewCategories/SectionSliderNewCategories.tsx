@@ -7,6 +7,7 @@ import CardCategory4 from "components/CardCategory4/CardCategory4";
 import NextPrev from "shared/NextPrev/NextPrev";
 import CardCategory5 from "components/CardCategory5/CardCategory5";
 import useNcId from "hooks/useNcId";
+import kfc from "../../images/kfc.png"
 
 export interface SectionSliderNewCategoriesProps {
   className?: string;
@@ -23,57 +24,56 @@ export interface SectionSliderNewCategoriesProps {
 const DEMO_CATS: TaxonomyType[] = [
   {
     id: "1",
-    href: "/listing-stay",
-    name: "Nature House",
+    href: "#",
+    name: "Chola",
     taxonomy: "category",
     count: 17288,
-    thumbnail:
-      "https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+    thumbnail:kfc,
   },
   {
     id: "2",
-    href: "/listing-stay",
-    name: "Wooden house",
+    href: "#",
+    name: "p&S",
     taxonomy: "category",
     count: 2118,
     thumbnail:
-      "https://images.pexels.com/photos/2351649/pexels-photo-2351649.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    kfc,
   },
   {
     id: "3",
-    href: "/listing-stay",
-    name: "Houseboat",
+    href: "#",
+    name: "KFC",
     taxonomy: "category",
     count: 36612,
     thumbnail:
-      "https://images.pexels.com/photos/962464/pexels-photo-962464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    kfc,
   },
   {
     id: "4",
-    href: "/listing-stay",
-    name: "Farm House",
+    href: "#",
+    name: "Jollybe",
     taxonomy: "category",
     count: 188288,
     thumbnail:
-      "https://images.pexels.com/photos/248837/pexels-photo-248837.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    kfc,
   },
   {
     id: "5",
-    href: "/listing-stay",
-    name: "Dome House",
+    href: "#",
+    name: "Some Rest",
     taxonomy: "category",
     count: 188288,
     thumbnail:
-      "https://images.pexels.com/photos/3613236/pexels-photo-3613236.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    kfc,
   },
   {
     id: "6",
-    href: "/listing-stay",
-    name: "Dome House",
+    href: "#",
+    name: "Dome Food",
     taxonomy: "category",
     count: 188288,
     thumbnail:
-      "https://images.pexels.com/photos/3613236/pexels-photo-3613236.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    kfc,
   },
 ];
 
