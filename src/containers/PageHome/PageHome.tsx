@@ -1,15 +1,9 @@
-import SectionHero from "components/SectionHero/SectionHero";
 import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
 import React, { useEffect, useState, FC } from "react";
-import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
-import SectionOurFeatures from "components/SectionOurFeatures/SectionOurFeatures";
-import SectionGridFeaturePlaces from "./SectionGridFeaturePlaces";
-import SectionHowItWork from "components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "components/BackgroundSection/BackgroundSection";
 import BgGlassmorphism from "components/BgGlassmorphism/BgGlassmorphism";
 import { TaxonomyType } from "data/types";
 import SectionDowloadApp from "./SectionDowloadApp";
-import SectionClientSay from "components/SectionClientSay/SectionClientSay";
 import SectionGridAllMenu from "./SectionGridAllMenu";
 import kfc from 'images/kfc.png'
 import domino from 'images/domino.png'
@@ -20,8 +14,10 @@ import offer2 from 'images/offer2.png'
 import { getRestaurantList, getOffersList, getAllComboMenuList } from '../../services/apiServices'
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 import AteSectionHero from "components/SectionHero/AteSectionHero";
-import ComboSlider from "./Components/ComboSlider";
 import AllRestMenu from "./Components/AllRestMenu";
+import food1 from "images/Canadian Food.png"
+import food2 from "images/British Food.png"
+import food3 from "images/Rectangle 29.png"
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -99,6 +95,48 @@ const DEMO_CATS_2: TaxonomyType[] = [
     taxonomy: "category",
     count: 188288,
     thumbnail: offer1,
+  },
+];
+const Cusine: TaxonomyType[] = [
+  {
+    id: "1",
+    href: "#",
+    name: "British Food",
+    taxonomy: "category",
+    count: 188288,
+    thumbnail: food1,
+  },
+  {
+    id: "222",
+    href: "#",
+    name: "Canadian Food",
+    taxonomy: "category",
+    count: 188288,
+    thumbnail: food2,
+  },
+  {
+    id: "3",
+    href: "#",
+    name: "Indian Food",
+    taxonomy: "category",
+    count: 188288,
+    thumbnail: food1,
+  },
+  {
+    id: "4",
+    href: "#",
+    name: "American Food",
+    taxonomy: "category",
+    count: 188288,
+    thumbnail: food3,
+  },
+  {
+    id: "5",
+    href: "#",
+    name: "Chinese Food",
+    taxonomy: "category",
+    count: 188288,
+    thumbnail: food2,
   },
 ];
 
@@ -272,6 +310,17 @@ const PageHome = () => {
         />
 
         <SectionDowloadApp />
+
+        <SectionSliderNewCategories
+            heading="Popular Cusines"
+            subHeading=""
+            categoryCardType="cusine"
+            itemPerRow={4}
+            sliderStyle="style2"
+            categories={Cusine}
+            uniqueClassName="PageHome_s1"
+            className="mt-24"
+          />
         
 
       

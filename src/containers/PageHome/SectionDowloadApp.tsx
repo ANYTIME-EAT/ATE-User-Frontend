@@ -17,7 +17,7 @@ const SectionDowloadApp = () => {
           alt="dowloadAppPng"
         />
 
-        <div className="hidden lg:block absolute left-8 top-0 max-w-md xl:max-w-sm rounded-3xl overflow-hidden">
+        <div className="hidden lg:block absolute left-8 top-12 max-w-md xl:max-w-sm rounded-3xl overflow-hidden">
           <img src={appRightImg} alt="" />
         </div>
         <div className="absolute right-0 top-0 max-w-2xl">
