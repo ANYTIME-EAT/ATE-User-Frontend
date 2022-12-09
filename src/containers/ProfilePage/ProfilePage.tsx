@@ -9,6 +9,7 @@ import PaymentSectionStatistic from "./contents/PaymentSectionStatistic";
 import SectionGridAllprofileMenu from "./contents/SectionGridAllProfileMenu";
 import SectionGridFilterCardMyOrders from "./contents/SectionGridFilterCardMyOrders";
 import AccountPage from "./AccountPage/AccountPage";
+import { getAllOrdersAPI, getAvatar } from "services/apiServices";
 // import EditAddressPage from "./EditAddress/EditAddressPage";
 
 
@@ -21,10 +22,18 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
   const [userInfo, setUserInfo] = useState<any>({})
   const [activePage, setActivePage] = useState<any>({id: 0, title: "Manage Address"});
   const [favouriteData, setFavouriteData] = useState<any>([])
+  const [order, setOrder] = useState<any>([])
   
 
   const handleActivePage = (id: number, title: string) => {
     setActivePage({id:id, title:title})
+  }
+
+  const [image, setImage] = useState<any>("")
+
+  const getProfile = async(img:string) => {
+    const file = await getAvatar(img)
+    setImage(URL.createObjectURL(file))
   }
 
   const getUserInfo = () => {
@@ -39,8 +48,15 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
     }
   }
 
+  const getOrdersItems =async () => {
+    const response = await getAllOrdersAPI(1)
+    if(response.data?.response ==="success"){
+      setOrder(response.data.orders)
+    }
+  }
   useEffect(() => {
     getUserInfo()
+    getOrdersItems()
   },[])
  
   const renderSidebar = () => {
@@ -67,7 +83,9 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
     else if(activePage.title === "My Order"){
       return (
         <div className=" flex-1 p-7">
-          <SectionGridFilterCardMyOrders/>
+          {order.length>0 &&
+          <SectionGridFilterCardMyOrders ordersData={order}/>
+          }
         </div>
       );
     }
@@ -85,20 +103,13 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
         </div>
       );
     }
-    else if(activePage.title === "Edit Profile"){
-      {console.log(userInfo)}
-      return (
-        
-        <div className=" flex-1 p-7">
-          <AccountPage userInfo={userInfo}/>
-          
-        </div>
-      );
-    }
-    // else if(activePage.title === "Edit Address"){
+    // else if(activePage.title === "Edit Profile"){
+    //   {console.log(userInfo)}
     //   return (
+        
     //     <div className=" flex-1 p-7">
-    //       <EditAddressPage/>
+    //       <AccountPage userInfo={userInfo}/>
+          
     //     </div>
     //   );
     // }

@@ -121,9 +121,12 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
 
   return (
     <div className={`nc-ManageAddress relative ${className}`}>
-      <h1 className="font-semibold pb-8 text-xl ">Manage Address</h1>
+      <div className="grid grid-cols-6 gap-4">
+          <h1 className="font-semibold pb-8 text-xl col-span-4">Manage Address</h1>
       <button
-        className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="block text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
+        focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 
+        dark:hover:bg-red-700 dark:focus:ring-red-800 "
         type="button"
         data-modal-toggle="authentication-modal"
         onClick={() => {
@@ -133,7 +136,8 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
       >
         Add
       </button>
-      <div className="p-10 text-center"></div>
+      </div>
+      {/* <div className="p-10 text-center"></div> */}
 
       <Modal isVisible={showModel3} closeModal={handleModal}>
      
@@ -178,6 +182,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
+                onClick={()=>{setShowModel(false)}}
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
                 No, cancel
@@ -185,7 +190,9 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
-                className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center ml-2"
+                className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none 
+                focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex 
+                items-center px-5 py-2.5 text-center ml-2"
                 onClick={handleAddressCreate} 
                 
               >
@@ -224,6 +231,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
+                onClick={()=>{setShowModel(false)}}
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
                 No, cancel
@@ -259,6 +267,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
+                onClick={()=>{setShowModel(false)}}
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
                 No, cancel
@@ -268,7 +277,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
         </div>
       </Modal>
 
-      <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-2 xl:gap-8 bg-neutral-50 px-10 py-10">
+      <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-2 xl:gap-8 px-2 py-4">
         {userAddress.map((item: any) => (
           <div
             key={item.id}
@@ -286,28 +295,47 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
                 {item.type}
               </h3>
             </div>
-            <span className="block text-sm text-neutral-500 mt-3 sm:text-sm dark:text-neutral-400 px-12">
+            <span className="block text-sm text-neutral-500 mt-3 sm:text-xs dark:text-neutral-400 px-10">
               {item.address}
             </span>
 
             <div className="grid grid-cols-3 gap-4 pt-4">
-              <button
+              {/* <button
                 onClick={() => {
                   handleTypeChange(item.type);
                   setShowModel(true);
                 }}
               >
                 <TbEdit />
-              </button>
+              </button> */}
+
+              <a className="cursor-pointer px-10 text-xs text-red-500 "
+                onClick={() => {
+                  handleTypeChange(item.type);
+                  setShowModel(true);
+                }}
+              >
+                Edit
+              </a>
+
               <div className="pl-20 pr-5">
-                <button
+                {/* <button
                   onClick={() => {
                     handleTypeChange(item.type);
                     setShowModel2(true);
                   }}
                 >
                   <RiDeleteBinLine />
-                </button>
+                </button> */}
+
+              <a className="cursor-pointer px-25 pt-20 text-xs text-red-500"
+                onClick={() => {
+                  handleTypeChange(item.type);
+                  setShowModel2(true);
+                }}
+              >
+                Delete
+              </a>
               </div>
             </div>
           </div>
