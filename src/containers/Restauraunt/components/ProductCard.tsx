@@ -130,7 +130,7 @@ const ProductCard: FC<ProductCardProps> = ({
     return (
       <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
         {/* <ToastContainer /> */}
-        <div className="space-y-4 w-full">
+        <div className="space-y-5 w-full">
 
           <div className="flex items-center space-x-2">
 
