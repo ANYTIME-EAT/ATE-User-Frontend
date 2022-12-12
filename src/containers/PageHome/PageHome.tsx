@@ -314,7 +314,7 @@ const PageHome = () => {
             heading="Popular Cusines"
             subHeading=""
             categoryCardType="cusine"
-            itemPerRow={4}
+            itemPerRow={5}
             sliderStyle="style2"
             categories={Cusine}
             uniqueClassName="PageHome_s1"

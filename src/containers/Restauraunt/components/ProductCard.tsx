@@ -19,20 +19,20 @@ export interface ProductCardProps {
   className?: string;
   data?: any;
   productData?: any;
-  setNewProduct(val:boolean): void;
+  setNewProduct(val: boolean): void;
 }
 
 const DEMO_DATA = DEMO_STAY_LISTINGS[0];
 
-const addAuthorItems = (id:number, name:string, price:string, quantity:number, image:any, type:string) => { 
-  const response = addProduct(id,name,price,quantity,image,type);
-  if(response){
-    toast.success(`Product added to shopping cart.`,{
-      position: toast.POSITION.BOTTOM_RIGHT 
+const addAuthorItems = (id: number, name: string, price: string, quantity: number, image: any, type: string) => {
+  const response = addProduct(id, name, price, quantity, image, type);
+  if (response) {
+    toast.success(`Product added to shopping cart.`, {
+      position: toast.POSITION.BOTTOM_RIGHT
     })
-  }else{
-    toast.warning(`This item has already been added to your shopping cart.`,{
-      position: toast.POSITION.BOTTOM_RIGHT 
+  } else {
+    toast.warning(`This item has already been added to your shopping cart.`, {
+      position: toast.POSITION.BOTTOM_RIGHT
     })
   }
 }
@@ -57,35 +57,35 @@ const ProductCard: FC<ProductCardProps> = ({
 
   const [image, setImage] = useState<any>("")
 
-  const getProfile = async(img:string) => {
+  const getProfile = async (img: string) => {
     const file = await getAvatar(img)
     setImage(URL.createObjectURL(file))
   }
-  
+
 
   useEffect(() => {
     console.log(productData.product_avatar)
     getProfile(productData.product_avatar)
-  },[])
+  }, [])
 
   const renderSliderGallery = () => {
     return (
-      <div className="flex-shrink-0 p-3 w-1/4 sm:w-1/6 ">
+      <div className="flex-shrink-0 p-3 w-full md:w-2/6 sm:w-2/6 ">
         <GallerySlider
           ratioClass="aspect-w-1 aspect-h-1"
-         
+
           galleryImgs={[image && image]}
           className="w-full h-full rounded-2xl overflow-hidden will-change-transform"
           uniqueID={`ProductCard_${id}`}
           href={href}
-          
+
         />
 
 
-        
-          <SaleOffBadge className="absolute left-5 top-5 !bg-orange-500"  
-          desc={productData.offer}/>
-     
+
+        <SaleOffBadge className="absolute left-5 top-5 !bg-orange-500"
+          desc={productData.offer} />
+
       </div>
     );
   };
@@ -129,31 +129,32 @@ const ProductCard: FC<ProductCardProps> = ({
   const renderContent = () => {
     return (
       <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
-        <ToastContainer />
+        {/* <ToastContainer /> */}
         <div className="space-y-4 w-full">
-          <div className="inline-flex space-x-3">
-            <StartRating reviewCount={reviewCount} point={reviewStart} />
-          </div>
+
           <div className="flex items-center space-x-2">
-            
+
             <h2 className="text-lg font-medium capitalize">
               <span className="line-clamp-2">{productData.name}</span>
             </h2>
-            
+
           </div>
           <div className=" flex items-center space-x-2">
-          <h2 className="text-lg font-medium capitalize">
+            <h2 className="text-lg font-medium capitalize">
               <span className="line-clamp-2">{productData.description}</span>
             </h2>
           </div>
           {/* {renderTienIch()} */}
           <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 "></div>
           <div className="flex w-full justify-between items-end">
-          <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-sm text-secondary-500">
+            <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-sm text-secondary-500">
               {`${productData.price}`}$
             </span>
-            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 " 
-            onClick={() => {addAuthorItems(productData.id,productData.name,productData.price,1,productData.product_avatar,"author"); ; setNewProduct(true)}}><i className="las la-shopping-cart"/>add</Button>           
+            <div className="inline-flex space-x-3">
+              <StartRating reviewCount={reviewCount} point={reviewStart} />
+            </div>
+            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 "
+              onClick={() => { addAuthorItems(productData.id, productData.name, productData.price, 1, productData.product_avatar, "author");; setNewProduct(true) }}><i className="las la-shopping-cart" />add</Button>
 
           </div>
         </div>
@@ -163,7 +164,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
   return (
     <div
-      className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden  ${className}`}
+      className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border  w-3/4 border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden  ${className}`}
       data-nc-id="ProductCard"
     >
       <Link to={href} className="absolute inset-0"></Link>
