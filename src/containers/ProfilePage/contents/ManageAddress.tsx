@@ -126,7 +126,6 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
       }
     }
   }
-
   return (
     <div className={`nc-ManageAddress relative ${className}`}>
       <div className="grid grid-cols-6 gap-4">
