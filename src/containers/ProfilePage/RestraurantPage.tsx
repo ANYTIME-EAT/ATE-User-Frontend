@@ -41,8 +41,9 @@ const sidebarData=[
     },
  {
   title:"Edit Profile"       
-},
-  
+}
+
+    
 ]
 
 const RestraurantPage: FC<RestraurantPageProps> = ({ data, handleActivePage }) => {

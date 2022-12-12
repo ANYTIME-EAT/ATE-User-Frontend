@@ -52,6 +52,7 @@ import ProfilePromotional from "containers/ProfilePromotional/ProfilePromotional
 import ProfilePage from "containers/ProfilePage/ProfilePage";
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 import AccountPage from "containers/ProfilePage/AccountPage/AccountPage";
+import NewRest from "containers/Restauraunt/NewRest";
 
 
 export const pages: Page[] = [
@@ -127,6 +128,10 @@ export const pages: Page[] = [
   { path: "/signup", component: PageSignUp },
   { path: "/login", component: PageLogin },
   { path: "/subscription", component: PageSubcription },
+
+
+  // restu 
+  { path: "/newrest", component: NewRest },
   
   
   //

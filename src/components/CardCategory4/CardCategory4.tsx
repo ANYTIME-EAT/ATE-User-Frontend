@@ -44,6 +44,7 @@ const CardCategory4: FC<CardCategory4Props> = ({
           {listingType === "car" && "cars"}
           {listingType === "experiences" && "experiences"}
         </span>
+        
       </div>
     </Link>
   );

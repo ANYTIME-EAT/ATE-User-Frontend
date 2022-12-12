@@ -58,6 +58,7 @@ export interface LocationStates {
   "/add-listing-10"?: {};
   //
   "/author"?: {};
+  "/newrest"?: {};
   "/search"?: {};
   "/about"?: {};
   "/contact"?: {};

@@ -96,8 +96,10 @@ const StayCard: FC<StayCardProps> = ({
             )}
           </div>
           <div className="w-20 border-b border-neutral-100 dark:border-neutral-800"></div>
-          <Button className="bg-red-600 text-white px-1 py-1 sm:px-3 hover:bg-[#be123c] dark:bg-[#be123c] dark:hover:bg-[#881337] flex  content-center">Order Now</Button>
+          <Button className="px-1 py-1 sm:px-3 hover:bg-[#be123c] dark:bg-[#be123c] dark:hover:bg-[#881337] flex  content-center"><i className="las la-shopping-cart"/>Add</Button>
         </div>
+
+
       </div>
     );
   };

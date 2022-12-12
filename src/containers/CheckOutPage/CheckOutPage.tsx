@@ -360,7 +360,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                     </button>
                   )}
                 </Tab>
-
               </Tab.List>
 
               <Tab.Panels>

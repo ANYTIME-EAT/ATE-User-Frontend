@@ -24,4 +24,9 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     href: "/listing-real-estate",
     name: "Card"
   },
+  {
+    id: ncNanoId(),
+    href: "/newrest",
+    name: "restu"
+  },
 ];
