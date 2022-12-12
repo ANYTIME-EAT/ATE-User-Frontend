@@ -22,9 +22,9 @@ export interface ManageAddressProps {
 
 const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   const [userAddress, setUserAddress] = useState<any>([]);
-  const [showModel, setShowModel] = useState(false);
-  const [showModel3, setShowModel3] = useState(false);
-  const [showModel2, setShowModel2] = useState(false);
+  const [showModelEdit, setShowModelEdit] = useState(false);
+  const [showModelAdd, setShowModelAdd] = useState(false);
+  const [showModelDelete, setShowModelDelete] = useState(false);
   const [address, setAddress] = useState<any>([]);
   const [addressType, setAddressType] = useState("");
   
@@ -58,8 +58,16 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     setSelectedAddressType(type);
   };
 
-  const handleModal = (val: boolean) => {
-    setShowModel(val);
+  const handleModalEdit = (val: boolean) => {
+    setShowModelEdit(val);
+  };
+
+  const handleModalDelete = (val: boolean) => {
+    setShowModelDelete(val);
+  };
+
+  const handleModalAdd = (val: boolean) => {
+    setShowModelAdd(val);
   };
 
   const handleSubmit = () => {};
@@ -73,7 +81,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     
     if (response.data) {
       if (response.data.response === "success") {
-        handleModal(false);
+        handleModalDelete(false);
       } else {
         alert("Not deleted");
       }
@@ -93,7 +101,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     setUserAddress(userAddress);
     if (response.data) {
       if (response.data.response === "success") {
-        handleModal(false);
+        handleModalEdit(false);
       } else {
         alert("Not updated");
       }
@@ -112,7 +120,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     if(response.data){
       if(response.data === "success"){
         setUserAddress(temp)
-        handleModal(false);
+        handleModalAdd(false);
       }else{
         console.log("cannot add address")
       }
@@ -131,7 +139,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
         data-modal-toggle="authentication-modal"
         onClick={() => {
           // handleTypeChange(item.addressType);
-          setShowModel3(true);
+          setShowModelAdd(true);
         }}
       >
         Add
@@ -139,7 +147,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
       </div>
       {/* <div className="p-10 text-center"></div> */}
 
-      <Modal isVisible={showModel3} closeModal={handleModal}>
+      <Modal isVisible={showModelAdd} closeModal={handleModalAdd}>
      
         <div className="px-6 py-6 lg:px-8">
           
@@ -182,7 +190,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
-                onClick={()=>{setShowModel(false)}}
+                onClick={()=>{setShowModelAdd(false)}}
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
                 No, cancel
@@ -203,7 +211,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
         </div>
       </Modal>
 
-      <Modal isVisible={showModel} closeModal={handleModal}>
+      <Modal isVisible={showModelEdit} closeModal={handleModalEdit}>
         {/* onClose={handleModal} */}
         <div className="px-6 py-6 lg:px-8">
           <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
@@ -231,7 +239,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
-                onClick={()=>{setShowModel(false)}}
+                onClick={()=>{setShowModelEdit(false)}}
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
                 No, cancel
@@ -249,7 +257,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
         </div>
       </Modal>
 
-      <Modal isVisible={showModel2} closeModal={handleModal}>
+      <Modal isVisible={showModelDelete} closeModal={handleModalDelete}>
         <div className="px-6 py-6 lg:px-8">
           <div className="relative w-full h-full max-w-md md:h-auto">
             <div className="p-6 text-center">
@@ -267,7 +275,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
-                onClick={()=>{setShowModel(false)}}
+                onClick={()=>{setShowModelDelete(false)}}
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
                 No, cancel
@@ -312,7 +320,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               <a className="cursor-pointer px-10 text-xs text-red-500 "
                 onClick={() => {
                   handleTypeChange(item.type);
-                  setShowModel(true);
+                  setShowModelEdit(true);
                 }}
               >
                 Edit
@@ -331,7 +339,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               <a className="cursor-pointer px-25 pt-20 text-xs text-red-500"
                 onClick={() => {
                   handleTypeChange(item.type);
-                  setShowModel2(true);
+                  setShowModelDelete(true);
                 }}
               >
                 Delete
