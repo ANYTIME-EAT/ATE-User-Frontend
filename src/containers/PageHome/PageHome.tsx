@@ -208,7 +208,6 @@ const PageHome = () => {
   }
 
 
-
   useEffect(() => {
     getRestrauntData()
     getOfferData()
@@ -321,12 +320,6 @@ const PageHome = () => {
             uniqueClassName="PageHome_s1"
             className="mt-24"
           />
-        
-
-      
-        
-
-
      
       </div>
     </div>

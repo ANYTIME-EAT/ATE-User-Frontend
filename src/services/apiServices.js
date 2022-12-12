@@ -151,3 +151,46 @@ export const editAddress = (data) => {
         })
     })
 }
+
+export const getAllFavouritesAPI = (userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/favourite/get_all_fav/${userId}`,header())
+        .then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getAllOrdersAPI = (userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/orders/all_orders/${userId}`,header())
+        .then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getAllPaymentAPI = (userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/payment_card/get_allcards/${userId}`,header()).then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const paymentCardAPI = (data) => {
+    return new Promise((resolve,reject)=>{
+        axios.post(`${config.SERVER_URL}/payment_card/add_card/4`,header(),data)
+        .then((res) =>{           
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
