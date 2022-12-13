@@ -184,9 +184,9 @@ export const getAllPaymentAPI = (userId) => {
     })
 }
 
-export const paymentCardAPI = (data) => {
+export const paymentCardAPI = (data,userId) => {
     return new Promise((resolve,reject)=>{
-        axios.post(`${config.SERVER_URL}/payment_card/add_card/4`,header(),data)
+        axios.post(`${config.SERVER_URL}/payment_card/add_card/${userId}`,header(),data)
         .then((res) =>{           
             resolve(res)
         }).catch((res) => {

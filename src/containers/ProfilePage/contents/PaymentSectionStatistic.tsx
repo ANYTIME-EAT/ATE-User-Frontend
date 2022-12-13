@@ -31,6 +31,10 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
   const [last4Number, setLast4Number] = useState("");
   const [cardType, setCardType] = useState("");
   const [showModelDelete, setShowModelDelete] = useState(false);
+  const [customer_name, setCustomer_name] = useState("");
+  const [email, setEmail] = useState("");
+  const [type, setType] = useState("");
+  
 
   //get user payments
   const getAllPaymentData = async () => {
@@ -45,8 +49,8 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
             card_id: item.card_id,
             exp_month: item.exp_month,
             exp_year: item.exp_year,
-            last4Number:item.last4Number,
-            cardType:cardType,
+            last4Number:item.last_four_digits,
+            cardType:item.card_type,
             
           };
         });
@@ -73,13 +77,17 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
       exp_year: expDate.split("-")[0],
       cvc:cvc,
       name:name,
-      last4Number:last4Number,
-      cardType:cardType
-      
+      last_four_digits:last4Number,
+      card_type:cardType,
+      card_holder_name:customer_name,
+      email:email,
+      type:type,
+      card_id:cardId,
+      primary_card:false
       
     };
     let temp = [...paymentCards, data];
-    const response = await paymentCardAPI({ payment: temp });
+    const response = await paymentCardAPI(data);
     console.log(response);
     if (response.data) {
       if (response.data === "success") {
@@ -109,9 +117,9 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
   return (
     <div className={`nc-SectionStatistic relative ${className}`} >
       <div className="grid grid-cols-12">
-      <h1 className="font-semibold pb-8 text-xl grid col-span-11">Payment</h1>
+      <h1 className="font-semibold pb-8 text-xl grid xl:col-span-11 col-span-9">Payment</h1>
       <button
-        className="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+        className="px-4 w-16 h-10 block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
         type="button"
         data-modal-toggle="authentication-modal"
         onClick={() => {
@@ -128,7 +136,7 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
       <form className="space-y-6" action="#" onSubmit={handleSubmit}>
           <div x-show="card">
             <div className="space-y-4">
-              <div>
+              {/* <div>
                 <label
                   className="block text-sm font-medium mb-1"
                   htmlFor="card-nr"
@@ -143,6 +151,41 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
                 onChange={(e) => setCard_no(e.target.value)}
                 value={card_no}
                 />
+              </div> */}
+              <div className="flex space-x-4">
+                <div className="flex-1">
+                  <label
+                    className="block text-sm font-medium mb-1"
+                    htmlFor="card-expiry"
+                  >
+                    Card Type <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="card-expiry"
+                    className="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
+                    type="text"
+                    placeholder="MASTER/VISA CARD"
+                    onChange={(e) => setCardType(e.target.value)}
+                    value={cardType}
+                    
+                  />
+                </div>
+                <div>
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="card-nr"
+                >
+                  Card Number <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="card-nr"
+                  className="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
+                  type="text"
+                  placeholder="1234 1234 1234 1234"
+                onChange={(e) => setCard_no(e.target.value)}
+                value={card_no}
+                />
+              </div>
               </div>
               <div className="flex space-x-4">
                 <div className="flex-1">
@@ -196,7 +239,7 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
                 />
               </div>
 
-              <div className="p-6 text-center">
+              <div className="text-center">
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
