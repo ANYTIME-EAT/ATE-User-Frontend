@@ -123,7 +123,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   return (
     <div className={`nc-ManageAddress relative ${className}`}>
       <div className="grid grid-cols-12 gap-4">
-          <h1 className="font-semibold pb-8 text-xl col-span-11">Manage Address</h1>
+          <h1 className="font-semibold pb-8 text-xl xl:col-span-11 col-span-10 ">Manage Address</h1>
     <button
         className="block text-white
         font-medium text-sm text-left"
@@ -133,7 +133,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
           setShowModelAdd(true);
         }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="red" className="w-12 h-12">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="red" className="w-10 h-10">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </button>

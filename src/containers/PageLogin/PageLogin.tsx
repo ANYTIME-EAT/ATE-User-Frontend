@@ -148,7 +148,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
             <input
               type="text"
               className="form-control block w-full px-4 py-2 text-sm font-normal 
-              text-gray-700 bg-white bg-clip-padding border border-solid border-red-300 
+              text-gray-700 bg-white border border-solid  
               rounded-xl ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-red-600 
               focus:outline-none"
               id="exampleFormControlInput2"
@@ -159,7 +159,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
           <div className="mb-6">
             <input
               type="password"
-              className="form-control block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-red-300 rounded-xl ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-red-600 focus:outline-none"
+              className="form-control block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded-xl ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-red-600 focus:outline-none"
               id="exampleFormControlInput2"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
@@ -173,10 +173,10 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
                 className="form-check-input appearance-none h-4 w-4 border border-red-300 rounded-sm bg-white checked:bg-red-600 checked:border-red-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                 id="exampleCheck2"
               />
-              <label className="form-check-label inline-block text-gray-800 text-sm" htmlFor="exampleCheck2">Remember me</label
+              <label className="form-check-label inline-block text-gray-800 xl:text-sm text-xs" htmlFor="exampleCheck2">Remember me</label
               >
             </div>
-            <a href="/forgot-pass" className="text-gray-800 text-sm ">Forgot password?</a>
+            <a href="/forgot-pass" className="text-gray-800 xl:text-sm text-xs">Forgot password?</a>
           </div>
 
           <div className="text-center lg:text-left">
@@ -189,16 +189,20 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
             >
               Login
             </button> */}
-            <ButtonPrimary type="submit" className="inline-block px-7 py-3 bg-red-600 text-white font-medium text-sm leading-snug 
+            {/* <ButtonPrimary type="submit" className="inline-block px-7 py-3 bg-red-600 text-white font-medium text-sm leading-snug 
               uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 
               focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg 
-              transition duration-150 ease-in-out">Login</ButtonPrimary>
-            <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-              Don't have an account?
+              transition duration-150 ease-in-out">Login</ButtonPrimary> */}
+              <ButtonPrimary type="submit" className="inline-block px-7 py-3 bg-red-600 text-white font-medium
+           text-sm leading-snug uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 
+           focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg 
+          transition duration-150 ease-in-out w-full">LOGIN</ButtonPrimary>
+            <p className="xl:text-sm font-semibold mt-2 pt-1 mb-0 text-xs">
+              Don't have an account? 
               <a
                 href="/signup"
                 className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                >Register</a
+                > Register</a
               >
             </p>
           </div>
