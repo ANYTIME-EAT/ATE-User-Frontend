@@ -44,7 +44,7 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({ className = "" }) 
           // </div>
           <div
             key={item.id}
-            className="p-6 bg-slate-100  dark:bg-neutral-800 rounded-2xl dark:border-neutral-800 columns-2"
+            className="p-6 bg-slate-100 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800 columns-2"
           >
             <h3 className="not-italic text-xs font-normal">
               {item.heading}
@@ -58,8 +58,6 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({ className = "" }) 
           </div>
         ))}
       </div>
-      
-
     </div>
   );
 };
