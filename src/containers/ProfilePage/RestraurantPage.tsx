@@ -39,10 +39,6 @@ const sidebarData=[
     {
         title:"Change Language"       
     },
- {
-  title:"Edit Profile"       
-}
-
     
 ]
 

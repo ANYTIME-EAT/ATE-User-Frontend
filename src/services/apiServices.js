@@ -194,3 +194,14 @@ export const paymentCardAPI = (data) => {
         })
     })
 }
+
+export const deletePaymentCardApi = (id,data) => {
+    return new Promise((resolve,reject) => {
+        axios.post(`${config.SERVER_URL}/payment_card/remove_card/${id}`,data,header())
+        .then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
