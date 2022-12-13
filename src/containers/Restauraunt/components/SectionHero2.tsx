@@ -5,6 +5,7 @@ import img from "../../images/placeholder-small.png"
 import Heading from "shared/Heading/Heading";
 import StartRating from "components/StartRating/StartRating";
 import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
+import SearchItem from "./SearchItem";
 
 
 
@@ -59,8 +60,7 @@ const SectionHero2: FC<SectionHero2Props> = ({
               />
               
 
-            </div>
-            
+            </div>            
           </div>
 
         </div>

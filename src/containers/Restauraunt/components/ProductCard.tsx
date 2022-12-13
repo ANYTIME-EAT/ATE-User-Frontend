@@ -145,7 +145,7 @@ const ProductCard: FC<ProductCardProps> = ({
             </h2>
           </div>
           {/* {renderTienIch()} */}
-          <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 "></div>
+          {/* <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 "></div> */}
           <div className="flex w-full justify-between items-end">
             <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-sm text-secondary-500">
               {`${productData.price}`}$
@@ -154,7 +154,10 @@ const ProductCard: FC<ProductCardProps> = ({
               <StartRating reviewCount={reviewCount} point={reviewStart} />
             </div>
             <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 "
-              onClick={() => { addAuthorItems(productData.id, productData.name, productData.price, 1, productData.product_avatar, "author");; setNewProduct(true) }}><i className="las la-shopping-cart" />add</Button>
+              onClick={() => { addAuthorItems(productData.id, productData.name, productData.price, 1, productData.product_avatar, "author");; setNewProduct(true) }}><i className="las la-shopping-cart" 
+            />
+              add
+            </Button>
 
           </div>
         </div>
