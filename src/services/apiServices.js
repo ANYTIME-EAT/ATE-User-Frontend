@@ -119,6 +119,16 @@ export const getAllProductsAPI = () => {
     })
 }
 
+export const getAllCuisinesAPI = () => {
+    return new Promise((resolve,reject) => {
+        axios.get(`${config.SERVER_URL}/cuisines/list`).then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
 export const getAllUserAddress = (userId) => {
     return new Promise((resolve,reject)=>{
         localStorage.getItem("access-token");
