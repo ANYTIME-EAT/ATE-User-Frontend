@@ -7,7 +7,7 @@ import { getRestaurantCategory, getRestaurant, getProduct } from "services/apiSe
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 import { getAvatar } from 'services/apiServices'
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
-import CustomInupt from "containers/ShoppingCart/components/CustomInupt";
+import CustomInupt from "./components/CustomInput";
 
 // import { addToCart, getCartList } from "services/cartStorage"
 
@@ -44,7 +44,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
   //Restaurant Food Category
   const getrestraurantCat = async () => {
     const response = await getRestaurantCategory(1)
-    console.log(response.data)
+    // console.log(response.data)
     if (response.data?.response === "success") {
       setCurrentAuthor({ index: 0, title: response.data.category[0].name })
       let menuArr: any = [];
@@ -60,6 +60,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
   //retauraunt Name
   const getRestaurantName = async () => {
     const response = await getRestaurant(1)
+    console.log(response.data)
     if (response.data?.response === "success") {
       setresturant(response.data.restaurant[0])
       getProfile(response.data.restaurant[0].restaurant_avatar)
@@ -115,6 +116,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
         <div className={`rounded-2xl  bg-white dark:bg-neutral-800 shadow-2xl `}>
           <div className="relative p-6 ">
             <span className="text-xl font-semibold">Cart</span>
+            <p>McDonalds</p>
             {/* <div className="w-full border-b border-neutral-200 dark:border-neutral-700 mt-4"></div> */}
             <div className="flex flex-col max-w-2xl p-1 space-y-2 sm:p-1 dark:bg-inherit dark:text-gray-100 ">
 
@@ -131,7 +133,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
                           <p className="text-sm ">+Coke</p>
                         </div>
                         <div className=" justify-center mb-10">
-                          <h6 className=" text-sm">€ 24</h6>
+                          <h6 className=" text-sm font-bold">€ 24</h6>
                           {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
                         </div>
 
@@ -148,7 +150,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
                         {/* <div className="flex items-right px-2 py-1 pl-0 space-x-1">
                               <CustomInupt className="mr-2" />
                             </div> */}
-                        {/* <button type="button" className="flex items-center px-1 py-1 pl-0 space-x-1 fill-red-600" >
+                        <button type="button" className="flex items-center px-1 py-1 pl-0 space-x-1 fill-red-600" >
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-3 h-3 ">
                                 <path d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"></path>
                                 <rect width="32" height="200" x="168" y="216"></rect>
@@ -157,7 +159,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
                                 <path d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z"></path>
                               </svg>
                               <span className="text-red-700">Remove</span>
-                            </button> */}
+                            </button>
                       </div>
                     </div>
                   </div>
@@ -203,7 +205,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
       </Helmet>
 
 
-      <div className="flex flex-cols-3 ">
+      <div className="flex lg:flex-row xl:flex-row flex-col ">
         {/* <ShoppingCart className="top-1/3" authorItems={authorItems} addAuthorItems={addAuthorItems}/> */}
 
         {/* <ShoppingCart className="top-1/3" newProduct={newProduct} setNewProduct={setNewProduct} /> */}
@@ -214,7 +216,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
           {renderSection1()}
         </div>
 
-        <div className="w-6/12 mx-16">{cart()}</div>
+        <div className="lg:w-3/4 w-full mx-5 py-10 shrink-1 ">{cart()}</div>
       </div>
     </div>
   );

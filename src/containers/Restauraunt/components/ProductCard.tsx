@@ -9,7 +9,6 @@ import SaleOffBadge from "components/SaleOffBadge/SaleOffBadge";
 import Badge from "shared/Badge/Badge";
 import { StayDataType } from "data/types";
 import Button from "shared/Button/Button";
-import ButtonCircle from "shared/Button/ButtonCircle";
 import { getAvatar } from 'services/apiServices'
 
 import { addToCart, getCartList, addProduct } from "services/cartStorage"
@@ -167,7 +166,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
   return (
     <div
-      className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border  w-3/4 border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden  ${className}`}
+      className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border  border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden shadow-2xl ${className}`}
       data-nc-id="ProductCard"
     >
       <Link to={href} className="absolute inset-0"></Link>
