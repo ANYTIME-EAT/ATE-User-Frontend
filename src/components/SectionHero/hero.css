@@ -5,3 +5,7 @@
     display: flex;
     align-items: center;
 }
+
+.bg-signup{
+    background: url(../../images/bgLogin.png) center center no-repeat;
+}

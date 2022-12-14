@@ -46,7 +46,7 @@ const RestraurantPage: FC<RestraurantPageProps> = ({ data, handleActivePage }) =
   const [open, setOpen] = useState(true);
 
   return (
-    <div className="flex h-screen bg-gray-100 dark:bg-black dark:bg-opacity-20 ">
+    <div className="flex relative h-screen bg-gray-100 dark:bg-black dark:bg-opacity-20 ">
 
       <div
         className={` ${open ? "w-72" : "w-1 "
