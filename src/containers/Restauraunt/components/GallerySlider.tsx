@@ -44,7 +44,7 @@ const GallerySlider: FC<GallerySliderProps> = ({
       >
         {galleryImgs.map((_, i) => (
           <button
-            className="glide__bullet w-1.5 h-1.5 rounded-full bg-neutral-300"
+            className="glide__bullet w-1 h-1 rounded-full bg-neutral-300"
             key={i}
             data-glide-dir={`=${i}`}
           />

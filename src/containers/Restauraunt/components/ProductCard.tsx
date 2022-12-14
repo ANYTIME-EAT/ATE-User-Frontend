@@ -9,7 +9,6 @@ import SaleOffBadge from "components/SaleOffBadge/SaleOffBadge";
 import Badge from "shared/Badge/Badge";
 import { StayDataType } from "data/types";
 import Button from "shared/Button/Button";
-import ButtonCircle from "shared/Button/ButtonCircle";
 import { getAvatar } from 'services/apiServices'
 
 import { addToCart, getCartList, addProduct } from "services/cartStorage"
@@ -130,7 +129,7 @@ const ProductCard: FC<ProductCardProps> = ({
     return (
       <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
         {/* <ToastContainer /> */}
-        <div className="space-y-4 w-full">
+        <div className="space-y-5 w-full">
 
           <div className="flex items-center space-x-2">
 
@@ -145,7 +144,7 @@ const ProductCard: FC<ProductCardProps> = ({
             </h2>
           </div>
           {/* {renderTienIch()} */}
-          <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 "></div>
+          {/* <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 "></div> */}
           <div className="flex w-full justify-between items-end">
             <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-sm text-secondary-500">
               {`${productData.price}`}$
@@ -154,7 +153,10 @@ const ProductCard: FC<ProductCardProps> = ({
               <StartRating reviewCount={reviewCount} point={reviewStart} />
             </div>
             <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 "
-              onClick={() => { addAuthorItems(productData.id, productData.name, productData.price, 1, productData.product_avatar, "author");; setNewProduct(true) }}><i className="las la-shopping-cart" />add</Button>
+              onClick={() => { addAuthorItems(productData.id, productData.name, productData.price, 1, productData.product_avatar, "author");; setNewProduct(true) }}><i className="las la-shopping-cart" 
+            />
+              add
+            </Button>
 
           </div>
         </div>
@@ -164,7 +166,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
   return (
     <div
-      className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border  w-3/4 border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden  ${className}`}
+      className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border  border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden shadow-2xl ${className}`}
       data-nc-id="ProductCard"
     >
       <Link to={href} className="absolute inset-0"></Link>

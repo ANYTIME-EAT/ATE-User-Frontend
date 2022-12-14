@@ -24,15 +24,15 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
 }) => {
   return (
     <div
-      className={`nc-SectionGridFilterCard ${className}`}
+      className={`nc-SectionGridFilterCard   ${className}`}
       data-nc-id="SectionGridFilterCard"
     >
       <Heading2
-        heading={"Items"}
+        heading={""}
         //crrAuthor?.title
       />
       
-      <div className="grid grid-cols-1 gap-6 md:gap-8 xl:grid-cols-2 ">
+      <div className="grid grid-cols-1 gap-6 md:gap-3 ">
         {productData.map((item:any, key:number) => (        
           <ProductCard key={key} productData={item} setNewProduct={setNewProduct} />
         ))}
