@@ -113,7 +113,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
   const cart = () => {
     return (
       <div className={` p-1  w-full  `}>
-        <div className={`rounded-2xl  bg-white dark:bg-neutral-800 shadow-2xl `}>
+        <div className={`rounded-3xl bg-white dark:bg-neutral-800 shadow-2xl border-2 border-gray-200`}>
           <div className="relative p-6 ">
             <span className="text-xl font-semibold">Cart</span>
             <p>McDonalds</p>
@@ -129,7 +129,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
                     <div className="flex flex-col justify-between w-full pb-4">
                       <div className="flex justify-between w-full pb-2 space-x-2">
                         <div className="space-y-1">
-                          <h6 className="leading-snug "> Mc Chicken Burger</h6>
+                          <h6 className="leading-snug ">6Pc Nuggets + Mc Chicken Burger</h6>
                           <p className="text-sm ">+Coke</p>
                         </div>
                         <div className=" justify-center mb-10">
@@ -151,15 +151,15 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
                               <CustomInupt className="mr-2" />
                             </div> */}
                         <button type="button" className="flex items-center px-1 py-1 pl-0 space-x-1 fill-red-600" >
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-3 h-3 ">
-                                <path d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"></path>
-                                <rect width="32" height="200" x="168" y="216"></rect>
-                                <rect width="32" height="200" x="240" y="216"></rect>
-                                <rect width="32" height="200" x="312" y="216"></rect>
-                                <path d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z"></path>
-                              </svg>
-                              <span className="text-red-700">Remove</span>
-                            </button>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-3 h-3 ">
+                            <path d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"></path>
+                            <rect width="32" height="200" x="168" y="216"></rect>
+                            <rect width="32" height="200" x="240" y="216"></rect>
+                            <rect width="32" height="200" x="312" y="216"></rect>
+                            <path d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z"></path>
+                          </svg>
+                          <span className="text-red-700">Remove</span>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -176,19 +176,20 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
               </div>
 
             </div>
+            <div className="bg-gray-50 dark:bg-white/5 p-5 rounded-3xl  mt-10">
+              <a
+                className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-primary-6000 text-white hover:bg-primary-700"
+                href='/checkout'
+                // target="_blank"
+                rel="noopener noreferrer"
+              >
+                {/* <ShoppingCartIcon className="w-4 h-4" /> */}
+                <ShoppingBagIcon className="w-4 h-4" />
+                <span className="ml-2">CheckOut</span>
+              </a>
+            </div>
           </div>
-          <div className="bg-gray-50 dark:bg-white/5 p-5">
-            <a
-              className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-primary-6000 text-white hover:bg-primary-700"
-              href='/checkout'
-              // target="_blank"
-              rel="noopener noreferrer"
-            >
-              {/* <ShoppingCartIcon className="w-4 h-4" /> */}
-              <ShoppingBagIcon className="w-4 h-4" />
-              <span className="ml-2">CheckOut</span>
-            </a>
-          </div>
+
         </div>
       </div>
     )
@@ -216,7 +217,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
           {renderSection1()}
         </div>
 
-        <div className="lg:w-3/4 w-full mx-5 py-10 shrink-1 ">{cart()}</div>
+        <div className="lg:w-3/4 w-full  py-10 shrink-1 visible">{cart()}</div>
       </div>
     </div>
   );
