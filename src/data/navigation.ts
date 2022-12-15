@@ -29,4 +29,14 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     href: "/newrest",
     name: "restu"
   },
+  {
+    id: ncNanoId(),
+    href: "/profile",
+    name: "Profile"
+  },
+  {
+    id: ncNanoId(),
+    href: "/signup",
+    name: "Signup"
+  },
 ];
