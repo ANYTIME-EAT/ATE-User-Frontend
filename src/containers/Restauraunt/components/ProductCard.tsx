@@ -147,7 +147,7 @@ const ProductCard: FC<ProductCardProps> = ({
           {/* <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 "></div> */}
           <div className="flex w-full justify-between items-end">
             <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-sm text-secondary-500">
-              {`${productData.price}`}$
+              {`${productData.price}€`}
             </span>
             <div className="inline-flex space-x-3">
               <StartRating reviewCount={reviewCount} point={reviewStart} />

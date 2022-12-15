@@ -6,10 +6,10 @@ import img from '../../RestraurantPage/control.png'
 export interface RestraurantPageProps {
   data?: any;
   changeAuthor(index: number, title: string): void;
-  crrAuthor?:any;
+  crrAuthor?: any;
 }
 
-const RestraurantPage: FC<RestraurantPageProps> = ({ data, changeAuthor,crrAuthor }) => {
+const RestraurantPage: FC<RestraurantPageProps> = ({ data, changeAuthor, crrAuthor }) => {
   const [open, setOpen] = useState(true);
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -29,8 +29,7 @@ const RestraurantPage: FC<RestraurantPageProps> = ({ data, changeAuthor,crrAutho
         <div className="flex gap-x-4 items-end">
 
           <h1
-            className={`text-black dark:text-gray-100 origin-right font-medium text-xl duration-200 ${!open && "scale-0"
-              }`}
+            className={` dark:text-gray-100 origin-right font-medium text-xl duration-200`}
           >
           </h1>
           {/* <Heading className={`text-black origin-left dark:text-gray-100 font-medium text-xl duration-200 ${!open && "scale-0"
@@ -39,20 +38,25 @@ const RestraurantPage: FC<RestraurantPageProps> = ({ data, changeAuthor,crrAutho
         </div>
         <ul className="pt-6 items-end">
           {data.map((Menu: any, index: number) => (
-            <li
-              onClick={() => {changeAuthor(index, Menu.title); setActiveIndex(index)} }
-              key={index}
-              // className={`flex  rounded-md p-2 cursor-pointer hover:bg-blue-100 hover:font-bold dark:hover:bg-slate-400 dark:hover:text-black   text-lg items-center gap-x-4 
-              //  ${index === crrAuthor.id && "bg-gray-900"} `}
-               className={`flex  rounded-md p-3 cursor-pointer text-end  items-end gap-x-4 
-               ${index === activeIndex && "bg-blue-100 dark:bg-slate-400 dark:text-black font-bold "} ${!open && "hidden"} `}
+           
+              <li
+                onClick={() => { changeAuthor(index, Menu.title); setActiveIndex(index) }}
+                key={index}
+                // className={`flex  rounded-md p-2 cursor-pointer hover:bg-blue-100 hover:font-bold dark:hover:bg-slate-400 dark:hover:text-black   text-lg items-center gap-x-4 
+                //  ${index === crrAuthor.id && "bg-gray-900"} `}
+                className={`flex  rounded-md p-3 cursor-pointer bg 
+               ${index === activeIndex && " text-red-500 dark:bg-slate-400"} `}
               //  style={{backgroundColor: index == crrAuthor.id? "bg-gray-900": ""}}
-            >
+              >
 
-              <span className={`${!open && "hidden"} duration-200 py-3`}>
-                {Menu.title}
-              </span>
-            </li>
+                <span className={`py-4 text-right`}>
+                  {Menu.title}
+                </span>
+                <span className={`${index === activeIndex && " text-red-500  "} `}>
+
+                </span>
+              </li>
+            
           ))}
         </ul>
       </div>
