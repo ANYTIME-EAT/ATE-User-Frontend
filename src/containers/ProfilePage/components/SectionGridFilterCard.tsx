@@ -34,7 +34,7 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
       
       <div className="grid grid-cols-1 gap-6 md:gap-8 xl:grid-cols-2 ">
         {productData.map((item:any, key:number) => (
-          <ProductCard key={key} productData={item} />
+          <ProductCard key={key} ordersData={item} />
         ))}
       </div>
       <div className="flex mt-16 justify-center items-center">

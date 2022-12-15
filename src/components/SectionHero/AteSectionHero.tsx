@@ -15,8 +15,8 @@ const AteSectionHero: FC<AteSectionHeroProps> = ({ className = "" }) => {
         className={`flex lg:flex-col relative text-white ${className}`}
       >
         <div className="flex flex-col lg:flex-row ">
-          <div className="flex flex-col items-center space-y-4 sm:space-y-10 pb-12 lg:pb-64">
-            <h2 className="font-medium text-2xl md:text-3xl xl:text-8xl ml-16 ">
+          <div className="flex flex-col items-center space-y-4 sm:space-y-10 pb-12 lg:pb-64 md:ml-40">
+            <h2 className="font-medium text-xl ml-6 md:text-5xl xl:text-7xl">
               Discover the best Food & Drinks
             </h2>
 

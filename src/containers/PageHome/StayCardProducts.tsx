@@ -1,30 +1,32 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import GallerySlider from "components/GallerySlider/GallerySlider";
 import { DEMO_STAY_LISTINGS } from "data/listings";
 import { StayDataType } from "data/types";
-import StartRating from "components/StartRating/StartRating";
 import { Link } from "react-router-dom";
 import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
 import SaleOffBadge from "components/SaleOffBadge/SaleOffBadge";
 import Badge from "shared/Badge/Badge";
 import Button from "shared/Button/Button";
-import img1 from "images/domino.png";
-import { getAvatar } from "services/apiServices";
+import img1 from 'images/domino.png'
+import StartRating from "./StartRating";
 
-export interface StayCardProps {
+
+export interface StayCardProductsProps {
   className?: string;
   data?: StayDataType;
   size?: "default" | "small";
-  favouritesData?: any;
+  productsData? : any;
+  setNewProduct(val:boolean) : void;
 }
 
 const DEMO_DATA = DEMO_STAY_LISTINGS[0];
 
-const StayCard: FC<StayCardProps> = ({
+const StayCardProduct: FC<StayCardProductsProps> = ({
   size = "default",
   className = "",
   data = DEMO_DATA,
-  favouritesData,
+  productsData,
+  setNewProduct
 }) => {
   const {
     galleryImgs,
@@ -42,28 +44,25 @@ const StayCard: FC<StayCardProps> = ({
     id,
   } = data;
 
-  const [image, setImage] = useState<any>("")
+  // "name": "Big Sale",
+  // "description": "off",
+  // "discount": 10,
+  // "max_quantity": 5,
+  // "is_availability": null,
+  // "is_deleted": false,
 
-  const getProfile = async(img:string) => {
-    const file = await getAvatar(img)
-    setImage(URL.createObjectURL(file))
-  }
-
-  useEffect(() => {
-    console.log(favouritesData.product_avatar)
-    getProfile(favouritesData.product_avatar)
-  },[])
+  // console.log(comboMenuData)
 
   const renderSliderGallery = () => {
     return (
       <div className="relative w-full">
         <GallerySlider
-          uniqueID={`StayCard_${favouritesData.id}`}
+          uniqueID={`StayCard_${productsData.id}`}
           ratioClass="aspect-w-4 aspect-h-3 "
-          galleryImgs={[image && image]}
+          galleryImgs={galleryImgs}
           href={href}
         />
-
+        
         <BtnLikeIcon isLiked={like} className="absolute right-3 top-3 z-[1]" />
         {saleOff && <SaleOffBadge className="absolute left-1 top-3" />}
       </div>
@@ -75,28 +74,29 @@ const StayCard: FC<StayCardProps> = ({
       <div className={size === "default" ? "p-4 space-y-4" : "p-3 space-y-2"}>
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
+
             <h2
-              className={` font-medium capitalize ${
-                size === "default" ? "text-lg" : "text-base"
-              }`}
+              className={` font-medium capitalize ${size === "default" ? "text-lg" : "text-base"
+                }`}
             >
-              <span className="line-clamp-1">{favouritesData.name}</span>
+              <span className="line-clamp-1">{productsData.name}</span>
             </h2>
           </div>
           <span className="text-sm text-neutral-500 dark:text-neutral-400">
-            {favouritesData.description}
+            {productsData.description}  
           </span>
           <div className="flex justify-between items-center">
             <span className="text-base font-semibold">
-              {favouritesData.price}
+              {productsData.price}
               {` `}
+             
             </span>
             {!!reviewStart && (
               <StartRating reviewCount={reviewCount} point={reviewStart} />
             )}
           </div>
           <div className="w-20 border-b border-neutral-100 dark:border-neutral-800"></div>
-          <Button className=" bg-red-500 text-white sm:text-xs pb-2 px-1 py-1 sm:px-3 flex content-center">ORDER NOW</Button>
+          <Button className="px-1 py-1 sm:px-3 hover:bg-[#be123c] dark:bg-[#be123c] dark:hover:bg-[#881337] flex  content-center">Order Now</Button>
         </div>
 
 
@@ -115,4 +115,4 @@ const StayCard: FC<StayCardProps> = ({
   );
 };
 
-export default StayCard;
+export default StayCardProduct;

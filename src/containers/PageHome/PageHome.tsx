@@ -11,7 +11,7 @@ import pizza from 'images/pizza.png'
 import bbq from 'images/bbq.png'
 import offer1 from 'images/offer1.png'
 import offer2 from 'images/offer2.png'
-import { getRestaurantList, getOffersList, getAllComboMenuList } from '../../services/apiServices'
+import { getRestaurantList, getOffersList, getAllComboMenuList, getAllProductsAPI, getAllCuisinesAPI } from '../../services/apiServices'
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 import AteSectionHero from "components/SectionHero/AteSectionHero";
 import AllRestMenu from "./Components/AllRestMenu";
@@ -150,7 +150,9 @@ const PageHome = () => {
   const [offerData, setOfferData] = useState<any>([])
   const [comboMenuData, setcomboMenuData] = useState<any>([])
   const [newProduct, setNewProduct] = useState<boolean>(false)
-
+  const [productsData, setProductsData] = useState<any>([])
+  const [cuisinesData, setCuisinesData] = useState<any>([])
+ 
 
   const getRestrauntData = async () => {
     const response = await getRestaurantList()
@@ -174,6 +176,55 @@ const PageHome = () => {
     }
   }
 
+  const getAllProductsData = async () => {
+    const response = await getAllProductsAPI()
+    console.log(response.data)
+    if (response.data) {
+      let tempData: any = [];
+      if (response.data.response === "success") {
+        response.data.product.map((item: any, key: number) => {
+          tempData[key] = {
+            id: item.id,
+            name: item.name,
+            category_id: item.description,
+            restaurant_id: item.discount,
+            description: item.max_quantity,
+            food_type: item.is_availability,
+            combo_menu_id: item.menu_avatar,
+            is_availability: item.is_deleted,
+            price:item.price,
+            quantity:item.quantity,
+            addons:item.addons,
+            offer:item.offer,
+            product_avatar:item.product_avatar
+
+          }
+        })
+        setProductsData(tempData)
+      }
+
+    }
+  }
+
+  const getAllCuisinesData = async () => {
+    const response = await getAllCuisinesAPI()
+    console.log(response.data)
+    if (response.data) {
+      let tempData: any = [];
+      if (response.data.response === "success") {
+        response.data.cuisines.map((item: any, key: number) => {
+          tempData[key] = {
+            id: item.id,
+            name: item.name,
+            cuisines_avatar:item.cuisines_avatar
+
+          }
+        })
+        setCuisinesData(tempData)
+      }
+
+    }
+  }
   const getComboMenuData = async () => {
     const response = await getAllComboMenuList()
 
@@ -208,11 +259,11 @@ const PageHome = () => {
   }
 
 
-
   useEffect(() => {
     getRestrauntData()
     getOfferData()
     getComboMenuData()
+    getAllProductsData()
   }, [])
 
 
@@ -224,15 +275,6 @@ const PageHome = () => {
 
 
       <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
-        {/* SECTION HERO */}
-
-        {/* <SectionHero className="pt-10 lg:pt-16 lg:pb-16" /> */}
-        {/* <ShoppingCart newProduct={newProduct} setNewProduct={setNewProduct}/> */}
-        {/* <EmptyCart /> */}
-
-
-
-        {/* SECTION 1 */}
 
         {restrauntData.length > 0 &&
           <SectionSliderNewCategories
@@ -273,7 +315,7 @@ const PageHome = () => {
         <div className="relative py-16">
           <BackgroundSection />
           {/* <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct} /> */}
-          <AllRestMenu  combo_MenuData={comboMenuData} setNewProduct={setNewProduct}/>
+          <AllRestMenu products_Data={productsData} setNewProduct={setNewProduct}/>
         </div>
 
         {/* SECTION */}
@@ -321,12 +363,6 @@ const PageHome = () => {
             uniqueClassName="PageHome_s1"
             className="mt-24"
           />
-        
-
-      
-        
-
-
      
       </div>
     </div>

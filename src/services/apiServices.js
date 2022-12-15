@@ -119,6 +119,16 @@ export const getAllProductsAPI = () => {
     })
 }
 
+export const getAllCuisinesAPI = () => {
+    return new Promise((resolve,reject) => {
+        axios.get(`${config.SERVER_URL}/cuisines/list`).then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
 export const getAllUserAddress = (userId) => {
     return new Promise((resolve,reject)=>{
         localStorage.getItem("access-token");
@@ -144,6 +154,60 @@ export const updateProfile = (data) => {
 export const editAddress = (data) => {
     return new Promise((resolve,reject) => {
         axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
+        .then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getAllFavouritesAPI = (userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/favourite/get_all_fav/${userId}`,header())
+        .then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getAllOrdersAPI = (userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/orders/all_orders/${userId}`,header())
+        .then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getAllPaymentAPI = (userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/payment_card/get_allcards/${userId}`,header()).then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const paymentCardAPI = (data,userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.post(`${config.SERVER_URL}/payment_card/add_card/${userId}`,header(),data)
+        .then((res) =>{           
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const deletePaymentCardApi = (id,data) => {
+    return new Promise((resolve,reject) => {
+        axios.post(`${config.SERVER_URL}/payment_card/remove_card/${id}`,data,header())
         .then((res) => {
             resolve(res)
         }).catch((res) => {
