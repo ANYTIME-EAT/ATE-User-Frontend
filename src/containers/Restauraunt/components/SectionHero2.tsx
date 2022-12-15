@@ -5,6 +5,7 @@ import Heading from "shared/Heading/Heading";
 import StartRating from "./StarRating";
 import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
 import SquareIcon from "./SquareIcon";
+import img from "images/bbq.png"
 
 
 
@@ -42,7 +43,7 @@ const SectionHero2: FC<SectionHero2Props> = ({
             <div className="sm:w-48 sm:h-48 h-50 w-50 sm:mr-10 inline-flex items-center justify-center flex-shrink-1">
               {/* <img
                 src={data.restaurant_avatar}
-                className="border-round-lg rounded"
+                className="border-round-lg rounded visible"
               /> */}
               <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500" src={data.restaurant_avatar} alt={data.name} loading="lazy" />
             </div>
