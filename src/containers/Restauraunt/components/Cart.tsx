@@ -158,7 +158,7 @@ const Cart: FC<CartProps> = ({ className = "", newProduct, setNewProduct }) => {
                         </div>
                         <div className="bg-gray-50 dark:bg-white/5 p-5 rounded-3xl  mt-10">
                             <a
-                                className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-red-500 text-white hover:bg-red-700"
+                                className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-red-600 text-white hover:bg-red-800"
                                 href='/checkout'
                                 // target="_blank"
                                 rel="noopener noreferrer"
