@@ -67,7 +67,7 @@ const CustomInupt: FC<CustomInuptProps> = ({
         className={`nc-NcInputNumber flex items-center justify-between w-28`}
       >
         <button
-          className="ml-3 w-6 h-6 rounded-full flex items-center justify-center border border-neutral-400 dark:border-neutral-500 bg-white dark:bg-neutral-900 focus:outline-none hover:border-neutral-700 disabled:hover:border-neutral-400 dark:disabled:hover:border-neutral-500 disabled:opacity-50 disabled:cursor-default"
+          className="ml-3 w-6 h-6 rounded-full flex items-center justify-center border border-neutral-400 dark:border-neutral-500 bg-red-500 dark:bg-neutral-900 focus:outline-none hover:border-neutral-700 disabled:hover:border-neutral-400 dark:disabled:hover:border-neutral-500 disabled:opacity-50 disabled:cursor-default"
           type="button"
           onClick={handleClickDecrement}
           disabled={min >= value}
@@ -76,7 +76,7 @@ const CustomInupt: FC<CustomInuptProps> = ({
         </button>
         <span>{value}</span>
         <button
-          className="mr-3 w-6 h-6 rounded-full flex items-center justify-center border border-neutral-400 dark:border-neutral-500 bg-white dark:bg-neutral-900 focus:outline-none hover:border-neutral-700 disabled:hover:border-neutral-400 dark:disabled:hover:border-neutral-500 disabled:opacity-50 disabled:cursor-default"
+          className="mr-3 w-6 h-6 rounded-full flex items-center justify-center border border-neutral-400 dark:border-neutral-500 bg-red-500 dark:bg-neutral-900 focus:outline-none hover:border-neutral-700 disabled:hover:border-neutral-400 dark:disabled:hover:border-neutral-500 disabled:opacity-50 disabled:cursor-default"
           type="button"
           onClick={handleClickIncrement}
           disabled={max ? max <= value : false}
