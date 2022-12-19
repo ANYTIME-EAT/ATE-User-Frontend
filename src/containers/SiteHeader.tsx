@@ -143,7 +143,7 @@ const SiteHeader = () => {
 //             {({ open }) => (
 //               <>
 //                 <Popover.Button
-//                   className={`p-2.5 bg-white hover:bg-neutral-100 dark:bg-primary-6000 dark:hover:bg-primary-700 rounded-xl shadow-xl border border-neutral-200 dark:border-primary-6000 z-10 focus:outline-none ${
+//                   className={`p-2.5 bg-white hover:bg-neutral-100 dark:bg-red-6000 dark:hover:bg-red-700 rounded-xl shadow-xl border border-neutral-200 dark:border-primary-6000 z-10 focus:outline-none ${
 //                     open ? " focus:ring-2 ring-primary-500" : ""
 //                   }`}
 //                 >
@@ -168,7 +168,7 @@ const SiteHeader = () => {
 //                       </div>
 //                       <div className="bg-gray-50 dark:bg-white/5 p-5">
 //                         <a
-//                           className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-primary-6000 text-white hover:bg-primary-700"
+//                           className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-red-6000 text-white hover:bg-red-700"
 //                           href={
 //                             "https://themeforest.net/item/chisfis-online-booking-react-template/33515927"
 //                           }

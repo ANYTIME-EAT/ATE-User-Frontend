@@ -34,4 +34,10 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     href: "/signup",
     name: "Signup"
   },
+
+  {
+    id: ncNanoId(),
+    href: "/logout",
+    name: "Logout"
+  },
 ];

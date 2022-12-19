@@ -208,7 +208,7 @@ const FlightSearchForm = () => {
           name={name}
           onChange={() => setFlightClassState(label)}
           type="radio"
-          className="focus:ring-primary-500 h-6 w-6 text-primary-500 border-neutral-300 !checked:bg-primary-500 bg-transparent"
+          className="focus:ring-primary-500 h-6 w-6 text-primary-500 border-neutral-300 !checked:bg-red-500 bg-transparent"
         />
         <label
           htmlFor={id + name}

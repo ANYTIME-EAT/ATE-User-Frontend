@@ -5,8 +5,8 @@ import Heading from "shared/Heading/Heading";
 import StartRating from "./StarRating";
 import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
 import SquareIcon from "./SquareIcon";
-import NcImage from "shared/NcImage/NcImage";
-import img1 from "images/bbq.png"
+import img from "images/bbq.png"
+import { getAvatar } from 'services/apiServices'
 
 
 
@@ -32,7 +32,16 @@ const SectionHero2: FC<SectionHero2Props> = ({
   // reviewCount,
 }) => {
 
+  const [restAvatar, setRestAvatar] = useState<any>();
 
+  const getRestaurantAvatar = async(img: any) => {
+    const file = await getAvatar(img);
+    setRestAvatar(URL.createObjectURL(file))
+  }
+
+useEffect(() => {
+  getRestaurantAvatar(data.restaurant_avatar)
+},[data])
 
   return (
 
@@ -42,17 +51,11 @@ const SectionHero2: FC<SectionHero2Props> = ({
         <div className="container px-5 py-10 mx-auto ">
           <div className="p-5 flex items-center mx-auto bg-red-900 dark:bg-slate-800 mb-1 rounded-lg sm:flex-row flex-col shadow-xl">
             <div className="sm:w-48 sm:h-48 h-50 w-50 sm:mr-10 inline-flex items-center justify-center flex-shrink-1">
-              {/* <img
-                src={data.restaurant_avatar}
+              <img
+                src={restAvatar}
                 className="border-round-lg rounded visible"
-              /> */}
-              <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-full sm:h-full dark:bg-gray-500" src={data.restaurant_avatar} alt={data.name} />
-              {/* <NcImage
-              className="flex-shrink-0 object-fill w-full h-full dark:border-transparent rounded outline-none sm:w-40 sm:h-40 dark:bg-gray-500"
-              src={img1}
-              alt={data.name}
-              
-              /> */}
+              />
+              {/* <img className="flex-shrink-0 object-cover w-40 h-40 dark:border-transparent rounded outline-none sm:w-40 sm:h-40 dark:bg-gray-500" src={restAvatar} alt={data.name} loading="lazy" /> */}
             </div>
             <div className="flex-grow text-center  mt-5">
               {/* <h1 className="text-black text-2xl title-font font-bold mb-2">Mc'Donalds</h1> */}
