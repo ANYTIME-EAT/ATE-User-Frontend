@@ -94,7 +94,7 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", newProduct, setNe
 
 
                 <button
-                    className={`fixed h-12 w-12  z-50 flex items-center cursor-pointer right-2 top-10 p-2.5 bg-white hover:bg-neutral-100 dark:bg-gray-900 dark:hover:bg-primary-200 rounded-xl shadow-xl border border-neutral-200 dark:border-primary-600 focus:outline-none text-white ${className}`}
+                    className={`fixed h-12 w-12  z-50 flex items-center cursor-pointer right-2 top-10 p-2.5 bg-white hover:bg-neutral-100 dark:bg-gray-900 dark:hover:bg-red-200 rounded-xl shadow-xl border border-neutral-200 dark:border-primary-600 focus:outline-none text-white ${className}`}
                     // style={{ position: "relative" }}
 
                     onClick={() => setShowSidebar(!showSidebar)}
@@ -197,7 +197,7 @@ const ShoppingCart: FC<ShoppingCartProps> = ({ className = "", newProduct, setNe
                     </div>
                     <div className="bg-gray-50 dark:bg-white/5 p-5">
                         <a
-                            className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-primary-6000 text-white hover:bg-primary-700"
+                            className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-red-6000 text-white hover:bg-red-700"
                             href='/checkout'
                             // target="_blank"
                             rel="noopener noreferrer"

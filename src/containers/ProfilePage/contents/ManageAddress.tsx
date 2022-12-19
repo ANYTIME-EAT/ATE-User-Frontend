@@ -9,6 +9,8 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import NavItem from "shared/NavItem/NavItem";
 import { add } from "lodash";
 import { updateProfile } from "services/apiServices";
+import Logout from "containers/Auth/Logout";
+import AvatarDropdown from "components/Header/AvatarDropdown";
 
 export interface Statistic {
   id: string;
@@ -203,7 +205,6 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
       </Modal>
 
       <Modal isVisible={showModelEdit} closeModal={handleModalEdit}>
-        {/* onClose={handleModal} */}
         <div className="px-6 py-6 lg:px-8">
           <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
             Edit Address
@@ -328,7 +329,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               </a>
               </div>
             </div>
-          // </div>
+
         ))}
       </div>
     </div>

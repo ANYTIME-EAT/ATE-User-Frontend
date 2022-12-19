@@ -7,7 +7,7 @@ import {
   ArrowRightOnRectangleIcon,
   LifebuoyIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "shared/Avatar/Avatar";
 
@@ -17,21 +17,21 @@ const solutions = [
     href: "/author",
     icon: UserCircleIcon,
   },
-  {
-    name: "Messages",
-    href: "##",
-    icon: ChatBubbleBottomCenterTextIcon,
-  },
-  {
-    name: "Wishlists",
-    href: "/account-savelists",
-    icon: HeartIcon,
-  },
-  {
-    name: "Booking",
-    href: "##",
-    icon: HomeIcon,
-  },
+  // {
+  //   name: "Messages",
+  //   href: "##",
+  //   icon: ChatBubbleBottomCenterTextIcon,
+  // },
+  // {
+  //   name: "Wishlists",
+  //   href: "/account-savelists",
+  //   icon: HeartIcon,
+  // },
+  // {
+  //   name: "Booking",
+  //   href: "##",
+  //   icon: HomeIcon,
+  // },
 ];
 
 const solutionsFoot = [
@@ -48,7 +48,16 @@ const solutionsFoot = [
   },
 ];
 
+
 export default function AvatarDropdown() {
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  
+  const logout = () => {
+    localStorage.removeItem("user-info");
+    setIsLoggedIn(false);
+  };
+
   return (
     <div className="AvatarDropdown">
       <Popover className="relative">
@@ -81,7 +90,9 @@ export default function AvatarDropdown() {
                           <item.icon aria-hidden="true" className="w-6 h-6" />
                         </div>
                         <div className="ml-4">
-                          <p className="text-sm font-medium ">{item.name}</p>
+                          {item.name==="Logout"?<p className="text-sm font-medium " onClick={logout}>{item.name}</p>:
+                          <p className="text-sm font-medium">{item.name}</p>
+                        }
                         </div>
                       </Link>
                     ))}

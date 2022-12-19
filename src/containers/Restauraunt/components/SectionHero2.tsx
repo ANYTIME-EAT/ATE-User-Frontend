@@ -5,6 +5,7 @@ import Heading from "shared/Heading/Heading";
 import StartRating from "./StarRating";
 import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
 import SquareIcon from "./SquareIcon";
+import img from "images/bbq.png"
 
 
 
@@ -36,13 +37,13 @@ const SectionHero2: FC<SectionHero2Props> = ({
 
     <div>
 
-      <section className="text-gray-100 body-font h-50 flex bg-red-800 dark:bg-slate-900 border-round-lg">
+      <section className="text-gray-100 body-font h-50 flex bg-red-800 dark:bg-slate-900 rounded-lg">
         <div className="container px-5 py-10 mx-auto ">
           <div className="p-5 flex items-center mx-auto bg-red-900 dark:bg-slate-800 mb-1 rounded-lg sm:flex-row flex-col shadow-xl">
             <div className="sm:w-48 sm:h-48 h-50 w-50 sm:mr-10 inline-flex items-center justify-center flex-shrink-1">
               {/* <img
                 src={data.restaurant_avatar}
-                className="border-round-lg rounded"
+                className="border-round-lg rounded visible"
               /> */}
               <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500" src={data.restaurant_avatar} alt={data.name} loading="lazy" />
             </div>
@@ -74,7 +75,7 @@ const SectionHero2: FC<SectionHero2Props> = ({
                       <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" className="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </button>
                   </span>
-                  <input type="search" name="q" className="py-2 text-sm text-white dark:bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900" placeholder="Search For Dishes" />
+                  <input type="search" name="q" className="py-2 text-sm text-white bg-red-300 border-red-300 dark:bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-red-300  focus:text-gray-900" placeholder="Search For Dishes" />
                 </div>
                 <div className="relative text-gray-600 focus-within:text-gray-400 mb-3 ">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-2">
