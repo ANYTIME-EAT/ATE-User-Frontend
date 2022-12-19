@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Logo from "shared/Logo/Logo";
 import Navigation from "shared/Navigation/Navigation";
 import SearchDropdown from "./SearchDropdown";
@@ -12,6 +12,15 @@ export interface MainNav1Props {
 }
 
 const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    if(localStorage.getItem("user-info")){
+      let userIsLoggedIn= JSON.parse(localStorage.getItem("user-info")|| "{}").isLoggedIn;
+      console.log(userIsLoggedIn)
+      setIsLoggedIn(userIsLoggedIn)
+    }
+  },[])
   return (
     <div className={`nc-MainNav1 relative z-10 ${className}`}>
       <div className="px-4 lg:container py-4 lg:py-5 relative flex justify-between items-center">
@@ -29,7 +38,12 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
             <SwitchDarkMode />
             <SearchDropdown />
             <div className="px-1" />
+           
             <ButtonPrimary href="/login">Sign In</ButtonPrimary>
+          
+            {/* <ButtonPrimary  href="/" onClick={()=>localStorage.clear()}>Logout</ButtonPrimary> */}
+          
+            
           </div>
           <div className="flex xl:hidden items-center">
             <SwitchDarkMode />

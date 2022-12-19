@@ -103,7 +103,6 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   };
 
   const handleAddressCreate = async() => {  
-    
     const data = {
       type: addressType,
       address: address,

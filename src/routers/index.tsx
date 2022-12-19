@@ -53,6 +53,8 @@ import ProfilePage from "containers/ProfilePage/ProfilePage";
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 import AccountPage from "containers/ProfilePage/AccountPage/AccountPage";
 import NewRest from "containers/Restauraunt/NewRest";
+import ForgotPasswordPage from "containers/Auth/ForgotPassword/ForgotPasswordPage";
+import ResetPasswordPage from "containers/Auth/ResetPassword";
 
 
 export const pages: Page[] = [
@@ -99,16 +101,16 @@ export const pages: Page[] = [
   // { path: "/profile/route", component: ProfilePage},
   
   { path: "/pay-done", component: PayPage },
-  //
+  
   { path: "/author", component: AuthorPage },
   { path: "/profile/account", component: ProfilePage },
   { path: "/account-password", component: AccountPass },
   { path: "/account-savelists", component: AccountSavelists },
   { path: "/account-billing", component: AccountBilling },
-  //
+  
   { path: "/blog", component: BlogPage },
   { path: "/blog-single", component: BlogSingle },
-  //
+  
   { path: "/add-listing-1", component: PageAddListing1 },
   { path: "/add-listing-2", component: PageAddListing2 },
   { path: "/add-listing-3", component: PageAddListing3 },
@@ -119,7 +121,6 @@ export const pages: Page[] = [
   { path: "/add-listing-8", component: PageAddListing8 },
   { path: "/add-listing-9", component: PageAddListing9 },
   { path: "/add-listing-10", component: PageAddListing10 },
-  //
   { path: "/contact", component: PageContact },
   { path: "/about", component: PageAbout },
   { path: "/packages", component: PagePackages },
@@ -129,12 +130,14 @@ export const pages: Page[] = [
   { path: "/login", component: PageLogin },
   { path: "/subscription", component: PageSubcription },
 
+  { path: "/forgotPassword", component: ForgotPasswordPage },
 
   // restu 
   { path: "/newrest", component: NewRest },
+  { path: "/reset_password/:id/:token", component: ResetPasswordPage },
+
   
-  
-  //
+ 
 ];
 
 const MyRoutes = () => {
