@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import Heading from "components/Heading/Heading";
 import { deletePaymentCardApi, getAllPaymentAPI, paymentCardAPI } from "services/apiServices";
 import Modal from "../components/Modal";
-import "react-credit-cards/es/styles-compiled.css";
+// import "react-credit-cards/es/styles-compiled.css";
 import visaCard from "images/visaCard.png";
 import masterCard from "images/mastercard.png";
 
