@@ -20,7 +20,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       </Helmet>
       <CommonLayout>
         <div className="space-y-6 sm:space-y-8">
-          {/* HEADING */}
+     
           <h2 className="text-3xl font-semibold">Account infomation</h2>
           <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
           <div className="flex flex-col md:flex-row">
@@ -57,7 +57,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                 <Label>Name</Label>
                 <Input className="mt-1.5" defaultValue="Eden Tuan" />
               </div>
-              {/* ---- */}
+              
               <div>
                 <Label>Gender</Label>
                 <Select className="mt-1.5">
@@ -66,17 +66,14 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   <option value="Other">Other</option>
                 </Select>
               </div>
-              {/* ---- */}
               <div>
                 <Label>Username</Label>
                 <Input className="mt-1.5" defaultValue="@eden_tuan" />
               </div>
-              {/* ---- */}
               <div>
                 <Label>Email</Label>
                 <Input className="mt-1.5" defaultValue="example@email.com" />
               </div>
-              {/* ---- */}
               <div className="max-w-lg">
                 <Label>Date of birth</Label>
                 <Input
@@ -85,17 +82,14 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                   defaultValue="1990-07-22"
                 />
               </div>
-              {/* ---- */}
               <div>
                 <Label>Addess</Label>
                 <Input className="mt-1.5" defaultValue="New york, USA" />
               </div>
-              {/* ---- */}
               <div>
                 <Label>Phone number</Label>
                 <Input className="mt-1.5" defaultValue="003 888 232" />
               </div>
-              {/* ---- */}
               <div>
                 <Label>About you</Label>
                 <Textarea className="mt-1.5" defaultValue="..." />

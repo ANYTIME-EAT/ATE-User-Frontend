@@ -82,7 +82,7 @@ export default function DropdownTravelers() {
                             : ""
                         }`}
                       >
-                        <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-primary-50 rounded-md text-primary-500 sm:h-12 sm:w-12">
+                        <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-red-50 rounded-md text-primary-500 sm:h-12 sm:w-12">
                           <item.icon aria-hidden="true" />
                         </div>
                         <div className="ml-4 space-y-0.5">

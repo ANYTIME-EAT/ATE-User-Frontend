@@ -65,7 +65,7 @@ const PageSubcription: FC<PageSubcriptionProps> = ({ className = "" }) => {
         }`}
       >
         {pricing.isPopular && (
-          <span className="bg-primary-500 text-white px-3 py-1 tracking-widest text-xs absolute right-3 top-3 rounded-full z-10">
+          <span className="bg-red-500 text-white px-3 py-1 tracking-widest text-xs absolute right-3 top-3 rounded-full z-10">
             POPULAR
           </span>
         )}

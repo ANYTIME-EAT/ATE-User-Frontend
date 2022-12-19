@@ -121,7 +121,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
           target={item.targetBlank ? "_blank" : undefined}
           rel="noopener noreferrer"
           className={({ isActive }) =>
-            `inline-flex items-center py-1 px-2 rounded hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 font-normal text-neutral-6000 dark:text-neutral-300 `
+            `inline-flex items-center py-1 px-2 rounded hover:text-neutral-700 hover:bg-red-400  font-normal text-neutral-6000 dark:text-neutral-300 `
           }
           to={item.href || ""}
         >

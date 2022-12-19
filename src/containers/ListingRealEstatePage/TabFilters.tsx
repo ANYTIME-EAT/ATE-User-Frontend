@@ -46,7 +46,7 @@ const TabFilters = () => {
 
   const renderXClear = () => {
     return (
-      <span className="w-4 h-4 rounded-full bg-primary-500 text-white flex items-center justify-center ml-3 cursor-pointer">
+      <span className="w-4 h-4 rounded-full bg-red-500 text-white flex items-center justify-center ml-3 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-3 w-3"
@@ -173,7 +173,7 @@ const TabFilters = () => {
         {({ open, close }) => (
           <>
             <Popover.Button
-              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none `}
+              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-primary-500 bg-red-50 text-primary-700 focus:outline-none `}
             >
               <span>
                 {`$${convertNumbThousand(
@@ -280,7 +280,7 @@ const TabFilters = () => {
       <div
         className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border focus:outline-none cursor-pointer transition-all ${
           isOnSale
-            ? "border-primary-500 bg-primary-50 text-primary-700"
+            ? "border-primary-500 bg-red-50 text-primary-700"
             : "border-neutral-300 dark:border-neutral-700"
         }`}
         onClick={() => setIsOnSale(!isOnSale)}
@@ -332,7 +332,7 @@ const TabFilters = () => {
     return (
       <div>
         <div
-          className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none cursor-pointer`}
+          className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-primary-500 bg-red-50 text-primary-700 focus:outline-none cursor-pointer`}
           onClick={openModalMoreFilter}
         >
           <span>
