@@ -10,6 +10,7 @@ import {
 import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "shared/Avatar/Avatar";
+import { useNavigate } from "react-router-dom";
 
 const solutions = [
   {
@@ -40,20 +41,20 @@ const solutionsFoot = [
     href: "##",
     icon: LifebuoyIcon,
   },
-
   {
     name: "Logout",
-    href: "##",
+    href: "/login",
     icon: ArrowRightOnRectangleIcon,
   },
 ];
 
 
 export default function AvatarDropdown() {
-  
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   
   const logout = () => {
+    console.log("sdsd")
     localStorage.removeItem("user-info");
     setIsLoggedIn(false);
   };
@@ -80,7 +81,7 @@ export default function AvatarDropdown() {
               <Popover.Panel className="absolute z-10 w-screen max-w-[260px] px-4 mt-4 -right-10 sm:right-0 sm:px-0">
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid gap-6 bg-white dark:bg-neutral-800 p-7">
-                    {solutions.map((item, index) => (
+                    {solutionsFoot.map((item, index) => (
                       <Link
                         key={index}
                         to={item.href}
