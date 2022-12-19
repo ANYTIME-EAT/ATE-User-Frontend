@@ -37,20 +37,26 @@ const SectionHero2: FC<SectionHero2Props> = ({
     let navigate = useNavigate(); 
 
     const getProfile = async(imgUrl : string) => {
-      // cons
       const response = await getAvatar(imgUrl);
       setAvatar(URL.createObjectURL(response))
+      console.log(avatar)
     }
 
     const routeChange = () =>{ 
       navigate("/profile/user/edit");
     }
 
+    const changeHandler = (e: { target: { files: any[]; }; }) => {
+      if (!e.target.files[0]) return;
+      setAvatar(e.target.files[0]);
+    };
+
 
     useEffect(() => {
       if(userInfo.avatar)
         getProfile(userInfo.avatar)
     },[userInfo.avatar])
+    console.log(userInfo.avatar)
   return (
     <div>
 

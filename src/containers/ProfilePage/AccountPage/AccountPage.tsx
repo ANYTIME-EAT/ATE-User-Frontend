@@ -20,12 +20,15 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   const [email, setEmail] = useState<any>("");
   const [username, setUsername] = useState<any>("");
   const [userData, setUserData] = useState<any>("");
+  const [avatar, setAvatar] = useState<any>("");
+  
   let navigate = useNavigate();
 
   const getProfileData = async () => {
     var userdata = {
       username: username,
       email: email,
+      avatar:avatar
     };
     console.log(userdata);
     const response = await updateProfile(userData);
@@ -45,6 +48,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   useEffect(() => {
     setEmail(JSON.parse(localStorage.getItem("user-info") || "{}").email);
     setUsername(JSON.parse(localStorage.getItem("user-info") || "{}").username);
+    setAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar)
   }, []);
 
   useEffect(() => {
@@ -83,6 +87,8 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
               <input
                 type="file"
                 className="absolute inset-0 opacity-0 cursor-pointer"
+                value={avatar}
+                onChange={(e)=>setAvatar(e.target.value)}
               />
             </div>
           </div>

@@ -42,6 +42,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
         let tempData: any = [];
         console.log(tempData);
         setUserAddress(addressArr);
+        
       }
     }
   };
