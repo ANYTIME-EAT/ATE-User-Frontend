@@ -108,7 +108,7 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
   // user profile page
   const heroSection = () => {
       return(
-        <SectionHero2 data={restaurant}  userInfo={userInfo}/>
+        <SectionHero2 data={restaurant}  userInfo={userInfo} img={image}/>
       );
   }
   return (

@@ -76,7 +76,7 @@ export interface LocationStates {
   "/profile/user/edit"?: {};
 
   "/forgotPassword"?: {};
-  "/user/reset_password/:id"?: {};
+  "/user/reset_password/:id/:token"?: {};
   "/logout"?: {};
   // "/reset_password"?: {};
   "/forgot_password/success"?: {};

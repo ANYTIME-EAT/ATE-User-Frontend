@@ -22,28 +22,24 @@ const ResetPasswordPage: FC<ResetPasswordProps> = ({ className = "" }) => {
   const [resetPassword, setResetPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
-  const [token, setToken] = useState("");
   const [allData, setAllData] = useState("");
   const navigate = useNavigate();
-  const { id } = useParams();
-  // const token=useParams();
+  const { id,token } = useParams();
 
   console.log(id);
 
   const handleSubmit = async () => {
     var data = {
-      token:id,
-      password:password,
-      confPassword:confPassword
+      password:password
     };
 
-    const response = await resetPasswordApi(data);
+    const response = await resetPasswordApi(id,token,data);
     console.log(response);
     if (response.data) {
       if (response.data === "success") {
         console.log(response.data);
         setAllData(response)
-              // navigate("/user/reset_password/${token}");
+              navigate("/login");
       } else {
         toast.error(response.data.message, {
           position: toast.POSITION.TOP_CENTER,

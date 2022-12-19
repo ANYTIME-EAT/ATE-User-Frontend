@@ -37,8 +37,8 @@ const SectionHero2: FC<SectionHero2Props> = ({
     let navigate = useNavigate(); 
 
     const getProfile = async(imgUrl : string) => {
-      const response = await getAvatar(imgUrl);
-      setAvatar(URL.createObjectURL(response))
+      const file = await getAvatar(imgUrl);
+      setAvatar(URL.createObjectURL(file))
       console.log(avatar)
     }
 
@@ -51,12 +51,11 @@ const SectionHero2: FC<SectionHero2Props> = ({
       setAvatar(e.target.files[0]);
     };
 
-
     useEffect(() => {
+      console.log(userInfo.avatar)
       if(userInfo.avatar)
         getProfile(userInfo.avatar)
     },[userInfo.avatar])
-    console.log(userInfo.avatar)
   return (
     <div>
 

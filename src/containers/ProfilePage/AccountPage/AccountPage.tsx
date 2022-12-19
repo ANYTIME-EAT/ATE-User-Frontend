@@ -10,6 +10,7 @@ import { Helmet } from "react-helmet";
 import { updateProfile } from "services/apiServices";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+// import {img} from "images/avatars/Image-1.png"
 
 export interface AccountPageProps {
   className?: string;
@@ -20,7 +21,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   const [email, setEmail] = useState<any>("");
   const [username, setUsername] = useState<any>("");
   const [userData, setUserData] = useState<any>("");
-  const [avatar, setAvatar] = useState<any>("");
+  const [avatar, setAvatar] = useState<any>("images/avatars/Image-1.png");
   
   let navigate = useNavigate();
 
@@ -48,12 +49,15 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   useEffect(() => {
     setEmail(JSON.parse(localStorage.getItem("user-info") || "{}").email);
     setUsername(JSON.parse(localStorage.getItem("user-info") || "{}").username);
-    setAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar)
+    setAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar) 
   }, []);
 
+  
+
   useEffect(() => {
+    console.log(avatar)
     console.log(email);
-  }, [email]);
+  }, [email,avatar]);
 
   return (
     <div className={`nc-AccountPage ${className} `} data-nc-id="AccountPage">
@@ -87,7 +91,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
               <input
                 type="file"
                 className="absolute inset-0 opacity-0 cursor-pointer"
-                value={avatar}
+                value={"images/avatars/Image-1.png"}
                 onChange={(e)=>setAvatar(e.target.value)}
               />
             </div>

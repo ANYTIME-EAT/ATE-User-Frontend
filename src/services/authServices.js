@@ -48,9 +48,9 @@ export const forgotPasswordApi = (email) => {
 
 } 
 
-export const resetPasswordApi = (id) => {
+export const resetPasswordApi = (id,token,data) => {
     return new Promise((resolve,reject)=>{
-        axios.patch(`${config.SERVER_URL}/reset_password/${id}`)
+        axios.post(`${config.SERVER_URL}/user/reset_password/${id}/${token}`,data)
         .then((res) =>{  
             resolve(res)
         }).catch((res) => {

@@ -136,7 +136,7 @@ export const pages: Page[] = [
 
   // restu 
   { path: "/newrest", component: NewRest },
-  { path: "/user/reset_password/:id", component: ResetPasswordPage },
+  { path: "/user/reset_password/:id/:token", component: ResetPasswordPage },
 
   { path: "/logout", component: Logout },
   // { path: "/reset_password", component: ResetPasswordPage },
