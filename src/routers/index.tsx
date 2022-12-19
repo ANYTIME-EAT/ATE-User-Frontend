@@ -56,6 +56,7 @@ import NewRest from "containers/Restauraunt/NewRest";
 import ForgotPasswordPage from "containers/Auth/ForgotPassword/ForgotPasswordPage";
 import ResetPasswordPage from "containers/Auth/ResetPassword";
 import Logout from "containers/Auth/Logout";
+import ForgotPasswordSuccessPage from "containers/Auth/SuccessForgotPassword";
 
 
 export const pages: Page[] = [
@@ -135,9 +136,15 @@ export const pages: Page[] = [
 
   // restu 
   { path: "/newrest", component: NewRest },
-  { path: "/reset_password/:id/:token", component: ResetPasswordPage },
+  { path: "/user/reset_password/:id", component: ResetPasswordPage },
 
   { path: "/logout", component: Logout },
+  // { path: "/reset_password", component: ResetPasswordPage },
+
+  { path: "/forgot_password/success", component: ForgotPasswordSuccessPage },
+  // { path: "/user/reset_password/:id/:token", component: ResetPasswordPage },
+  
+  
   
  
 ];
