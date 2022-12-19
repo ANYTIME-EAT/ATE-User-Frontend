@@ -72,6 +72,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
   const getProductItems = async () => {
     const response = await getProduct(1)
     if (response.data?.response === "success") {
+      console.log(response.data.product)
       setProduct(response.data.product)
     }
   }
