@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logoImg from "images/logo.png";
 import logoLightImg from "images/logo-light.png";
-import logo from "images/atelogo.png";
+import logo from "images/atelogo-removebg-preview.png";
 
 export interface LogoProps {
   img?: string;
