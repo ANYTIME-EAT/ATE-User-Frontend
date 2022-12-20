@@ -57,8 +57,8 @@ useEffect(() => {
                 src={restAvatar}
                 className="border-round-lg rounded visible"
 
-              /> */}
-              <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-full sm:h-full dark:bg-gray-500" src={data.restaurant_avatar} alt={data.name} />
+              /> 
+              {/* <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-full sm:h-full dark:bg-gray-500" src={data.restaurant_avatar} alt={data.name} /> */}
               {/* <NcImage
               className="flex-shrink-0 object-fill w-full h-full dark:border-transparent rounded outline-none sm:w-40 sm:h-40 dark:bg-gray-500"
               src={img1}
