@@ -342,16 +342,20 @@ const PageHome = () => {
         </div> */}
 
         {/* All Resturaunt */}
+        {restrauntData.length > 0 &&
         <SectionSliderNewCategories
           heading="All Resturaunts"
           subHeading="Good Food Is Always Cooking! Order Yummy Items "
           categoryCardType="card3"
           itemPerRow={5}
+          categories={restrauntData}
           uniqueClassName="PageHome_s3"
           sliderStyle = "style2"
-        />
+        />}
 
         <SectionDowloadApp />
+
+        
 
         <SectionSliderNewCategories
             heading="Popular Cusines"
