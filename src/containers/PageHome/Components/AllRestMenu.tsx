@@ -25,7 +25,7 @@ const AllRestMenu: FC<AllRestMenuProps> = ({
   products_Data,
   stayListings = DEMO_DATA,
   gridClass = "",
-  heading = "All Rest Menu",
+  heading = "All Restaurant Menu",
   subHeading = "Good Food Is Always Cooking! Order Some Yummy Items From The Menu",
   headingIsCenter,
   tabs = [],

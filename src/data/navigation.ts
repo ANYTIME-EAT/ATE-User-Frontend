@@ -21,8 +21,8 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "/newrest",
-    name: "restu"
+    href: "/restaurant",
+    name: "Restaurant"
   },
   {
     id: ncNanoId(),
