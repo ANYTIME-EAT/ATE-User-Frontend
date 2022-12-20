@@ -344,7 +344,7 @@ const PageHome = () => {
         {/* All Resturaunt */}
         {restrauntData.length > 0 &&
         <SectionSliderNewCategories
-          heading="All Resturaunts"
+          heading="All Restaurants"
           subHeading="Good Food Is Always Cooking! Order Yummy Items "
           categoryCardType="card3"
           itemPerRow={5}
