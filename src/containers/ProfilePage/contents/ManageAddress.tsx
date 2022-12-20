@@ -41,7 +41,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
         let addressArr = response.data.data;
         let tempData: any = [];
         console.log(tempData);
-        setUserAddress(addressArr);
+        setAddress(addressArr);
         
       }
     }
@@ -50,6 +50,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   useEffect(() => {
     getAllAddressData();
     setAddress(address);
+    console.log(address)
   }, []);
   const handleTypeChange = (type: string) => {
     setSelectedAddressType(type);

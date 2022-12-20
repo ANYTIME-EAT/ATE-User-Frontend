@@ -7,12 +7,13 @@ import {
   ArrowRightOnRectangleIcon,
   LifebuoyIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "shared/Avatar/Avatar";
 import { useNavigate } from "react-router-dom";
+import { getAvatar } from "services/apiServices";
 
-
+import avatar1 from "images/avatars/Image-1.png";
 
 const solutionsFoot = [
   {
@@ -25,6 +26,13 @@ const solutionsFoot = [
     href: "/login",
     icon: ArrowRightOnRectangleIcon,
   },
+
+  {
+    name: "Profile",
+    href: "/profile",
+    icon: ArrowRightOnRectangleIcon,
+  },
+
 ];
 
 
@@ -38,6 +46,23 @@ export default function AvatarDropdown() {
     setIsLoggedIn(false);
   };
 
+  const [image, setImage] = useState<any>("")
+  const [avatar, setAvatar] = useState<any>("")
+
+  const getUserAvatar = async(img:string) => {
+    const file = await getAvatar(img)
+    setImage(URL.createObjectURL(file))
+  
+  }
+  useEffect(() => {
+    setAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar)
+  }, []);
+
+  useEffect(() => {
+    console.log(avatar)
+    getUserAvatar(avatar)
+  }, [avatar]);
+
   return (
     <div className="AvatarDropdown">
       <Popover className="relative">
@@ -46,7 +71,7 @@ export default function AvatarDropdown() {
             <Popover.Button
               className={`inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
-              <Avatar sizeClass="w-8 h-8 sm:w-9 sm:h-9" />
+              <Avatar sizeClass="w-8 h-8 sm:w-9 sm:h-9" imgUrl={image} />
             </Popover.Button>
             <Transition
               as={Fragment}

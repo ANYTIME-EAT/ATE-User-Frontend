@@ -7,7 +7,7 @@ import Select from "shared/Select/Select";
 import Textarea from "shared/Textarea/Textarea";
 import CommonLayout from "./CommonLayout";
 import { Helmet } from "react-helmet";
-import { updateProfile } from "services/apiServices";
+import { getAvatar, updateProfile } from "services/apiServices";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 // import {img} from "images/avatars/Image-1.png"
@@ -15,13 +15,15 @@ import { useNavigate } from "react-router-dom";
 export interface AccountPageProps {
   className?: string;
   userInfo?: any;
+  
 }
 
 const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   const [email, setEmail] = useState<any>("");
   const [username, setUsername] = useState<any>("");
   const [userData, setUserData] = useState<any>("");
-  const [avatar, setAvatar] = useState<any>("images/avatars/Image-1.png");
+  const [avatar, setAvatar] = useState<any>("");
+  const imageMimeType = /image\/(png|jpg|jpeg)/i;
   
   let navigate = useNavigate();
 
@@ -46,18 +48,38 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
     }
   };
 
+  const [image, setImage] = useState<any>("")
+
+  const getUserAvatar = async(img:any) => {
+    const file = await getAvatar(img)
+    setImage(URL.createObjectURL(file))
+  
+  }
+
   useEffect(() => {
     setEmail(JSON.parse(localStorage.getItem("user-info") || "{}").email);
     setUsername(JSON.parse(localStorage.getItem("user-info") || "{}").username);
     setAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar) 
-  }, []);
+    getUserAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar)
+  }, [image]);
 
+  const changeHandler = async(e:any) => {
+    const file = e.target.files[0];
+    const file1 = await getAvatar(file)
+    setImage(URL.createObjectURL(file))
   
+  }
+
+  // const changeHandler = (e:any) => {
+  //   const file = e.target.files[0];
+  //   setImage(URL.createObjectURL(file))
+  // }
 
   useEffect(() => {
     console.log(avatar)
     console.log(email);
   }, [email,avatar]);
+
 
   return (
     <div className={`nc-AccountPage ${className} `} data-nc-id="AccountPage">
@@ -67,9 +89,9 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
           
           <div className="flex-shrink-0 flex items-start">
             
-            <div className="relative rounded-full overflow-hidden flex">
-              <Avatar sizeClass="w-32 h-32" />
-              <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
+            <div className="relative rounded-full overflow-hidden flex" >
+              <Avatar sizeClass="w-32 h-32" imgUrl={image}/>
+              <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer" >
                 <svg
                   width="30"
                   height="30"
@@ -91,9 +113,10 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
               <input
                 type="file"
                 className="absolute inset-0 opacity-0 cursor-pointer"
-                value={"images/avatars/Image-1.png"}
-                onChange={(e)=>setAvatar(e.target.value)}
+                // value={image}
+                onChange={changeHandler}
               />
+              {/* <img src={image} alt="" /> */}
             </div>
           </div>
           <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-lg space-y-6">

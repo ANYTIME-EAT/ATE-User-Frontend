@@ -43,7 +43,7 @@ const SectionHero2: FC<SectionHero2Props> = ({
     }
 
     const routeChange = () =>{ 
-      navigate("/profile/user/edit");
+      navigate("/getAvatar/edit");
     }
 
     const changeHandler = (e: { target: { files: any[]; }; }) => {

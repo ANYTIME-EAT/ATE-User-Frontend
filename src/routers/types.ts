@@ -73,7 +73,7 @@ export interface LocationStates {
 
   "/profile/address/edit"?: {};
   "/address/edit"?: {};
-  "/profile/user/edit"?: {};
+  "/getAvatar/edit"?: {};
 
   "/forgotPassword"?: {};
   "/user/reset_password/:id/:token"?: {};
@@ -82,6 +82,9 @@ export interface LocationStates {
   "/forgot_password/success"?: {};
   // "/user/reset_password/:id/:token"?: {};
   
+   // {user.isSignedIn && (
+  //   <Route exact path="/restricted" component={RestrictedPage} />
+  // )}
   
 }
 

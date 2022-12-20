@@ -42,6 +42,7 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
       if(response){
         console.log(JSON.parse(response))
         setUserInfo(JSON.parse(response))
+
       }
     }else{
       setUserInfo({})
@@ -108,7 +109,7 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
   // user profile page
   const heroSection = () => {
       return(
-        <SectionHero2 data={restaurant}  userInfo={userInfo} img={image}/>
+        <SectionHero2 data={restaurant}  userInfo={userInfo} img={userInfo.avatar}/>
       );
   }
   return (
