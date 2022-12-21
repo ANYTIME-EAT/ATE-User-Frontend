@@ -2,8 +2,9 @@ import Stepper from "containers/Stepper/Stepper";
 import React, { useState, useEffect } from "react";
 import { getOrderStatusApi } from "../../services/apiServices";
 import io from "socket.io-client";
+import config from '../../config/config.json'
 
-const socket = io("http://localhost:5005");
+const socket = io(config.SERVER_URL);
 
 const Tracking = () => {
   //Chat
