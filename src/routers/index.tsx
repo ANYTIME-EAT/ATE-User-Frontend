@@ -127,8 +127,8 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/packages", component: PagePackages },
   { path: "/services", component: PageServices },
   { path: "/offers", component: PageOffers },
-  { path: "/signup", component: PageSignUp },
-  // { path: "/login", component: PageLogin },
+  { path: "/signup", component: PageHome },
+  { path: "/login", component: PageHome},
   { path: "/subscription", component: PageSubcription },
 
   { path: "/forgotPassword", component: ForgotPasswordPage },

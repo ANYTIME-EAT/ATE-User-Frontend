@@ -70,16 +70,14 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   
   }
 
-  // const changeHandler = (e:any) => {
-  //   const file = e.target.files[0];
-  //   setImage(URL.createObjectURL(file))
-  // }
-
   useEffect(() => {
     console.log(avatar)
     console.log(email);
   }, [email,avatar]);
 
+  const handleCancel = () => {
+    navigate("/profile")
+};
 
   return (
     <div className={`nc-AccountPage ${className} `} data-nc-id="AccountPage">
@@ -143,6 +141,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
+                onClick={handleCancel}
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
                 No, cancel

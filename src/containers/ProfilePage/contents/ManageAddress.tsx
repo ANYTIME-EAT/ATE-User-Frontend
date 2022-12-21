@@ -29,10 +29,29 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   const [showModelDelete, setShowModelDelete] = useState(false);
   const [address, setAddress] = useState<any>([]);
   const [addressType, setAddressType] = useState("");
-  
   const [selectedAddressType, setSelectedAddressType] = useState<string>("");
+  const [userId, setUserId] = useState(0);
+
+  useEffect(() => {
+    setUserId(JSON.parse(localStorage.getItem("user-info") || "{}").id)
+    console.log(userId)
+  }, []);
 
   //get user address
+  // const getAllAddressData = async () => {
+  //   const response = await getAllUserAddress(userId);
+  //   console.log(response.data);
+  //   if (response.data) {
+  //     if (response.data.data.length > 0) {
+  //       let addressArr = response.data.data;
+  //       let tempData: any = [];
+  //       console.log(addressArr);
+  //       setAddress(addressArr);
+        
+  //     }
+  //   }
+  // };
+
   const getAllAddressData = async () => {
     const response = await getAllUserAddress(1);
     console.log(response.data);
@@ -41,12 +60,19 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
         let addressArr = response.data.data;
         let tempData: any = [];
         console.log(tempData);
-        setAddress(addressArr);
-        
+        setUserAddress(addressArr);
+        console.log(addressArr)
+        userAddress.map((item: any, key: number) => {
+          if (item.type === selectedAddressType) {
+            userAddress[key] = {
+              type: item.type,
+              address: address,
+            };
+          }
+        });
       }
     }
   };
-
   useEffect(() => {
     getAllAddressData();
     setAddress(address);
@@ -117,7 +143,8 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     if(response.data){
       if(response.data === "success"){
         setUserAddress(temp)
-        handleModalAdd(false);
+        setShowModelAdd(false)
+        // handleModalAdd(false);
       }else{
         console.log("cannot add address")
       }

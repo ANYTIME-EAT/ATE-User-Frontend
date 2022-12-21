@@ -60,15 +60,3 @@ export const resetPasswordApi = (id,token,data) => {
 
 } 
 
-// export const verifyEmailApi = (verificationCode) => {
-//     return new Promise((resolve,reject)=>{
-//         axios.get(`${config.SERVER_URL}/user/logout/${verificationCode}`)
-//         .then((res) =>{  
-//             resolve(res)
-//         }).catch((res) => {
-//             reject(res)
-//         })
-//     })
-
-// } 
-
