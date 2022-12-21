@@ -31,14 +31,14 @@ const CardCategory5: FC<CardCategory5Props> = ({
       </div>
       <div className="mt-4 px-3 truncate">
         <h2
-          className={`text-base sm:text-lg text-neutral-900 dark:text-neutral-100 font-medium truncate`}
+          className={`text-base sm:text-lg text-neutral-900 dark:text-neutral-100 font-medium truncate text-center`}
         >
           {name}
         </h2>
         <span
           className={`block mt-2 text-sm text-neutral-6000 dark:text-neutral-400`}
         >
-          {convertNumbThousand(count)} orders
+          
         </span>
         
       </div>

@@ -11,7 +11,7 @@ import pizza from 'images/pizza.png'
 import bbq from 'images/bbq.png'
 import offer1 from 'images/offer1.png'
 import offer2 from 'images/offer2.png'
-import { getRestaurantList, getOffersList, getAllComboMenuList, getAllProductsAPI, getAllCuisinesAPI } from '../../services/apiServices'
+import { getRestaurantList, getOffersList, getAllComboMenuList, getAllProductsAPI, getAllCuisinesAPI, getKitchenList, getAvatar } from '../../services/apiServices'
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 import AteSectionHero from "components/SectionHero/AteSectionHero";
 import AllRestMenu from "./Components/AllRestMenu";
@@ -146,13 +146,37 @@ const Cusine: TaxonomyType[] = [
 
 const PageHome = () => {
 
+  const [kitchenData, setKitchenData] = useState<any>([])
   const [restrauntData, setRestraurantData] = useState<any>([])
   const [offerData, setOfferData] = useState<any>([])
   const [comboMenuData, setcomboMenuData] = useState<any>([])
   const [newProduct, setNewProduct] = useState<boolean>(false)
   const [productsData, setProductsData] = useState<any>([])
   const [cuisinesData, setCuisinesData] = useState<any>([])
- 
+
+  const getKitchenData = async () => {
+    const response = await getKitchenList()
+    
+    if (response.data) {
+      let tempData: any = [];
+      if (response.data.response === "success") {
+        console.log(response.data)
+        response.data.kitchen.map(async(item: any, key: number) => {
+          tempData[key] = {
+            id: item.id,
+            href: "#",
+            name: item.name,
+            taxonomy: "category",
+            thumbnail: item.avatar
+          }
+        })
+        console.log("rest data", tempData)
+        setKitchenData(tempData)
+      }
+
+    }
+  }
+
 
   const getRestrauntData = async () => {
     const response = await getRestaurantList()
@@ -160,6 +184,7 @@ const PageHome = () => {
     if (response.data) {
       let tempData: any = [];
       if (response.data.response === "success") {
+        console.log(response.data)
         response.data.restaurant.map((item: any, key: number) => {
           tempData[key] = {
             id: item.id,
@@ -167,9 +192,9 @@ const PageHome = () => {
             name: item.name,
             taxonomy: "category",
             count: 188288,
-            // thumbnail:kfc,
           }
         })
+
         setRestraurantData(tempData)
       }
 
@@ -192,11 +217,11 @@ const PageHome = () => {
             food_type: item.is_availability,
             combo_menu_id: item.menu_avatar,
             is_availability: item.is_deleted,
-            price:item.price,
-            quantity:item.quantity,
-            addons:item.addons,
-            offer:item.offer,
-            product_avatar:item.product_avatar
+            price: item.price,
+            quantity: item.quantity,
+            addons: item.addons,
+            offer: item.offer,
+            product_avatar: item.product_avatar
 
           }
         })
@@ -216,7 +241,7 @@ const PageHome = () => {
           tempData[key] = {
             id: item.id,
             name: item.name,
-            cuisines_avatar:item.cuisines_avatar
+            cuisines_avatar: item.cuisines_avatar
 
           }
         })
@@ -261,6 +286,7 @@ const PageHome = () => {
 
   useEffect(() => {
     getRestrauntData()
+    getKitchenData()
     getOfferData()
     getComboMenuData()
     getAllProductsData()
@@ -276,14 +302,14 @@ const PageHome = () => {
 
       <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
 
-        {restrauntData.length > 0 &&
+        {kitchenData.length > 0 &&
           <SectionSliderNewCategories
             heading="Our Top Brands"
             subHeading=""
-            categoryCardType="card5"
+            categoryCardType="card3"
             itemPerRow={4}
             sliderStyle="style2"
-            categories={restrauntData}
+            categories={kitchenData}
             uniqueClassName="PageHome_s1"
             className="mt-24"
           />}
@@ -315,7 +341,7 @@ const PageHome = () => {
         <div className="relative py-16">
           <BackgroundSection />
           {/* <SectionGridAllMenu combo_MenuData={comboMenuData} setNewProduct={setNewProduct} /> */}
-          <AllRestMenu products_Data={productsData} setNewProduct={setNewProduct}/>
+          <AllRestMenu products_Data={productsData} setNewProduct={setNewProduct} />
         </div>
 
         {/* SECTION */}
@@ -343,31 +369,31 @@ const PageHome = () => {
 
         {/* All Resturaunt */}
         {restrauntData.length > 0 &&
-        <SectionSliderNewCategories
-          heading="All Restaurants"
-          subHeading="Good Food Is Always Cooking! Order Yummy Items "
-          categoryCardType="card3"
-          itemPerRow={5}
-          categories={restrauntData}
-          uniqueClassName="PageHome_s3"
-          sliderStyle = "style2"
-        />}
+          <SectionSliderNewCategories
+            heading="All Restaurants"
+            subHeading="Good Food Is Always Cooking! Order Yummy Items "
+            categoryCardType="card3"
+            itemPerRow={5}
+            categories={restrauntData}
+            uniqueClassName="PageHome_s3"
+            sliderStyle="style2"
+          />}
 
         <SectionDowloadApp />
 
-        
+
 
         <SectionSliderNewCategories
-            heading="Popular Cusines"
-            subHeading=""
-            categoryCardType="cusine"
-            itemPerRow={4}
-            sliderStyle="style2"
-            categories={Cusine}
-            uniqueClassName="PageHome_s1"
-            className="mt-24"
-          />
-     
+          heading="Popular Cusines"
+          subHeading=""
+          categoryCardType="cusine"
+          itemPerRow={4}
+          sliderStyle="style2"
+          categories={Cusine}
+          uniqueClassName="PageHome_s1"
+          className="mt-24"
+        />
+
       </div>
     </div>
   );
