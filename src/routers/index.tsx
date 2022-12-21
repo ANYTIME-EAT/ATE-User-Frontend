@@ -56,6 +56,7 @@ import NewRest from "containers/Restauraunt/NewRest";
 import ForgotPasswordPage from "containers/Auth/ForgotPassword/ForgotPasswordPage";
 import ResetPasswordPage from "containers/Auth/ResetPassword";
 import Logout from "containers/Auth/Logout";
+import Tracking from "containers/Tracking/Tracking";
 
 
 export const pages: Page[] = [
@@ -102,6 +103,7 @@ export const pages: Page[] = [
   // { path: "/profile/route", component: ProfilePage},
   
   { path: "/pay-done", component: PayPage },
+  { path: "/tracking", component: Tracking },
   
   { path: "/author", component: AuthorPage },
   { path: "/profile/account", component: ProfilePage },
