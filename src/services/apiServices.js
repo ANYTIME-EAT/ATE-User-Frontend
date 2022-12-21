@@ -215,3 +215,14 @@ export const deletePaymentCardApi = (id,data) => {
         })
     })
 }
+
+export const getOrderStatusApi = (id) => {
+    return new Promise((resolve,reject) => {
+        axios.get(`${config.SERVER_URL}/orders/get_status/${id}`,header())
+        .then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}

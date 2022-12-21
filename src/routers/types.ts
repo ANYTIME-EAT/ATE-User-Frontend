@@ -79,6 +79,7 @@ export interface LocationStates {
   "/reset_password/:id/:token"?: {};
   "/logout"?: {};
   "/tracking"?: {};
+  "/chat"?: {};
   
 }
 
