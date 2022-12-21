@@ -58,7 +58,7 @@ export interface LocationStates {
   "/add-listing-10"?: {};
   //
   "/author"?: {};
-  "/newrest"?: {};
+  "/restaurant"?: {};
   "/search"?: {};
   "/about"?: {};
   "/contact"?: {};
@@ -78,13 +78,8 @@ export interface LocationStates {
   "/forgotPassword"?: {};
   "/user/reset_password/:id/:token"?: {};
   "/logout"?: {};
-  // "/reset_password"?: {};
   "/forgot_password/success"?: {};
-  // "/user/reset_password/:id/:token"?: {};
-  
-   // {user.isSignedIn && (
-  //   <Route exact path="/restricted" component={RestrictedPage} />
-  // )}
+  "/tracking"?: {};
   
 }
 

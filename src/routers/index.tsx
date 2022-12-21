@@ -59,6 +59,7 @@ import Logout from "containers/Auth/Logout";
 import ForgotPasswordSuccessPage from "containers/Auth/SuccessForgotPassword";
 import { loginApi } from "services/authServices";
 import { toast } from "react-toastify";
+import Tracking from "containers/Tracking/Tracking";
 
 
 export const AuthenticationAccesspages: Page[] = [
@@ -101,6 +102,7 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/getAvatar/edit", component: AccountPage},
     
   { path: "/pay-done", component: PayPage },
+  { path: "/tracking", component: Tracking },
   
   { path: "/author", component: AuthorPage },
   
@@ -134,7 +136,7 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/forgotPassword", component: ForgotPasswordPage },
 
   // restu 
-  { path: "/newrest", component: NewRest },
+  { path: "/restaurant", component: NewRest },
   
   { path: "/user/reset_password/:id/:token", component:ResetPasswordPage },
 

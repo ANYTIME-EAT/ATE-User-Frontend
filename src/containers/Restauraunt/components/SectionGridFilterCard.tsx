@@ -37,7 +37,7 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
           <ProductCard key={key} productData={item} setNewProduct={setNewProduct} />
         ))}
       </div>
-      <div className="flex mt-16 justify-center items-center">
+      <div className="flex mt-16 justify-center items-center ">
         {/* <Pagination /> */}
       </div>
     </div>

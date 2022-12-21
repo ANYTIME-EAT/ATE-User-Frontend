@@ -10,6 +10,7 @@ import Badge from "shared/Badge/Badge";
 import { StayDataType } from "data/types";
 import Button from "shared/Button/Button";
 import { getAvatar } from 'services/apiServices'
+import CustomInupt from "./CustomInput";
 
 import { addToCart, getCartList, addProduct } from "services/cartStorage"
 import { ToastContainer, toast } from 'react-toastify'
@@ -80,12 +81,12 @@ const ProductCard: FC<ProductCardProps> = ({
 
         />
 
-
-
         <SaleOffBadge className="absolute left-5 top-5 !bg-orange-500"
           desc={productData.offer} />
+        
 
       </div>
+      
     );
   };
 
@@ -153,8 +154,8 @@ const ProductCard: FC<ProductCardProps> = ({
               <StartRating reviewCount={reviewCount} point={reviewStart} />
             </div>
             <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 "
-              onClick={() => { addAuthorItems(productData.id, productData.name, productData.price, 1, productData.product_avatar, "author");; setNewProduct(true) }}><i className="las la-shopping-cart" 
-            />
+              onClick={() => { addAuthorItems(productData.id, productData.name, productData.price, 1, productData.product_avatar, "author");; setNewProduct(true) }}><i className="las la-shopping-cart"
+              />
               add
             </Button>
 
