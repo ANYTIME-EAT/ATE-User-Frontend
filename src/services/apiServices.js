@@ -215,3 +215,14 @@ export const deletePaymentCardApi = (id,data) => {
         })
     })
 }
+
+export const uploadFileApi = (data) => {
+    return new Promise((resolve,reject) => {
+        axios.post(`${config.SERVER_URL}/uploadSingle`,data,header())
+        .then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}

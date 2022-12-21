@@ -7,7 +7,7 @@ import Select from "shared/Select/Select";
 import Textarea from "shared/Textarea/Textarea";
 import CommonLayout from "./CommonLayout";
 import { Helmet } from "react-helmet";
-import { getAvatar, updateProfile } from "services/apiServices";
+import { getAvatar, updateProfile, uploadFileApi } from "services/apiServices";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 // import {img} from "images/avatars/Image-1.png"
@@ -23,6 +23,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   const [username, setUsername] = useState<any>("");
   const [userData, setUserData] = useState<any>("");
   const [avatar, setAvatar] = useState<any>("");
+  const [file, setFile] = useState<any>("");
   const imageMimeType = /image\/(png|jpg|jpeg)/i;
   
   let navigate = useNavigate();
@@ -51,8 +52,9 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   const [image, setImage] = useState<any>("")
 
   const getUserAvatar = async(img:any) => {
-    const file = await getAvatar(img)
-    setImage(URL.createObjectURL(file))
+    const file2 = await getAvatar(img)
+    setImage(URL.createObjectURL(file2))
+    // setFile(URL.createObjectURL(file2))
   
   }
 
@@ -63,12 +65,36 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
     getUserAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar)
   }, [image]);
 
+  // const changeHandler = async(e:any) => {
+    
+  //   e.preventDefault()
+  //   const file = e.target.value;
+  //   console.log(file)
+  //   const file1 = await getAvatar(file)
+  //   setImage(URL.createObjectURL(file1))
+  //   console.log(URL.createObjectURL(file1))
+    
+  // }
+
   const changeHandler = async(e:any) => {
+    e.preventDefault();
     const file = e.target.files[0];
-    const file1 = await getAvatar(file)
-    setImage(URL.createObjectURL(file))
-  
-  }
+    const formData = new FormData();
+    formData.append('file',file);
+    const file1 = await uploadFileApi(formData)
+    .then(res => {
+      console.log(res.data.filename);
+      setAvatar(res.data.filename)
+      console.log(avatar)
+      // alert("File uploaded successfully.")
+      
+})
+};
+   
+useEffect(() => {
+  console.log(avatar)
+  console.log(email);
+}, [email,avatar]);
 
   useEffect(() => {
     console.log(avatar)

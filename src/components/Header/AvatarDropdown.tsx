@@ -17,6 +17,11 @@ import avatar1 from "images/avatars/Image-1.png";
 
 const solutionsFoot = [
   {
+    name: "Profile",
+    href: "/profile",
+    icon: UserCircleIcon,
+  },
+  {
     name: "Help",
     href: "##",
     icon: LifebuoyIcon,
@@ -26,13 +31,6 @@ const solutionsFoot = [
     href: "/login",
     icon: ArrowRightOnRectangleIcon,
   },
-
-  {
-    name: "Profile",
-    href: "/profile",
-    icon: ArrowRightOnRectangleIcon,
-  },
-
 ];
 
 

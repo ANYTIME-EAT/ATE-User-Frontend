@@ -30,11 +30,11 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   const [address, setAddress] = useState<any>([]);
   const [addressType, setAddressType] = useState("");
   const [selectedAddressType, setSelectedAddressType] = useState<string>("");
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     setUserId(JSON.parse(localStorage.getItem("user-info") || "{}").id)
-    console.log(userId)
+    console.log("********************",userId)
   }, []);
 
   //get user address
@@ -53,8 +53,9 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   // };
 
   const getAllAddressData = async () => {
-    const response = await getAllUserAddress(1);
-    console.log(response.data);
+      const response = await getAllUserAddress(JSON.parse(localStorage.getItem("user-info") || "{}").id);
+      console.log(response.data);
+  
     if (response.data) {
       if (response.data.data.length > 0) {
         let addressArr = response.data.data;
@@ -71,7 +72,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
           }
         });
       }
-    }
+  }
   };
   useEffect(() => {
     getAllAddressData();
@@ -141,9 +142,10 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     const response = await updateProfile({ address: temp });
     console.log(response)
     if(response.data){
-      if(response.data === "success"){
+      if(response.data.response=== "success"){
         setUserAddress(temp)
         setShowModelAdd(false)
+        console.log("&&&&&&&&&&&&&&&",showModelAdd)
         // handleModalAdd(false);
       }else{
         console.log("cannot add address")
