@@ -160,7 +160,7 @@ const PageHome = () => {
     if (response.data) {
       let tempData: any = [];
       if (response.data.response === "success") {
-        console.log(response.data)
+        // console.log(response.data)
         response.data.kitchen.map(async(item: any, key: number) => {
           tempData[key] = {
             id: item.id,
@@ -170,7 +170,7 @@ const PageHome = () => {
             thumbnail: item.avatar
           }
         })
-        console.log("rest data", tempData)
+        // console.log("rest data", tempData)
         setKitchenData(tempData)
       }
 
@@ -184,7 +184,7 @@ const PageHome = () => {
     if (response.data) {
       let tempData: any = [];
       if (response.data.response === "success") {
-        console.log(response.data)
+        // console.log(response.data)
         response.data.restaurant.map((item: any, key: number) => {
           tempData[key] = {
             id: item.id,
@@ -203,7 +203,7 @@ const PageHome = () => {
 
   const getAllProductsData = async () => {
     const response = await getAllProductsAPI()
-    console.log(response.data)
+    // console.log(response.data)
     if (response.data) {
       let tempData: any = [];
       if (response.data.response === "success") {
@@ -233,7 +233,7 @@ const PageHome = () => {
 
   const getAllCuisinesData = async () => {
     const response = await getAllCuisinesAPI()
-    console.log(response.data)
+    // console.log(response.data)
     if (response.data) {
       let tempData: any = [];
       if (response.data.response === "success") {
@@ -330,7 +330,7 @@ const PageHome = () => {
           />
         </div>
 
-        {/* All Rest Menu  */}
+        {/* Combo Menu  */}
         <div className="relative py-16">
           {/* <BackgroundSection /> */}
           <SectionGridAllMenu headingIsCenter={true} combo_MenuData={comboMenuData} setNewProduct={setNewProduct} />

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import GallerySlider from "components/GallerySlider/GallerySlider";
 import { DEMO_STAY_LISTINGS } from "data/listings";
 import { StayDataType } from "data/types";
@@ -9,14 +9,15 @@ import Badge from "shared/Badge/Badge";
 import Button from "shared/Button/Button";
 import img1 from 'images/domino.png'
 import StartRating from "./StartRating";
+import { getAvatar } from 'services/apiServices'
 
 
 export interface StayCardProductsProps {
   className?: string;
   data?: StayDataType;
   size?: "default" | "small";
-  productsData? : any;
-  setNewProduct(val:boolean) : void;
+  productsData?: any;
+  setNewProduct(val: boolean): void;
 }
 
 const DEMO_DATA = DEMO_STAY_LISTINGS[0];
@@ -51,20 +52,34 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
   // "is_availability": null,
   // "is_deleted": false,
 
-  // console.log(comboMenuData)
+  console.log(productsData)
+
+  const [image, setImage] = useState<any>("")
+
+  const getImage = async (img: string) => {
+    const file = await getAvatar(img)
+    setImage(URL.createObjectURL(file))
+  }
+
+  useEffect(() => {
+    // console.log(productsData.product_avatar)
+    getImage(productsData.product_avatar)
+  }, [])
 
   const renderSliderGallery = () => {
     return (
       <div className="relative w-full">
         <GallerySlider
-          uniqueID={`StayCard_${productsData.id}`}
+          uniqueID={`StayCard_${id}`}
           ratioClass="aspect-w-4 aspect-h-3 "
-          galleryImgs={galleryImgs}
+          galleryImgs={[image && image]}
           href={href}
         />
-        
+
         <BtnLikeIcon isLiked={like} className="absolute right-3 top-3 z-[1]" />
-        {saleOff && <SaleOffBadge className="absolute left-1 top-3" />}
+        <SaleOffBadge className="absolute left-1 top-3"
+          desc={productsData.offer}
+        />
       </div>
     );
   };
@@ -83,20 +98,20 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
             </h2>
           </div>
           <span className="text-sm text-neutral-500 dark:text-neutral-400">
-            {productsData.description}  
+            {productsData.description}
           </span>
           <div className="flex justify-between items-center">
             <span className="text-base font-semibold">
               {productsData.price}
-              {` `}
-             
+              {`$ `}
+
             </span>
             {!!reviewStart && (
               <StartRating reviewCount={reviewCount} point={reviewStart} />
             )}
           </div>
-          <div className="w-20 border-b border-neutral-100 dark:border-neutral-800"></div>
-          <Button className="px-1 py-1 sm:px-3 hover:bg-[#be123c] dark:bg-[#be123c] dark:hover:bg-[#881337] flex  content-center">Order Now</Button>
+          <div className="w-20 border-b border-neutral-100 dark:border-neutral-800 "></div>
+          <Button className="px-1 py-1 sm:px-3 bg-red-600 hover:bg-red-800 dark:bg-[#be123c] dark:hover:bg-[#881337] flex ">Order Now</Button>
         </div>
 
 
