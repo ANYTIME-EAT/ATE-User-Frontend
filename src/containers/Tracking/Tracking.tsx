@@ -1,7 +1,7 @@
 import Stepper from 'containers/Stepper/Stepper';
 import React, { useState, useEffect} from 'react'
 import {getOrderStatusApi} from '../../services/apiServices'
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 
 // const socket = require("socket.io-client")("http://localhost:5005", {
 //   rejectUnauthorized: false // WARN: please do not do this in production
