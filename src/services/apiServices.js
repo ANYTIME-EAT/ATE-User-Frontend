@@ -145,10 +145,8 @@ export const updateProfile = (data,id) => {
         axios.put(`${config.SERVER_URL}/user/edit/${id}`,data,header())
         .then((res) => {
             resolve(res)
-            console.log("6666666666666666666666666",res)
         }).catch((res) => {
             reject(res)
-            console.log("777777777777777777777777777777",res)
         })
     })
 }

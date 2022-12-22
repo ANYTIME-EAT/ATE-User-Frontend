@@ -51,8 +51,9 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
 
   const getOrdersItems =async () => {
     const response = await getAllOrdersAPI(1)
+    console.log(response)
     if(response.data?.response ==="success"){
-      setOrder(response.data.orders)
+      setOrder(response.data.data)
     }
   }
   useEffect(() => {

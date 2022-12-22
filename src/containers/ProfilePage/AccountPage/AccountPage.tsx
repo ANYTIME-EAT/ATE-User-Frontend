@@ -32,14 +32,14 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   const getProfileData = async () => {
     var userdata = {
       name: username,
-      // email: email,
       avatar:avatar
     };
-    console.log(userdata);
-    const response = await updateProfile(userData,1);
+    console.log(userdata)
+
+    const response = await updateProfile(userdata, 1);
     console.log(response.data);
 
-    if (response.data > 0) {
+    if (response.data.response==="success") {
       setUserData(response.data);
       console.log(response.data);
       navigate("/profile");
