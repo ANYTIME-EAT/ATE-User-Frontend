@@ -140,13 +140,15 @@ export const getAllUserAddress = (userId) => {
     })
 }
 
-export const updateProfile = (data) => {
+export const updateProfile = (data,id) => {
     return new Promise((resolve,reject) => {
-        axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
+        axios.put(`${config.SERVER_URL}/user/edit/${id}`,data,header())
         .then((res) => {
             resolve(res)
+            console.log("6666666666666666666666666",res)
         }).catch((res) => {
             reject(res)
+            console.log("777777777777777777777777777777",res)
         })
     })
 }

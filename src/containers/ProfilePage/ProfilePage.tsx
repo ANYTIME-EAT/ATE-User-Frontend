@@ -40,7 +40,7 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
     if(localStorage.getItem("user-info")){
       const response = localStorage.getItem('user-info');
       if(response){
-        console.log(JSON.parse(response))
+        console.log("%%%%%%%%%%%%%%%%%",JSON.parse(response))
         setUserInfo(JSON.parse(response))
 
       }

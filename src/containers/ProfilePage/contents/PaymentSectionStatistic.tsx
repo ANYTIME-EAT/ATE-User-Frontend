@@ -38,7 +38,7 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
 
   //get user payments
   const getAllPaymentData = async () => {
-    const response = await getAllPaymentAPI(4);
+    const response = await getAllPaymentAPI(JSON.parse(localStorage.getItem("user-info") || "{}").id);
     console.log(response.data.cards);
     if (response.data) {
       if (response.data.cards.length > 0) {
@@ -72,18 +72,19 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
 
   const handlePaymentCardCreate = async () => {
     const data = {
-      card_no: card_no,
+      // card_no: card_no,
       exp_month: expDate.split("-")[1],
       exp_year: expDate.split("-")[0],
       cvc:cvc,
       name:name,
-      last_four_digits:last4Number,
+      card_no:card_no,
+      // last_four_digits:last4Number,
       card_type:cardType,
-      card_holder_name:customer_name,
-      email:email,
+      // card_holder_name:customer_name,
+      // email:email,
       type:type,
-      card_id:cardId,
-      primary_card:false
+      // card_id:cardId,
+      // primary_card:false
       
     };
     let temp = [...paymentCards, data];

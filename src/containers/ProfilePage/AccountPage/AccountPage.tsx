@@ -23,6 +23,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   const [username, setUsername] = useState<any>("");
   const [userData, setUserData] = useState<any>("");
   const [avatar, setAvatar] = useState<any>("");
+  const [updatedAvatar, setupdatedAvatar] = useState<any>("");
   const [file, setFile] = useState<any>("");
   const imageMimeType = /image\/(png|jpg|jpeg)/i;
   
@@ -30,13 +31,13 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
 
   const getProfileData = async () => {
     var userdata = {
-      username: username,
-      email: email,
+      name: username,
+      // email: email,
       avatar:avatar
     };
     console.log(userdata);
-    const response = await updateProfile(userData);
-    console.log(response);
+    const response = await updateProfile(userData,1);
+    console.log(response.data);
 
     if (response.data > 0) {
       setUserData(response.data);
@@ -58,11 +59,20 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   
   }
 
+  const getUpdateduserAvatar = async(img:any) => {
+    const file2 = await getAvatar(img)
+    setupdatedAvatar(URL.createObjectURL(file2))
+
+    // setFile(URL.createObjectURL(file2))
+  
+  }
   useEffect(() => {
     setEmail(JSON.parse(localStorage.getItem("user-info") || "{}").email);
     setUsername(JSON.parse(localStorage.getItem("user-info") || "{}").username);
     setAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar) 
     getUserAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar)
+    getUpdateduserAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar)
+    
   }, [image]);
 
   // const changeHandler = async(e:any) => {
@@ -84,12 +94,27 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
     const file1 = await uploadFileApi(formData)
     .then(res => {
       console.log(res.data.filename);
-      setAvatar(res.data.filename)
-      console.log(avatar)
+      console.log(updatedAvatar)
+      localStorage.setItem('user-info',JSON.stringify({imgAvatar:res.data.filename}));
       // alert("File uploaded successfully.")
+      console.log("^^^^^^^^^^^^^^^^^^^",userInfo)
+
+const newUpdatedUserInfo = {
+  ...userInfo,
+  "username":username,
+  "avatar": res.data.filename
+};
+
+localStorage.setItem('user-info', JSON.stringify(newUpdatedUserInfo))
       
 })
 };
+
+useEffect(() => {
+  let avatar=setAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar) 
+  setupdatedAvatar(avatar)
+  console.log(updatedAvatar)
+}, [avatar]);
    
 useEffect(() => {
   console.log(avatar)
@@ -154,14 +179,15 @@ useEffect(() => {
               />
             </div>
 
-            <div>
+            {/* <div>
               <Label>Email</Label>
               <Input
                 className="mt-1.5"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
+
               />
-            </div>
+            </div> */}
 
             <div className="p-6 text-center">
               <button

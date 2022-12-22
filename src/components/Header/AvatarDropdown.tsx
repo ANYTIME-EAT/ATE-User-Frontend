@@ -41,11 +41,18 @@ export default function AvatarDropdown() {
   const logout = () => {
     console.log("sdsd")
     localStorage.removeItem("user-info");
+    localStorage.removeItem("access-token");
+    setTimeout(() => {
+      window.location.reload();
+    }, 2)
     setIsLoggedIn(false);
+    setOpen(false)
+    navigate("/login")
   };
 
   const [image, setImage] = useState<any>("")
   const [avatar, setAvatar] = useState<any>("")
+  const [open, setOpen] = useState<any>(false)
 
   const getUserAvatar = async(img:string) => {
     const file = await getAvatar(img)

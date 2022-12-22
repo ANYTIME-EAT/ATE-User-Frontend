@@ -130,7 +130,7 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/services", component: PageServices },
   { path: "/offers", component: PageOffers },
   { path: "/signup", component: PageHome },
-  { path: "/login", component: PageHome},
+  { path: "/login", component: PageLogin},
   { path: "/subscription", component: PageSubcription },
 
   { path: "/forgotPassword", component: ForgotPasswordPage },
@@ -149,7 +149,7 @@ export const AuthenticationAccesspages: Page[] = [
 export const AllAccesspages : Page[] = [
 
   { path: "/", exact: true, component: PageHome },
-  { path: "/login", exact: true, component: PageLogin },
+  { path: "/login", exact: true, component: PageLogin},
   { path: "/signup", exact: true, component: PageSignUp },
   { path: "/profile", exact: true, component: PageLogin },
   { path: "/", exact: true, component: PageHome},
