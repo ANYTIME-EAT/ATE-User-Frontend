@@ -31,7 +31,7 @@ const SectionGridAllMenu: FC<SectionGridAllMenuProps> = ({
   setNewProduct
 }) => {
   const renderCard = (data:any) => {
-    // console.log(data)
+    console.log(data)
     return <StayCard key={data.id} comboMenuData={data} setNewProduct={setNewProduct}/>;
   };
 

@@ -80,6 +80,7 @@ export interface LocationStates {
   "/logout"?: {};
   "/forgot_password/success"?: {};
   "/tracking"?: {};
+  "/chat"?: {};
   
 }
 

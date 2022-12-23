@@ -60,6 +60,7 @@ import ForgotPasswordSuccessPage from "containers/Auth/SuccessForgotPassword";
 import { loginApi } from "services/authServices";
 import { toast } from "react-toastify";
 import Tracking from "containers/Tracking/Tracking";
+import Chat from "containers/Chat/Chat"
 
 
 export const AuthenticationAccesspages: Page[] = [
@@ -103,6 +104,7 @@ export const AuthenticationAccesspages: Page[] = [
     
   { path: "/pay-done", component: PayPage },
   { path: "/tracking", component: Tracking },
+  { path: "/chat", component: Chat },
   
   { path: "/author", component: AuthorPage },
   

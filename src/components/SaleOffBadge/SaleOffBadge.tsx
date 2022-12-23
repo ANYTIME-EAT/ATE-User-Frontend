@@ -11,10 +11,11 @@ const SaleOffBadge: FC<SaleOffBadgeProps> = ({
 }) => {
   return (
     <div
-      className={`nc-SaleOffBadge flex items-center justify-center text-xs py-0.5 px-3 bg-red-700 text-red-50 rounded-full ${className}`}
+      className={`nc-SaleOffBadge flex items-center justify-center text-xs py-0.5 px-3 bg-green-700 text-red-50 rounded-full ${className}`}
       data-nc-id="SaleOffBadge"
+      style={{display: desc?"flex":"none"}}
     >
-      {desc}
+      {desc} %
     </div>
   );
 };

@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import "./stepper.css"
 import { TiTick, } from "react-icons/ti";
 import {BsCart,BsCartCheck} from "react-icons/bs";
 import {CiSettings} from "react-icons/ci"
 import {GoHome} from "react-icons/go"
 import {SlBadge} from "react-icons/sl"
-const Stepper = () => {
+
+export interface StepperProps {
+    currentStep: number;
+    complete: boolean;
+}
+
+const Stepper: FC<StepperProps> = ({currentStep, complete}) => {
     const steps = ["Confirmed Order", "Prepared", "In Process", "Deliverd", "Rate Us"];
     const stepsvg = [
         <BsCart size={40} className="fill-white"/>,
@@ -33,8 +39,8 @@ const Stepper = () => {
 
 
     ]
-    const [currentStep, setCurrentStep] = useState(1);
-    const [complete, setComplete] = useState(false);
+    // const [currentStep, setCurrentStep] = useState(1);
+    // const [complete, setComplete] = useState(false);
     return (
         <>
             <div className="flex  justify-between">
@@ -52,7 +58,7 @@ const Stepper = () => {
                     </div>
                 ))}
             </div>
-            {!complete && (
+            {/* {!complete && (
                 <button
                     className="btn"
                     onClick={() => {
@@ -63,7 +69,7 @@ const Stepper = () => {
                 >
                     {currentStep === steps.length ? "Finish" : "Next"}
                 </button>
-            )}
+            )} */}
         </>
     );
 };

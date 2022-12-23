@@ -148,7 +148,7 @@ const Cart: FC<CartProps> = ({ className = "", newProduct, setNewProduct }) => {
 
                                 {/* {items[0].name} */}
                             </ul>
-                            <div className="space-y-1 text-right">
+                            <div className="space-y-1 text-right" hidden = {items.length>0? false:true}>
                                 <p>Total amount :
                                     <span className="font-semibold"> {total} €</span>
                                 </p>
@@ -156,9 +156,10 @@ const Cart: FC<CartProps> = ({ className = "", newProduct, setNewProduct }) => {
                             </div>
 
                         </div>
-                        <div className="bg-gray-50 dark:bg-white/5 p-5 rounded-3xl  mt-10">
+                        <div className={`bg-gray-50 dark:bg-white/5 p-5 rounded-3xl  mt-10 ${items.length >0? "pointer-events-auto " : "pointer-events-none "}  `} >
                             <a
-                                className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-red-600 text-white hover:bg-red-800"
+                                className={`flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium 
+                                 ${items.length >0? "bg-red-600 text-white hover:bg-red-800" : "bg-red-900 text-white "}`} 
                                 href='/checkout'
                                 // target="_blank"
                                 rel="noopener noreferrer"

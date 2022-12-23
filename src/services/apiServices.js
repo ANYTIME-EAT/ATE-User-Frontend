@@ -26,11 +26,22 @@ export const getAvatar = (avatar) => {
     }) 
 }
 
+// getallKitchen
+export const getKitchenList = () => {
+    return new Promise((resolve,reject) =>{
+        axios.get(`${config.SERVER_URL}/kitchen/list/all_kitchen`).then((res) => {
+            resolve(res)
+        }).catch ((res) => {
+            reject(res)
+        })
+    })
+}
+
 export const getRestaurantList = () => {
     return new Promise((resolve,reject)=>{
-        axios.get(`${config.SERVER_URL}/restaurant/list`).then((res) =>{
+        axios.get(`${config.SERVER_URL}/restaurant/list`).then((res) => {
             resolve(res)
-        }).catch((res) => {
+        }).catch ((res) => {
             reject(res)
         })
     })
@@ -216,6 +227,17 @@ export const deletePaymentCardApi = (id,data) => {
     })
 }
 
+export const getOrderStatusApi = (id) => {
+    return new Promise((resolve,reject) => {
+        axios.get(`${config.SERVER_URL}/orders/get_status/${id}`,header())
+        .then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
 export const uploadFileApi = (data) => {
     return new Promise((resolve,reject) => {
         axios.post(`${config.SERVER_URL}/uploadSingle`,data,header())
@@ -226,3 +248,4 @@ export const uploadFileApi = (data) => {
         })
     })
 }
+
