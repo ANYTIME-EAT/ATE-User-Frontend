@@ -1,8 +1,9 @@
-import React, { FC } from "react";
+import React, { FC,useState,useEffect } from "react";
 import NcImage from "shared/NcImage/NcImage";
 import { TaxonomyType } from "data/types";
 import { Link } from "react-router-dom";
-import convertNumbThousand from "utils/convertNumbThousand";
+import { getAvatar } from "services/apiServices";
+
 
 export interface CusinesProps {
   className?: string;
@@ -14,6 +15,17 @@ const Cusines: FC<CusinesProps> = ({
   taxonomy,
 }) => {
   const { count, name, href = "/", thumbnail } = taxonomy;
+
+  const [image, setImage] = useState<any>()
+  const setProfile = async (img: string) => {
+    const file = await getAvatar(img);
+    setImage(URL.createObjectURL(file))
+  }
+
+  useEffect(() => {
+    setProfile(thumbnail ? thumbnail : "")
+  }, [])
+
   return (
     <Link
       to={href}
@@ -24,10 +36,10 @@ const Cusines: FC<CusinesProps> = ({
         className={`flex-shrink-0 relative w-full hover:drop-shadow-2xl overflow-hidden group`}
       >
         <NcImage
-          src={thumbnail}
-          className="object-cover rounded-full "
+          src={image}
+          className="object-cover "
         />
-     
+
       </div>
       <div className="mt-2 ml-10 right-10">
         <h2

@@ -2,14 +2,15 @@ import React, { FC, useEffect, useMemo } from "react";
 import Heading from "components/Heading/Heading";
 import Glide from "@glidejs/glide";
 import { TaxonomyType } from "data/types";
-import CardCategory1 from "components/CardCategory1/CardCategory1";
+import CardCategory1 from "./CardCategory1";
 import CardCategory3 from "components/CardCategory3/CardCategory3";
 import CardCategory4 from "components/CardCategory4/CardCategory4";
 import NextPrev from "shared/NextPrev/NextPrev";
 import CardCategory5 from "components/CardCategory5/CardCategory5";
 import useNcId from "hooks/useNcId";
-import kfc from "../../images/kfc.png"
+// import kfc from "../../images/kfc.png"
 import Cusines from "containers/PageHome/Components/Cusines";
+import StayCardProduct from "../StayCardProducts";
 
 export interface SectionSliderNewCategoriesProps {
   className?: string;
@@ -30,7 +31,7 @@ const DEMO_CATS: TaxonomyType[] = [
     name: "Chola",
     taxonomy: "category",
     count: 17288,
-    thumbnail:kfc,
+    thumbnail:"",
   },
   {
     id: "2",
@@ -38,8 +39,7 @@ const DEMO_CATS: TaxonomyType[] = [
     name: "p&S",
     taxonomy: "category",
     count: 2118,
-    thumbnail:
-    kfc,
+    thumbnail:"",
   },
   {
     id: "3",
@@ -47,8 +47,7 @@ const DEMO_CATS: TaxonomyType[] = [
     name: "KFC",
     taxonomy: "category",
     count: 36612,
-    thumbnail:
-    kfc,
+    thumbnail:"",
   },
   {
     id: "4",
@@ -56,8 +55,7 @@ const DEMO_CATS: TaxonomyType[] = [
     name: "Jollybe",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-    kfc,
+    thumbnail:"",
   },
   {
     id: "5",
@@ -65,8 +63,7 @@ const DEMO_CATS: TaxonomyType[] = [
     name: "Some Rest",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-    kfc,
+    thumbnail:"",
   },
   {
     id: "6",
@@ -74,8 +71,7 @@ const DEMO_CATS: TaxonomyType[] = [
     name: "Dome Food",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-    kfc,
+    thumbnail:"",
   },
 ];
 
