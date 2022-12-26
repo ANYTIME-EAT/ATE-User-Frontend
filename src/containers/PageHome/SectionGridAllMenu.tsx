@@ -5,6 +5,7 @@ import ButtonPrimary from "shared/Button/ButtonPrimary";
 import HeaderFilter from "./HeaderFilter";
 import StayCard from "./StayCard";
 
+
 // OTHER DEMO WILL PASS PROPS
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
 
@@ -31,7 +32,7 @@ const SectionGridAllMenu: FC<SectionGridAllMenuProps> = ({
   setNewProduct
 }) => {
   const renderCard = (data:any) => {
-    console.log(data)
+    // console.log(data)
     return <StayCard key={data.id} comboMenuData={data} setNewProduct={setNewProduct}/>;
   };
 

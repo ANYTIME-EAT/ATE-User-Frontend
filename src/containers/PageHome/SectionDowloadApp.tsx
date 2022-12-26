@@ -9,7 +9,7 @@ import btnIosPng from "images/btn-ios.png";
 import btnAndroidPng from "images/btn-android.png";
 const SectionDowloadApp = () => {
   return (
-    <div className="relative pb-24 pt-24 lg:py-32 xl:py-64 2xl:py-48">
+    <div className="relative pb-24 pt-24 lg:py-32 xl:py-64 2xl:py-48 ">
       <BackgroundSection className="bg-red-500 bg-opacity-80 dark:bg-opacity-100 ">
         <img
           className="absolute inset-0 w-full h-full object-cover rounded-3xl object-right"

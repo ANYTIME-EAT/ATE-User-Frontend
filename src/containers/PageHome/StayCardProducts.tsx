@@ -17,7 +17,6 @@ export interface StayCardProductsProps {
   data?: StayDataType;
   size?: "default" | "small";
   productsData?: any;
-  setNewProduct(val: boolean): void;
 }
 
 const DEMO_DATA = DEMO_STAY_LISTINGS[0];
@@ -27,7 +26,6 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
   className = "",
   data = DEMO_DATA,
   productsData,
-  setNewProduct
 }) => {
   const {
     galleryImgs,
@@ -52,7 +50,7 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
   // "is_availability": null,
   // "is_deleted": false,
 
-  console.log(productsData)
+
 
   const [image, setImage] = useState<any>("")
 
@@ -62,7 +60,7 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
   }
 
   useEffect(() => {
-    // console.log(productsData.product_avatar)
+    
     getImage(productsData.product_avatar)
   }, [])
 
