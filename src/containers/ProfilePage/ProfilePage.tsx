@@ -98,14 +98,22 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
         </div>
       );
     }
-    else if(activePage.title === "Referral"){
+    // else if(activePage.title === "Referral"){
+    //   return (
+    //     <div className=" flex-1 p-7">
+    //       <PromotionalSectionStatistic/>
+    //     </div>
+    //   );
+    // }
+    else if(activePage.title === "Settings"){
       return (
         <div className=" flex-1 p-7">
-          <PromotionalSectionStatistic/>
+          <AccountPage/>
         </div>
       );
     }
   };
+  
 
   // user profile page
   const heroSection = () => {

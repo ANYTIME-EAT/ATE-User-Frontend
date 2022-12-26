@@ -24,10 +24,10 @@ const sidebarData=[
         title:"My Order"
         
     },
-    {
-        title:"Referral"
+    // {
+    //     title:"Referral"
         
-    },
+    // },
     {
         title:"Refund History"
         
@@ -38,6 +38,10 @@ const sidebarData=[
     },
     {
         title:"Change Language"       
+    },
+    {
+      title:"Settings", 
+      subTitle:"Edit Profile"     
     },
     
 ]
@@ -76,6 +80,7 @@ const RestraurantPage: FC<RestraurantPageProps> = ({ data, handleActivePage }) =
               onClick={() => handleActivePage(index, Menu.title)}>
               <span className={`${!open && "hidden bg-blue-100 "} origin-left duration-200 py-3`}>
                 {Menu.title}
+                {/* {Menu.subTitle} */}
               </span>
             </li>
           ))}
