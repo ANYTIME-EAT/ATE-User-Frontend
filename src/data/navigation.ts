@@ -30,9 +30,9 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     name: "Signup"
   },
 
-  {
-    id: ncNanoId(),
-    href: "/logout",
-    name: "Logout"
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/logout",
+  //   name: "Logout"
+  // },
 ];
