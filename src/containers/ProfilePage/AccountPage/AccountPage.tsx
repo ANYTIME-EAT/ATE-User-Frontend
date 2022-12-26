@@ -7,31 +7,39 @@ import Select from "shared/Select/Select";
 import Textarea from "shared/Textarea/Textarea";
 import CommonLayout from "./CommonLayout";
 import { Helmet } from "react-helmet";
-import { updateProfile } from "services/apiServices";
+import { getAvatar, updateProfile, uploadFileApi } from "services/apiServices";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+// import {img} from "images/avatars/Image-1.png"
 
 export interface AccountPageProps {
   className?: string;
   userInfo?: any;
+  
 }
 
 const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   const [email, setEmail] = useState<any>("");
   const [username, setUsername] = useState<any>("");
   const [userData, setUserData] = useState<any>("");
+  const [avatar, setAvatar] = useState<any>("");
+  const [updatedAvatar, setupdatedAvatar] = useState<any>("");
+  const [file, setFile] = useState<any>("");
+  const imageMimeType = /image\/(png|jpg|jpeg)/i;
+  
   let navigate = useNavigate();
 
   const getProfileData = async () => {
     var userdata = {
-      username: username,
-      email: email,
+      name: username,
+      avatar:avatar
     };
-    console.log(userdata);
-    const response = await updateProfile(userData);
-    console.log(response);
+    console.log(userdata)
 
-    if (response.data > 0) {
+    const response = await updateProfile(userdata, 1);
+    console.log(response.data);
+
+    if (response.data.response==="success") {
       setUserData(response.data);
       console.log(response.data);
       navigate("/profile");
@@ -42,14 +50,85 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
     }
   };
 
+  const [image, setImage] = useState<any>("")
+
+  const getUserAvatar = async(img:any) => {
+    const file2 = await getAvatar(img)
+    setImage(URL.createObjectURL(file2))
+    // setFile(URL.createObjectURL(file2))
+  
+  }
+
+  const getUpdateduserAvatar = async(img:any) => {
+    const file2 = await getAvatar(img)
+    setupdatedAvatar(URL.createObjectURL(file2))
+
+    // setFile(URL.createObjectURL(file2))
+  
+  }
   useEffect(() => {
     setEmail(JSON.parse(localStorage.getItem("user-info") || "{}").email);
     setUsername(JSON.parse(localStorage.getItem("user-info") || "{}").username);
-  }, []);
+    setAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar) 
+    getUserAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar)
+    getUpdateduserAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar)
+    
+  }, [image]);
+
+  // const changeHandler = async(e:any) => {
+    
+  //   e.preventDefault()
+  //   const file = e.target.value;
+  //   console.log(file)
+  //   const file1 = await getAvatar(file)
+  //   setImage(URL.createObjectURL(file1))
+  //   console.log(URL.createObjectURL(file1))
+    
+  // }
+
+  const changeHandler = async(e:any) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file',file);
+    const file1 = await uploadFileApi(formData)
+    .then(res => {
+      console.log(res.data.filename);
+      console.log(updatedAvatar)
+      localStorage.setItem('user-info',JSON.stringify({imgAvatar:res.data.filename}));
+      // alert("File uploaded successfully.")
+      console.log("^^^^^^^^^^^^^^^^^^^",userInfo)
+
+const newUpdatedUserInfo = {
+  ...userInfo,
+  "username":username,
+  "avatar": res.data.filename
+};
+
+localStorage.setItem('user-info', JSON.stringify(newUpdatedUserInfo))
+      
+})
+};
+
+useEffect(() => {
+  let avatar=setAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar) 
+  setupdatedAvatar(avatar)
+  console.log(updatedAvatar)
+}, [avatar]);
+   
+useEffect(() => {
+  console.log(avatar)
+  console.log(email);
+}, [email,avatar]);
 
   useEffect(() => {
+    console.log(avatar)
     console.log(email);
-  }, [email]);
+  }, [email,avatar]);
+
+  const handleCancel = () => {
+    navigate("/profile")
+};
 
   return (
     <div className={`nc-AccountPage ${className} `} data-nc-id="AccountPage">
@@ -59,9 +138,9 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
           
           <div className="flex-shrink-0 flex items-start">
             
-            <div className="relative rounded-full overflow-hidden flex">
-              <Avatar sizeClass="w-32 h-32" />
-              <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
+            <div className="relative rounded-full overflow-hidden flex" >
+              <Avatar sizeClass="w-32 h-32" imgUrl={image}/>
+              <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer" >
                 <svg
                   width="30"
                   height="30"
@@ -83,7 +162,10 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
               <input
                 type="file"
                 className="absolute inset-0 opacity-0 cursor-pointer"
+                // value={image}
+                onChange={changeHandler}
               />
+              {/* <img src={image} alt="" /> */}
             </div>
           </div>
           <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-lg space-y-6">
@@ -97,19 +179,21 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
               />
             </div>
 
-            <div>
+            {/* <div>
               <Label>Email</Label>
               <Input
                 className="mt-1.5"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
+
               />
-            </div>
+            </div> */}
 
             <div className="p-6 text-center">
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
+                onClick={handleCancel}
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
                 No, cancel

@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from "react";
 import Heading from "components/Heading/Heading";
-import { deletePaymentCardApi, getAllPaymentAPI, paymentCardAPI } from "services/apiServices";
+import { attachCardApi, deletePaymentCardApi, getAllPaymentAPI, paymentCardAPI } from "services/apiServices";
 import Modal from "../components/Modal";
-// import "react-credit-cards/es/styles-compiled.css";
 import visaCard from "images/visaCard.png";
 import masterCard from "images/mastercard.png";
+import _ from "lodash";
 
 export interface Statistic {
   id: string;
@@ -16,29 +16,37 @@ export interface SectionStatisticProps {
   className?: string;
 }
 
+const generateRandomID = (size:number) => {
+  let length = size,
+    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    retVal = "";
+  for (let i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
+}
+
 const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
   className = "",
 }) => {
   const [paymentCards, setPaymentCards] = useState<any>([]);
   const [showModel, setShowModel] = useState(false);
-  const [cardId, setCardId] = useState("");
+  const [card_id, setCard_id] = useState(_.uniqueId(`cc-${Date.now()}-${generateRandomID(6)}`));
   const [expMonth, setExpMonth] = useState("");
   const [expYear, setExpYear] = useState("");
   const [name, setName] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [expDate, setExpDate] = useState("");
-  const [card_no, setCard_no] = useState("");
-  const [last4Number, setLast4Number] = useState("");
+  const [cvc, setCvc] = useState("123");
+  const [expDate, setExpDate] = useState("2022-12");
+  const [cardNo, setCardNo] = useState("");
   const [cardType, setCardType] = useState("");
   const [showModelDelete, setShowModelDelete] = useState(false);
-  const [customer_name, setCustomer_name] = useState("");
+  const [cardholderName, setCardholderName] = useState("Mr X");
   const [email, setEmail] = useState("");
   const [type, setType] = useState("");
-  
-
+ 
   //get user payments
   const getAllPaymentData = async () => {
-    const response = await getAllPaymentAPI(4);
+    const response = await getAllPaymentAPI(JSON.parse(localStorage.getItem("user-info") || "{}").id);
     console.log(response.data.cards);
     if (response.data) {
       if (response.data.cards.length > 0) {
@@ -70,41 +78,70 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
 
   const handleSubmit = () => {};
 
-  const handlePaymentCardCreate = async () => {
+  // const handlePaymentCardCreate = async () => {
+  //   const data = {
+  //     customer_name:customer_name,
+  //     exp_month: expDate.split("-")[1],
+  //     exp_year: expDate.split("-")[0],
+  //     cvc:cvc,
+  //     card_no:card_no,
+  //     card_type:cardType,
+  //     name:name,
+  //     email:email,
+  //     type:type,
+  //     card_id:cardId,
+  //     primary_card:false   
+      
+  //   };
+  //   let temp = [...paymentCards, data];
+  //   const response = await paymentCardAPI(data);
+  //   console.log(response);
+  //   if (response.data) {
+  //     if (response.data === "success") {
+  //       setPaymentCards(temp);
+  //       handleModal(false);
+  //     } else {
+  //       console.log("cannot add payment cards");
+  //     }
+  //   }
+  // };
+
+  const handlePayByCard = async() => {  
     const data = {
-      card_no: card_no,
+      customer_name: cardholderName,
+      name: name,
+      email: email,
+      type: "card",
+      card_no: cardNo,
       exp_month: expDate.split("-")[1],
       exp_year: expDate.split("-")[0],
-      cvc:cvc,
-      name:name,
-      last_four_digits:last4Number,
-      card_type:cardType,
-      card_holder_name:customer_name,
-      email:email,
-      type:type,
-      card_id:cardId,
-      primary_card:false
-      
-    };
-    let temp = [...paymentCards, data];
-    const response = await paymentCardAPI(data);
-    console.log(response);
-    if (response.data) {
-      if (response.data === "success") {
-        setPaymentCards(temp);
-        handleModal(false);
-      } else {
-        console.log("cannot add payment cards");
+      cvc: cvc,
+      cardId: card_id,
+      primary_card: false
+    }
+
+    let temp=[...paymentCards,data]
+    const response = await attachCardApi(JSON.parse(localStorage.getItem("user-info") || "{}").id,temp)
+    console.log(response)
+    if(response.data){
+      if(response.data.response === "success" || response.data.message === "This card is already exists."){
+        console.log(card_id)
+        setPaymentCards(temp)
+      }else{
+        console.log("Invalid card details")
       }
     }
-  };
+  }
 
   const handleModalDelete = (val: boolean) => {
     setShowModelDelete(val);
   };
 
   const removePaymentHandler = async () => {
-    const response = await deletePaymentCardApi(4);
+    const data={
+      card_id:card_id
+    }
+    const response = await deletePaymentCardApi(4,data);
     if (response.data) {
       if (response.data.response === "success") {
         handleModalDelete(false);
@@ -136,22 +173,7 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
       <form className="space-y-6" action="#" onSubmit={handleSubmit}>
           <div x-show="card">
             <div className="space-y-4">
-              {/* <div>
-                <label
-                  className="block text-sm font-medium mb-1"
-                  htmlFor="card-nr"
-                >
-                  Card Number <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="card-nr"
-                  className="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
-                  type="text"
-                  placeholder="1234 1234 1234 1234"
-                onChange={(e) => setCard_no(e.target.value)}
-                value={card_no}
-                />
-              </div> */}
+              
               <div className="flex space-x-4">
                 <div className="flex-1">
                   <label
@@ -182,8 +204,8 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
                   className="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
                   type="text"
                   placeholder="1234 1234 1234 1234"
-                onChange={(e) => setCard_no(e.target.value)}
-                value={card_no}
+                onChange={(e) => setCardNo(e.target.value)}
+                value={cardNo}
                 />
               </div>
               </div>
@@ -255,7 +277,7 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
                 data-modal-toggle="popup-modal"
                 type="button"
                 className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center ml-2"
-                onClick={handlePaymentCardCreate}
+                onClick={handlePayByCard}
               >
                 Add
               </button>

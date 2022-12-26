@@ -57,6 +57,9 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
         console.log(response.data)
         localStorage.setItem("user-info", JSON.stringify(response.data.user));
         localStorage.setItem("access-token", response.data.token);
+        setTimeout(() => {
+          window.location.reload();
+        }, 5)
         navigate('/');
       }else{
         toast.error(response.data.message,{
@@ -82,6 +85,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
   // };
 
   const logout = () => {
+    localStorage.removeItem("user-info");
     localStorage.removeItem("user-info");
     setIsLoggedIn(false);
   };

@@ -24,8 +24,9 @@ const SectionGridFilterCardMyOrders: FC<SectionGridFilterCardProps> = ({
 
   const getAllOrdersData=async()=>{
     const response=await getAllOrdersAPI(1);
+    console.log(response)
     if(response.data){
-      console.log(response.data.orders)
+      console.log(response.data.data)
       let tempData:any=[]
       if(response.data.response==="success"){
         response.data.orders.map((item:any,key: number)=>{

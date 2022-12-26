@@ -29,26 +29,55 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   const [showModelDelete, setShowModelDelete] = useState(false);
   const [address, setAddress] = useState<any>([]);
   const [addressType, setAddressType] = useState("");
-  
   const [selectedAddressType, setSelectedAddressType] = useState<string>("");
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    setUserId(JSON.parse(localStorage.getItem("user-info") || "{}").id)
+    console.log("********************",userId)
+  }, []);
 
   //get user address
+  // const getAllAddressData = async () => {
+  //   const response = await getAllUserAddress(userId);
+  //   console.log(response.data);
+  //   if (response.data) {
+  //     if (response.data.data.length > 0) {
+  //       let addressArr = response.data.data;
+  //       let tempData: any = [];
+  //       console.log(addressArr);
+  //       setAddress(addressArr);
+        
+  //     }
+  //   }
+  // };
+
   const getAllAddressData = async () => {
-    const response = await getAllUserAddress(1);
-    console.log(response.data);
+      const response = await getAllUserAddress(JSON.parse(localStorage.getItem("user-info") || "{}").id);
+      console.log(response.data);
+  
     if (response.data) {
       if (response.data.data.length > 0) {
         let addressArr = response.data.data;
         let tempData: any = [];
         console.log(tempData);
         setUserAddress(addressArr);
+        console.log(addressArr)
+        userAddress.map((item: any, key: number) => {
+          if (item.type === selectedAddressType) {
+            userAddress[key] = {
+              type: item.type,
+              address: address,
+            };
+          }
+        });
       }
-    }
+  }
   };
-
   useEffect(() => {
     getAllAddressData();
     setAddress(address);
+    console.log(address)
   }, []);
   const handleTypeChange = (type: string) => {
     setSelectedAddressType(type);
@@ -113,9 +142,11 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     const response = await updateProfile({ address: temp });
     console.log(response)
     if(response.data){
-      if(response.data === "success"){
+      if(response.data.response=== "success"){
         setUserAddress(temp)
-        handleModalAdd(false);
+        setShowModelAdd(false)
+        console.log("&&&&&&&&&&&&&&&",showModelAdd)
+        // handleModalAdd(false);
       }else{
         console.log("cannot add address")
       }

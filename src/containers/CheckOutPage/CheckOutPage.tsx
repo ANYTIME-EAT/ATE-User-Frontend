@@ -18,7 +18,7 @@ import ModalSelectGuests from "components/ModalSelectGuests";
 import { GuestsObject } from "components/HeroSearchForm2Mobile/GuestsInput";
 import { COUNTRIES } from "data/countryCodeList"
 import _ from "lodash";
-import { getAvatar, attachCardApi, paymentApi } from 'services/apiServices'
+import { getAvatar, attachCardApi, paymentApi, getAllUserAddress, updateProfile } from 'services/apiServices'
 import { getCartList } from 'services/cartStorage'
 import { useNavigate } from "react-router-dom";
 
@@ -54,8 +54,13 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     const [state, setState] = useState<string>("");
     const [postal_code, setPostalCode] = useState<string>("");
     const [countryCode, setCountryCode] = useState<string>("IT");
-
-    const [total_amount, setTotal] = useState<number>(0)
+    const [total_amount, setTotal] = useState<number>(0);
+    
+    const [userAddress, setUserAddress] = useState<any>([]);
+    const [selectedAddressType, setSelectedAddressType] = useState<string>("");
+    const [address, setAddress] = useState<any>([]);
+    const [addressType, setAddressType] = useState<string>("");
+    
 
     //Card dets
     const [cardNo, setCardNo] = useState<string>("4242424242424242")
@@ -65,6 +70,13 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     const [cvv, setCvv] = useState<string>("123")
 
     const [images, setImages] = useState<any>([]);
+
+    useEffect(() => {
+      setEmail(JSON.parse(localStorage.getItem("user-info") || "{}").email);
+      setName(JSON.parse(localStorage.getItem("user-info") || "{}").username);
+      console.log(name)
+      setLine1(address)
+    }, []);
 
     const getProfile = (list:any) => {
       list.map(async(item:any,key:number) => {
@@ -120,6 +132,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
       phone: phone,
       tracking_number: "TR-123456",
       address: {
+        type:addressType,
         city: city,
         country_code: countryCode,
         line1: line1,
@@ -186,23 +199,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
       <div className="flex flex-col max-w-2xl p-1 dark:bg-inherit dark:text-gray-100  sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
         <h3 className="text-2xl font-semibold">View Cart</h3>
         <div className="flex flex-col  ">
-          {/* <div className="flex-shrink-0 w-full sm:w-40">
-            <div className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent  rounded-2xl overflow-hidden">
-              <NcImage src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />             
-            </div>
-            <div className="py-5 sm:px-5 space-y-3">
-            <div>
-              <span className="text-base font-medium mt-1 block">
-                The Lounge & Bar
-              </span>
-            </div>
-            <span className="block  text-sm text-neutral-500 dark:text-neutral-400">
-              2 beds · 2 baths
-            </span>
-            <div className="w-10 border-b border-neutral-200  dark:border-neutral-700"></div>
-           
-          </div>
-          </div> */}
           {items && items.map ((item:any , key:number) => {
             return[
               <div className="flex w-full space-x-2 sm:space-x-4 mb-3">
@@ -223,27 +219,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
             </div>
             ]
           })}
-          {/* <div className="flex w-full space-x-2 sm:space-x-4 mt-5">
-            <img className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Polaroid camera"
-            />
-            <div className="flex flex-col justify-between w-full pb-4">
-              <div className="flex justify-between w-full pb-2 space-x-2">
-                <div className="space-y-1">
-                  <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
-                  <p className="text-sm dark:text-gray-400">04</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-lg font-semibold">2.33$</p>
-                
-                </div>
-              </div>
-              <div className="flex text-sm ">
-
-               
-              </div>
-            </div>
-          </div> */}
-
         </div>
         <div className="flex flex-col space-y-4">
           {/* <h3 className="text-2xl font-semibold">Price detail</h3> */}
@@ -266,6 +241,55 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     );
   };
 
+  const getAllAddressData = async () => {
+    const response = await getAllUserAddress(1);
+    console.log(response.data);
+    if (response.data) {
+      if (response.data.data.length > 0) {
+        let addressArr = response.data.data;
+        let tempData: any = [];
+        console.log(tempData);
+        setUserAddress(addressArr);
+        console.log(addressArr)
+        userAddress.map((item: any, key: number) => {
+          if (item.type === selectedAddressType) {
+            userAddress[key] = {
+              type: item.type,
+              address: address,
+            };
+          }
+        });
+      }
+    }
+  };
+  
+  const updateAddress = async () => {
+    userAddress.map((item: any, key: number) => {
+      if (item.type === selectedAddressType) {
+        userAddress[key] = {
+          type: item.type,
+          address: address,
+        };
+      }
+    });
+    const response = await updateProfile({ address: userAddress });
+    setUserAddress(userAddress);
+    if (response.data) {
+      if (response.data.response === "success") {
+        console.log(response.data.type)
+        // handleModalEdit(false);
+      } else {
+        alert("Not updated");
+      }
+    }
+  };
+
+  useEffect(() => {
+    getAllAddressData();
+    updateAddress();
+    // setAddress(address);
+  }, []);
+
   const renderMain = () => {
 
     return (
@@ -283,11 +307,11 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           <div>
             <div className="space-y-1 mb-4">
               <Label>Recipient Name </Label>
-              <Input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)}/>
+              <Input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} value={name}/>
             </div>
             <div className="space-y-1 mb-4">
               <Label>Recipient Email </Label>
-              <Input type="email" placeholder="Email"  onChange={(e) => setEmail(e.target.value)}/>
+              <Input type="email" placeholder="Email"  onChange={(e) => setEmail(e.target.value)} value={email}/>
             </div>
             <div className="space-y-1 mb-4">
               <Label>Phone No </Label>
@@ -297,7 +321,16 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
               <h4 className="text-1x1 font-semibold">Address</h4>
               <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
               <div className="space-y-1 mb-4">
-                <input type="text" placeholder="Address Line 1"  onChange={(e) => setLine1(e.target.value)}/>
+                <select value={addressType} onChange={(e) => setAddressType(e.target.value)}>
+                  {userAddress.map((item:any,key:number)=>{
+                    return[
+                      <option value={item.type}>{item.type}</option>
+                    ]
+                  })}
+                </select>
+              </div>
+              <div className="space-y-1 mb-4">
+                <input type="text" placeholder="Address Line 1"  onChange={(e) => setLine1(e.target.value)} />
               </div>
               <div className="space-y-1 mb-4">
                 <input type="text" placeholder="Address Line 2"  onChange={(e) => setLine2(e.target.value)}/>

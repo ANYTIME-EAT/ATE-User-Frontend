@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React , {useEffect, useState} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Page } from "./types";
 import ScrollToTop from "./ScrollToTop";
@@ -56,13 +56,17 @@ import NewRest from "containers/Restauraunt/NewRest";
 import ForgotPasswordPage from "containers/Auth/ForgotPassword/ForgotPasswordPage";
 import ResetPasswordPage from "containers/Auth/ResetPassword";
 import Logout from "containers/Auth/Logout";
+import ForgotPasswordSuccessPage from "containers/Auth/SuccessForgotPassword";
+import { loginApi } from "services/authServices";
+import { toast } from "react-toastify";
 import Tracking from "containers/Tracking/Tracking";
 import Chat from "containers/Chat/Chat"
 
 
-export const pages: Page[] = [
+export const AuthenticationAccesspages: Page[] = [
+
   { path: "/", exact: true, component: PageHome },
-  { path: "/#", exact: true, component: PageHome },
+  // { path: "/#", exact: true, component: PageHome },
   { path: "/home-1-header-2", exact: true, component: PageHome },
   { path: "/home-2", component: PageHome2 },
   { path: "/home-3", component: PageHome3 },
@@ -94,20 +98,16 @@ export const pages: Page[] = [
   { path: "/listing-flights", component: ListingFlightsPage },
   //
   { path: "/checkout", component: CheckOutPage },
+
   { path: "/profile", component: ProfilePage},
-  { path: "/profile/user/edit", component: AccountPage},
-  
-  // { path: "/profile/favourites", component: ProfilePage},
-  // { path: "/profile/payment", component: ProfilePage},
-  // { path: "/profile/myOrders", component: ProfilePage},
-  // { path: "/profile/promotional", component: ProfilePage},
-  // { path: "/profile/route", component: ProfilePage},
-  
+  { path: "/getAvatar/edit", component: AccountPage},
+    
   { path: "/pay-done", component: PayPage },
   { path: "/tracking", component: Tracking },
   { path: "/chat", component: Chat },
   
   { path: "/author", component: AuthorPage },
+  
   { path: "/profile/account", component: ProfilePage },
   { path: "/account-password", component: AccountPass },
   { path: "/account-savelists", component: AccountSavelists },
@@ -131,23 +131,66 @@ export const pages: Page[] = [
   { path: "/packages", component: PagePackages },
   { path: "/services", component: PageServices },
   { path: "/offers", component: PageOffers },
-  { path: "/signup", component: PageSignUp },
-  { path: "/login", component: PageLogin },
+  { path: "/signup", component: PageHome },
+  { path: "/login", component: PageLogin},
   { path: "/subscription", component: PageSubcription },
 
   { path: "/forgotPassword", component: ForgotPasswordPage },
 
   // restu 
   { path: "/restaurant", component: NewRest },
-  { path: "/reset_password/:id/:token", component: ResetPasswordPage },
+  
+  { path: "/user/reset_password/:id/:token", component:ResetPasswordPage },
 
   { path: "/logout", component: Logout },
-  
- 
+
+  { path: "/forgot_password/success", component: ForgotPasswordSuccessPage },
+
+];
+
+export const AllAccesspages : Page[] = [
+
+  { path: "/", exact: true, component: PageHome },
+  { path: "/login", exact: true, component: PageLogin},
+  { path: "/signup", exact: true, component: PageSignUp },
+  { path: "/profile", exact: true, component: PageLogin },
+  { path: "/", exact: true, component: PageHome},
+
 ];
 
 const MyRoutes = () => {
   const WIN_WIDTH = useWindowSize().width || window.innerWidth;
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const login = async () => {
+    var data ={
+      "email": "email",
+      "password":"password",
+      "signedIn": false
+    };
+    
+    const response=await loginApi(data);
+    if(response.data){
+      if(response.data.isLoggedIn){
+        console.log(response.data)
+        localStorage.setItem("user-info", JSON.stringify(response.data.user));
+      
+       
+      }else{
+        toast.error(response.data.message,{
+          position:toast.POSITION.TOP_CENTER
+        });
+      }
+    }
+    console.log(response.data);
+  }
+
+  useEffect(() => {
+    if(localStorage.getItem("user-info")){
+      setIsLoggedIn(true)
+      console.log(isLoggedIn)
+    }
+  },[])
 
   return (
     <BrowserRouter
@@ -157,10 +200,20 @@ const MyRoutes = () => {
       <SiteHeader />
 
       <Routes>
-        {pages.map(({ component, path }) => {
+        {isLoggedIn?
+        
+        AuthenticationAccesspages.map(({ component, path }) => {
           const Component = component;
+          
           return <Route key={path} element={<Component />} path={path} />;
-        })}
+        })
+        :
+        AllAccesspages.map(({ component, path }) => {
+          const Component = component;
+          
+          return <Route key={path} element={<Component />} path={path} />;
+        })
+        }
         <Route element={<Page404 />} />
       </Routes>
 

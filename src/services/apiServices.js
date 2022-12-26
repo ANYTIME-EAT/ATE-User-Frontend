@@ -151,9 +151,9 @@ export const getAllUserAddress = (userId) => {
     })
 }
 
-export const updateProfile = (data) => {
+export const updateProfile = (data,id) => {
     return new Promise((resolve,reject) => {
-        axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
+        axios.put(`${config.SERVER_URL}/user/edit/${id}`,data,header())
         .then((res) => {
             resolve(res)
         }).catch((res) => {
@@ -237,3 +237,15 @@ export const getOrderStatusApi = (id) => {
         })
     })
 }
+
+export const uploadFileApi = (data) => {
+    return new Promise((resolve,reject) => {
+        axios.post(`${config.SERVER_URL}/uploadSingle`,data,header())
+        .then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+

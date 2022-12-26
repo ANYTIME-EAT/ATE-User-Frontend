@@ -40,8 +40,9 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
     if(localStorage.getItem("user-info")){
       const response = localStorage.getItem('user-info');
       if(response){
-        console.log(JSON.parse(response))
+        console.log("%%%%%%%%%%%%%%%%%",JSON.parse(response))
         setUserInfo(JSON.parse(response))
+
       }
     }else{
       setUserInfo({})
@@ -50,8 +51,9 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
 
   const getOrdersItems =async () => {
     const response = await getAllOrdersAPI(1)
+    console.log(response)
     if(response.data?.response ==="success"){
-      setOrder(response.data.orders)
+      setOrder(response.data.data)
     }
   }
   useEffect(() => {
@@ -108,7 +110,7 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
   // user profile page
   const heroSection = () => {
       return(
-        <SectionHero2 data={restaurant}  userInfo={userInfo}/>
+        <SectionHero2 data={restaurant}  userInfo={userInfo} img={userInfo.avatar}/>
       );
   }
   return (
