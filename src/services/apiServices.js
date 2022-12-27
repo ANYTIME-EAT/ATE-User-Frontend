@@ -278,3 +278,13 @@ export const uploadFileApi = (data) => {
     })
 }
 
+export const getUserDetailByIdAPI = (userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/user/${userId}`,header()).then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+

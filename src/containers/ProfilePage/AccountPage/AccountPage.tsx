@@ -7,7 +7,7 @@ import Select from "shared/Select/Select";
 import Textarea from "shared/Textarea/Textarea";
 import CommonLayout from "./CommonLayout";
 import { Helmet } from "react-helmet";
-import { getAvatar, updateProfile, uploadFileApi } from "services/apiServices";
+import { getAvatar, getUserDetailByIdAPI, updateProfile, uploadFileApi } from "services/apiServices";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 // import {img} from "images/avatars/Image-1.png"
@@ -26,23 +26,41 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   const [updatedAvatar, setupdatedAvatar] = useState<any>("");
   const [file, setFile] = useState<any>("");
   const imageMimeType = /image\/(png|jpg|jpeg)/i;
+  const [phone_no, setPhone_no] = useState<any>("");
+  const [password, setPassword] = useState<any>("");
+  const [address, setAddress] = useState<any>("");
+  const [userDetailsData, setUserDetailsData] = useState<any>("");
+  
   
   let navigate = useNavigate();
 
   const getProfileData = async () => {
     var userdata = {
       name: username,
-      avatar:avatar
+      avatar:avatar,
+      address:address,
+      phone_no:phone_no,
+      // password:password
     };
-    console.log(userdata)
 
-    const response = await updateProfile(userdata, 1);
+    console.log("44444444444444444444444444444",userdata)
+
+    const response = await updateProfile(userdata,58);
     console.log(response.data);
 
     if (response.data.response==="success") {
       setUserData(response.data);
       console.log(response.data);
       navigate("/profile");
+
+      const newUpdatedUserInfo = {
+        ...userInfo,
+        "username":username,
+        "email":email,
+        
+      };
+      
+      localStorage.setItem('user-info', JSON.stringify(newUpdatedUserInfo))
     } else {
       toast.error(response.data.message, {
         position: toast.POSITION.TOP_CENTER,
@@ -93,7 +111,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
     formData.append('file',file);
     const file1 = await uploadFileApi(formData)
     .then(res => {
-      console.log(res.data.filename);
+      console.log("999999999",res.data.filename);
       console.log(updatedAvatar)
       localStorage.setItem('user-info',JSON.stringify({imgAvatar:res.data.filename}));
       // alert("File uploaded successfully.")
@@ -102,7 +120,8 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
 const newUpdatedUserInfo = {
   ...userInfo,
   "username":username,
-  "avatar": res.data.filename
+  "avatar": res.data.filename,
+
 };
 
 localStorage.setItem('user-info', JSON.stringify(newUpdatedUserInfo))
@@ -129,6 +148,33 @@ useEffect(() => {
   const handleCancel = () => {
     navigate("/profile")
 };
+
+const getAllUserData = async () => {
+  const response = await getUserDetailByIdAPI(JSON.parse(localStorage.getItem("user-info") || "{}").id);
+  console.log("77777777777777777777777777777777777777",response.data.user);
+  if (response.data) {
+    if (response.data.user.length > 0) {
+      let userArr = response.data.user;
+      let tempData: any = [];
+      userArr.map((item: any, key: number) => {
+        tempData[key] = {
+          address: item.address,
+          phone_no: item.phone_no,
+          password: item.password
+        };
+        setAddress(item.address)
+        setPhone_no(item.phone_no)
+        setPassword(item.password)
+      });
+      console.log(tempData);
+      setUserDetailsData(userArr);
+    }
+  }
+};
+useEffect(() => {
+  getAllUserData()
+  console.log(getAllUserData())
+}, []);
 
   return (
     <div className={`nc-AccountPage ${className} `} data-nc-id="AccountPage">
@@ -179,7 +225,7 @@ useEffect(() => {
               />
             </div>
 
-            {/* <div>
+            <div>
               <Label>Email</Label>
               <Input
                 className="mt-1.5"
@@ -187,7 +233,35 @@ useEffect(() => {
                 value={email}
 
               />
-            </div> */}
+            </div>
+            <div>
+              <Label>Phone Number</Label>
+              <Input
+                className="mt-1.5"
+                onChange={(e) => setPhone_no(e.target.value)}
+                value={phone_no}
+
+              />
+            </div>
+            <div>
+              <Label>Address</Label>
+              <Input
+                className="mt-1.5"
+                onChange={(e) => setAddress(e.target.value)}
+                value={address}
+
+              />
+            </div>
+            <div>
+              <Label>Password</Label>
+              <Input
+                className="mt-1.5"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+
+              />
+            </div>
+
 
             <div className="p-6 text-center">
               <button
