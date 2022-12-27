@@ -182,7 +182,7 @@ const PageHome = () => {
     if (response.data) {
       let tempData: any = [];
       if (response.data.response === "success") {
-        // console.log(response.data)
+        // console.log("kitchen data",response.data)
         response.data.kitchen.map(async (item: any, key: number) => {
           tempData[key] = {
             id: item.id,
@@ -248,7 +248,7 @@ const PageHome = () => {
 
   const getAllProductsData = async () => {
     const response = await getAllProductsAPI()
-    // console.log(response.data)
+    console.log("product data",response.data)
     if (response.data) {
       let tempData: any = [];
       if (response.data.response === "success") {

@@ -105,7 +105,7 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
     //     </div>
     //   );
     // }
-    else if(activePage.title === "Settings"){
+    else if(activePage.title === "Edit Profile"){
       return (
         <div className=" flex-1 p-7">
           <AccountPage/>
