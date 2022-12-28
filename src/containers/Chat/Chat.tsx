@@ -1,12 +1,15 @@
 import Stepper from "containers/Stepper/Stepper";
 import React, { useState, useEffect } from "react";
 import { getOrderStatusApi } from "../../services/apiServices";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import config from '../../config/config.json'
 
-const socket = io(config.SERVER_URL);
+// const socket = io(config.SERVER_URL);
+const socket = require("socket.io-client")(config.SERVER_URL, {
+  rejectUnauthorized: true 
+});
 
-const Tracking = () => {
+const Chat = () => {
   //Chat
   const [message, setMessage] = useState("");
   const [messageArr, setMessageArray] = useState<any>([]);
@@ -44,6 +47,7 @@ const messageListener = () => {
   
       return () => socket.off("receive_message", eventListener);
 }
+
 
   useEffect(() => {
     messageListener()
@@ -93,4 +97,4 @@ const messageListener = () => {
   );
 };
 
-export default Tracking;
+export default Chat;
