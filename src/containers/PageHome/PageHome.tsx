@@ -189,7 +189,7 @@ const PageHome = () => {
         response.data.kitchen.map(async (item: any, key: number) => {
           tempData[key] = {
             id: item.id,
-            href: "#",
+            href: `/restaurant/${item.id}`,
             name: item.name,
             taxonomy: "category",
             thumbnail: item.avatar
@@ -248,29 +248,6 @@ const PageHome = () => {
 
     }
   }
-
-  // const getTopbrandKitchenData = async () => {
-  //   const response = await getKitchenIdApi()
-
-  //   if (response.data) {
-  //     let tempData: any = [];
-  //     if (response.data.response === "success") {
-  //       // console.log(response.data)
-  //       response.data.data.map(async (item: any, key: number) => {
-  //         tempData[key] = {
-  //           id: topbrandData.id,
-  //           href: "#",
-  //           name: item.name,
-  //           taxonomy: "category",
-  //           thumbnail: item.avatar
-  //         }
-  //       })
-  //       // console.log("brand data", tempData)
-  //       setTopbrandKitchenData(tempData)
-  //     }
-
-  //   }
-  // }
 
   const getRestrauntData = async () => {
     const response = await getRestaurantList()
@@ -441,29 +418,6 @@ const PageHome = () => {
           }
         </div>
 
-        {/* SECTION */}
-        {/* <SectionHowItWork /> */}
-
-
-
-        {/* SECTION */}
-        {/* <SectionSubscribe2 /> */}
-
-        {/* SECTION */}
-        {/* <div className="relative py-16">
-          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
-          <SectionGridAuthorBox />
-        </div> */}
-
-        {/* SECTION */}
-        {/* <SectionGridCategoryBox /> */}
-
-        {/* SECTION */}
-        {/* <div className="relative py-16">
-          <BackgroundSection />
-          <SectionBecomeAnAuthor />
-        </div> */}
-
         {kitchenData.length > 0 &&
           <SectionSliderNewCategories
             heading="All Restaurants"
@@ -475,19 +429,6 @@ const PageHome = () => {
             uniqueClassName="PageHome_s1"
             className="mt-24"
           />}
-
-
-        {/* All Resturaunt */}
-        {/* {restrauntData.length > 0 &&
-          <SectionSliderNewCategories
-            heading="All Restaurants"
-            subHeading="Good Food Is Always Cooking! Order Yummy Items "
-            categoryCardType="card3"
-            itemPerRow={5}
-            categories={restrauntData}
-            uniqueClassName="PageHome_s3"
-            sliderStyle="style2"
-          />} */}
 
         <SectionDowloadApp />
 
