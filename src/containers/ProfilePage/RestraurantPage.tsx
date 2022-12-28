@@ -1,4 +1,7 @@
-import React, { FC, useState } from "react";
+import { Popover, Transition } from "@headlessui/react";
+import React, { FC, Fragment, useState } from "react";
+import { BsChevronDown } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import Heading from "shared/Heading/Heading";
 import img from '../RestraurantPage/control.png'
 
@@ -7,7 +10,7 @@ export interface RestraurantPageProps {
   handleActivePage(id: number, title: string) : void;
 }
 
-const sidebarData=[
+const Menus=[
     {
         title:"Manage Address"
         
@@ -24,26 +27,36 @@ const sidebarData=[
         title:"My Order"
         
     },
-    {
-        title:"Referral"
+    // {
+    //     title:"Referral"
         
-    },
-    {
-        title:"Refund History"
+    // },
+    // {
+    //     title:"Refund History"
         
-    },
+    // },
     {
         title:"Promotional"
         
     },
+    // {
+    //     title:"Change Language"       
+    // },
     {
-        title:"Change Language"       
+      title:"Settings", 
+      subMenu:true,
+      subMenuItems:[
+        {title:"Edit Profile"},
+        {title:"Manage Address"},
+        {title:"Change Language"},
+      ]   
     },
     
 ]
 
 const RestraurantPage: FC<RestraurantPageProps> = ({ data, handleActivePage }) => {
   const [open, setOpen] = useState(true);
+  const [subMenuOpen, setSubMenuOpen] = useState(false);
 
   return (
     <div className="flex relative h-screen bg-gray-100 dark:bg-black dark:bg-opacity-20 ">
@@ -67,18 +80,39 @@ const RestraurantPage: FC<RestraurantPageProps> = ({ data, handleActivePage }) =
           </h1>
         </div>
         <ul className="pt-6">
-          {sidebarData.map((Menu: any, index: number) => (
-            <li
+          {Menus.map((menu: any, index: number) => (
+            <>
+              <li
               key={index}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-blue-100 hover:font-bold dark:hover:bg-slate-400 dark:hover:text-black  text-lg items-center gap-x-4 
                ${index === 0 && "bg-light-white"
                 } `}
-              onClick={() => handleActivePage(index, Menu.title)}>
+              onClick={() => handleActivePage(index, menu.title)}>
               <span className={`${!open && "hidden bg-blue-100 "} origin-left duration-200 py-3`}>
-                {Menu.title}
+                {menu.title}
               </span>
+              {menu.subMenu && open && (
+                <BsChevronDown className={`${subMenuOpen && "rotate-180"}`} onClick={()=>{setSubMenuOpen(!subMenuOpen)}}/>
+              )}
             </li>
+            {menu.subMenu && subMenuOpen && open &&(
+                <ul>
+                  {menu.subMenuItems.map((subMenuItem:any,index:number)=>(
+                    <li key={index} className={`flex 
+                    rounded-md p-2 px-5 cursor-pointer hover:bg-blue-100 hover:font-bold dark:hover:bg-slate-400 dark:hover:text-black  text-lg items-center gap-x-4 
+                    ${index === 0 && "bg-light-white"
+                     } `}
+                     onClick={()=>handleActivePage(index,subMenuItem.title)}
+                     >
+                      {subMenuItem.title}
+                     </li>
+                  ))}
+                </ul>
+            )}
+            </>
+            
           ))}
+          
         </ul>
       </div>
 

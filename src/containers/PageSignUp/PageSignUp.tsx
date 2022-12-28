@@ -48,16 +48,16 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
         phone_no: phone,
         email: email,
         password: password,
+        signedIn: false
       };
 
       const response = await userRegister(data);
       if (response.data) {
         if (response.data.response === "success") {
-          
           toast.success("Sign Up Success", {
             position: toast.POSITION.TOP_CENTER,
           });
-          navigate("/");
+          navigate("/login");
         } else {
           toast.error(response.data.message, {
             position: toast.POSITION.TOP_CENTER,
@@ -139,9 +139,9 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
                 type="text"
                 placeholder="Username"
                 onChange={(e) => {
-                setUsername(e.target.value)
-              }}
-              required={true}
+                  setUsername(e.target.value);
+                }}
+                required={true}
               />
             </div>
             <div className="mt-4">
@@ -153,9 +153,9 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
                 type="email"
                 placeholder="Email address"
                 onChange={(e) => {
-                setEmail(e.target.value)
-              }}
-              required={true}
+                  setEmail(e.target.value);
+                }}
+                required={true}
               />
             </div>
             <div className="mt-4">
@@ -172,9 +172,9 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
                 type="password"
                 placeholder="Password"
                 onChange={(e) => {
-                setPassword(e.target.value)
-              }}
-              required={true}
+                  setPassword(e.target.value);
+                }}
+                required={true}
               />
             </div>
             <div className="mt-4">
@@ -188,13 +188,15 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
                 type="password"
                 placeholder="Confirm Password"
                 onChange={(e) => {
-                setConfirmPassword(e.target.value)
-              }}
-              required={true}
+                  setConfirmPassword(e.target.value);
+                }}
+                required={true}
               />
             </div>
             <div className="mt-8">
-              <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
+              <button 
+              className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600"
+              >
                 Register
               </button>
             </div>

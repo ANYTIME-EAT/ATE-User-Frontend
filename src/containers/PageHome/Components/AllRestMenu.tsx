@@ -18,7 +18,6 @@ export interface AllRestMenuProps {
   subHeading?: ReactNode;
   headingIsCenter?: boolean;
   tabs?: string[];
-  setNewProduct(val:boolean): void;
 }
 
 const AllRestMenu: FC<AllRestMenuProps> = ({
@@ -29,12 +28,11 @@ const AllRestMenu: FC<AllRestMenuProps> = ({
   subHeading = "Good Food Is Always Cooking! Order Some Yummy Items From The Menu",
   headingIsCenter,
   tabs = [],
-  setNewProduct,
   
 }) => {
   const renderCard = (data:any) => {
     // console.log(data)
-    return <StayCardProduct key={data.id} productsData={data} setNewProduct={setNewProduct}/>;
+    return <StayCardProduct key={data.id} productsData={data} />;
   };
 
   return (

@@ -26,18 +26,13 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "/profile",
-    name: "Profile"
-  },
-  {
-    id: ncNanoId(),
     href: "/signup",
     name: "Signup"
   },
 
-  {
-    id: ncNanoId(),
-    href: "/logout",
-    name: "Logout"
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/logout",
+  //   name: "Logout"
+  // },
 ];

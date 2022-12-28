@@ -25,11 +25,30 @@ export const getAvatar = (avatar) => {
         })
     }) 
 }
-
+//offer
+export const getTopOffersList = () => {
+    return new Promise((resolve,reject) =>{
+        axios.get(`${config.SERVER_URL}/top_offers/list`).then((res) => {
+            resolve(res)
+        }).catch ((res) => {
+            reject(res)
+        })
+    })
+}
 // getallKitchen
 export const getKitchenList = () => {
     return new Promise((resolve,reject) =>{
         axios.get(`${config.SERVER_URL}/kitchen/list/all_kitchen`).then((res) => {
+            resolve(res)
+        }).catch ((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getTopbrands = () => {
+    return new Promise((resolve,reject) =>{
+        axios.get(`${config.SERVER_URL}/top_brands/list`).then((res) => {
             resolve(res)
         }).catch ((res) => {
             reject(res)
@@ -70,6 +89,16 @@ export const getOffersList = () => {
 export const getAllComboMenuList = () => {
     return new Promise((resolve,reject)=>{
         axios.get(`${config.SERVER_URL}/combomenu/list`).then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getCusine = (id) => {
+    return new Promise((resolve,reject) => {
+        axios.get(`${config.SERVER_URL}/restaurant/${id}`).then((res) => {
             resolve(res)
         }).catch((res) => {
             reject(res)
@@ -130,7 +159,7 @@ export const getAllProductsAPI = () => {
     })
 }
 
-export const getAllCuisinesAPI = () => {
+export const getAllCuisines = () => {
     return new Promise((resolve,reject) => {
         axios.get(`${config.SERVER_URL}/cuisines/list`).then((res) => {
             resolve(res)
@@ -151,9 +180,9 @@ export const getAllUserAddress = (userId) => {
     })
 }
 
-export const updateProfile = (data) => {
+export const updateProfile = (data,id) => {
     return new Promise((resolve,reject) => {
-        axios.put(`${config.SERVER_URL}/user/edit/1`,data,header())
+        axios.put(`${config.SERVER_URL}/user/edit/${id}`,data,header())
         .then((res) => {
             resolve(res)
         }).catch((res) => {
@@ -237,3 +266,25 @@ export const getOrderStatusApi = (id) => {
         })
     })
 }
+
+export const uploadFileApi = (data) => {
+    return new Promise((resolve,reject) => {
+        axios.post(`${config.SERVER_URL}/uploadSingle`,data,header())
+        .then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const getUserDetailByIdAPI = (userId) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/user/${userId}`,header()).then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+

@@ -7,14 +7,20 @@ import {
   ArrowRightOnRectangleIcon,
   LifebuoyIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "shared/Avatar/Avatar";
 import { useNavigate } from "react-router-dom";
+import { getAvatar } from "services/apiServices";
 
-
+import avatar1 from "images/avatars/Image-1.png";
 
 const solutionsFoot = [
+  {
+    name: "Profile",
+    href: "/profile",
+    icon: UserCircleIcon,
+  },
   {
     name: "Help",
     href: "##",
@@ -35,8 +41,32 @@ export default function AvatarDropdown() {
   const logout = () => {
     console.log("sdsd")
     localStorage.removeItem("user-info");
+    localStorage.removeItem("access-token");
+    setTimeout(() => {
+      window.location.reload();
+    }, 2)
     setIsLoggedIn(false);
+    setOpen(false)
+    navigate("/login")
   };
+
+  const [image, setImage] = useState<any>("")
+  const [avatar, setAvatar] = useState<any>("")
+  const [open, setOpen] = useState<any>(false)
+
+  const getUserAvatar = async(img:string) => {
+    const file = await getAvatar(img)
+    setImage(URL.createObjectURL(file))
+  
+  }
+  useEffect(() => {
+    setAvatar(JSON.parse(localStorage.getItem("user-info") || "{}").avatar)
+  }, []);
+
+  useEffect(() => {
+    console.log(avatar)
+    getUserAvatar(avatar)
+  }, [avatar]);
 
   return (
     <div className="AvatarDropdown">
@@ -46,7 +76,7 @@ export default function AvatarDropdown() {
             <Popover.Button
               className={`inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
-              <Avatar sizeClass="w-8 h-8 sm:w-9 sm:h-9" />
+              <Avatar sizeClass="w-8 h-8 sm:w-9 sm:h-9" imgUrl={image} />
             </Popover.Button>
             <Transition
               as={Fragment}

@@ -37,17 +37,22 @@ const SectionHero2: FC<SectionHero2Props> = ({
     let navigate = useNavigate(); 
 
     const getProfile = async(imgUrl : string) => {
-      // cons
-      const response = await getAvatar(imgUrl);
-      setAvatar(URL.createObjectURL(response))
+      const file = await getAvatar(imgUrl);
+      setAvatar(URL.createObjectURL(file))
+      console.log(avatar)
     }
 
     const routeChange = () =>{ 
-      navigate("/profile/user/edit");
+      navigate("/getAvatar/edit");
     }
 
+    const changeHandler = (e: { target: { files: any[]; }; }) => {
+      if (!e.target.files[0]) return;
+      setAvatar(e.target.files[0]);
+    };
 
     useEffect(() => {
+      console.log(userInfo.avatar)
       if(userInfo.avatar)
         getProfile(userInfo.avatar)
     },[userInfo.avatar])
@@ -70,15 +75,13 @@ const SectionHero2: FC<SectionHero2Props> = ({
                 className="text-black dark:text-white"
               />
               <p className="text-black dark:text-white pb-2">{address}</p>
-              <button 
+              {/* <button 
               className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow"
               onClick={routeChange}>
                 
                 Edit Profile
-                </button>
-              {/* <StartRating
-                className="mt-4"
-              /> */}
+                </button> */}
+        
             </div>
           </div>
         </div>

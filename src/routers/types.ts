@@ -73,11 +73,12 @@ export interface LocationStates {
 
   "/profile/address/edit"?: {};
   "/address/edit"?: {};
-  "/profile/user/edit"?: {};
+  "/getAvatar/edit"?: {};
 
   "/forgotPassword"?: {};
-  "/reset_password/:id/:token"?: {};
+  "/user/reset_password/:id/:token"?: {};
   "/logout"?: {};
+  "/forgot_password/success"?: {};
   "/tracking"?: {};
   "/chat"?: {};
   
