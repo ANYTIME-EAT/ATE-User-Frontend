@@ -11,7 +11,7 @@ import pizza from 'images/pizza.png'
 import bbq from 'images/bbq.png'
 import offer1 from 'images/offer1.png'
 import offer2 from 'images/offer2.png'
-import { getRestaurantList, getOffersList, getAllComboMenuList, getAllProductsAPI, getAllCuisines, getKitchenList, getAvatar, getTopbrands, getTopOffersList } from '../../services/apiServices'
+import { getRestaurantList, getOffersList, getAllComboMenuList, getAllProductsAPI, getAllCuisines, getKitchenList, getAvatar, getTopbrands, getTopOffersList, getKitchenIdApi } from '../../services/apiServices'
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 import AteSectionHero from "components/SectionHero/AteSectionHero";
 import AllRestMenu from "./Components/AllRestMenu";
@@ -114,6 +114,9 @@ const PageHome = () => {
   const [cuisinesData, setCuisinesData] = useState<any>([])
   const [topbrandData, setTopbrandData] = useState<any>([])
   const [topoffersData, setTopoffersData] = useState<any>([])
+  
+  const [topbrandKitchenData, setTopbrandKitchenData] = useState<any>([])
+  
 
   const getTopOffers = async () => {
     const response = await getTopOffersList()
@@ -198,10 +201,33 @@ const PageHome = () => {
 
     }
   }
+  
+   // const getTopbrandKitchenData = async () => {
+  //   const response = await getKitchenIdApi()
 
+  //   if (response.data) {
+  //     let tempData: any = [];
+  //     if (response.data.response === "success") {
+  //       // console.log(response.data)
+  //       response.data.data.map(async (item: any, key: number) => {
+  //         tempData[key] = {
+  //           id: item.id,
+  //           href: "#",
+  //           name: item.name,
+  //           taxonomy: "category",
+  //           thumbnail: item.avatar
+  //         }
+  //       })
+  //       // console.log("brand data", tempData)
+  //       setTopbrandKitchenData(tempData)
+  //     }
+
+  //   }
+  // }
+  
   const getTopbrandData = async () => {
     const response = await getTopbrands()
-
+    console.log(response.data)
     if (response.data) {
       let tempData: any = [];
       if (response.data.response === "success") {
@@ -209,19 +235,42 @@ const PageHome = () => {
         response.data.data.map(async (item: any, key: number) => {
           tempData[key] = {
             id: item.id,
-            href: "#",
+            href: `/restaurant/${item.id}`,
             name: item.name,
             taxonomy: "category",
             thumbnail: item.avatar
           }
         })
-        // console.log("brand data", tempData)
+        console.log("brand data", tempData)
         setTopbrandData(tempData)
+      
       }
 
     }
   }
 
+  // const getTopbrandKitchenData = async () => {
+  //   const response = await getKitchenIdApi()
+
+  //   if (response.data) {
+  //     let tempData: any = [];
+  //     if (response.data.response === "success") {
+  //       // console.log(response.data)
+  //       response.data.data.map(async (item: any, key: number) => {
+  //         tempData[key] = {
+  //           id: topbrandData.id,
+  //           href: "#",
+  //           name: item.name,
+  //           taxonomy: "category",
+  //           thumbnail: item.avatar
+  //         }
+  //       })
+  //       // console.log("brand data", tempData)
+  //       setTopbrandKitchenData(tempData)
+  //     }
+
+  //   }
+  // }
 
   const getRestrauntData = async () => {
     const response = await getRestaurantList()
@@ -345,6 +394,7 @@ const PageHome = () => {
             categories={topbrandData}
             uniqueClassName="PageHome_s1"
             className="mt-24"
+            
           />}
 
 

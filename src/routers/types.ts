@@ -58,7 +58,7 @@ export interface LocationStates {
   "/add-listing-10"?: {};
   //
   "/author"?: {};
-  "/restaurant"?: {};
+  "/restaurant/:id"?: {};
   "/search"?: {};
   "/about"?: {};
   "/contact"?: {};

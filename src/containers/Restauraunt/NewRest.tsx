@@ -3,22 +3,25 @@ import { Helmet } from "react-helmet";
 import RestraurantPage from "./components/RestraurantPage";
 import SectionGridFilterCard from "./components/SectionGridFilterCard";
 import SectionHero2 from "./components/SectionHero2";
-import { getRestaurantCategory, getRestaurant, getProduct } from "services/apiServices";
+import { getRestaurantCategory, getRestaurant, getProduct, getKitchenIdApi } from "services/apiServices";
 import ShoppingCart from "containers/ShoppingCart/ShoppingCart";
 import { getAvatar } from 'services/apiServices'
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import CustomInupt from "./components/CustomInput";
 import Cart from "./components/Cart";
+import { useParams } from "react-router-dom";
 
 // import { addToCart, getCartList } from "services/cartStorage"
 
 
 export interface NewRestProps {
   className?: string;
+ 
 }
 
 
 const NewRest: FC<NewRestProps> = ({ className = "" }) => {
+  const { id } = useParams();
 
   const [restraurantCategory, setrestraurantCategory] = useState<any>([])
   const [restaurant, setresturant] = useState<any>([])
@@ -41,6 +44,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
     setImage(URL.createObjectURL(file))
   }
 
+ 
 
   //Restaurant Food Category
   const getrestraurantCat = async () => {
@@ -59,14 +63,47 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
   }
 
   //retauraunt Name
-  const getRestaurantName = async () => {
-    const response = await getRestaurant(1)
-    console.log(response.data)
+  // const getRestaurantName = async () => {
+  //   const response = await getRestaurant(1)
+  //   console.log("restaurant name",response.data)
+  //   if (response.data?.response === "success") {
+  //     setresturant(response.data.restaurant[0])
+  //     getProfile(response.data.restaurant[0].restaurant_avatar)
+  //   }
+  // }
+
+  const getRestaurantDataByKitchenId = async () => {
+ 
+    const response = await getKitchenIdApi(id)
+    console.log("kichen data",response.data)
     if (response.data?.response === "success") {
-      setresturant(response.data.restaurant[0])
-      getProfile(response.data.restaurant[0].restaurant_avatar)
+      setresturant(response.data.kitchen[0])
+      getProfile(response.data.kitchen[0].avatar)
     }
   }
+
+//   const getAllAddressData = async () => {
+//     const response = await getAllUserAddress(JSON.parse(localStorage.getItem("user-info") || "{}").id);
+//     console.log(response.data);
+
+//   if (response.data) {
+//     if (response.data.data.length > 0) {
+//       let addressArr = response.data.data;
+//       let tempData: any = [];
+//       console.log(tempData);
+//       setUserAddress(addressArr);
+//       console.log(addressArr)
+//       userAddress.map((item: any, key: number) => {
+//         if (item.type === selectedAddressType) {
+//           userAddress[key] = {
+//             type: item.type,
+//             address: address,
+//           };
+//         }
+//       });
+//     }
+// }
+// };
 
   // Products 
   const getProductItems = async () => {
@@ -81,7 +118,8 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
 
   useEffect(() => {
     getrestraurantCat()
-    getRestaurantName()
+    getRestaurantDataByKitchenId()
+    // getRestaurantName()
     getProductItems()
   }, [])
 

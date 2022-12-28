@@ -288,3 +288,12 @@ export const getUserDetailByIdAPI = (userId) => {
     })
 }
 
+export const getKitchenIdApi = (id) => {
+    return new Promise((resolve,reject) => {
+        axios.get(`${config.SERVER_URL}/kitchen/${id}`).then((res) => {
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
