@@ -42,6 +42,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
   const getProfile = async (img: string) => {
     const file = await getAvatar(img)
     setImage(URL.createObjectURL(file))
+    console.log("444444444444444444",img)
   }
 
  
