@@ -11,6 +11,7 @@ export interface SectionGridFilterCardProps {
   productData?: any;
   crrAuthor?:any;
   setNewProduct(val:boolean): void;
+  categoryId:number;
 }
 
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
@@ -20,7 +21,8 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
   data = DEMO_DATA,
   productData,
   crrAuthor,
-  setNewProduct
+  setNewProduct,
+  categoryId
 }) => {
   return (
     <div
@@ -33,8 +35,11 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
       />
       
       <div className="grid grid-cols-1 gap-6 md:gap-3 ">
-        {productData.map((item:any, key:number) => (        
-          <ProductCard key={key} productData={item} setNewProduct={setNewProduct} />
+        
+        {productData.map((item:any, key:number) => (   
+      
+          <ProductCard key={key} productData={item} setNewProduct={setNewProduct} category_id={categoryId} />
+          
         ))}
       </div>
       <div className="flex mt-16 justify-center items-center ">

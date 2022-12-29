@@ -42,7 +42,7 @@ const SectionHero2: FC<SectionHero2Props> = ({
   }
 
 useEffect(() => {
-  getRestaurantAvatar(data.restaurant_avatar)
+  getRestaurantAvatar(data.avatar)
 },[data])
 
   return (

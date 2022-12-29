@@ -20,6 +20,7 @@ export interface ProductCardProps {
   data?: any;
   productData?: any;
   setNewProduct(val: boolean): void;
+  category_id:any;
 }
 
 const DEMO_DATA = DEMO_STAY_LISTINGS[0];
@@ -41,7 +42,8 @@ const ProductCard: FC<ProductCardProps> = ({
   className = "",
   data = DEMO_DATA,
   productData,
-  setNewProduct
+  setNewProduct,
+  category_id
 }) => {
   const {
     galleryImgs,
@@ -56,6 +58,7 @@ const ProductCard: FC<ProductCardProps> = ({
   } = data;
 
   const [image, setImage] = useState<any>("")
+  const [isCategoryId, setIsCategoryId] = useState<any>(false)
 
   const getProfile = async (img: string) => {
     const file = await getAvatar(img)
@@ -64,7 +67,8 @@ const ProductCard: FC<ProductCardProps> = ({
 
 
   useEffect(() => {
-    console.log(productData.product_avatar)
+    console.log("cat_id 1",productData.category_id)
+    console.log("cat_id 2",category_id)
     getProfile(productData.product_avatar)
   }, [])
 
@@ -165,10 +169,22 @@ const ProductCard: FC<ProductCardProps> = ({
     );
   };
 
+  const [cate_id, setCate_id] = useState<any>(category_id)
+  
+  // useEffect(()=>{
+
+  //   if(productData.category_id===cate_id){
+  //     setIsCategoryId(true);
+  //   }
+  // },[])
+
   return (
-    <div
+    
+    
+      <div
       className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border  border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden shadow-2xl ${className}`}
       data-nc-id="ProductCard"
+      hidden={productData.category_id === category_id? false: true}
     >
       <Link to={href} className="absolute inset-0"></Link>
       <div className="h-full w-full flex flex-col sm:flex-row sm:items-center">
@@ -182,6 +198,7 @@ const ProductCard: FC<ProductCardProps> = ({
         className="absolute right-5 top-5 sm:right-3 sm:top-3 "
       />
     </div>
+
   );
 };
 
