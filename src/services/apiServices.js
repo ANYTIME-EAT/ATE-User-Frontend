@@ -118,7 +118,7 @@ export const getRestaurant = (id) => {
 
 export const getProduct = (id) => {
     return new Promise((resolve,reject) => {
-        axios.get(`${config.SERVER_URL}/product/product/${id}`).then((res) => {
+        axios.get(`${config.SERVER_URL}/product/kitchen/${id}`).then((res) => {
             resolve(res)
         }).catch((res) => {
             reject(res)
