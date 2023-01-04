@@ -81,6 +81,7 @@ export interface LocationStates {
   "/forgot_password/success"?: {};
   "/tracking"?: {};
   "/chat"?: {};
+  "/tableReservation"?: {};
   
 }
 

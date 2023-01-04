@@ -61,6 +61,7 @@ import { loginApi } from "services/authServices";
 import { toast } from "react-toastify";
 import Tracking from "containers/Tracking/Tracking";
 import Chat from "containers/Chat/Chat"
+import TableReservation from "containers/TableReservation/TableReservation";
 
 
 export const AuthenticationAccesspages: Page[] = [
@@ -145,6 +146,8 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/logout", component: Logout },
 
   { path: "/forgot_password/success", component: ForgotPasswordSuccessPage },
+
+  { path: "/tableReservation", component: TableReservation },
 
 ];
 
