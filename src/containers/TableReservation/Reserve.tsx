@@ -16,7 +16,7 @@ export interface TableReservationProps {
   className?: string;
 }
 
-const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
+const Reserve: FC<TableReservationProps> = ({ className = "" }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [address, setAddress] = useState<string>("");
@@ -26,8 +26,6 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
   const [date, setDate] = useState<string>("");
   const [endTime, setEndTime] = useState<string>("");
   const [startTime, setStartTime] = useState<string>("");
-  const [guests, setGuests] = useState<string>("");
-  const [chooseSlots, setChooseSlots] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -72,10 +70,10 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
     }
   };
 
-  const routeChange = () => {
-    let path = "/reserved";
+  const routeChange = () =>{ 
+    let path = `/reserve`; 
     navigate(path);
-  };
+  }
 
   return (
     <div className="py-6">
@@ -104,10 +102,10 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
                   <Input
-                    type="number"
+                    type="month"
                     defaultValue="2022-12"
-                    onChange={(e) => setGuests(e.target.value)}
-                    placeholder="Choose Guests"
+                    onChange={(e) => setDate(e.target.value)}
+                    placeholder="Choose Date"
                   />
                 </div>
               </div>
@@ -116,51 +114,81 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
                   <Input
+                    type="month"
+                    onChange={(e) => setStartTime(e.target.value)}
+                    placeholder="Start time"
+                  />
+                </div>
+                <div className="flex-1 space-y-1">
+                  <Input
                     type="number"
-                    defaultValue="2022-12"
-                    onChange={(e) => setChooseSlots(e.target.value)}
-                    placeholder="Available Slots"
+                    value={endTime}
+                    onChange={(e) => setEndTime(e.target.value)}
+                    placeholder="End time"
                   />
                 </div>
               </div>
             </div>
 
+            <div className="mt-4">
+              <div className="flex space-x-5  ">
+                <div className="flex-1 space-y-1">
+                  <Input
+                    type="text"
+                    placeholder="Enter the name"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    required={true}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 ">
+              <div className="flex space-x-5  ">
+                <div className="flex-1 space-y-1">
+                  <Input
+                    type="email"
+                    placeholder="Enter the email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    required={true}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 ">
+              <div className="flex space-x-5  ">
+                <div className="flex-1 space-y-1">
+                  <Input
+                    type="text"
+                    placeholder="Enter the Address"
+                    onChange={(e) => {
+                      setAddress(e.target.value);
+                    }}
+                    required={true}
+                  />
+                </div>
+              </div>
+            </div>
             <div className="mt-8 mr-2">
-              <button
-                type="button"
-                onClick={routeChange}
-                className="bg-red-800 text-white rounded-r-md py-2 border-l border-red-200 hover:bg-red-700 hover:text-white px-3 text-center"
-              >
-                <div className="flex flex-row align-middle">
-                  <span className="mr-2">Reserve Now</span>
-                </div>
-              </button>
-              <button
-                type="button"
-                className="bg-red-800 text-white rounded-l-md border-r border-red-100 py-2 hover:bg-red-700 hover:text-white px-3"
-              >
-                <div className="flex flex-row align-middle">
-                  <svg
-                    className="w-5 mr-2"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <p className="ml-2">Prev</p>
-                </div>
-              </button>
+            <button type="button" onClick={routeChange} className="bg-gray-800 text-white rounded-r-md py-2 border-l border-gray-200 hover:bg-red-700 hover:text-white px-3 text-center">
+              <div className="flex flex-row align-middle">
+                <span className="mr-2">Next</span>
+                <svg className="w-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+            </button>
             </div>
           </form>
+          
         </div>
       </div>
     </div>
   );
 };
 
-export default TableReservation;
+export default Reserve;

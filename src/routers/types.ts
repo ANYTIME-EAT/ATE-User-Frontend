@@ -82,6 +82,8 @@ export interface LocationStates {
   "/tracking"?: {};
   "/chat"?: {};
   "/tableReservation"?: {};
+  "/reserved"?: {};
+  
   
 }
 
