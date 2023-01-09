@@ -102,8 +102,8 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
                   <Input
-                    type="month"
-                    defaultValue="2022-12"
+                    type="date"
+                    defaultValue="date"
                     onChange={(e) => setDate(e.target.value)}
                     placeholder="Choose Date"
                     className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
@@ -115,7 +115,7 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
                   <Input
-                    type="number"
+                    type="time"
                     onChange={(e) => setStartTime(e.target.value)}
                     placeholder="Start time"
                     className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
@@ -124,7 +124,7 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
                 </div>
                 <div className="flex-1 space-y-1">
                   <Input
-                    type="number"
+                    type="time"
                     value={endTime}
                     onChange={(e) => setEndTime(e.target.value)}
                     placeholder="End time"
