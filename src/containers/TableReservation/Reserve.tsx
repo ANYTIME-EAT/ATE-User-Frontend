@@ -148,7 +148,7 @@ const Reserve: FC<TableReservationProps> = ({ className = "" }) => {
                 </div>
               </div>
             </div>
-            {/* <div className="mt-4">
+            <div className="mt-4">
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
                   <select
@@ -183,76 +183,32 @@ const Reserve: FC<TableReservationProps> = ({ className = "" }) => {
                   </select>
                 </div>
               </div>
-            </div> */}
-            
-            {/* <div className="mt-4">
+            </div>
+
+            <div className="mt-4">
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
-                  <ul className="dropdown-content absolute hidden text-gray-700 pt-1">
-                    <li>
-                      {SLOTS.map((item: any, key: number) => {
-                        return [
-                          <option value={item.No}>
-                            {item.totlalSeats}
-                            {" Person Table"}
-                          </option>,
-                        ];
-                      })}
-                      <ul className="dropdown-content absolute hidden text-gray-700 pl-5 ml-24 -mt-10">
-                        <li>
-                          {SLOTS.map((item: any, key: number) => {
-                            return [
-                              <option value={item.No}>
-                                {item.bookingSeats}
-                                {" seats"}
-                              </option>,
-                            ];
-                          })}
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
+                 
+                    <select
+                    defaultValue="choose seats"
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
+                    value={chooseSeats}
+                    onChange={(e) => setChooseSeats(e.target.value)}
+                  >
+                    {SLOTS.map((item: any, key: number) => {
+                      return [
+                        <option value={item.No}>
+                          {item.bookingSeats}
+                          {" Seats"}
+                        </option>,
+                      ];
+                    })}
+                  </select>
+                
                 </div>
               </div>
-            </div> */}
-
+            </div>
             
-<button id="multiLevelDropdownButton" data-dropdown-toggle="dropdown" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-
-<div id="dropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-    <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="multiLevelDropdownButton">
-      <li>
-        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-      </li>
-      <li>
-        <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dropdown<svg aria-hidden="true" className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button>
-          <div id="doubleDropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
-              <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Overview</a>
-              </li>
-              <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">My downloads</a>
-              </li>
-              <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Billing</a>
-              </li>
-              <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rewards</a>
-              </li>
-            </ul>
-        </div>
-      </li>
-      <li>
-        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-      </li>
-      <li>
-        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-      </li>
-    </ul>
-</div>
-
-
             <div className="mt-4">
               <button
                 type="button"
