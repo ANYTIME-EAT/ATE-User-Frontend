@@ -26,6 +26,7 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
   const [date, setDate] = useState<string>("");
   const [endTime, setEndTime] = useState<string>("");
   const [startTime, setStartTime] = useState<string>("");
+ 
 
   const navigate = useNavigate();
 
@@ -70,6 +71,11 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
     }
   };
 
+  const routeChange = () => {
+    let path = "/reserved";
+    navigate(path);
+  };
+
   return (
     <div className="py-6">
       <ToastContainer />
@@ -86,7 +92,6 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
             S & L Dinner
           </h6>
           <p className="text-xs">189, Avenue Streat, Edinburg</p>
-          
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -101,6 +106,7 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
                     defaultValue="2022-12"
                     onChange={(e) => setDate(e.target.value)}
                     placeholder="Choose Date"
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
                   />
                 </div>
               </div>
@@ -109,10 +115,11 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
                   <Input
-                    type="month"
-                    defaultValue="2022-12"
+                    type="number"
                     onChange={(e) => setStartTime(e.target.value)}
                     placeholder="Start time"
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
+                  
                   />
                 </div>
                 <div className="flex-1 space-y-1">
@@ -121,59 +128,73 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
                     value={endTime}
                     onChange={(e) => setEndTime(e.target.value)}
                     placeholder="End time"
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
+                  
                   />
                 </div>
               </div>
             </div>
+
             <div className="mt-4">
-              
-              <input
-                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                type="text"
-                placeholder="Enter the name"
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                required={true}
-              />
+              <div className="flex space-x-5  ">
+                <div className="flex-1 space-y-1">
+                  <Input
+                    type="text"
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
+                    placeholder="Enter the name"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    required={true}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="mt-4">
-              
-              <input
-                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                type="email"
-                placeholder="Enter the email"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                required={true}
-              />
+            <div className="mt-4 ">
+              <div className="flex space-x-5  ">
+                <div className="flex-1 space-y-1">
+                  <Input
+                    type="email"
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
+                  
+                    placeholder="Enter the email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    required={true}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="mt-4">
-              
-              <input
-                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                type="text"
-                placeholder="Enter the Address"
-                onChange={(e) => {
-                  setAddress(e.target.value);
-                }}
-                required={true}
-              />
+
+            <div className="mt-4 ">
+              <div className="flex space-x-5  ">
+                <div className="flex-1 space-y-1">
+                  <Input
+                    type="text"
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
+                  
+                    placeholder="Enter the Address"
+                    onChange={(e) => {
+                      setAddress(e.target.value);
+                    }}
+                    required={true}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="mt-8">
-              <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
-                Next
-              </button>
+            <div className="mt-8 mr-2">
+            <button type="button" onClick={routeChange} className="bg-red-800 text-white rounded-r-md py-2 border-l border-gray-200 hover:bg-red-700 hover:text-white px-3 text-center">
+              <div className="flex flex-row align-middle">
+                <span className="mr-2">Next</span>
+                <svg className="w-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+            </button>
             </div>
           </form>
-          <div className="mt-4 flex items-center justify-between">
-            <span className="border-b w-1/5 md:w-1/4"></span>
-            {/* <a href="/login" className="text-xs text-gray-500 uppercase">
-              or sign in
-            </a> */}
-            <span className="border-b w-1/5 md:w-1/4"></span>
-          </div>
+          
         </div>
       </div>
     </div>
