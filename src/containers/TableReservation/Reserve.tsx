@@ -28,8 +28,43 @@ const Reserve: FC<TableReservationProps> = ({ className = "" }) => {
   const [startTime, setStartTime] = useState<string>("");
   const [guests, setGuests] = useState<string>("");
   const [chooseSlots, setChooseSlots] = useState<string>("");
+  const [chooseSeats, setChooseSeats] = useState<string>("");
+  
 
   const navigate = useNavigate();
+
+  const SLOTS = [
+    {
+      tableNo: 1,
+      totlalSeats: 4,
+      type: "round",
+      bookingSeats: 2,
+    },
+    {
+      tableNo: 2,
+      totlalSeats: 5,
+      type: "round",
+      bookingSeats: 2,
+    },
+    {
+      tableNo: 3,
+      totlalSeats: 6,
+      type: "square",
+      bookingSeats: 5,
+    },
+    {
+      tableNo: 4,
+      totlalSeats: 4,
+      type: "square",
+      bookingSeats: 3,
+    },
+    {
+      tableNo: 5,
+      totlalSeats: 4,
+      type: "round",
+      bookingSeats: 3,
+    },
+  ];
 
   const handleApi = async () => {
     const isValidPassword = passwordValidation(password, confirmPassword);
@@ -100,13 +135,14 @@ const Reserve: FC<TableReservationProps> = ({ className = "" }) => {
               handleApi();
             }}
           >
-            <div className="mt-4 pt-6">
+            <div className="mt-4">
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
                   <Input
                     type="number"
-                    defaultValue="2022-12"
+                    defaultValue="set guests"
                     onChange={(e) => setGuests(e.target.value)}
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
                     placeholder="Choose Guests"
                   />
                 </div>
@@ -115,16 +151,64 @@ const Reserve: FC<TableReservationProps> = ({ className = "" }) => {
             <div className="mt-4">
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
-                  <Input
-                    type="number"
-                    defaultValue="2022-12"
+                  <select
+                    defaultValue="chooseSlots"
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
+                    value={chooseSlots}
                     onChange={(e) => setChooseSlots(e.target.value)}
-                    placeholder="Available Slots"
-                  />
+                  >
+                    {SLOTS.map((item: any, key: number) => {
+                      return [
+                        <option value={item.No}>
+                          {item.totlalSeats}
+                          {" Person Table"}
+                        </option>, 
+                      ];
+                    })}
+                    <select
+                    defaultValue="choose seats"
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
+                    value={chooseSeats}
+                    onChange={(e) => setChooseSeats(e.target.value)}
+                  >
+                    {SLOTS.map((item: any, key: number) => {
+                      return [
+                        <option value={item.No}>
+                          {item.bookingSeats}
+                          {" Seats"}
+                        </option>,
+                      ];
+                    })}
+                  </select>
+                  </select>
                 </div>
               </div>
             </div>
 
+            <div className="mt-4">
+              <div className="flex space-x-5  ">
+                <div className="flex-1 space-y-1">
+                 
+                    <select
+                    defaultValue="choose seats"
+                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
+                    value={chooseSeats}
+                    onChange={(e) => setChooseSeats(e.target.value)}
+                  >
+                    {SLOTS.map((item: any, key: number) => {
+                      return [
+                        <option value={item.No}>
+                          {item.bookingSeats}
+                          {" Seats"}
+                        </option>,
+                      ];
+                    })}
+                  </select>
+                
+                </div>
+              </div>
+            </div>
+            
             <div className="mt-4">
               <button
                 type="button"
