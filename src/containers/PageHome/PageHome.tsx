@@ -282,22 +282,25 @@ const PageHome = () => {
           tempData[key] = {
             id: item.id,
             name: item.name,
-            category_id: item.description,
-            restaurant_id: item.discount,
-            description: item.max_quantity,
-            food_type: item.is_availability,
-            combo_menu_id: item.menu_avatar,
-            is_availability: item.is_deleted,
+            category_id: item.category_id,
+            restaurant_id: item.restaurant_id,
+            description: item.description,
+            // food_type: item.food_type,
+            // combo_menu_id: item.combo_menu_id,
+            // is_availability: item.is_availability,
             price: item.price,
-            quantity: item.quantity,
+            // quantity: item.quantity,
             addons: item.addons,
-            offer: item.offer,
-            product_avatar: item.product_avatar,
-            thumbnail: item.product_avatar,
-            taxonomy: "category"
+            vegetarian: item.vegetarian,
+            // product_avatar: item.product_avatar,
+            avatar: item.avatar,
+            is_deleted:item.is_deleted,
+            // thumbnail: item.product_avatar,
+            taxonomy: "category",
           }
         })
         setProductsData(tempData)
+        console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",tempData)
       }
 
     }
@@ -318,14 +321,14 @@ const PageHome = () => {
             description: item.description,
             discount: item.discount,
             price : item.price,
-            max_quantity: item.max_quantity,
-            is_availability: item.is_availability,
-            menu_avatar: item.menu_avatar,
-            is_deleted: item.is_deleted
+            avatar: item.avatar,
+            is_deleted: item.is_deleted,
+            restaurant_id:item.restaurant_id
 
           }
         })
         setcomboMenuData(tempData)
+        console.log("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY0",tempData)
       }
 
     }
