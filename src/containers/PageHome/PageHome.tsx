@@ -227,7 +227,7 @@ const PageHome = () => {
   
   const getTopbrandData = async () => {
     const response = await getTopbrands()
-    console.log(response.data)
+    console.log("brand data",response.data)
     if (response.data) {
       let tempData: any = [];
       if (response.data.response === "success") {

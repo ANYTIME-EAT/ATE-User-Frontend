@@ -60,7 +60,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
 
   //Restaurant Food Category
   const getrestraurantCat = async () => {
-    const response = await getRestaurantCategory(id);
+    const response = await getRestaurantCategory(1);
     console.log("category data", response.data);
     if (response.data?.response === "success") {
       setCurrentAuthor({ index: 0, title: response.data.category[0].name ,id:response.data.category[0].id});
@@ -86,7 +86,7 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
 
   // Products
   const getProductItems = async () => {
-    const response = await getProduct(id);
+    const response = await getProduct(1);
     console.log(response.data);
     if (response.data?.response === "success") {
       console.log("products", response.data.product);

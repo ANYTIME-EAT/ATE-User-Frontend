@@ -83,8 +83,8 @@ export interface LocationStates {
   "/chat"?: {};
   "/tableReservation"?: {};
   "/reserved"?: {};
-  
-  
+  "/restaurant"?: {};
+    
 }
 
 export type PathName = keyof LocationStates;

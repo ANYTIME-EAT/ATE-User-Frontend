@@ -36,6 +36,8 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
   const [phone, setPhone] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [avatar, setAvatar] = useState<string>("");
+
   const navigate = useNavigate();
 
   const handleApi = async () => {
@@ -48,7 +50,18 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
         phone_no: phone,
         email: email,
         password: password,
-        signedIn: false
+        signedIn: false,
+        avatar:avatar,
+
+      //   {
+      //     "username" : "LTW Tech",
+      //     "address" : [{"type" : "Home" , "address" : "Milan, Italy"}],
+      //     "authority" : {"role" : ["user"]},
+      //     "phone_no" : "0123456789",
+      //     "email" : "user@ltwtech.it",
+      //     "password" : "1234",
+      //     "avatar" : "1667793288133-668-6689202_avatar-profile-hd-png-download.png"
+      // }
       };
 
       const response = await userRegister(data);
