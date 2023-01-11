@@ -141,6 +141,8 @@ export const AuthenticationAccesspages: Page[] = [
 
   // restu 
   { path: "/restaurant/:id", component: NewRest },
+  { path: "/restaurant", component: NewRest },
+  
   
   { path: "/user/reset_password/:id/:token", component:ResetPasswordPage },
 

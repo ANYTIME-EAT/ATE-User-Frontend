@@ -48,7 +48,7 @@ export const getKitchenList = () => {
 
 export const getTopbrands = () => {
     return new Promise((resolve,reject) =>{
-        axios.get(`${config.SERVER_URL}/top_brands/list`).then((res) => {
+        axios.get(`${config.SERVER_URL}/top_brands/list`,header()).then((res) => {
             resolve(res)
         }).catch ((res) => {
             reject(res)
@@ -88,7 +88,7 @@ export const getOffersList = () => {
 
 export const getAllComboMenuList = () => {
     return new Promise((resolve,reject)=>{
-        axios.get(`${config.SERVER_URL}/combomenu/list`).then((res) =>{
+        axios.get(`${config.SERVER_URL}/combo_menu/list`).then((res) =>{
             resolve(res)
         }).catch((res) => {
             reject(res)
@@ -118,7 +118,7 @@ export const getRestaurant = (id) => {
 
 export const getProduct = (id) => {
     return new Promise((resolve,reject) => {
-        axios.get(`${config.SERVER_URL}/product/kitchen/${id}`).then((res) => {
+        axios.get(`${config.SERVER_URL}/product/restaurant/${id}`).then((res) => {
             resolve(res)
         }).catch((res) => {
             reject(res)
