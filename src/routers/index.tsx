@@ -63,6 +63,7 @@ import Tracking from "containers/Tracking/Tracking";
 import Chat from "containers/Chat/Chat"
 import TableReservation from "containers/TableReservation/TableReservation";
 import Reserve from "containers/TableReservation/Reserve";
+import ReservationDone from "containers/TableReservation/ReservationDone";
 
 
 export const AuthenticationAccesspages: Page[] = [
@@ -151,7 +152,9 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/forgot_password/success", component: ForgotPasswordSuccessPage },
 
   { path: "/tableReservation", component: TableReservation },
-  { path: "/reserved", component: Reserve },
+  { path: "/reserved",component:Reserve },
+  { path: "/reservationDone", component: ReservationDone },
+  
  
 
 ];
