@@ -21,11 +21,11 @@ export interface TableReservationProps {
 
 const Reserve: FC<TableReservationProps> = ({ className = ""}) => {
   const [tableIds, setTableIds] = useState<any>([]);
-  // const [guestsCount, setGuestsCount] = useState<number>();
+  const [guestsCount, setGuestsCount] = useState<number>(0);
   const [animal, setAnimal] = useState<any>([])
   const [userId, setUserId] = useState<string>("");
 
-  const [guestsCount, setGuestsCount] = useState<string>("");
+  // const [guestsCount, setGuestsCount] = useState<any>("");
   const navigate = useNavigate();
   const { state } = useLocation();
   const { id } = useParams();
@@ -116,21 +116,12 @@ const options: {
       }
     }
   };
-  // const getProfile = (list: any) => {
-  //   list.map(async (item: any, key: number) => {
-  //     let file = await getAvatar(item.image)
-  //     setImages((s: any) => {
-  //       return [
-  //         ...s, {
-  //           id: item.id,
-  //           author: item.author,
-  //           image: URL.createObjectURL(file)
-  //         }
-  //       ]
-  //     })
-  //   })
-  // }
-
+ 
+  const handleNumber = (event: { target: { value: number; }; }) => {
+    const result = Number(event.target.value);
+    setGuestsCount(result);
+    console.log("6666666666666666666",Number(guestsCount));
+  };
   return (
     <div className="py-6">
       <ToastContainer />
@@ -159,7 +150,11 @@ const options: {
                   <Input
                     type="number"
                     defaultValue="set guests"
-                    onChange={(e) => setGuestsCount(e.target.value)}
+                    // onChange={(e) => setGuestsCount(Number(e.target.value))}
+                    // onChange={handleNumber} 
+                    value={guestsCount}
+                    onChange={e => {setGuestsCount(Number(e.target.value)) 
+                    }}
                     className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
                     placeholder="Choose Guests"
                   />
