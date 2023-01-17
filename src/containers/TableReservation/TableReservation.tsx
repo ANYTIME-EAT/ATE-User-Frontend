@@ -37,14 +37,16 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
   const navigate = useNavigate();
 
   const handleConfirm = async () => {
-    const data = {
+    const data = await{
       reservation_date: date,
       reservation_from: startTime,
       reservation_to: endTime,
       // note:note
     };
+    
+    navigate("/reserved", {state: {data: data}});
+    // setItems(data)
     console.log("reservation333333333333333",data)
-    navigate("/reserved", {state: {data: items}});
   };
 
   return (

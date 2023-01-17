@@ -21,19 +21,11 @@ export interface TableReservationProps {
 
 const Reserve: FC<TableReservationProps> = ({ className = ""}) => {
   const [tableIds, setTableIds] = useState<any>([]);
-  const [guestsCount, setGuestsCount] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [date, setDate] = useState<string>("");
-  const [endTime, setEndTime] = useState<string>("");
-  const [startTime, setStartTime] = useState<string>("");
-  const [guests, setGuests] = useState<string>("");
-  const [chooseSlots, setChooseSlots] = useState<string>("");
-  const [chooseSeats, setChooseSeats] = useState<string>("");
+  // const [guestsCount, setGuestsCount] = useState<number>();
   const [animal, setAnimal] = useState<any>([])
   const [userId, setUserId] = useState<string>("");
 
+  const [guestsCount, setGuestsCount] = useState<string>("");
   const navigate = useNavigate();
   const { state } = useLocation();
   const { id } = useParams();
@@ -95,25 +87,32 @@ const options: {
 
   }, []);
 
+  useEffect(() => {
+    if (state?.data) {
+      console.log("state data88888888888",state?.data)
+      handleReservation()
+    }
+  }, [])
+
+
   const handleReservation = async () => {
-    
-    const data =  {
-      reservation_date: state.reservation_date,
-      reservation_from: state.reservation_from,
-      reservation_to: state.reservation_to,
+     const data =  {
+      reservation_date: state.data.reservation_date,
+      reservation_from: state.data.reservation_from,
+      reservation_to: state.data.reservation_to,
       table_ids: animal,
       guests_count:guestsCount,
       user_id:userId
       // note:note
     };
-    console.log("777777777777777777777",data)
+  console.log("777777777777777777777",data)
   const response = await tableReservationAPI(data, id);
     console.log("table reservation data", response);
     if (response.data) {
       if (response.data.response === "success") {
         navigate("/reservation-done", { state: { data: data } });
       } else {
-        console.log("Payment failure");
+        console.log("Reservation failure");
       }
     }
   };
@@ -131,13 +130,6 @@ const options: {
   //     })
   //   })
   // }
-
-  useEffect(() => {
-    if (state?.data) {
-      console.log("state data88888888888",state?.data)
-      handleReservation()
-    }
-  }, [])
 
   return (
     <div className="py-6">
@@ -167,7 +159,7 @@ const options: {
                   <Input
                     type="number"
                     defaultValue="set guests"
-                    onChange={(e) => setGuests(e.target.value)}
+                    onChange={(e) => setGuestsCount(e.target.value)}
                     className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
                     placeholder="Choose Guests"
                   />
@@ -212,7 +204,7 @@ const options: {
               </button>
               <button
                 type="button"
-                onClick={routeChange}
+                onClick={handleReservation}
                 className="bg-red-800 text-white rounded-l-md border-r border-red-100 py-2 hover:bg-red-700 hover:text-white px-1 xs:px-0 ml-20"
               >
                 <div className="flex flex-row align-middle">
