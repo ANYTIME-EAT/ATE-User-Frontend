@@ -84,6 +84,8 @@ export interface LocationStates {
   "/tableReservation"?: {};
   "/reserved"?: {};
   "/restaurant"?: {};
+  "/reservationDone"?: {};
+  
     
 }
 

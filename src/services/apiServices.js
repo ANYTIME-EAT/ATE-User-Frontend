@@ -149,6 +149,17 @@ export const paymentApi = (data) => {
     })
 }
 
+export const tableReservationAPI = (data,id) => {
+    return new Promise((resolve,reject)=>{
+        axios.post(`${config.SERVER_URL}/table_reservation/create/${id}`,data)
+        .then((res) =>{           
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
 export const getAllProductsAPI = () => {
     return new Promise((resolve,reject) => {
         axios.get(`${config.SERVER_URL}/product/list`).then((res) => {
@@ -290,10 +301,31 @@ export const getUserDetailByIdAPI = (userId) => {
 
 export const getKitchenIdApi = (id) => {
     return new Promise((resolve,reject) => {
-        axios.get(`${config.SERVER_URL}/kitchen/${id}`).then((res) => {
+        axios.get(`${config.SERVER_URL}/restaurant/${id}`).then((res) => {
             resolve(res)
         }).catch((res) => {
             reject(res)
         })
     })
 }
+export const checkTableReservationAPI = (data,id) => {
+    return new Promise((resolve,reject)=>{
+        axios.post(`${config.SERVER_URL}/table_reservation/check_availability/${id}`,data)
+        .then((res) =>{           
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+// export const getKitchenIdApi = (id) => {
+//     return new Promise((resolve,reject) => {
+//         axios.get(`${config.SERVER_URL}/restaurant/${id}`).then((res) => {
+//             resolve(res)
+//         }).catch((res) => {
+//             reject(res)
+//         })
+//     })
+// }
+

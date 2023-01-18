@@ -79,8 +79,8 @@ const NewRest: FC<NewRestProps> = ({ className = "" }) => {
   const getRestaurantDataByKitchenId = async () => {
     const response = await getKitchenIdApi(id);
     if (response.data?.response === "success") {
-      setresturant(response.data.kitchen[0]);
-      getProfile(response.data.kitchen[0].avatar);
+      setresturant(response.data.restaurant[0]);
+      getProfile(response.data.restaurant[0].avatar);
     }
   };
 
