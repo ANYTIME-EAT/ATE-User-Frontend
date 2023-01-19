@@ -319,13 +319,12 @@ export const checkTableReservationAPI = (data,id) => {
     })
 }
 
-// export const getKitchenIdApi = (id) => {
-//     return new Promise((resolve,reject) => {
-//         axios.get(`${config.SERVER_URL}/restaurant/${id}`).then((res) => {
-//             resolve(res)
-//         }).catch((res) => {
-//             reject(res)
-//         })
-//     })
-// }
-
+export const getCompoMenuById = (id) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/combo_menu/${id}`).then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
