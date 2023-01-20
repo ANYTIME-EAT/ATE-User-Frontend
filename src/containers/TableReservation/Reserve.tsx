@@ -11,7 +11,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import bgLogin from "images/bgLogin1.png";
 import { useNavigate } from "react-router-dom";
-import Select from "react-tailwindcss-select";
 import { tableReservationAPI } from "services/apiServices";
 import { useLocation } from "react-router-dom";
 
@@ -164,13 +163,13 @@ const options: {
              <div className="mt-4">
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
-                <Select
+                {/* <Select
                     value={animal}
                     onChange={handleChange}
                     options={options}
                     isMultiple={true} 
                     primaryColor={"red"}   
-                    />
+                    /> */}
                 </div>
               </div>
             </div>
