@@ -397,7 +397,6 @@ const PageHome = () => {
 
         {/* Combo Menu  */}
         <div className="relative py-16">
-          {/* <BackgroundSection /> */}
           <SectionGridAllMenu headingIsCenter={true} combo_MenuData={comboMenuData} setNewProduct={setNewProduct} />
         </div>
 
