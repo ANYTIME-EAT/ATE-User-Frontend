@@ -131,7 +131,7 @@ const StayCard: FC<StayCardProps> = ({
           // onClick={() => { addAuthorItems(comboMenuData.id, comboMenuData.name, comboMenuData.price, 1, comboMenuData.product_avatar, "author");;}}
           
           className="px-1 py-1 sm:px-3 bg-red-600 hover:bg-red-800 dark:bg-[#be123c] dark:hover:bg-[#881337] flex  content-center">
-            Order Now
+            Add To Cart
           </Button>
         
         </div>

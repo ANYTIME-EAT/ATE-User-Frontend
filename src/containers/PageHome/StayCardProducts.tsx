@@ -2,15 +2,16 @@ import React, { FC, useState, useEffect } from "react";
 import GallerySlider from "components/GallerySlider/GallerySlider";
 import { DEMO_STAY_LISTINGS } from "data/listings";
 import { StayDataType } from "data/types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
 import SaleOffBadge from "components/SaleOffBadge/SaleOffBadge";
 import Badge from "shared/Badge/Badge";
 import Button from "shared/Button/Button";
-import img1 from 'images/domino.png'
+import img1 from "images/domino.png";
 import StartRating from "./StartRating";
-import { getAvatar } from 'services/apiServices'
-
+import { getAvatar } from "services/apiServices";
+import { addProduct } from "services/cartStorage";
+import { toast } from "react-toastify";
 
 export interface StayCardProductsProps {
   className?: string;
@@ -43,26 +44,38 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
     id,
   } = data;
 
-  // "name": "Big Sale",
-  // "description": "off",
-  // "discount": 10,
-  // "max_quantity": 5,
-  // "is_availability": null,
-  // "is_deleted": false,
-
-
-
-  const [image, setImage] = useState<any>("")
+  const [image, setImage] = useState<any>("");
 
   const getImage = async (img: string) => {
-    const file = await getAvatar(img)
-    setImage(URL.createObjectURL(file))
+    const file = await getAvatar(img);
+    setImage(URL.createObjectURL(file));
+  };
+
+  const addAuthorItems = (id: number, name: string, price: string, quantity: number, image: any, type: string) => {
+    const response = addProduct(id, name, price, quantity, image, type);
+    console.log("menu list",response)
+    if (response) {
+      toast.success(`Restaurant menu added to shopping cart.`, {
+        position: toast.POSITION.BOTTOM_RIGHT
+      })
+    } else {
+      toast.warning(`This item has already been added to your shopping cart.`, {
+        position: toast.POSITION.BOTTOM_RIGHT
+      })
+    }
+  }
+
+  const navigate = useNavigate();
+
+  const handleClick =async() => {
+    await addAuthorItems(productsData.id, productsData.name, productsData.price, 1, productsData.product_avatar, "author");
+    navigate("/checkout");
+          
   }
 
   useEffect(() => {
-    
-    getImage(productsData.product_avatar)
-  }, [])
+    getImage(productsData.product_avatar);
+  }, []);
 
   const renderSliderGallery = () => {
     return (
@@ -75,7 +88,8 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
         />
 
         <BtnLikeIcon isLiked={like} className="absolute right-3 top-3 z-[1]" />
-        <SaleOffBadge className="absolute left-1 top-3"
+        <SaleOffBadge
+          className="absolute left-1 top-3"
           desc={productsData.offer}
         />
       </div>
@@ -87,10 +101,10 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
       <div className={size === "default" ? "p-4 space-y-4" : "p-3 space-y-2"}>
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
-
             <h2
-              className={` font-medium capitalize ${size === "default" ? "text-lg" : "text-base"
-                }`}
+              className={` font-medium capitalize ${
+                size === "default" ? "text-lg" : "text-base"
+              }`}
             >
               <span className="line-clamp-1">{productsData.name}</span>
             </h2>
@@ -102,17 +116,18 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
             <span className="text-base font-semibold">
               {productsData.price}
               {`$ `}
-
             </span>
             {!!reviewStart && (
               <StartRating reviewCount={reviewCount} point={reviewStart} />
             )}
           </div>
           <div className="w-20 border-b border-neutral-100 dark:border-neutral-800 "></div>
-          <Button className="px-1 py-1 sm:px-3 bg-red-600 hover:bg-red-800 dark:bg-[#be123c] dark:hover:bg-[#881337] flex ">Order Now</Button>
+          <Button className="px-1 py-1 sm:px-3 bg-red-600 hover:bg-red-800 dark:bg-[#be123c] dark:hover:bg-[#881337] flex "
+          onClick={handleClick}>
+           
+            Add To Cart
+          </Button>
         </div>
-
-
       </div>
     );
   };
