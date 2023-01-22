@@ -53,10 +53,11 @@ const ReservationDone: FC<PayPageProps> = ({ className = "" }) => {
     return (
       <>
 
-        <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto rounded-2xl dark:bg-gray-800 bg-gray-100 shadow-2xl ">
+        <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto rounded-2xl dark:bg-gray-800 bg-reservation shadow-2xl ">
+        {/* bg-reservation */}
+        {/* bg-gray-100 */}
 
-
-          <div className="flex justify-start space-y-3 flex-col items-center ">
+          <div className="flex justify-start space-y-3 flex-col items-center bg-gray-100 p-10 ">
             <div>
               <NcImage
                 src={tick}
@@ -69,15 +70,23 @@ const ReservationDone: FC<PayPageProps> = ({ className = "" }) => {
             </h1>
             <h6 className="text-lg dark:text-white lg:text-2xl  text-gray-800 bg-green-200 px-7 rounded-lg gap-y-8">Reservation Number #13432</h6>
             <p className=" dark:text-gray-300 font-medium  text-gray-600"> {new Date().toLocaleString()}</p>
-            <p className=" dark:text-gray-300 font-medium  text-gray-600">Payment Method : Credit Card</p>
+            {/* <p className=" dark:text-gray-300 font-medium  text-gray-600">Payment Method : Credit Card</p> */}
+            
+            <p className=" dark:text-gray-300 font-medium  text-gray-600">{"Start time:"} {state?.data.reservation_from}</p>
+            <p className=" dark:text-gray-300 font-medium  text-gray-600">{"End time:"} {state?.data.reservation_to}</p>
+            <p className=" dark:text-gray-300 font-medium  text-gray-600">{"Number of guest:"} {state?.data.guests_count}</p>
+            
+            {/* <p className=" dark:text-gray-300 font-medium  text-gray-600">{"Number of Table:"} {state?.data.table_ids}</p> */}
+            
           </div>
           
 
           <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0 ">
             <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
-              {/* <div className="flex flex-col justify-start items-start dark:bg-gray-800  bg-gray-100 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
-                <p className="text-lg md:text-xl dark:text-white font-semibold  text-gray-800">Order Summary</p>
-                {state?.data && state.data.map((item: any, key: number) => {
+              
+              <div className="flex flex-col justify-start items-start dark:bg-gray-800  bg-gray-100 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
+                <p className="text-lg md:text-xl dark:text-white font-semibold  text-gray-800">Reservation Summary</p>
+                {/* {state?.data && state.data.map((item: any, key: number) => {
                   return [
                     <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                       <div className="pb-4 md:pb-8 w-40">
@@ -101,9 +110,11 @@ const ReservationDone: FC<PayPageProps> = ({ className = "" }) => {
                       </div>
                     </div>
                   ]
-                })}
+                })} */}
 
-              </div> */}
+              <p className=" dark:text-gray-300 font-medium  text-gray-600">{"Address  | "} {"No 12, Sample street, Italy"}</p>
+              <p className=" dark:text-gray-300 font-medium  text-gray-600">{"Phone | "} {"+3928988383123"}</p>
+              </div>
             </div>
 
           </div>
@@ -124,7 +135,7 @@ const ReservationDone: FC<PayPageProps> = ({ className = "" }) => {
   return (
     <div className={`nc-PayPage ${className}`} data-nc-id="PayPage">
       <main className="container mt-11 mb-24 lg:mb-32 ">
-        <div className="max-w-4xl mx-auto">{renderContent()}</div>
+        <div className="max-w-xl mx-auto">{renderContent()}</div>
       </main>
     </div>
   );
