@@ -152,7 +152,7 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/forgot_password/success", component: ForgotPasswordSuccessPage },
 
   { path: "/tableReservation", component: TableReservation },
-  { path: "/reserved",component:Reserve },
+  { path: "/reserved/:id",component:Reserve },
   { path: "/reservationDone", component: ReservationDone },
   
  

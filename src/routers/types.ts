@@ -82,7 +82,7 @@ export interface LocationStates {
   "/tracking"?: {};
   "/chat"?: {};
   "/tableReservation"?: {};
-  "/reserved"?: {};
+  "/reserved/:id"?: {};
   "/restaurant"?: {};
   "/reservationDone"?: {};
   

@@ -44,7 +44,7 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
       // note:note
     };
     
-    navigate("/reserved", {state: {data: data}});
+    navigate("/reserved/2", {state: {data: data}});
     // setItems(data)
     console.log("reservation333333333333333",data)
   };

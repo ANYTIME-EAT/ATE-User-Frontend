@@ -13,6 +13,8 @@ import bgLogin from "images/bgLogin1.png";
 import { useNavigate } from "react-router-dom";
 import { tableReservationAPI } from "services/apiServices";
 import { useLocation } from "react-router-dom";
+import Select from 'react-tailwindcss-select';
+
 
 export interface TableReservationProps {
   className?: string; 
@@ -100,16 +102,17 @@ const options: {
       reservation_from: state.data.reservation_from,
       reservation_to: state.data.reservation_to,
       table_ids: animal,
-      guests_count:guestsCount,
+      guests_count:guestsCount as Number,
       user_id:userId
       // note:note
     };
-  console.log("777777777777777777777",data)
+  console.log("777777777777777777777",id)
   const response = await tableReservationAPI(data, id);
     console.log("table reservation data", response);
     if (response.data) {
       if (response.data.response === "success") {
-        navigate("/reservation-done", { state: { data: data } });
+        console.log("REservation done pass data",data)
+        navigate("/reservationDone", { state: { data: data } });
       } else {
         console.log("Reservation failure");
       }
@@ -163,13 +166,13 @@ const options: {
              <div className="mt-4">
               <div className="flex space-x-5  ">
                 <div className="flex-1 space-y-1">
-                {/* <Select
+                <Select
                     value={animal}
                     onChange={handleChange}
                     options={options}
                     isMultiple={true} 
                     primaryColor={"red"}   
-                    /> */}
+                    />
                 </div>
               </div>
             </div>
