@@ -11,7 +11,7 @@ import img1 from "images/domino.png";
 import StartRating from "./StartRating";
 import { getAvatar } from "services/apiServices";
 import { addProduct } from "services/cartStorage";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify'
 
 export interface StayCardProductsProps {
   className?: string;
@@ -69,7 +69,8 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
 
   const handleClick =async() => {
     await addAuthorItems(productsData.id, productsData.name, productsData.price, 1, productsData.product_avatar, "author");
-    navigate("/checkout");
+    // navigate("/checkout");
+    // alert("item added to cart")
           
   }
 
@@ -100,7 +101,9 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
     return (
       <div className={size === "default" ? "p-4 space-y-4" : "p-3 space-y-2"}>
         <div className="space-y-2">
+       
           <div className="flex items-center space-x-2">
+          <ToastContainer />
             <h2
               className={` font-medium capitalize ${
                 size === "default" ? "text-lg" : "text-base"
@@ -122,7 +125,7 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
             )}
           </div>
           <div className="w-20 border-b border-neutral-100 dark:border-neutral-800 "></div>
-          <Button className="px-1 py-1 sm:px-3 bg-red-600 hover:bg-red-800 dark:bg-[#be123c] dark:hover:bg-[#881337] flex "
+          <Button className="px-1 py-1 sm:px-3 bg-red-600 hover:bg-red-800 dark:bg-red-600 dark:hover:bg-[#881337] flex "
           onClick={handleClick}>
            
             Add To Cart

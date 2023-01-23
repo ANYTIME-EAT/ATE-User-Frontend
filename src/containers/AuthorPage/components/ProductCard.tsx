@@ -152,7 +152,7 @@ const ProductCard: FC<ProductCardProps> = ({
           <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-sm text-secondary-500">
               {`${productData.price}`}$
             </span>
-            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 " 
+            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-red-600 bg-red-600  dark:bg-red-600 dark:hover:bg-red-600 mt-2 " 
             onClick={() => {addAuthorItems(productData.id,productData.name,productData.price,1,productData.product_avatar,"author"); ; setNewProduct(true)}}><i className="las la-shopping-cart"/>add</Button>           
 
           </div>

@@ -160,8 +160,6 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
               <button
                 type="button"
                 onClick={handleConfirm}
-                
-                
                 className="bg-red-800 text-white rounded-r-md py-2 border-l border-gray-200 hover:bg-red-700 hover:text-white px-3 text-center"
               >
                 <div className="flex flex-row align-middle">

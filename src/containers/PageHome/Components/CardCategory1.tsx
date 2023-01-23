@@ -11,7 +11,7 @@ import Button from "shared/Button/Button";
 import img1 from "images/domino.png";
 import StartRating from "../StartRating";
 import { addProduct } from "services/cartStorage";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify'
 
 export interface CardCategory1Props {
   className?: string;
@@ -54,7 +54,8 @@ const CardCategory1: FC<CardCategory1Props> = ({
 
   const handleClick =async() => {
     await addAuthorItems(taxonomy.id, taxonomy.name, taxonomy.price, 1, taxonomy.product_avatar, "author");
-    navigate("/checkout");
+    // navigate("/checkout");
+    // alert("item added to cart")
           
   }
 
@@ -79,6 +80,7 @@ const CardCategory1: FC<CardCategory1Props> = ({
       <div className={"p-4 space-y-4"}>
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
+          <ToastContainer />
             <h2 className={` font-medium capitalize ${"text-base"}`}>
               <span className="line-clamp-1">{taxonomy.name}</span>
             </h2>

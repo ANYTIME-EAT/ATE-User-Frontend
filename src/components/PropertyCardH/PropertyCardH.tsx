@@ -9,6 +9,7 @@ import Badge from "shared/Badge/Badge";
 import { StayDataType } from "data/types";
 import Button from "shared/Button/Button";
 import ButtonCircle from "shared/Button/ButtonCircle";
+import { ToastContainer, toast } from 'react-toastify'
 
 export interface PropertyCardHProps {
   className?: string;
@@ -84,6 +85,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
   const renderContent = () => {
     return (
       <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
+        <ToastContainer />
         <div className="space-y-4 w-full">
           <div className="inline-flex space-x-3">
             <StartRating reviewCount={reviewCount} point={reviewStart} />
@@ -100,7 +102,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
           <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-sm text-secondary-500">
               {`${price}`}
             </span>
-            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 "><i className="las la-shopping-cart"/>add</Button>           
+            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-red-600  dark:bg-red-600 dark:hover:bg-[#881337] mt-2 "><i className="las la-shopping-cart"/>add</Button>           
             
 
           </div>

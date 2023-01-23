@@ -107,7 +107,7 @@ const PropertyCardMyOrder: FC<PropertyCardHProps> = ({
           <span className="flex items-center justify-center px-3 py-2 border border-secondary-500 rounded leading-none text-base font-sm text-secondary-500">
               {`${price}`}
             </span>
-            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-[#be123c]  dark:bg-[#be123c] dark:hover:bg-[#881337] mt-2 "><i className="las la-shopping-cart"/>add</Button>           
+            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-red-600  dark:bg-red-600 dark:hover:bg-[#881337] mt-2 "><i className="las la-shopping-cart"/>add</Button>           
             
 
           </div>

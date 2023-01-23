@@ -10,7 +10,7 @@ import Button from "shared/Button/Button";
 import img1 from "images/domino.png";
 import StartRating from "./StartRating";
 import { getAvatar, getCompoMenuById } from "services/apiServices";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { addProduct } from "services/cartStorage";
 
 export interface StayCardProps {
@@ -53,7 +53,7 @@ const StayCard: FC<StayCardProps> = ({
   const handleClick =async() => {
     
     await addAuthorItems(comboMenuData.id, comboMenuData.name, comboMenuData.price, 1, comboMenuData.product_avatar, "author");
-    navigate("/checkout");
+    // navigate("/checkout");
           
   }
 
@@ -65,6 +65,7 @@ const StayCard: FC<StayCardProps> = ({
 
   const addAuthorItems = (id: number, name: string, price: string, quantity: number, image: any, type: string) => {
     const response = addProduct(id, name, price, quantity, image, type);
+    console.log("compo menu response",response)
     if (response) {
       toast.success(`compo menu added to shopping cart.`, {
         position: toast.POSITION.BOTTOM_RIGHT
@@ -104,6 +105,7 @@ const StayCard: FC<StayCardProps> = ({
     return (
       <div className={size === "default" ? "p-4 space-y-4" : "p-3 space-y-2"}>
         <div className="space-y-2">
+          <ToastContainer/>
           <div className="flex items-center space-x-2">
             <h2
               className={` font-medium capitalize ${
@@ -130,7 +132,7 @@ const StayCard: FC<StayCardProps> = ({
           onClick={handleClick}
           // onClick={() => { addAuthorItems(comboMenuData.id, comboMenuData.name, comboMenuData.price, 1, comboMenuData.product_avatar, "author");;}}
           
-          className="px-1 py-1 sm:px-3 bg-red-600 hover:bg-red-800 dark:bg-[#be123c] dark:hover:bg-[#881337] flex  content-center">
+          className="px-1 py-1 sm:px-3 bg-red-600 hover:bg-red-800 dark:bg-red-600 dark:hover:bg-[#881337] flex  content-center">
             Add To Cart
           </Button>
         

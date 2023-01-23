@@ -20,13 +20,6 @@ const handleModalOpen = (val: boolean) => {
   setShowModelOpen(val);
 };
 
-// const lenObj = JSON.parse(localStorage.getItem('cart-items')|| "{}");
-// var count = 0;
-// for(var item in lenObj) {
-//    count += lenObj[item].length
-// }
-
-// const lenObj = JSON.stringify(localStorage.getItem('cart-items'));
 const lenObj = JSON.parse(localStorage.getItem('cart-items') || "{}");
         const len = lenObj.length;
         console.log("JSON obj length: ",len);
