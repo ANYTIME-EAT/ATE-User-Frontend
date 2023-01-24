@@ -11,10 +11,10 @@ export interface RestraurantPageProps {
 }
 
 const Menus=[
-    {
-        title:"Manage Address"
+    // {
+    //     title:"Manage Address"
         
-    },
+    // },
     {
       title:"Favourites"
       

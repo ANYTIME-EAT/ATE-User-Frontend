@@ -53,8 +53,8 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   // };
 
   const getAllAddressData = async () => {
-      const response = await getAllUserAddress(JSON.parse(localStorage.getItem("user-info") || "{}").id);
-      console.log(response.data);
+      const response = await getAllUserAddress(userId);
+      console.log("address data 88888888888888888",response.data);
   
     if (response.data) {
       if (response.data.data.length > 0) {
@@ -101,7 +101,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     const newAddressList = userAddress.filter(
       (item: any) => item.type !== selectedAddressType
     );
-    const response = await updateProfile({ address: newAddressList });
+    const response = await updateProfile({ address: newAddressList },userId);
     setUserAddress(newAddressList);
     
     if (response.data) {
@@ -122,7 +122,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
         };
       }
     });
-    const response = await updateProfile({ address: userAddress });
+    const response = await updateProfile({ address: userAddress },userId);
     setUserAddress(userAddress);
     if (response.data) {
       if (response.data.response === "success") {
@@ -139,8 +139,8 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
       address: address,
     }
     let temp=[...userAddress,data]
-    const response = await updateProfile({ address: temp });
-    console.log(response)
+    const response = await updateProfile({ address: temp },userId);
+    console.log("address create response",response)
     if(response.data){
       if(response.data.response=== "success"){
         setUserAddress(temp)

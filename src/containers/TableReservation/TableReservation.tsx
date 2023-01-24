@@ -109,53 +109,6 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
                 </div>
               </div>
             </div>
-
-            {/* <div className="mt-4">
-              <div className="flex space-x-5  ">
-                <div className="flex-1 space-y-1">
-                  <Input
-                    type="text"
-                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
-                    placeholder="Enter the name"
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                    required={true}
-                  />
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="mt-4 ">
-              <div className="flex space-x-5  ">
-                <div className="flex-1 space-y-1">
-                  <Input
-                    type="email"
-                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
-                    placeholder="Enter the email"
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                    required={true}
-                  />
-                </div>
-              </div>
-            </div> */}
-
-            {/* <div className="mt-4 ">
-              <div className="flex space-x-5  ">
-                <div className="flex-1 space-y-1">
-                  <Input
-                    type="text"
-                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
-                    placeholder="Enter the Address"
-                    onChange={(e) => {
-                      setAddress(e.target.value);
-                    }}
-                    required={true}
-                  />
-                </div>
-              </div>
-            </div> */}
             <div className="mt-8 mr-2">
               <button
                 type="button"
