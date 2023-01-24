@@ -99,9 +99,12 @@ const lenObj = JSON.parse(localStorage.getItem('cart-items') || "{}");
        </div> */}
 
       <Modal isVisible={showModelOpen} closeModal={handleModalOpen}>
+      {/* <div className="lg:w-3/4 w-full  py-10 shrink-1 visible">
+          <Cart newProduct={newProduct} setNewProduct={setNewProduct} />
+        </div> */}
       <Cart newProduct={true} setNewProduct={setNewProduct} />
      
-     <div className="px-6 py-6 lg:px-8 z-40">
+              {/* <div className="px-6 py-6 lg:px-8 z-40">
               <Transition
                 show={open}
                 as={Fragment}
@@ -112,10 +115,10 @@ const lenObj = JSON.parse(localStorage.getItem('cart-items') || "{}");
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
               >
-              {/* {open &&
+              {open &&
                 <div className="lg:w-3/4 w-full  py-10 shrink-1 visible">
                 <Cart newProduct={true} setNewProduct={setNewProduct} />
-              </div>} */}
+              </div>}
 
                 <Popover.Panel
                   static
@@ -131,7 +134,7 @@ const lenObj = JSON.parse(localStorage.getItem('cart-items') || "{}");
                   </form>
                 </Popover.Panel>
               </Transition>
-              </div>
+              </div> */}
               {/* </div> */}
               </Modal>
             </>
