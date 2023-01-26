@@ -51,10 +51,7 @@ const StayCard: FC<StayCardProps> = ({
   const navigate = useNavigate();
 
   const handleClick =async() => {
-    
-    await addAuthorItems(comboMenuData.id, comboMenuData.name, comboMenuData.price, 1, comboMenuData.product_avatar, "author");
-    // navigate("/checkout");
-          
+    await addAuthorItems(comboMenuData.id, comboMenuData.name, comboMenuData.price, 1, comboMenuData.product_avatar, "author");         
   }
 
 
@@ -103,9 +100,10 @@ const StayCard: FC<StayCardProps> = ({
 
   const renderContent = () => {
     return (
+      
       <div className={size === "default" ? "p-4 space-y-4" : "p-3 space-y-2"}>
+       
         <div className="space-y-2">
-          <ToastContainer/>
           <div className="flex items-center space-x-2">
             <h2
               className={` font-medium capitalize ${
@@ -142,13 +140,17 @@ const StayCard: FC<StayCardProps> = ({
   };
 
   return (
+    <>
+    <ToastContainer/>
     <div
       className={`nc-StayCard group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden will-change-transform hover:shadow-xl transition-shadow ${className}`}
       data-nc-id="StayCard"
     >
       {renderSliderGallery()}
+     
       <Link to={href}>{renderContent()}</Link>
     </div>
+    </>
   );
 };
 

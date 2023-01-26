@@ -103,7 +103,7 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
         <div className="space-y-2">
        
           <div className="flex items-center space-x-2">
-          <ToastContainer />
+          
             <h2
               className={` font-medium capitalize ${
                 size === "default" ? "text-lg" : "text-base"
@@ -136,6 +136,8 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
   };
 
   return (
+    <>
+    <ToastContainer/>
     <div
       className={`nc-StayCard group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden will-change-transform hover:shadow-xl transition-shadow ${className}`}
       data-nc-id="StayCard"
@@ -143,6 +145,7 @@ const StayCardProduct: FC<StayCardProductsProps> = ({
       {renderSliderGallery()}
       <Link to={href}>{renderContent()}</Link>
     </div>
+    </>
   );
 };
 

@@ -154,8 +154,6 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/tableReservation", component: TableReservation },
   { path: "/reserved/:id",component:Reserve },
   { path: "/reservationDone", component: ReservationDone },
-  
- 
 
 ];
 

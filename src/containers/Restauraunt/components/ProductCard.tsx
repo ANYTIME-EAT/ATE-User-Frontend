@@ -179,8 +179,8 @@ const ProductCard: FC<ProductCardProps> = ({
   // },[])
 
   return (
-    
-    
+    <>
+    <ToastContainer/>
       <div
       className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border  border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden shadow-2xl ${className}`}
       data-nc-id="ProductCard"
@@ -198,7 +198,7 @@ const ProductCard: FC<ProductCardProps> = ({
         className="absolute right-5 top-5 sm:right-3 sm:top-3 "
       />
     </div>
-
+</>
   );
 };
 

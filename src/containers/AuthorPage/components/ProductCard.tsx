@@ -129,7 +129,7 @@ const ProductCard: FC<ProductCardProps> = ({
   const renderContent = () => {
     return (
       <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
-        <ToastContainer />
+       
         <div className="space-y-4 w-full">
           <div className="inline-flex space-x-3">
             <StartRating reviewCount={reviewCount} point={reviewStart} />
@@ -162,6 +162,8 @@ const ProductCard: FC<ProductCardProps> = ({
   };
 
   return (
+    <>
+     <ToastContainer />
     <div
       className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden  ${className}`}
       data-nc-id="ProductCard"
@@ -178,6 +180,7 @@ const ProductCard: FC<ProductCardProps> = ({
         className="absolute right-5 top-5 sm:right-3 sm:top-3 "
       />
     </div>
+    </>
   );
 };
 

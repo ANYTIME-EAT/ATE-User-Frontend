@@ -80,7 +80,7 @@ const Cart: FC<CartProps> = ({ className = "", newProduct, setNewProduct }) => {
   return (
     <>
       <div
-        className={`p-1 w-full relative overflow-y-scroll h-screen mx-auto`}
+        className={`p-1 w-full relative overflow-y-scroll h-screen mx-auto py-14 visible shrink-1`}
       >
         <div
           className={`rounded-3xl bg-white dark:bg-neutral-800 shadow-2xl border-2 border-gray-200`}

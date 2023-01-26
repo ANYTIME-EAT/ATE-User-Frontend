@@ -80,7 +80,7 @@ const CardCategory1: FC<CardCategory1Props> = ({
       <div className={"p-4 space-y-4"}>
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
-          <ToastContainer />
+         
             <h2 className={` font-medium capitalize ${"text-base"}`}>
               <span className="line-clamp-1">{taxonomy.name}</span>
             </h2>
@@ -111,6 +111,8 @@ const CardCategory1: FC<CardCategory1Props> = ({
   };
 
   return (
+    <>
+    <ToastContainer/>
     <div
       className={`nc-StayCard group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden will-change-transform hover:shadow-xl transition-shadow ${className}`}
       data-nc-id="StayCard"
@@ -118,6 +120,7 @@ const CardCategory1: FC<CardCategory1Props> = ({
       {renderSliderGallery()}
       <Link to={href}>{renderContent()}</Link>
     </div>
+    </>
   );
 };
 
