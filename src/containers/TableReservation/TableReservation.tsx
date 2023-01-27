@@ -53,7 +53,7 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
 
     for(const[key,value] of Object.entries(data)){
       if(value===''){
-        setFormErrors("undefined")
+        setFormErrors(`please fill in the \"${key}\" field`)
         return undefined
       }
     }
@@ -64,19 +64,19 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
   };
   
 
-  const validate = (values: { date: any; startTime: any; endTime: any; }) => {
-    const errors = {date,startTime,endTime};
-    if (!values.date) {
-      errors.date= "date is required!";
-    }
-    if (!values.startTime) {
-      errors.startTime = "startTime is required!";
-    }
-    if (!values.endTime) {
-      errors.endTime = "endTime is required!";
-    }
-    return errors;
-  };
+  // const validate = (values: { date: any; startTime: any; endTime: any; }) => {
+  //   const errors = {date,startTime,endTime};
+  //   if (!values.date) {
+  //     errors.date= "date is required!";
+  //   }
+  //   if (!values.startTime) {
+  //     errors.startTime = "startTime is required!";
+  //   }
+  //   if (!values.endTime) {
+  //     errors.endTime = "endTime is required!";
+  //   }
+  //   return errors;
+  // };
 
   return (
     <div className="py-6">
@@ -146,8 +146,9 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
                 </div>
               </div>
             </div>
-            <div className="mt-8 mr-2">
-            {formErrors}
+            <div className="mt-2 mr-2">
+              <span className="inline-flex text-sm text-red-600 pr-10 pl-2 pb-4"> {formErrors}</span>
+            {/* {formErrors} */}
               <button
                 type="button"
                 onClick={handleConfirm}
