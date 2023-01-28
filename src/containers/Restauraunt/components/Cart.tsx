@@ -133,6 +133,9 @@ const Cart: FC<CartProps> = ({ className = "", newProduct, setNewProduct }) => {
                                 onClick={() => {
                                   removeCart(item.id, item.type);
                                   setNewProduct(true);
+                                  // setTimeout(() => {
+                                  //   window.location.reload();
+                                  // }, 2)
                                 }}
                               >
                                 <svg

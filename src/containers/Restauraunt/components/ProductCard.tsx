@@ -157,7 +157,7 @@ const ProductCard: FC<ProductCardProps> = ({
             <div className="inline-flex space-x-3">
               <StartRating reviewCount={reviewCount} point={reviewStart} />
             </div>
-            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-red-600  dark:bg-red-600 dark:hover:bg-[#881337] mt-2 "
+            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-red-700 bg-red-600  dark:bg-red-600 mt-2 text-white "
               onClick={() => { addAuthorItems(productData.id, productData.name, productData.price, 1, productData.product_avatar, "author");; setNewProduct(true) }}><i className="las la-shopping-cart"
               />
               add

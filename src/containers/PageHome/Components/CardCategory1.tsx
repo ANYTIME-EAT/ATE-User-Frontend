@@ -101,7 +101,7 @@ const CardCategory1: FC<CardCategory1Props> = ({
             )}
           </div>
           <div className="w-20 border-b border-neutral-100 dark:border-neutral-800 "></div>
-          <Button className="px-1 py-1 sm:px-3 bg-red-600 hover:bg-red-800 dark:bg-[#be123c] dark:hover:bg-[#881337] flex "
+          <Button className="px-1 py-1 sm:px-3 bg-red-600 hover:bg-red-800 dark:bg-[#be123c] dark:hover:bg-[#881337] flex text-white"
           onClick={handleClick}>
             Add To Cart
           </Button>

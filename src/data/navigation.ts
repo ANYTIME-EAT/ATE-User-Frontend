@@ -9,26 +9,26 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     name: "Home",
     isNew: true,
   },
-  {
-    id: ncNanoId(),
-    href: "/offers",
-    name: "Promotions",
-  },
-  {
-    id: ncNanoId(),
-    href: "/listing-real-estate",
-    name: "Card"
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/offers",
+  //   name: "Promotions",
+  // },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/listing-real-estate",
+  //   name: "Card"
+  // },
   {
     id: ncNanoId(),
     href: "/restaurant",
     name: "Restaurant"
   },
-  {
-    id: ncNanoId(),
-    href: "/signup",
-    name: "Signup"
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/signup",
+  //   name: "Signup"
+  // },
 
   // {
   //   id: ncNanoId(),
