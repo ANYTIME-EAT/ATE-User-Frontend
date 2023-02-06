@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import bgLogin from "images/bgLogin1.png";
 import { useNavigate } from "react-router-dom";
 import { tableReservationAPI } from "services/apiServices";
+import { useForm } from "react-hook-form";
 
 export interface TableReservationProps {
   className?: string;
@@ -33,8 +34,14 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
   const [note, setNote] = useState<string>("");
   const [guestsCount, setGuestsCount] = useState<string>("");
   const [items, setItems] = useState<any>([])
+  const [formErrors, setFormErrors] = useState("")
 
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
 
   const handleConfirm = async () => {
     const data = await{
@@ -43,11 +50,33 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
       reservation_to: endTime,
       // note:note
     };
-    
+
+    for(const[key,value] of Object.entries(data)){
+      if(value===''){
+        setFormErrors(`please fill in the \"${key}\" field`)
+        return undefined
+      }
+    }
     navigate("/reserved/2", {state: {data: data}});
     // setItems(data)
+    // setFormErrors(validate(items));
     console.log("reservation333333333333333",data)
   };
+  
+
+  // const validate = (values: { date: any; startTime: any; endTime: any; }) => {
+  //   const errors = {date,startTime,endTime};
+  //   if (!values.date) {
+  //     errors.date= "date is required!";
+  //   }
+  //   if (!values.startTime) {
+  //     errors.startTime = "startTime is required!";
+  //   }
+  //   if (!values.endTime) {
+  //     errors.endTime = "endTime is required!";
+  //   }
+  //   return errors;
+  // };
 
   return (
     <div className="py-6">
@@ -76,11 +105,18 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
                 <div className="flex-1 space-y-1">
                   <Input
                     type="date"
+                    // {...register('date', { required: true})}
                     defaultValue="date"
+                    value={date}
                     onChange={(e) => setDate(e.target.value)}
                     placeholder="Choose Date"
                     className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
-                  />
+                    // ref={register({required:"this field is required"})}
+                    // ref={register({ required: true })}
+              />
+
+                {/* <span className="inline-flex text-sm text-red-600"></span> */}
+                {/* <p className="text-red-900">{formErrors.reservation_date}</p> */}
                 </div>
               </div>
             </div>
@@ -91,6 +127,7 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
                     type="datetime-local"
                     onChange={(e) => setStartTime(e.target.value)}
                     placeholder="Start time"
+                    value={startTime}
                     className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
                   />
                 </div>
@@ -109,60 +146,16 @@ const TableReservation: FC<TableReservationProps> = ({ className = "" }) => {
                 </div>
               </div>
             </div>
-
-            {/* <div className="mt-4">
-              <div className="flex space-x-5  ">
-                <div className="flex-1 space-y-1">
-                  <Input
-                    type="text"
-                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
-                    placeholder="Enter the name"
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                    required={true}
-                  />
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="mt-4 ">
-              <div className="flex space-x-5  ">
-                <div className="flex-1 space-y-1">
-                  <Input
-                    type="email"
-                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
-                    placeholder="Enter the email"
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                    required={true}
-                  />
-                </div>
-              </div>
-            </div> */}
-
-            {/* <div className="mt-4 ">
-              <div className="flex space-x-5  ">
-                <div className="flex-1 space-y-1">
-                  <Input
-                    type="text"
-                    className="block w-full border-red-200 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 bg-white dark:border-red-700 dark:focus:ring-red-6000 dark:focus:ring-opacity-25 dark:bg-red-900"
-                    placeholder="Enter the Address"
-                    onChange={(e) => {
-                      setAddress(e.target.value);
-                    }}
-                    required={true}
-                  />
-                </div>
-              </div>
-            </div> */}
-            <div className="mt-8 mr-2">
+            <div className="mt-2 mr-2">
+              <span className="inline-flex text-sm text-red-600 pr-10 pl-2 pb-4"> {formErrors}</span>
+            {/* {formErrors} */}
               <button
                 type="button"
                 onClick={handleConfirm}
                 className="bg-red-800 text-white rounded-r-md py-2 border-l border-gray-200 hover:bg-red-700 hover:text-white px-3 text-center"
               >
                 <div className="flex flex-row align-middle">
+                  
                   <span className="mr-2">Next</span>
                   <svg
                     className="w-5 ml-2"

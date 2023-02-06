@@ -10,6 +10,7 @@ import SectionGridAllprofileMenu from "./contents/SectionGridAllProfileMenu";
 import SectionGridFilterCardMyOrders from "./contents/SectionGridFilterCardMyOrders";
 import AccountPage from "./AccountPage/AccountPage";
 import { getAllOrdersAPI, getAvatar } from "services/apiServices";
+import { useNavigate } from "react-router-dom";
 // import EditAddressPage from "./EditAddress/EditAddressPage";
 
 
@@ -23,7 +24,7 @@ const ProfilePage: FC<AuthorPageProps> = ({ className = "" }) => {
   const [activePage, setActivePage] = useState<any>({id: 0, title: "Manage Address"});
   const [favouriteData, setFavouriteData] = useState<any>([])
   const [order, setOrder] = useState<any>([])
-  
+  const navigate = useNavigate();
 
   const handleActivePage = (id: number, title: string) => {
     setActivePage({id:id, title:title})

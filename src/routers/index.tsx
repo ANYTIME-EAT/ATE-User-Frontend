@@ -96,7 +96,7 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/listing-car-detail", component: ListingCarDetailPage },
   //
   { path: "/listing-real-estate-map", component: ListingRealEstateMapPage },
-  { path: "/listing-real-estate", component: ListingRealEstatePage },
+  // { path: "/listing-real-estate", component: ListingRealEstatePage },
   //
   { path: "/listing-flights", component: ListingFlightsPage },
   //
@@ -139,6 +139,7 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/subscription", component: PageSubcription },
 
   { path: "/forgotPassword", component: ForgotPasswordPage },
+  { path: "/listing-real-estate", component: ListingRealEstatePage },
 
   // restu 
   { path: "/restaurant/:id", component: NewRest },
@@ -154,8 +155,6 @@ export const AuthenticationAccesspages: Page[] = [
   { path: "/tableReservation", component: TableReservation },
   { path: "/reserved/:id",component:Reserve },
   { path: "/reservationDone", component: ReservationDone },
-  
- 
 
 ];
 

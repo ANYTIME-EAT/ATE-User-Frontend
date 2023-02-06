@@ -1,7 +1,8 @@
 import Logo from "shared/Logo/Logo";
 import SocialsList1 from "shared/SocialsList1/SocialsList1";
 import { CustomLink } from "data/types";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Input from "shared/Input/Input";
 
 export interface WidgetFooterMenu {
   id: string;
@@ -14,7 +15,7 @@ const widgetMenus: WidgetFooterMenu[] = [
     id: "1",
     title: "COMPANY",
     menus: [
-      { href: "#", label: "Who We Are"},
+      { href: "#", label: "Who We Are" },
       { href: "#", label: "Blog" },
       { href: "#", label: "Careers" },
       { href: "#", label: "Report Fraud" },
@@ -34,9 +35,7 @@ const widgetMenus: WidgetFooterMenu[] = [
   {
     id: "3",
     title: "FOR RESTAURANTS",
-    menus: [
-      { href: "#", label: "Add restaurant" },
-    ],
+    menus: [{ href: "#", label: "Add restaurant" }],
   },
   {
     id: "4",
@@ -73,16 +72,52 @@ const Footer: React.FC = () => {
       </div>
     );
   };
+  const [email, setEmail] = useState<string>("");
+
+  // useEffect(() => {
+  //   setEmail(JSON.parse(localStorage.getItem("user-info") || "{}").email);
+  //   console.log(name)
+  // }, []);
+
+  const handleData = async () => {
+    const data = {
+      email: email,
+    };
+    console.log("777777777777777777777", email);
+    // const response = await tableReservationAPI(data, id);
+    // console.log("table reservation data", response);
+    // if (response.data) {
+    //   if (response.data.response === "success") {
+    //     console.log("REservation done pass data", data);
+    //     navigate("/reservationDone", { state: { data: data } });
+    //   } else {
+    //     console.log("Reservation failure");
+    //   }
+    // }
+  };
 
   return (
-    <div className="nc-Footer relative py-24 lg:py-28 border-t border-neutral-200 dark:border-neutral-700">
-      
-      {/* <p className="text-center">jhjgfdshfdf</p> */}
+    <div className="nc-Footer relative py-8 border-t border-neutral-200 dark:border-neutral-700 bg-footer">
+      <h2 className="text-center text-3xl pb-4">
+        Subscribe for Special Offers
+      </h2>
+      <div className=" flex justify-center items-center pb-8">
+        <div className="relative">
+          <input
+            type="text"
+            className="h-11 w-96 pl-10 pr-20 rounded-full z-0 focus:shadow focus:ring-2 focus:ring-red-300 focus:border-transparent"
+            placeholder="Enter your Email..."
+          />
+          <div className="absolute top-2 right-2">
+            <button className="h-8 w-25 text-white rounded-full p-1 hover:bg-red-600 bg-footerSubscribeButton">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 ">
-       
-       <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
+        <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
           <div className="col-span-2 md:col-span-1">
-
             <Logo />
           </div>
           <div className="col-span-2 flex items-center md:col-span-3">

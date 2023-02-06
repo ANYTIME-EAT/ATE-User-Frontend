@@ -32,6 +32,7 @@ export const addToCart = (cartItems) => {
      if(cartItems){          
         localStorage.setItem("cart-items", JSON.stringify(cartItems));
         return true;
+        
      }else{
         return false;
      }

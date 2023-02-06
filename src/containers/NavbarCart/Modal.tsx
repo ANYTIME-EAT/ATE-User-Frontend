@@ -15,7 +15,7 @@ const Modal: FC<ModelProps> = ({isVisible, closeModal,children}) => {
           closeModal(true)
     }
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center ' >
+    <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center pb-50' >
       {/* onClick={() => closeModal(false)} */}
         <div className='w-[500px] flex flex-col absolute inset-y-16 right-0' id="wrapper" onClick={handleClose}>
             <button className='text-white text-xl place-self-end' onClick={() => closeModal(false)}>x</button>

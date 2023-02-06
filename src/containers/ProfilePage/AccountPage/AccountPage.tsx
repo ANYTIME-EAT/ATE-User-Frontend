@@ -30,6 +30,12 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
   const [password, setPassword] = useState<any>("");
   const [address, setAddress] = useState<any>("");
   const [userDetailsData, setUserDetailsData] = useState<any>("");
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    setUserId(JSON.parse(localStorage.getItem("user-info") || "{}").id)
+    console.log("********************",userId)
+  }, []);
   
   
   let navigate = useNavigate();
@@ -45,7 +51,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
 
     console.log("44444444444444444444444444444",userdata)
 
-    const response = await updateProfile(userdata,58);
+    const response = await updateProfile(userdata,userId);
     console.log(response.data);
 
     if (response.data.response==="success") {
@@ -93,16 +99,6 @@ const AccountPage: FC<AccountPageProps> = ({ className = "", userInfo }) => {
     
   }, [image]);
 
-  // const changeHandler = async(e:any) => {
-    
-  //   e.preventDefault()
-  //   const file = e.target.value;
-  //   console.log(file)
-  //   const file1 = await getAvatar(file)
-  //   setImage(URL.createObjectURL(file1))
-  //   console.log(URL.createObjectURL(file1))
-    
-  // }
 
   const changeHandler = async(e:any) => {
     e.preventDefault();

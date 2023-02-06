@@ -157,7 +157,7 @@ const ProductCard: FC<ProductCardProps> = ({
             <div className="inline-flex space-x-3">
               <StartRating reviewCount={reviewCount} point={reviewStart} />
             </div>
-            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-[#e75579] bg-red-600  dark:bg-red-600 dark:hover:bg-[#881337] mt-2 "
+            <Button className="flex items-center justify-center px-1 py-1 sm:px-3 hover:bg-red-700 bg-red-600  dark:bg-red-600 mt-2 text-white "
               onClick={() => { addAuthorItems(productData.id, productData.name, productData.price, 1, productData.product_avatar, "author");; setNewProduct(true) }}><i className="las la-shopping-cart"
               />
               add
@@ -179,8 +179,8 @@ const ProductCard: FC<ProductCardProps> = ({
   // },[])
 
   return (
-    
-    
+    <>
+    <ToastContainer/>
       <div
       className={`nc-ProductCard group relative bg-white dark:bg-neutral-900 border  border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden shadow-2xl ${className}`}
       data-nc-id="ProductCard"
@@ -198,7 +198,7 @@ const ProductCard: FC<ProductCardProps> = ({
         className="absolute right-5 top-5 sm:right-3 sm:top-3 "
       />
     </div>
-
+</>
   );
 };
 

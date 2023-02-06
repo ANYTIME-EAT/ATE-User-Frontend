@@ -117,6 +117,8 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
       exp_year: expDate.split("-")[0],
       cvc: cvc,
       cardId: card_id,
+      // last4Number:last4Number,
+      // cardType:cardType
       primary_card: false
     }
 
@@ -124,7 +126,7 @@ const PaymentSectionStatistic: FC<SectionStatisticProps> = ({
     const response = await attachCardApi(JSON.parse(localStorage.getItem("user-info") || "{}").id,temp)
     console.log(response)
     if(response.data){
-      if(response.data.response === "success" || response.data.message === "This card is already exists."){
+      if(response.data.response === "success"){
         console.log(card_id)
         setPaymentCards(temp)
       }else{

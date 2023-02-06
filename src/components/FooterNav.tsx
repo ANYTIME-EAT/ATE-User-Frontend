@@ -2,12 +2,14 @@ import {
   HeartIcon,
   MagnifyingGlassIcon,
   UserCircleIcon,
+  HomeIcon
 } from "@heroicons/react/24/outline";
 import React, { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { PathName } from "routers/types";
 import MenuBar from "shared/MenuBar/MenuBar";
 import isInViewport from "utils/isInViewport";
+
 
 let WIN_PREV_POSITION = window.pageYOffset;
 
@@ -17,20 +19,27 @@ interface NavItem {
   icon: any;
 }
 
+
 const NAV: NavItem[] = [
+  
   {
-    name: "Explore",
+    name: "Home",
+    link: "/",
+    icon: HomeIcon,
+  },
+  {
+    name: "Search",
     link: "/",
     icon: MagnifyingGlassIcon,
   },
-  {
-    name: "Wishlists",
-    link: "/account-savelists",
-    icon: HeartIcon,
-  },
+  // {
+  //   name: "Wishlists",
+  //   link: "/account-savelists",
+  //   icon: HeartIcon,
+  // },
   {
     name: "Log in",
-    link: "/account",
+    link: "/login",
     icon: UserCircleIcon,
   },
   {

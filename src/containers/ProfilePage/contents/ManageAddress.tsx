@@ -31,6 +31,8 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   const [addressType, setAddressType] = useState("");
   const [selectedAddressType, setSelectedAddressType] = useState<string>("");
   const [userId, setUserId] = useState("");
+  const [addressTypeExit, setAddressTypeExit] = useState(false);
+  
 
   useEffect(() => {
     setUserId(JSON.parse(localStorage.getItem("user-info") || "{}").id)
@@ -53,8 +55,8 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
   // };
 
   const getAllAddressData = async () => {
-      const response = await getAllUserAddress(JSON.parse(localStorage.getItem("user-info") || "{}").id);
-      console.log(response.data);
+      const response = await getAllUserAddress(userId);
+      console.log("address data 88888888888888888",response.data);
   
     if (response.data) {
       if (response.data.data.length > 0) {
@@ -95,13 +97,19 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
     setShowModelAdd(val);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    const array1 = [userAddress];
+    const found = array1.find(userAddres => userAddres==address);
+    // console.log("foundddddddddddddddddddddddd",found);
+    alert("already added")
+
+  };
 
   const removeAddressHandler = async () => {
     const newAddressList = userAddress.filter(
       (item: any) => item.type !== selectedAddressType
     );
-    const response = await updateProfile({ address: newAddressList });
+    const response = await updateProfile({ address: newAddressList },userId);
     setUserAddress(newAddressList);
     
     if (response.data) {
@@ -122,7 +130,7 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
         };
       }
     });
-    const response = await updateProfile({ address: userAddress });
+    const response = await updateProfile({ address: userAddress },userId);
     setUserAddress(userAddress);
     if (response.data) {
       if (response.data.response === "success") {
@@ -139,8 +147,21 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
       address: address,
     }
     let temp=[...userAddress,data]
-    const response = await updateProfile({ address: temp });
-    console.log(response)
+    userAddress.map(async(item: any, key: number) => {
+      if(item.type === data.type) {
+        alert("type of address already exist please update the address")
+        console.log("alert")
+        // return undefined
+        setAddressTypeExit(true);
+        setShowModelAdd(false)
+      }
+        
+    });
+   if(addressTypeExit==false){
+    const response = await updateProfile({ address: temp },userId);
+    console.log("address create response",response)
+    setAddress(data)
+    
     if(response.data){
       if(response.data.response=== "success"){
         setUserAddress(temp)
@@ -150,7 +171,9 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
       }else{
         console.log("cannot add address")
       }
-    }
+  }
+   }
+    
   }
   return (
     <div className={`nc-ManageAddress relative ${className}`}>
@@ -287,21 +310,25 @@ const ManageAddress: FC<ManageAddressProps> = ({ className = "" }) => {
               <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                 Are you sure you want to delete this Address?
               </h3>
-              <button
-                onClick={removeAddressHandler}
-                data-modal-toggle="popup-modal"
-                type="button"
-                className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-              >
-                Yes, I'm sure
-              </button>
+              
               <button
                 data-modal-toggle="popup-modal"
                 type="button"
                 onClick={()=>{setShowModelDelete(false)}}
-                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none 
+                focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5
+                 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500
+                  dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 mr-2"
               >
                 No, cancel
+              </button>
+              <button
+                onClick={removeAddressHandler}
+                data-modal-toggle="popup-modal"
+                type="button"
+                className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center "
+              >
+                Yes, I'm sure
               </button>
             </div>
           </div>
